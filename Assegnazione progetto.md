@@ -8,4 +8,4 @@
 	- 2.Cf3 Cc6
 	- 3.d4
 
-![ultima_slide_presentazione_corso](./res/img/ultima_slide_presentazione_corso.png)
+![ultima_slide_presentazione_corso](./res/img/ultima_slide_presentazione_corso.PNG)
