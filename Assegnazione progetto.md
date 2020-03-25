@@ -7,3 +7,5 @@
 	- 1.e4 e5
 	- 2.Cf3 Cc6
 	- 3.d4
+
+![ultima_slide_presentazione_corso](./res/img/ultima_slide_presentazione_corso.png)
