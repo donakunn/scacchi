@@ -1,3 +1,5 @@
+package Partita;
+import Pezzi.Pezzo;
 public class Cella {
 	boolean vuota=true;
 	Pezzo pezzo;
@@ -9,14 +11,14 @@ public class Cella {
 	void piazza(Pezzo pezzo) {
 		if(vuota==true) vuota=false;
 		/* else {
-		 * 	se la cella è occupata da un pezzo dello stesso giocatore che ha effettuato la mossa
+		 * 	se la cella ï¿½ occupata da un pezzo dello stesso giocatore che ha effettuato la mossa
 		 * 	allora throw new cellaOccupataException();
-		 * 	altrimenti se è occupata da un pezzo dell'altro giocatore
+		 * 	altrimenti se ï¿½ occupata da un pezzo dell'altro giocatore
 		 * 	allora lancia cattura();
 		 * 	altrimenti procedi;
 		 * }
 		 */
 		this.pezzo=pezzo;
-		return true;
+		// return true; funzione Void
 	};
 }
