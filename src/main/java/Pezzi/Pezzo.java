@@ -5,20 +5,15 @@ import Partita.Cella;
 
 public abstract class Pezzo {		//classe astratta che fattorizza proprietà comuni dei pezzi del gioco degli scacchi
 
-	private int colore;
-	private String tipoPezzo;
+	protected int colore; //0 bianco, 1 Nero
+	protected String tipoPezzo;
 	protected ArrayList<Cella> mossePossibili = new ArrayList<Cella>();
-	public abstract ArrayList<Cella> MosseDisponibili(Cella statoGioco[][],int x, int y); 
+	public abstract ArrayList<Cella> MosseDisponibili(Cella statoGioco[][]); 
 
 
 
-	public void SetTipo(String tipo) {
-		this.tipoPezzo = tipo;
-	}
+	//public abstract void SetTipoColore(int x);
 
-	public void SetColore (int col) {
-		this.colore = col;
-	}
 
 	public String GetTipo() {
 		return this.tipoPezzo;
