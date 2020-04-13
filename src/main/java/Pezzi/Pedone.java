@@ -6,11 +6,11 @@ import Partita.Cella;
 
 public class Pedone extends Pezzo{
 
-	private int MosseEffettuate;
-	private int x;
-	private int y;
+	private int MosseEffettuate; //numero di mosse effettuate
+	private int x; //ascissa della posizione del pedone
+	private int y; //ordinata della posizione del pedone
 	
-	public Pedone(int col, int x, int y) {
+	public Pedone(int col, int x, int y) {		//costruttore classe Pedone
 		if (col == 0) {
 			this.tipoPezzo = "U"+"2659"; //pedone bianco
 			this.colore = col;
