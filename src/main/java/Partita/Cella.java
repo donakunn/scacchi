@@ -21,4 +21,9 @@ public class Cella {
 		this.pezzo=pezzo;
 		// return true; funzione Void
 	};
+	
+	public Pezzo leggiPezzo() {			//da implementare
+		return pezzo;
+	
+	}
 }
