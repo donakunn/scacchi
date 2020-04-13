@@ -8,11 +8,11 @@ public abstract class Pezzo {		//classe astratta che fattorizza proprietà comun
 	protected int colore; //0 bianco, 1 Nero
 	protected String tipoPezzo;
 	protected ArrayList<Cella> mossePossibili = new ArrayList<Cella>();
-	public abstract ArrayList<Cella> MosseDisponibili(Cella statoGioco[][],int x, int y); 
+	public abstract ArrayList<Cella> MosseDisponibili(Cella statoGioco[][]); 
 
 
 
-	public abstract void SetTipoColore(int x);
+	//public abstract void SetTipoColore(int x);
 
 
 	public String GetTipo() {
