@@ -7,23 +7,20 @@ import Partita.Cella;
 public class Pedone extends Pezzo{
 
 	private int MosseEffettuate; //numero di mosse effettuate
-	private int x; //ascissa della posizione del pedone
-	private int y; //ordinata della posizione del pedone
 	
 	public Pedone(int col, int x, int y) {		//costruttore classe Pedone
+		MosseEffettuate = 0;
+		this.x = x;
+		this.y = y;
+		this.colore = col;
 		if (col == 0) {
 			this.tipoPezzo = "U"+"2659"; //pedone bianco
-			this.colore = col;
-			MosseEffettuate = 0;
-			this.x = x;
-			this.y = y;
+			
 		}
 		else if (col == 1) {
 			this.tipoPezzo = "U"+"265F"; //pedone nero
-			this.colore = col;
-			MosseEffettuate =0;
-			this.x = x;
-			this.y = y;
+			
+			
 		}
 		else throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
 
