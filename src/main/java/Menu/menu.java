@@ -13,7 +13,9 @@ public class menu {
         int j;
         if(comando.equals("show")) {// verifica il comando scritto in input e lo confronta con il comando 'show'
         
+        	stampaScacchiera(); // funzione che stamperà la scacchiera (da implementare)
         }
+        
         }
         
 }
