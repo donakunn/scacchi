@@ -15,15 +15,18 @@ public abstract class Pezzo {		//classe astratta che fattorizza proprietà comun
 	//public abstract void SetTipoColore(int x);
 
 
-	public String GetTipo() {
+	/*public String GetTipo() {
 		return this.tipoPezzo;
-	}
+	} */
 
 	public int GetColore() {
 		return this.colore;
 	}
 
-
+	public String toString() {
+		return tipoPezzo;
+		
+	}
 
 
 
