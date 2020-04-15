@@ -15,6 +15,15 @@ public class menu {
         }
 	}
 	
+	public void comandoMoves(){
+		Scanner input = new Scanner(System.in);
+		String comando = input.next(); //prende in input il comando
+		if(comando.equals("moves")) {
+			//inserire la funzione che mostra le mosse giocte durante la partita
+		}
+		
+	}
+	
 	
 	
 }
