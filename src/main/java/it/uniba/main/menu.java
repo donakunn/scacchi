@@ -11,7 +11,7 @@ public class menu {
         String comando = scanner.next();
         if(comando.equals("board")) // verifica il comando scritto in input e lo confronta con il comando 'board'
         {
-        	Partita.stampaScacchiera();
+        	Game.printBoard();
         }
 	}
 	

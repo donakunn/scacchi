@@ -1,9 +1,9 @@
 package it.uniba.main;
 
-public class Partita {
+public class Game {
             private static Cella board[][] = new Cella[8][8];
 
-            public static void stampaScacchiera() {
+            public static void printBoard() {
                 System.out.println("\ta\tb\tc\td\te\tf\tg\th");
                 for (int i = 0; i < 8; i++) {
                     System.out.print(8 - i + ".\t");
