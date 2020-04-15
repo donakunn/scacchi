@@ -1,7 +1,7 @@
 package Menu;
 import java.util.Scanner;
 public class menu {
-	public void mostrareelencocomandi() {
+	public void mostrareComandi() {
 		System.out.print("Se la partita non � in corso compariranno questi comandi:\n help \n play \n quit\n");
         System.out.print("Se la partita � in corso compariranno questi comandi:\n help \n quit \n board \n moves \n captures");
 	}
@@ -24,6 +24,16 @@ public class menu {
 		
 	}
 	
+	public void chiudilGioco() {
+		try (Scanner oggetto = new Scanner(System.in)) {
+			System.out.print("Sei sicuro di uscire?:");
+			String risposta= oggetto.nextLine();
+			risposta.toUpperCase();
+			if(risposta.equals("SI") || risposta.equals("YES")  ) {
+				System.exit(0);
+			}
+		}
 	
+}
 	
 }
