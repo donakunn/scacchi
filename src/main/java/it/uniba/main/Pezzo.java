@@ -1,7 +1,7 @@
-package Pezzi;
+package it.uniba.main;
 
 import java.util.ArrayList;
-import Partita.Cella;
+
 
 public abstract class Pezzo {		//classe astratta che fattorizza proprietà comuni dei pezzi del gioco degli scacchi
 

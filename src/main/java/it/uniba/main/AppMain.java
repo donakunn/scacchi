@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
 import java.util.Scanner;
-import Partita.Cella;
 
 import it.uniba.sotorrent.GoogleDocsUtils;
 

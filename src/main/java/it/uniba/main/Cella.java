@@ -1,5 +1,4 @@
-package Partita;
-import Pezzi.Pezzo;
+package it.uniba.main;
 public class Cella {
 	boolean vuota=true;
 	Pezzo pezzo;

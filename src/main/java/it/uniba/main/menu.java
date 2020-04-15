@@ -1,4 +1,4 @@
-package Menu;
+package it.uniba.main;
 import java.util.Scanner;
 public class menu {
 	public void mostrareComandi() {

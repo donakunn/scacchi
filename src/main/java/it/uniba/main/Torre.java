@@ -1,9 +1,7 @@
-package Pezzi;
+package it.uniba.main;
 
 
 import java.util.ArrayList;
-
-import Partita.Cella;
 
 public class Torre extends Pezzo {
 
