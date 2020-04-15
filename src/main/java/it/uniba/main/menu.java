@@ -1,12 +1,12 @@
 package it.uniba.main;
 import java.util.Scanner;
 public class menu {
-	public void mostrareComandi() {
+	public void showCommands() {
 		System.out.print("Se la partita non � in corso compariranno questi comandi:\n help \n play \n quit\n");
         System.out.print("Se la partita � in corso compariranno questi comandi:\n help \n quit \n board \n moves \n captures");
 	}
  
-	public void comandoBoard() {
+	public void commandBoard() {
 		Scanner scanner = new Scanner(System.in); // prende il comando scritto in input
         String comando = scanner.next();
         if(comando.equals("board")) // verifica il comando scritto in input e lo confronta con il comando 'board'
@@ -15,7 +15,7 @@ public class menu {
         }
 	}
 	
-	public void comandoMoves(){
+	public void commandMoves(){
 		Scanner input = new Scanner(System.in);
 		String comando = input.next(); //prende in input il comando
 		if(comando.equals("moves")) {
@@ -24,9 +24,9 @@ public class menu {
 		
 	}
 	
-	public void chiudilGioco() {
+	public void closeGame() {
 		try (Scanner oggetto = new Scanner(System.in)) {
-			System.out.print("Sei sicuro di uscire?:");
+			System.out.print("Are you sure you want to quit?:");
 			String risposta= oggetto.nextLine();
 			risposta.toUpperCase();
 			if(risposta.equals("SI") || risposta.equals("YES")  ) {
