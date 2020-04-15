@@ -2,8 +2,8 @@ package it.uniba.main;
 import java.util.Scanner;
 public class menu {
 	public void showCommands() {
-		System.out.print("Se la partita non � in corso compariranno questi comandi:\n help \n play \n quit\n");
-        System.out.print("Se la partita � in corso compariranno questi comandi:\n help \n quit \n board \n moves \n captures");
+		System.out.print("If not in-game this commands will appear:\n help \n play \n quit\n");
+        System.out.print("If in-game this commands will appear:\n help \n quit \n board \n moves \n captures");
 	}
  
 	public void commandBoard() {
