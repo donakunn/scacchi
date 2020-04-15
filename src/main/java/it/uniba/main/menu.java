@@ -1,4 +1,4 @@
-package Menu;
+package it.uniba.main;
 import java.util.Scanner;
 public class menu {
 	public void mostrareComandi() {
@@ -11,7 +11,7 @@ public class menu {
         String comando = scanner.next();
         if(comando.equals("board")) // verifica il comando scritto in input e lo confronta con il comando 'board'
         {
-        	//da inserire la funzione di stampa della matrice
+        	Partita.stampaScacchiera();
         }
 	}
 	

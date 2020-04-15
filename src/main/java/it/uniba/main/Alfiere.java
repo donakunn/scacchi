@@ -1,23 +1,20 @@
-package Pezzi;
-
+package it.uniba.main;
 
 import java.util.ArrayList;
 
-import Partita.Cella;
-
-public class Regina extends Pezzo {
+public class Alfiere extends Pezzo {
 
 	
-	public Regina(int col, int x, int y) {
+	public Alfiere(int col, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.colore = col;
 		if (col == 0) {
-			this.tipoPezzo = "U"+"2655"; //Regina bianca
+			this.tipoPezzo = "U"+"2657"; //Alfiere bianco
 			
 		}
 		else if (col == 1) {
-			this.tipoPezzo = "U"+"265B"; //Regina nera
+			this.tipoPezzo = "U"+"265D"; //Alfiere nero
 			
 			
 		}
