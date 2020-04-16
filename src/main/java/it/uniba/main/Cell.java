@@ -1,24 +1,28 @@
 package it.uniba.main;
+
 public class Cell {
-	boolean vuota=true;
+	boolean empty=true;
 	Piece piece;
 	
 	Cell(Piece piece) {
-		this.piece = piece;
-	
+		this.piece=piece;
+		empty=false;
 	};
 
-	
-	public Piece getPiece() {		
+	public Piece getPiece() {
 		return this.piece;
-	
 	}
 	
 	public void setEmpty() {
 		this.piece = null;
 	}
-	public void setPiece(Piece piece) {
-		this.piece = piece;
-		
+	void setPiece(Piece piece) {
+		if(empty==true) empty=false;
+		this.piece=piece;
+	};
+	
+	public String toString() {
+		if (piece==null) return "[ ]";
+		else return "["+piece.toString()+"]";
 	}
 }

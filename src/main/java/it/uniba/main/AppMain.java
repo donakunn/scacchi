@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 import it.uniba.sotorrent.GoogleDocsUtils;
 
-
-
 /**
  * The main class for the project. It must be customized to meet the project
  * assignment specifications.
@@ -17,7 +15,6 @@ import it.uniba.sotorrent.GoogleDocsUtils;
  * <b>DO NOT RENAME</b>
  */
 public final class AppMain {
-
 	/**
 	 * Private constructor. Change if needed.
 	 */
@@ -30,32 +27,55 @@ public final class AppMain {
 	 *
 	 * @param args The command-line arguments.
 	 */
-	public static void main(final String[] args) {
-		Cell[][] scacchiera= new Cell[8][8];
-		System.out.println("Current working dir: " + System.getProperty("user.dir"));
-
-		if (args.length > 0) {
-			switch (args[0]) {
-			case "it":
-				System.out.println("Applicazione avviata.");
+	public static void main(final String[] args) throws invalidCommandException, notInGameException {
+		Menu menu= new Menu();
+		boolean inGame= false;
+		boolean exit=false;
+		Scanner in = new Scanner(System.in);
+		System.out.println("Welcome to the chess app!");
+		System.out.println("Please type commands to be executed or type help to show a list of them.");
+		while (!exit) {
+			String input=in.nextLine();
+			switch(input) {
+			case "board":
+				if(inGame) {
+					menu.board();
+				}else {
+					throw new notInGameException();
+				}
+			case "captures":
+				if(inGame) {
+					//menu.Captures();
+				}else {
+					throw new notInGameException();
+				}
+			case "help":
+				menu.help();
 				break;
-
-			case "en":
-				System.out.println("Application started.");
+			case "moves":
+				if(inGame) {
+					menu.moves();
+				}else {
+					throw new notInGameException();
+				}
+			case "play":
+				if(!inGame) {
+					inGame=true;
+				}
+				menu.play();
 				break;
-
+			case "quit":
+				exit=menu.quit();
+				break;
 			default:
-				System.out.println("Specify the language. "
-								   + "Languages supported: 'it' or 'en'");
-				break;
+				if(inGame) {
+					menu.getMove(input);
+				}else {
+					throw new invalidCommandException();
+				}
 			}
-		} else {
-			System.out.println("Using default language 'en'");
-			System.out.println("Application started.");
 		}
-
+		in.close();
+		System.exit(0);
 	}
-	
-	
-
 }
