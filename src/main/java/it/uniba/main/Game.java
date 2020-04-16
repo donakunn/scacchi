@@ -9,14 +9,14 @@ public class Game {
 	private ArrayList<String> movesDone = new ArrayList<String>();
 	private ArrayList<Piece> BlacksCaptured= new ArrayList<Piece>();
 	private ArrayList<Piece> WhitesCaptured= new ArrayList<Piece>();
-	
+
 
 	void newGame() {
 		System.out.println("Creating game...");
 		for(int j=0;j<8;j++) {
 			//initialize pawns a2-h2 (white side)
 			board[1][j]= new Cell(new Pawn(1,1,j));
-			
+
 			//initialize pawns a7-h7 (black side)
 			board[6][j]= new Cell(new Pawn(0,6,j));
 		};
@@ -29,8 +29,8 @@ public class Game {
 		board[0][5]= new Cell(new Bishop(1,0,5));
 		board[0][6]= new Cell(new Knight(1,0,6));
 		board[0][7]= new Cell(new Rook(1,0,7));
-		 
-		
+
+
 		//initialize pieces a8-h8 (black side)
 		board[7][0]= new Cell(new Rook(1,7,0));
 		board[7][1]= new Cell(new Knight(1,7,1));
@@ -49,7 +49,7 @@ public class Game {
 		//chiedi a Donato, se legge Donato chiedi a Filippo di chiederti
 		if (move.length()==2){
 			x = move.charAt(1);
-			y = Colonna.valueOf(move.substring(0,0)).ordinal();
+			y = Colonna.valueOf(move.substring(0,1)).ordinal();
 			Pawn p;
 			ArrayList<Cell> possMoves;
 
@@ -59,33 +59,37 @@ public class Game {
 				if (possMoves.contains(board[x][y])) {
 					board[x-1][y].setEmpty();
 					board[x][y].setPiece(p);
+					movesDone.add(move);
 					p.incrementMoves();
 				}
 			}
 			else if ((board[x-2][y].getPiece() instanceof Pawn )&& (board[x-2][y].getPiece().getColor() == 0)) { 
 				p = (Pawn) board[x-2][y].getPiece();
-				possMoves = p.possibleMoves;
+				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
 					board[x-2][y].setEmpty();
 					board[x][y].setPiece(p);
+					movesDone.add(move);
 					p.incrementMoves();
 				}
 			}
 			else if ((board[x+1][y].getPiece() instanceof Pawn )&& (board[x+1][y].getPiece().getColor() == 1)) { 
 				p = (Pawn) board[x+1][y].getPiece();
-				possMoves = p.possibleMoves;
+				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
 					board[x+1][y].setEmpty();
 					board[x][y].setPiece(p);
+					movesDone.add(move);
 					p.incrementMoves();
 				}
 			}
 			else if ((board[x+2][y].getPiece() instanceof Pawn )&& (board[x+2][y].getPiece().getColor() == 0)) { 
 				p = (Pawn) board[x+2][y].getPiece();
-				possMoves = p.possibleMoves;
+				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
 					board[x+2][y].setEmpty();
 					board[x][y].setPiece(p);
+					movesDone.add(move);
 					p.incrementMoves();
 				}
 			}
@@ -111,8 +115,173 @@ public class Game {
 		//Colonna colonnaMossa= Colonna.valueOf(mossa.substring(0,1));
 		//accesso con scacchiera[mossa.charAt(1)-1][colonnaMossa.ordinal()]
 	}
-	
-	public Cell[][] getBoard() {
-		return this.board;
+
+	public void Capture(int player,String move) {
+		int x; //ascissa
+		int y; //ordinata
+		int z; //colonna del pezzo di provenienza
+
+		Piece p,caught;
+		ArrayList<Cell> possMoves;
+		x = move.charAt(3);
+		z = Colonna.valueOf(move.substring(0,1)).ordinal();
+		y = Colonna.valueOf(move.substring(2,3)).ordinal();
+
+		if (player == 0) {		//neri
+			if (z == y-1) {
+				if (board[x][y] != null) {
+					if (board[x-1][y-1].getPiece() instanceof Pawn) {       //cattura in diagonale da sinistra
+						p = (Pawn)board[x-1][y-1].getPiece();
+						possMoves = p.availableMoves(board);
+						if (possMoves.contains(board[x][y])) {
+							caught = board[x][y].getPiece();
+							board[x][y].setPiece(p);
+							board[x-1][y-1].setEmpty();
+							movesDone.add(move);
+							this.WhitesCaptured.add(caught);
+
+
+						}
+					}
+				} 
+				else {
+					if (board[x-1][y-1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da sinistra
+						if (board[x-1][y].getPiece() instanceof Pawn) {
+							p = (Pawn)board[x-1][y-1].getPiece();
+							caught = (Pawn)board[x-1][y].getPiece();
+							possMoves = p.availableMoves(board);
+							if (possMoves.contains(board[x][y])&& ((Pawn) caught).enPassantCatturable()) {
+								board[x][y].setPiece(p);
+								board[x-1][y-1].setEmpty();
+								board[x-1][y].setEmpty();
+								movesDone.add(move);
+								this.WhitesCaptured.add(caught);
+
+							}
+						}
+					}
+				}
+			}
+			else if ( z == y+1) { 
+				if (board[x][y] != null) {
+					if (board[x-1][y+1].getPiece() instanceof Pawn) { //cattura in diagonale da destra
+						p = (Pawn)board[x-1][y+1].getPiece();
+						possMoves = p.availableMoves(board);
+						if (possMoves.contains(board[x][y])) {
+							caught = board[x][y].getPiece();
+							board[x][y].setPiece(p);
+							board[x-1][y+1].setEmpty();
+							movesDone.add(move);
+							this.WhitesCaptured.add(caught);
+
+						}
+					}
+				}
+				else {
+					if (board[x-1][y+1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da destra
+						if (board[x-1][y].getPiece() instanceof Pawn) {
+							p = (Pawn)board[x-1][y+1].getPiece();
+							caught = (Pawn)board[x-1][y].getPiece();
+							possMoves = p.availableMoves(board);
+							if (possMoves.contains(board[x][y])&& ((Pawn) caught).enPassantCatturable()) {
+								board[x][y].setPiece(p);
+								board[x-1][y+1].setEmpty();
+								board[x-1][y].setEmpty();
+								movesDone.add(move);
+								this.WhitesCaptured.add(caught);
+
+							}
+						}
+					}
+				}
+
+			}
+			else {
+				System.err.println("Moves not allowed");
+				return;
+			}
+
+		}
+		else {															//bianchi
+			
+			if (z == y-1) {
+				if (board[x][y] != null) {
+					if (board[x+1][y-1].getPiece() instanceof Pawn) {       //cattura in diagonale da sinistra
+						p = (Pawn)board[x+1][y-1].getPiece();
+						possMoves = p.availableMoves(board);
+						if (possMoves.contains(board[x][y])) {
+							caught = board[x][y].getPiece();
+							board[x][y].setPiece(p);
+							board[x+1][y-1].setEmpty();
+							movesDone.add(move);
+							this.BlacksCaptured.add(caught);
+
+
+						}
+					}
+				} 
+				else {
+					if (board[x+1][y-1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da sinistra
+						if (board[x+1][y].getPiece() instanceof Pawn) {
+							p = (Pawn)board[x+1][y-1].getPiece();
+							caught = (Pawn)board[x+1][y].getPiece();
+							possMoves = p.availableMoves(board);
+							if (possMoves.contains(board[x][y])&& ((Pawn) caught).enPassantCatturable()) {
+								board[x][y].setPiece(p);
+								board[x+1][y-1].setEmpty();
+								board[x+1][y].setEmpty();
+								movesDone.add(move);
+								this.BlacksCaptured.add(caught);
+
+							}
+						}
+					}
+				}
+			}
+			else if ( z == y+1) { 
+				if (board[x][y] != null) {
+					if (board[x+1][y+1].getPiece() instanceof Pawn) { //cattura in diagonale da destra
+						p = (Pawn)board[x+1][y+1].getPiece();
+						possMoves = p.availableMoves(board);
+						if (possMoves.contains(board[x][y])) {
+							caught = board[x][y].getPiece();
+							board[x][y].setPiece(p);
+							board[x+1][y+1].setEmpty();
+							movesDone.add(move);
+							this.BlacksCaptured.add(caught);
+
+						}
+					}
+				}
+				else {
+					if (board[x+1][y+1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da destra
+						if (board[x+1][y].getPiece() instanceof Pawn) {
+							p = (Pawn)board[x+1][y+1].getPiece();
+							caught = (Pawn)board[x+1][y].getPiece();
+							possMoves = p.availableMoves(board);
+							if (possMoves.contains(board[x][y])&& ((Pawn) caught).enPassantCatturable()) {
+								board[x][y].setPiece(p);
+								board[x+1][y+1].setEmpty();
+								board[x+1][y].setEmpty();
+								movesDone.add(move);
+								this.BlacksCaptured.add(caught);
+
+							}
+						}
+					}
+				}
+
+			}
+			else {
+				System.err.println("Moves not allowed");
+				return;
+			}
+			}
+	}
+
+
+
+	public static Cell[][] getBoard() {
+		return board;
 	}
 }

@@ -30,7 +30,7 @@ public class Pawn extends Piece{
 	}
 	
 	
-	private Boolean CatturabileConEnPassant() {											//restituisce true se il pedone ha effettuato una sola mossa con salto di 2, false altrimenti
+	public Boolean enPassantCatturable() {											//restituisce true se il pedone ha effettuato una sola mossa con salto di 2, false altrimenti
 		if ((getColor() == 0)&& (movesDone == 1) && (this.x == 3 )) {
 			return true;
 		}
@@ -75,14 +75,14 @@ public class Pawn extends Piece{
 			
 			if ((y>0) && (statoGioco[x+1][y-1].getPiece() == null)&&(statoGioco[x][y-1].getPiece().getColor()!=this.getColor())&& ((statoGioco[x][y-1].getPiece() instanceof Pawn))) {		//controlla se può catturare in diagonale a sinistra o destra con en passant, se possibile aggiunge la posizione alla cella
 				Pawn p = (Pawn) statoGioco[x][y-1].getPiece();
-				if (p.CatturabileConEnPassant()) {
+				if (p.enPassantCatturable()) {
 					possibleMoves.add(statoGioco[x][y-1]); 
 				}
 			}
 			
 			else if ((y<7) && (statoGioco[x+1][y+1].getPiece() == null)&&(statoGioco[x][y+1].getPiece().getColor()!=this.getColor())&& ((statoGioco[x][y+1].getPiece() instanceof Pawn))) {
 				Pawn p = (Pawn) statoGioco[x][y+1].getPiece();
-				if (p.CatturabileConEnPassant()) {
+				if (p.enPassantCatturable()) {
 					possibleMoves.add(statoGioco[x][y+1]); 
 				}
 			}
@@ -125,14 +125,14 @@ public class Pawn extends Piece{
 			if ((y>0) && (statoGioco[x-1][y-1].getPiece() == null)&&(statoGioco[x][y-1].getPiece().getColor()!=this.getColor())&& ((statoGioco[x][y-1].getPiece() instanceof Pawn))) {			//controlla se può catturare in diagonale a sinistra o destra con en passant, se possibile aggiunge la posizione alla cella
 				
 				Pawn p = (Pawn) statoGioco[x][y-1].getPiece();
-				if (p.CatturabileConEnPassant()) {
+				if (p.enPassantCatturable()) {
 					possibleMoves.add(statoGioco[x][y-1]); 
 				}
 			}
 			
 			else if ((y<7) && (statoGioco[x-1][y+1].getPiece() == null)&&(statoGioco[x][y+1].getPiece().getColor()!=this.getColor())&& ((statoGioco[x][y+1].getPiece() instanceof Pawn))) {
 				Pawn p = (Pawn) statoGioco[x][y+1].getPiece();
-				if (p.CatturabileConEnPassant()) {
+				if (p.enPassantCatturable()) {
 					possibleMoves.add(statoGioco[x][y+1]); 
 				}
 			}
