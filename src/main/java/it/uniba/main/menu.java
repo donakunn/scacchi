@@ -1,10 +1,17 @@
 package it.uniba.main;
 import java.util.Scanner;
 public class menu {
-	public void showCommands() {
-		System.out.print("If not in-game this commands will appear:\n help \n play \n quit\n");
-        System.out.print("If in-game this commands will appear:\n help \n quit \n board \n moves \n captures");
-	}
+	public void commandHelp() {
+        System.out.println("List of executable commands:");
+        System.out.println("help");
+        System.out.println("play");
+        System.out.println("quit");
+        System.out.println("\nList of commands that can only be executed in the game:");
+        System.out.println("board");
+        System.out.println("captures");
+        System.out.println("moves");
+        System.out.println("To perform a move it is sufficient to specify it in algebraic notation.");
+    }
  
 	public void commandBoard() {
 		Scanner scanner = new Scanner(System.in); // prende il comando scritto in input
