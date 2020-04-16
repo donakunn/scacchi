@@ -25,7 +25,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	public ArrayList<Cell> MosseDisponibili(Cell[][] statoGioco) {
+	public ArrayList<Cell> availableMoves(Cell[][] statoGioco) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -9,8 +9,8 @@ public abstract class Piece {		//classe astratta che fattorizza proprietà comun
 	protected String tipoPezzo;
 	protected int x; //ascissa della posizione del pezzo
 	protected int y; //ordinata della posizione del pezzo
-	protected ArrayList<Cell> mossePossibili = new ArrayList<Cell>();
-	public abstract ArrayList<Cell> MosseDisponibili(Cell statoGioco[][]); 
+	protected ArrayList<Cell> possibleMoves = new ArrayList<Cell>();
+	public abstract ArrayList<Cell> availableMoves(Cell statoGioco[][]); 
 
 
 

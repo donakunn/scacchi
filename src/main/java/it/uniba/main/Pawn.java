@@ -44,9 +44,9 @@ public class Pawn extends Piece{
 
 
 	@Override
-	public ArrayList<Cell> MosseDisponibili(Cell statoGioco[][]) { //restituisce lista di mosse disponibili per il Pedone
+	public ArrayList<Cell> availableMoves(Cell statoGioco[][]) { //restituisce lista di mosse disponibili per il Pedone
 
-		mossePossibili.clear();
+		possibleMoves.clear();
 		if (GetColor() == 0) {											//neri, dall'alto verso il basso
 			
 			 /*  if (x == 7) 
@@ -55,35 +55,35 @@ public class Pawn extends Piece{
 			if (MosseEffettuate == 0) {								//se prima mossa è possibili sia andare avanti di 2 che di 1
 				if (statoGioco[x+1][y].getPiece() == null) {
 
-					this.mossePossibili.add(statoGioco[x+1][y]); 
+					this.possibleMoves.add(statoGioco[x+1][y]); 
 				}
 				if (statoGioco[x+2][y].getPiece() == null) {			
 
-					this.mossePossibili.add(statoGioco[x+2][y]);		//da controllare il verso della scacchiera, sto assumendo che si trovi in alto
+					this.possibleMoves.add(statoGioco[x+2][y]);		//da controllare il verso della scacchiera, sto assumendo che si trovi in alto
 				}
 				
 			}
 			
 			else if (statoGioco[x+1][y].getPiece() == null) {				//altrimenti va avanti solo di 1
-				this.mossePossibili.add(statoGioco[x+1][y]);
+				this.possibleMoves.add(statoGioco[x+1][y]);
 			}
 			if ((y>0) && (statoGioco[x+1][y-1].getPiece() != null)&&(statoGioco[x+1][y-1].getPiece().GetColor()!=this.GetColor()))					//controlla se può catturare in diagonale a sinistra o destra, se possibile aggiunge la posizione alla cella
-				mossePossibili.add(statoGioco[x+1][y-1]);
+				possibleMoves.add(statoGioco[x+1][y-1]);
 			else if ((y<7) && (statoGioco[x+1][y+1].getPiece() != null)&&(statoGioco[x+1][y-1].getPiece().GetColor()!=this.GetColor()))
-				mossePossibili.add(statoGioco[x+1][y+1]);
+				possibleMoves.add(statoGioco[x+1][y+1]);
 			
 			
 			if ((y>0) && (statoGioco[x+1][y-1].getPiece() == null)&&(statoGioco[x][y-1].getPiece().GetColor()!=this.GetColor())&& ((statoGioco[x][y-1].getPiece() instanceof Pawn))) {		//controlla se può catturare in diagonale a sinistra o destra con en passant, se possibile aggiunge la posizione alla cella
 				Pawn p = (Pawn) statoGioco[x][y-1].getPiece();
 				if (p.CatturabileConEnPassant()) {
-					mossePossibili.add(statoGioco[x][y-1]); 
+					possibleMoves.add(statoGioco[x][y-1]); 
 				}
 			}
 			
 			else if ((y<7) && (statoGioco[x+1][y+1].getPiece() == null)&&(statoGioco[x][y+1].getPiece().GetColor()!=this.GetColor())&& ((statoGioco[x][y+1].getPiece() instanceof Pawn))) {
 				Pawn p = (Pawn) statoGioco[x][y+1].getPiece();
 				if (p.CatturabileConEnPassant()) {
-					mossePossibili.add(statoGioco[x][y+1]); 
+					possibleMoves.add(statoGioco[x][y+1]); 
 				}
 			}
 
@@ -103,49 +103,40 @@ public class Pawn extends Piece{
 			if (MosseEffettuate == 0) {									//se prima mossa è possibili sia andare avanti di 2 che di 1
 				if (statoGioco[x-1][y].getPiece() == null) {
 
-					this.mossePossibili.add(statoGioco[x-1][y]); 
+					this.possibleMoves.add(statoGioco[x-1][y]); 
 				}
 				if (statoGioco[x-2][y].getPiece() == null) {
 
-					this.mossePossibili.add(statoGioco[x-2][y]);		//da controllare il verso della scacchiera, sto assumendo che si trovi in alto
+					this.possibleMoves.add(statoGioco[x-2][y]);		//da controllare il verso della scacchiera, sto assumendo che si trovi in alto
 				}
 				
 			}
 			
 			else if (statoGioco[x-1][y].getPiece() == null) {				//altrimenti va avanti solo di 1
-				this.mossePossibili.add(statoGioco[x-1][y]);
+				this.possibleMoves.add(statoGioco[x-1][y]);
 			}
 			
 			
 			if ((y>0) && (statoGioco[x-1][y-1].getPiece() != null)&&statoGioco[x+1][y-1].getPiece().GetColor()!=this.GetColor())				//controlla se può catturare in diagonale a sinistra o destra, se possibile aggiunge la posizione alla cella	
-				mossePossibili.add(statoGioco[x-1][y-1]);
+				possibleMoves.add(statoGioco[x-1][y-1]);
 			else if ((y<7) && (statoGioco[x-1][y+1].getPiece() != null)&&statoGioco[x+1][y-1].getPiece().GetColor()!=this.GetColor())
-				mossePossibili.add(statoGioco[x-1][y+1]);
+				possibleMoves.add(statoGioco[x-1][y+1]);
 			
 			if ((y>0) && (statoGioco[x-1][y-1].getPiece() == null)&&(statoGioco[x][y-1].getPiece().GetColor()!=this.GetColor())&& ((statoGioco[x][y-1].getPiece() instanceof Pawn))) {			//controlla se può catturare in diagonale a sinistra o destra con en passant, se possibile aggiunge la posizione alla cella
 				
 				Pawn p = (Pawn) statoGioco[x][y-1].getPiece();
 				if (p.CatturabileConEnPassant()) {
-					mossePossibili.add(statoGioco[x][y-1]); 
+					possibleMoves.add(statoGioco[x][y-1]); 
 				}
 			}
 			
 			else if ((y<7) && (statoGioco[x-1][y+1].getPiece() == null)&&(statoGioco[x][y+1].getPiece().GetColor()!=this.GetColor())&& ((statoGioco[x][y+1].getPiece() instanceof Pawn))) {
 				Pawn p = (Pawn) statoGioco[x][y+1].getPiece();
 				if (p.CatturabileConEnPassant()) {
-					mossePossibili.add(statoGioco[x][y+1]); 
+					possibleMoves.add(statoGioco[x][y+1]); 
 				}
 			}
 		}
-		return mossePossibili; 
+		return possibleMoves; 
 	}
-
-
-
-
-
-
-
-
-	
-	}
+}
