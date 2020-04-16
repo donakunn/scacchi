@@ -45,7 +45,7 @@ public class Menu {
 		System.out.println("Are you sure you want to quit?:");
 		while(true) {
 			answer=in.nextLine();
-			answer.toUpperCase();
+			answer=answer.toUpperCase();
 			if(answer.equals("YES")) {
 				return true;
 			}else if(answer.equals("NO")) {
