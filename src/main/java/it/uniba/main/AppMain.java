@@ -27,7 +27,7 @@ public final class AppMain {
 	 *
 	 * @param args The command-line arguments.
 	 */
-	public static void main(final String[] args) throws invalidCommandException, notInGameException {
+	public static void main(final String[] args){
 		Menu menu= new Menu();
 		boolean inGame= false;
 		boolean exit=false;
@@ -41,13 +41,13 @@ public final class AppMain {
 				if(inGame) {
 					menu.board();
 				}else {
-					throw new notInGameException();
+					System.err.println("You have to be in an active game to use that command.");
 				}
 			case "captures":
 				if(inGame) {
 					//menu.Captures();
 				}else {
-					throw new notInGameException();
+					System.err.println("You have to be in an active game to use that command.");
 				}
 			case "help":
 				menu.help();
@@ -56,7 +56,7 @@ public final class AppMain {
 				if(inGame) {
 					menu.moves();
 				}else {
-					throw new notInGameException();
+					System.err.println("You have to be in an active game to use that command.");
 				}
 			case "play":
 				if(!inGame) {
@@ -71,7 +71,7 @@ public final class AppMain {
 				if(inGame) {
 					menu.getMove(input);
 				}else {
-					throw new invalidCommandException();
+					System.err.println("That is not a valid command nor move.");
 				}
 			}
 		}
