@@ -22,6 +22,7 @@ public class Cell {
 	};
 	
 	public String toString() {
-		return "["+piece.toString()+"]";
+		if (piece==null) return "[ ]";
+		else return "["+piece.toString()+"]";
 	}
 }

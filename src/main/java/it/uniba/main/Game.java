@@ -37,6 +37,7 @@ public class Game {
 		board[7][5]= new Cell(new Bishop(1,7,5));
 		board[7][6]= new Cell(new Knight(1,7,6));
 		board[7][7]= new Cell(new Rook(1,7,7));
+		System.out.println("Game created...");
 	};
 
 	void move(String move) {
