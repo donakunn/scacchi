@@ -1,21 +1,22 @@
 package it.uniba.main;
 
+
 import java.util.ArrayList;
 
 
-public class Re extends Pezzo {
+public class Queen extends Piece {
 
 	
-	public Re(int col, int x, int y) {
+	public Queen(int col, int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.colore = col;
 		if (col == 0) {
-			this.tipoPezzo = "U"+"2654"; //Re bianco
+			this.tipoPezzo = "U"+"2655"; //Regina bianca
 			
 		}
 		else if (col == 1) {
-			this.tipoPezzo = "U"+"265A"; //pedone nero
+			this.tipoPezzo = "U"+"265B"; //Regina nera
 			
 			
 		}
@@ -25,7 +26,7 @@ public class Re extends Pezzo {
 	}
 
 	@Override
-	public ArrayList<Cella> MosseDisponibili(Cella[][] statoGioco) {
+	public ArrayList<Cell> MosseDisponibili(Cell[][] statoGioco) {
 		// TODO Auto-generated method stub
 		return null;
 	}

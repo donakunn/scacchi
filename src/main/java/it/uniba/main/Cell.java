@@ -1,13 +1,13 @@
 package it.uniba.main;
-public class Cella {
+public class Cell {
 	boolean vuota=true;
-	Pezzo pezzo;
-	Cella() {};
-	Cella(Pezzo pezzo) {
+	Piece pezzo;
+	Cell() {};
+	Cell(Piece pezzo) {
 		this.pezzo=pezzo;
 		vuota=false;
 	};
-	void piazza(Pezzo pezzo) {
+	void place(Piece pezzo) {
 		if(vuota==true) vuota=false;
 		/* else {
 		 * 	se la cella � occupata da un pezzo dello stesso giocatore che ha effettuato la mossa
@@ -21,7 +21,7 @@ public class Cella {
 		// return true; funzione Void
 	};
 	
-	public Pezzo leggiPezzo() {			//da implementare
+	public Piece getPiece() {			//da implementare
 		return pezzo;
 	
 	}

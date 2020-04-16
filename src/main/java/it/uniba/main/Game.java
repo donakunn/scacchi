@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 public class Game {
-            private static Cella board[][] = new Cella[8][8];
+            private static Cell board[][] = new Cell[8][8];
 
             public static void printBoard() {
                 System.out.println("\ta\tb\tc\td\te\tf\tg\th");
