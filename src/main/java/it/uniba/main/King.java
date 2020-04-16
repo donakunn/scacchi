@@ -9,13 +9,13 @@ public class King extends Piece {
 	public King(int col, int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.colore = col;
+		this.color= col;
 		if (col == 0) {
-			this.tipoPezzo = "U"+"2654"; //Re bianco
+			this.pieceType = "U"+"265A"; //Re nero 
 			
 		}
 		else if (col == 1) {
-			this.tipoPezzo = "U"+"265A"; //pedone nero
+			this.pieceType = "U"+"2654"; //Re bianco
 			
 			
 		}
