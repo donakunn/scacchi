@@ -31,7 +31,7 @@ public final class AppMain {
 	 * @param args The command-line arguments.
 	 */
 	public static void main(final String[] args) {
-		Cella[][] scacchiera= new Cella[8][8];
+		Cell[][] scacchiera= new Cell[8][8];
 		System.out.println("Current working dir: " + System.getProperty("user.dir"));
 
 		if (args.length > 0) {
