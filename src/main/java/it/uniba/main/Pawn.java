@@ -13,16 +13,20 @@ public class Pawn extends Piece{
 		this.y = y;
 		this.colore = col;
 		if (col == 0) {
-			this.tipoPezzo = "U"+"2659"; //pedone bianco
+			this.tipoPezzo = "U"+"265F"; //pedone nero
 			
 		}
 		else if (col == 1) {
-			this.tipoPezzo = "U"+"265F"; //pedone nero
+			this.tipoPezzo = "U"+"2659"; //pedone bianco
 			
 			
 		}
 		else throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
 
+	}
+	
+	public void incrementMoves() {
+		this.MosseEffettuate ++;
 	}
 	
 	
@@ -43,7 +47,7 @@ public class Pawn extends Piece{
 	public ArrayList<Cell> MosseDisponibili(Cell statoGioco[][]) { //restituisce lista di mosse disponibili per il Pedone
 
 		mossePossibili.clear();
-		if (GetColor() == 0) {											//bianchi, dall'alto verso il basso
+		if (GetColor() == 0) {											//neri, dall'alto verso il basso
 			
 			 /*  if (x == 7) 
 				return this.mossePossibili; */					//da implementare in seguito cosa accade quando il pedone raggiunge la fine della scacchiera
@@ -90,7 +94,7 @@ public class Pawn extends Piece{
 			
 		}
 		
-		else {															//neri, dal basso verso l'alto
+		else {															//bianchi, dal basso verso l'alto
 			
 			/*if (x == 0) {			//da implementare in seguito cosa accade quando il pedone raggiunge la fine della scacchiera
 			
