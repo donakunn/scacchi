@@ -5,8 +5,11 @@ import java.util.Scanner;
 
 public class Game {
 	private static Cell board[][] = new Cell[8][8];
-	enum Colonna {a,b,c,d,e,f,g,h};
-	ArrayList <String>movesDone = new ArrayList<String>();
+	private enum Colonna {a,b,c,d,e,f,g,h};
+	private ArrayList<String> movesDone = new ArrayList<String>();
+	private ArrayList<Piece> BlacksCaptured= new ArrayList<Piece>();
+	private ArrayList<Piece> WhitesCaptured= new ArrayList<Piece>();
+	
 
 	void newGame() {
 		System.out.println("Creating game...");
@@ -50,7 +53,7 @@ public class Game {
 			Pawn p;
 			ArrayList<Cell> possMoves;
 
-			if ((board[x-1][y].getPiece() instanceof Pawn )&& (board[x-1][y].getPiece().GetColor() == 0)) { //neri
+			if ((board[x-1][y].getPiece() instanceof Pawn )&& (board[x-1][y].getPiece().getColor() == 0)) { //neri
 				p = (Pawn) board[x-1][y].getPiece();
 				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
@@ -59,7 +62,7 @@ public class Game {
 					p.incrementMoves();
 				}
 			}
-			else if ((board[x-2][y].getPiece() instanceof Pawn )&& (board[x-2][y].getPiece().GetColor() == 0)) { 
+			else if ((board[x-2][y].getPiece() instanceof Pawn )&& (board[x-2][y].getPiece().getColor() == 0)) { 
 				p = (Pawn) board[x-2][y].getPiece();
 				possMoves = p.possibleMoves;
 				if (possMoves.contains(board[x][y])) {
@@ -68,7 +71,7 @@ public class Game {
 					p.incrementMoves();
 				}
 			}
-			else if ((board[x+1][y].getPiece() instanceof Pawn )&& (board[x+1][y].getPiece().GetColor() == 1)) { 
+			else if ((board[x+1][y].getPiece() instanceof Pawn )&& (board[x+1][y].getPiece().getColor() == 1)) { 
 				p = (Pawn) board[x+1][y].getPiece();
 				possMoves = p.possibleMoves;
 				if (possMoves.contains(board[x][y])) {
@@ -77,7 +80,7 @@ public class Game {
 					p.incrementMoves();
 				}
 			}
-			else if ((board[x+2][y].getPiece() instanceof Pawn )&& (board[x+2][y].getPiece().GetColor() == 0)) { 
+			else if ((board[x+2][y].getPiece() instanceof Pawn )&& (board[x+2][y].getPiece().getColor() == 0)) { 
 				p = (Pawn) board[x+2][y].getPiece();
 				possMoves = p.possibleMoves;
 				if (possMoves.contains(board[x][y])) {

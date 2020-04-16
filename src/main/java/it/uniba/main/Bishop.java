@@ -8,13 +8,13 @@ public class Bishop extends Piece {
 	public Bishop(int col, int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.colore = col;
+		this.color = col;
 		if (col == 0) {
-			this.tipoPezzo = "U"+"2657"; //Alfiere bianco
+			this.pieceType = "U"+"265D";//Alfiere nero
 			
 		}
 		else if (col == 1) {
-			this.tipoPezzo = "U"+"265D"; //Alfiere nero
+			this.pieceType = "U"+"2657";  //Alfiere bianco
 			
 			
 		}
