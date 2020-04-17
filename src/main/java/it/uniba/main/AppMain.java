@@ -29,15 +29,19 @@ public final class AppMain {
 	 */
 	public static void main(final String[] args){
 		Menu menu= new Menu();
+		String turn="white";
 		boolean inGame= false;
 		boolean exit=false;
 		Scanner in = new Scanner(System.in);
 		System.out.println("Welcome to the chess app!");
-		
+		System.out.println("Please type commands to be executed or type help to show a list of them.");
 		
 		while (!exit) {
 			//System.out.println("Player " + player ++ + " turn"); da far funzionare
-			System.out.println("Please type commands to be executed or type help to show a list of them.");
+			if(menu.getTurn()==false) {
+				turn="black";
+			}else {turn="white";}
+			System.out.println("Please type a command (" + turn + " turn)");
 			String input=in.nextLine();
 			switch(input) {
 			case "board":

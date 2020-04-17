@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
+	private boolean whiteTurn=true;
 	private static Cell board[][] = new Cell[8][8];
 	private enum Colonna {a,b,c,d,e,f,g,h};
 	private ArrayList<String> movesDone = new ArrayList<String>();
@@ -35,12 +36,13 @@ public class Game {
 		board[0][5]= new Cell(new Bishop(1,0,5));
 		board[0][6]= new Cell(new Knight(1,0,6));
 		board[0][7]= new Cell(new Rook(1,0,7));
+		
+		//initialize empty cells
 		for (int i = 2; i <=5; i++) {
 			for (int j = 0; j < 8; j++) {
 				board[i][j]= new Cell(null);
 			}
 		}
-
 
 		//initialize pieces a8-h8 (black side)
 		board[7][0]= new Cell(new Rook(1,7,0));
@@ -57,6 +59,7 @@ public class Game {
 	void move(String move) {
 		int x; //ascissa
 		int y; //ordinata
+		Scanner in = new Scanner(System.in);
 		//chiedi a Donato, se legge Donato chiedi a Filippo di chiederti
 		if (move.length()==2){
 			x = move.charAt(1);
@@ -64,7 +67,7 @@ public class Game {
 			Pawn p;
 			ArrayList<Cell> possMoves;
 
-			if ((board[x-1][y].getPiece() instanceof Pawn )&& (board[x-1][y].getPiece().getColor() == 0)) { //neri
+			if ((board[x-1][y].getPiece() instanceof Pawn )&& (board[x-1][y].getPiece().getColor() == 0) && whiteTurn==false) { //neri
 				p = (Pawn) board[x-1][y].getPiece();
 				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
@@ -72,9 +75,10 @@ public class Game {
 					board[x][y].setPiece(p);
 					movesDone.add(move);
 					p.incrementMoves();
+					whiteTurn=true;
 				}
 			}
-			else if ((board[x-2][y].getPiece() instanceof Pawn )&& (board[x-2][y].getPiece().getColor() == 0)) { 
+			else if ((board[x-2][y].getPiece() instanceof Pawn )&& (board[x-2][y].getPiece().getColor() == 0)&& whiteTurn==false) { 
 				p = (Pawn) board[x-2][y].getPiece();
 				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
@@ -82,9 +86,10 @@ public class Game {
 					board[x][y].setPiece(p);
 					movesDone.add(move);
 					p.incrementMoves();
+					whiteTurn=true;
 				}
 			}
-			else if ((board[x+1][y].getPiece() instanceof Pawn )&& (board[x+1][y].getPiece().getColor() == 1)) { 
+			else if ((board[x+1][y].getPiece() instanceof Pawn )&& (board[x+1][y].getPiece().getColor() == 1)&& whiteTurn==true) { 
 				p = (Pawn) board[x+1][y].getPiece();
 				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
@@ -92,9 +97,10 @@ public class Game {
 					board[x][y].setPiece(p);
 					movesDone.add(move);
 					p.incrementMoves();
+					whiteTurn=false;
 				}
 			}
-			else if ((board[x+2][y].getPiece() instanceof Pawn )&& (board[x+2][y].getPiece().getColor() == 0)) { 
+			else if ((board[x+2][y].getPiece() instanceof Pawn )&& (board[x+2][y].getPiece().getColor() == 0)&& whiteTurn==true) { 
 				p = (Pawn) board[x+2][y].getPiece();
 				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
@@ -102,8 +108,10 @@ public class Game {
 					board[x][y].setPiece(p);
 					movesDone.add(move);
 					p.incrementMoves();
+					whiteTurn=false;
 				}
 			}
+			System.out.println("Illegal move, please try again:");
 		}
 		else {
 			char chosenPiece=move.charAt(0);
@@ -127,7 +135,7 @@ public class Game {
 		//accesso con scacchiera[mossa.charAt(1)-1][colonnaMossa.ordinal()]
 	}
 
-	public void Capture(int player,String move) {
+	public void Capture(String move) {
 		int x; //ascissa
 		int y; //ordinata
 		int z; //colonna del pezzo di provenienza
@@ -138,7 +146,7 @@ public class Game {
 		z = Colonna.valueOf(move.substring(0,1)).ordinal();
 		y = Colonna.valueOf(move.substring(2,3)).ordinal();
 
-		if (player == 0) {		//neri
+		if (whiteTurn == false) {		//neri
 			if (z == y-1) {
 				if (board[x][y] != null) {
 					if (board[x-1][y-1].getPiece() instanceof Pawn) {       //cattura in diagonale da sinistra
@@ -150,8 +158,7 @@ public class Game {
 							board[x-1][y-1].setEmpty();
 							movesDone.add(move);
 							this.WhitesCaptured.add(caught);
-
-
+							whiteTurn=true;
 						}
 					}
 				} 
@@ -167,7 +174,7 @@ public class Game {
 								board[x-1][y].setEmpty();
 								movesDone.add(move);
 								this.WhitesCaptured.add(caught);
-
+								whiteTurn=true;
 							}
 						}
 					}
@@ -184,7 +191,7 @@ public class Game {
 							board[x-1][y+1].setEmpty();
 							movesDone.add(move);
 							this.WhitesCaptured.add(caught);
-
+							whiteTurn=true;
 						}
 					}
 				}
@@ -200,7 +207,7 @@ public class Game {
 								board[x-1][y].setEmpty();
 								movesDone.add(move);
 								this.WhitesCaptured.add(caught);
-
+								whiteTurn=true;
 							}
 						}
 					}
@@ -226,7 +233,7 @@ public class Game {
 							board[x+1][y-1].setEmpty();
 							movesDone.add(move);
 							this.BlacksCaptured.add(caught);
-
+							whiteTurn=false;
 
 						}
 					}
@@ -243,7 +250,7 @@ public class Game {
 								board[x+1][y].setEmpty();
 								movesDone.add(move);
 								this.BlacksCaptured.add(caught);
-
+								whiteTurn=false;
 							}
 						}
 					}
@@ -260,7 +267,7 @@ public class Game {
 							board[x+1][y+1].setEmpty();
 							movesDone.add(move);
 							this.BlacksCaptured.add(caught);
-
+							whiteTurn=false;
 						}
 					}
 				}
@@ -276,7 +283,7 @@ public class Game {
 								board[x+1][y].setEmpty();
 								movesDone.add(move);
 								this.BlacksCaptured.add(caught);
-
+								whiteTurn=false;
 							}
 						}
 					}
@@ -290,7 +297,149 @@ public class Game {
 			}
 	}
 
+//	void CaptureEnPassant(String move) {
+//		int x; //ascissa
+//		int y; //ordinata
+//		int z; //colonna del pezzo di provenienza
+//
+//		Piece p,caught;
+//		ArrayList<Cell> possMoves;
+//		x = move.charAt(3);
+//		y = Colonna.valueOf(move.substring(2,3)).ordinal();
+//		caught=Pawn(board[x-1][y].getPiece();
+//		
+//		if (whiteTurn == false) {		//neri
+//			if (caught instanceof Pawn) {
+//				if (possMoves.contains(board[x][y])&& ((Pawn) caught).enPassantCatturable()) {
+//					board[x][y].setPiece(p);
+//					board[x-1][y-1].setEmpty();
+//					board[x-1][y].setEmpty();
+//					movesDone.add(move);
+//					this.WhitesCaptured.add(caught);
+//					whiteTurn=true;
+//				}
+//			}
+//			}
+//			else if ( z == y+1) { 
+//				if (board[x][y] != null) {
+//					if (board[x-1][y+1].getPiece() instanceof Pawn) { //cattura in diagonale da destra
+//						p = (Pawn)board[x-1][y+1].getPiece();
+//						possMoves = p.availableMoves(board);
+//						if (possMoves.contains(board[x][y])) {
+//							caught = board[x][y].getPiece();
+//							board[x][y].setPiece(p);
+//							board[x-1][y+1].setEmpty();
+//							movesDone.add(move);
+//							this.WhitesCaptured.add(caught);
+//							whiteTurn=true;
+//						}
+//					}
+//				}
+//				else {
+//					if (board[x-1][y+1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da destra
+//						if (board[x-1][y].getPiece() instanceof Pawn) {
+//							p = (Pawn)board[x-1][y+1].getPiece();
+//							caught = (Pawn)board[x-1][y].getPiece();
+//							possMoves = p.availableMoves(board);
+//							if (possMoves.contains(board[x][y])&& ((Pawn) caught).enPassantCatturable()) {
+//								board[x][y].setPiece(p);
+//								board[x-1][y+1].setEmpty();
+//								board[x-1][y].setEmpty();
+//								movesDone.add(move);
+//								this.WhitesCaptured.add(caught);
+//								whiteTurn=true;
+//							}
+//						}
+//					}
+//				}
+//
+//			}
+//			else {
+//				System.err.println("Moves not allowed");
+//				return;
+//			}
+//
+//		}
+//		else {															//bianchi
+//			
+//			if (z == y-1) {
+//				if (board[x][y] != null) {
+//					if (board[x+1][y-1].getPiece() instanceof Pawn) {       //cattura in diagonale da sinistra
+//						p = (Pawn)board[x+1][y-1].getPiece();
+//						possMoves = p.availableMoves(board);
+//						if (possMoves.contains(board[x][y])) {
+//							caught = board[x][y].getPiece();
+//							board[x][y].setPiece(p);
+//							board[x+1][y-1].setEmpty();
+//							movesDone.add(move);
+//							this.BlacksCaptured.add(caught);
+//							whiteTurn=false;
+//
+//						}
+//					}
+//				} 
+//				else {
+//					if (board[x+1][y-1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da sinistra
+//						if (board[x+1][y].getPiece() instanceof Pawn) {
+//							p = (Pawn)board[x+1][y-1].getPiece();
+//							caught = (Pawn)board[x+1][y].getPiece();
+//							possMoves = p.availableMoves(board);
+//							if (possMoves.contains(board[x][y])&& ((Pawn) caught).enPassantCatturable()) {
+//								board[x][y].setPiece(p);
+//								board[x+1][y-1].setEmpty();
+//								board[x+1][y].setEmpty();
+//								movesDone.add(move);
+//								this.BlacksCaptured.add(caught);
+//								whiteTurn=false;
+//							}
+//						}
+//					}
+//				}
+//			}
+//			else if ( z == y+1) { 
+//				if (board[x][y] != null) {
+//					if (board[x+1][y+1].getPiece() instanceof Pawn) { //cattura in diagonale da destra
+//						p = (Pawn)board[x+1][y+1].getPiece();
+//						possMoves = p.availableMoves(board);
+//						if (possMoves.contains(board[x][y])) {
+//							caught = board[x][y].getPiece();
+//							board[x][y].setPiece(p);
+//							board[x+1][y+1].setEmpty();
+//							movesDone.add(move);
+//							this.BlacksCaptured.add(caught);
+//							whiteTurn=false;
+//						}
+//					}
+//				}
+//				else {
+//					if (board[x+1][y+1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da destra
+//						if (board[x+1][y].getPiece() instanceof Pawn) {
+//							p = (Pawn)board[x+1][y+1].getPiece();
+//							caught = (Pawn)board[x+1][y].getPiece();
+//							possMoves = p.availableMoves(board);
+//							if (possMoves.contains(board[x][y])&& ((Pawn) caught).enPassantCatturable()) {
+//								board[x][y].setPiece(p);
+//								board[x+1][y+1].setEmpty();
+//								board[x+1][y].setEmpty();
+//								movesDone.add(move);
+//								this.BlacksCaptured.add(caught);
+//								whiteTurn=false;
+//							}
+//						}
+//					}
+//				}
+//
+//			}
+//			else {
+//				System.err.println("Moves not allowed");
+//				return;
+//			}
+//			}
+//	}
 
+	public boolean getWhiteTurn() {
+		return this.whiteTurn;
+	}
 
 	public static Cell getCell(int x, int y) {
 		return board[x][y];
