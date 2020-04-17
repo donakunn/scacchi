@@ -1,5 +1,6 @@
 package it.uniba.main;
 import java.util.Scanner;
+import java.util.ArrayList;
 public class Menu {
 	private Game game=new Game();
 	public void help() {
@@ -26,9 +27,9 @@ public class Menu {
 		System.out.println("\ta\tb\tc\td\te\tf\tg\th");
 	}
 	
-	//input arraylist da stampare
 	public void moves(){
-		//inserire la funzione che mostra le mosse giocate durante la partita		
+		ArrayList<String> movesDone = game.getMoves();
+		System.out.println(movesDone);
 	}
 	
 	public void play(){

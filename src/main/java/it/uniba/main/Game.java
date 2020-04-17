@@ -284,4 +284,9 @@ public class Game {
 	public static Cell[][] getBoard() {
 		return board;
 	}
+	
+	public ArrayList<String> getMoves(){
+		return movesDone;
+	}
+		
 }
