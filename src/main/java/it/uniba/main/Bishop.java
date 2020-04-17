@@ -10,11 +10,11 @@ public class Bishop extends Piece {
 		this.y = y;
 		this.color = col;
 		if (col == 0) {
-			this.pieceType = "U"+"265D";//Alfiere nero
+			this.pieceType = "\u265D"; //Alfiere nero
 			
 		}
 		else if (col == 1) {
-			this.pieceType = "U"+"2657";  //Alfiere bianco
+			this.pieceType = "\u2657";  //Alfiere bianco
 			
 			
 		}

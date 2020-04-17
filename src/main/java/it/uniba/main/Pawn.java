@@ -13,11 +13,11 @@ public class Pawn extends Piece{
 		this.y = y;
 		this.color = col;
 		if (col == 0) {
-			this.pieceType = "U"+"265F"; //pedone nero
+			this.pieceType = "\u265F"; //pedone nero
 			
 		}
 		else if (col == 1) {
-			this.pieceType = "U"+"2659"; //pedone bianco
+			this.pieceType = "\u2659"; //pedone bianco
 			
 			
 		}

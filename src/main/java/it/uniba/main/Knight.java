@@ -10,11 +10,11 @@ public class Knight extends Piece {
 		this.y = y;
 		this.color= col;
 		if (col == 0) {
-			this.pieceType = "U"+"265E"; //Cavallo nero
+			this.pieceType = "\u265E"; //Cavallo nero
 			
 		}
 		else if (col == 1) {
-			this.pieceType = "U"+"2658"; //Cavallo bianco
+			this.pieceType = "\u2658"; //Cavallo bianco
 			
 			
 		}
