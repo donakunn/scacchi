@@ -11,11 +11,11 @@ public class King extends Piece {
 		this.y = y;
 		this.color= col;
 		if (col == 0) {
-			this.pieceType = "U"+"265A"; //Re nero 
+			this.pieceType = "\u265A"; //Re nero 
 			
 		}
 		else if (col == 1) {
-			this.pieceType = "U"+"2654"; //Re bianco
+			this.pieceType = "\u2654"; //Re bianco
 			
 			
 		}

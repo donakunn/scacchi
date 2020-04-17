@@ -12,11 +12,11 @@ public class Queen extends Piece {
 		this.y = y;
 		this.color = col;
 		if (col == 0) {
-			this.pieceType = "U"+"265B"; //Regina nera
+			this.pieceType = "\u265B"; //Regina nera
 			
 		}
 		else if (col == 1) {
-			this.pieceType = "U"+"2655"; //Regina bianca
+			this.pieceType = "\u2655"; //Regina bianca
 			
 			
 		}
