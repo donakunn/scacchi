@@ -9,7 +9,13 @@ public class Game {
 	private ArrayList<String> movesDone = new ArrayList<String>();
 	private ArrayList<Piece> BlacksCaptured= new ArrayList<Piece>();
 	private ArrayList<Piece> WhitesCaptured= new ArrayList<Piece>();
-
+	
+	public ArrayList<Piece> getBlacks(){
+		return BlacksCaptured;
+	}
+	public ArrayList<Piece> getWhites(){
+		return WhitesCaptured;
+	}
 
 	void newGame() {
 		System.out.println("Creating game...");

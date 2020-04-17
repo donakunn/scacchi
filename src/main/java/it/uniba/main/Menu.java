@@ -41,7 +41,10 @@ public class Menu {
 	}
 	
 	public void captures() {
-		//inserire la funzione che visualizza le catture
+		ArrayList<Piece> BlacksCaptured = game.getBlacks();
+		ArrayList<Piece> WhitesCaptured = game.getWhites();
+		System.out.println(BlacksCaptured);
+		System.out.println(WhitesCaptured);
 	}
 	
 	public boolean quit() {
