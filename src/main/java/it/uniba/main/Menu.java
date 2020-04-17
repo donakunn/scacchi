@@ -40,6 +40,10 @@ public class Menu {
 		game.move(input);
 	}
 	
+	public void captures() {
+		//inserire la funzione che visualizza le catture
+	}
+	
 	public boolean quit() {
 		Scanner in = new Scanner(System.in);
 		String answer;
