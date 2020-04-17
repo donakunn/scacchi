@@ -20,9 +20,11 @@ public class Menu {
 		for (int i = 0; i < 8; i++) {
 			System.out.print(8 - i + ".\t");
 			for (int j = 0; j < 8; j++) {
-				System.out.print(game.getBoard()[i][j]);
+				Cell c = Game.getCell(i,j);
+				System.out.print(c + ".\t");
 			}
 			System.out.print(8 - i + ".\t");
+			System.out.println("\n");
 		}
 		System.out.println("\ta\tb\tc\td\te\tf\tg\th");
 	}
@@ -61,6 +63,7 @@ public class Menu {
 			}else {
 				System.out.println("Invalid answer, please type again:");
 			}
+			in.close();
 		}
 	}	
 }
