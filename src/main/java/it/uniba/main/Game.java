@@ -35,6 +35,11 @@ public class Game {
 		board[0][5]= new Cell(new Bishop(1,0,5));
 		board[0][6]= new Cell(new Knight(1,0,6));
 		board[0][7]= new Cell(new Rook(1,0,7));
+		for (int i = 2; i <=5; i++) {
+			for (int j = 0; j < 8; j++) {
+				board[i][j]= new Cell(null);
+			}
+		}
 
 
 		//initialize pieces a8-h8 (black side)
@@ -287,8 +292,8 @@ public class Game {
 
 
 
-	public static Cell[][] getBoard() {
-		return board;
+	public static Cell getCell(int x, int y) {
+		return board[x][y];
 	}
 	
 	public ArrayList<String> getMoves(){
