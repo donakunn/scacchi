@@ -1,13 +1,12 @@
 package it.uniba.main;
 
-import java.util.ArrayList;
 
-public class Bishop extends Piece {
+
+class Bishop extends Piece {
 
 	
-	public Bishop(int col, int x, int y) {
-		this.x = x;
-		this.y = y;
+	Bishop(int col) {
+		
 		this.color = col;
 		if (col == 0) {
 			this.pieceType = "\u265D"; //Alfiere nero
@@ -23,10 +22,6 @@ public class Bishop extends Piece {
 		
 	}
 
-	@Override
-	public ArrayList<Cell> availableMoves(Cell[][] statoGioco) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
