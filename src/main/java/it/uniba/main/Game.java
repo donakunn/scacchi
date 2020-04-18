@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 class Game {
 	private boolean whiteTurn=true;
