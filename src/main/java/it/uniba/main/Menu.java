@@ -45,14 +45,29 @@ class Menu {
 	
 	void getMove(String input){
 		if (input.length()==2) {
-			game.move(input);
+			try { game.move(input);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Illegal Move; Please try again");
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Illegal Move; Please try again");
+			}
 		}else if(input.length()==4) {
 			if(input.substring(1,2)=="x");
-				game.capture(input);
+			try { game.capture(input);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Illegal Move; Please try again");
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Illegal Move; Please try again");
+			}
 
 		}else if(input.length()==8) {
 			if((input.substring(0,2)=="Px")&&(input.substring(4,8)=="e.p."));
-			game.captureEnPassant(input);
+			try { game.move(input);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Illegal Move; Please try again");
+			} catch (IndexOutOfBoundsException e) {
+				System.out.println("Illegal Move; Please try again");
+			}
 		}
 		else {
 			System.out.println("Illegal Move, please try again");
