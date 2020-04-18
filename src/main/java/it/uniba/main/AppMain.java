@@ -47,14 +47,18 @@ public final class AppMain {
 			case "board":
 				if(inGame) {
 					menu.board();
+					break;
 				}else {
 					System.err.println("You have to be in an active game to use that command.");
+					break;
 				}
 			case "captures":
 				if(inGame) {
 					//menu.Captures();
+					break;
 				}else {
 					System.err.println("You have to be in an active game to use that command.");
+					break;
 				}
 			case "help":
 				menu.help();
@@ -62,14 +66,22 @@ public final class AppMain {
 			case "moves":
 				if(inGame) {
 					menu.moves();
+					break;
 				}else {
 					System.err.println("You have to be in an active game to use that command.");
+					break;
 				}
-			case "play":
+			case "play":     //non crea nuova partita se una è già in corso
 				if(!inGame) {
 					inGame=true;
+					menu.play();
 				}
-				menu.play();
+				else {
+					System.out.println("Deleting current game and starting new one");
+					menu.play();
+					menu.resetTurn();
+
+				}
 				break;
 			case "quit":
 				exit=menu.quit();
@@ -77,8 +89,10 @@ public final class AppMain {
 			default:
 				if(inGame) {
 					menu.getMove(input);
+					break;
 				}else {
 					System.err.println("That is not a valid command nor move.");
+					break;
 				}
 			}
 		}

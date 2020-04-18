@@ -448,6 +448,10 @@ public class Game {
 		return this.whiteTurn;
 	}
 
+	public void setWhiteTurn() {
+		this.whiteTurn = true;
+	}
+
 	public static Cell getCell(int x, int y) {
 		return board[x][y];
 	}

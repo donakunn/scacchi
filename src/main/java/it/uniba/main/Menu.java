@@ -77,4 +77,8 @@ public class Menu {
 	public boolean getTurn() {
 		return game.getWhiteTurn();
 	}
+
+	public void resetTurn() {
+		game.setWhiteTurn();
+	}
 }
