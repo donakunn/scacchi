@@ -62,7 +62,7 @@ class Menu {
 
 		}else if(input.length()==8) {
 			if((input.substring(0,2)=="Px")&&(input.substring(4,8)=="e.p."));
-			try { game.move(input);
+			try { game.captureEnPassant(input);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Illegal Move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
