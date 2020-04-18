@@ -47,7 +47,7 @@ public class Pawn extends Piece{
 	public ArrayList<Cell> availableMoves(Cell statoGioco[][]) { //restituisce lista di mosse disponibili per il Pedone
 
 		possibleMoves.clear();
-		if (getColor() == 0) {											//neri, dall'alto verso il basso
+		if (getColor() == 1) {											//neri, dall'alto verso il basso
 			
 			 /*  if (x == 7) 
 				return this.mossePossibili; */					//da implementare in seguito cosa accade quando il pedone raggiunge la fine della scacchiera

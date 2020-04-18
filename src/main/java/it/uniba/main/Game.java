@@ -27,7 +27,7 @@ public class Game {
 			//initialize pawns a7-h7 (black side)
 			board[6][j]= new Cell(new Pawn(0,6,j));
 		};
-		//initialize pieces a1-h1 (white side)
+		//initialize pieces a1-h1 (black side)
 		board[0][0]= new Cell(new Rook(1,0,0));
 		board[0][1]= new Cell(new Knight(1,0,1));
 		board[0][2]= new Cell(new Bishop(1,0,2));
@@ -45,59 +45,63 @@ public class Game {
 		}
 
 		//initialize pieces a8-h8 (black side)
-		board[7][0]= new Cell(new Rook(1,7,0));
-		board[7][1]= new Cell(new Knight(1,7,1));
-		board[7][2]= new Cell(new Bishop(1,7,2));
-		board[7][3]= new Cell(new Queen(1,7,3));
-		board[7][4]= new Cell(new King(1,7,4));
-		board[7][5]= new Cell(new Bishop(1,7,5));
-		board[7][6]= new Cell(new Knight(1,7,6));
-		board[7][7]= new Cell(new Rook(1,7,7));
+		board[7][0]= new Cell(new Rook(0,7,0));
+		board[7][1]= new Cell(new Knight(0,7,1));
+		board[7][2]= new Cell(new Bishop(0,7,2));
+		board[7][3]= new Cell(new Queen(0,7,3));
+		board[7][4]= new Cell(new King(0,7,4));
+		board[7][5]= new Cell(new Bishop(0,7,5));
+		board[7][6]= new Cell(new Knight(0,7,6));
+		board[7][7]= new Cell(new Rook(0,7,7));
 		System.out.println("Game created...");
 	};
 
 	void move(String move) {
 		int x; //ascissa
 		int y; //ordinata
-		Scanner in = new Scanner(System.in);
+		
 		//chiedi a Donato, se legge Donato chiedi a Filippo di chiederti
 		if (move.length()==2){
-			x = move.charAt(1);
 			y = Colonna.valueOf(move.substring(0,1)).ordinal();
+			x = 8 - Integer.parseInt(move.substring(1,2));
+			
 			Pawn p;
 			ArrayList<Cell> possMoves;
 
-			if ((board[x-1][y].getPiece() instanceof Pawn )&& (board[x-1][y].getPiece().getColor() == 0) && whiteTurn==false) { //neri
+			if ((board[x-1][y].getPiece() instanceof Pawn )&& (board[x-1][y].getPiece().getColor() == 1) && whiteTurn==false) { //neri
 				p = (Pawn) board[x-1][y].getPiece();
 				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
 					board[x-1][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add(move);
+					movesDone.add("Black Pawn: "+move);
 					p.incrementMoves();
 					whiteTurn=true;
+					System.out.println(p.getType() + " Moved on " + move);
 				}
 			}
-			else if ((board[x-2][y].getPiece() instanceof Pawn )&& (board[x-2][y].getPiece().getColor() == 0)&& whiteTurn==false) { 
+			else if ((board[x-2][y].getPiece() instanceof Pawn )&& (board[x-2][y].getPiece().getColor() == 1)&& whiteTurn==false) { 
 				p = (Pawn) board[x-2][y].getPiece();
 				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
 					board[x-2][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add(move);
+					movesDone.add("Black Pawn: "+move);
 					p.incrementMoves();
 					whiteTurn=true;
+					System.out.println(p.getType() + " Moved on " + move);
 				}
 			}
-			else if ((board[x+1][y].getPiece() instanceof Pawn )&& (board[x+1][y].getPiece().getColor() == 1)&& whiteTurn==true) { 
+			else if ((board[x+1][y].getPiece() instanceof Pawn )&& (board[x+1][y].getPiece().getColor() == 0)&& whiteTurn==true) { //bianchi
 				p = (Pawn) board[x+1][y].getPiece();
 				possMoves = p.availableMoves(board);
 				if (possMoves.contains(board[x][y])) {
 					board[x+1][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add(move);
+					movesDone.add("White Pawn: "+move);
 					p.incrementMoves();
 					whiteTurn=false;
+					System.out.println(p.getType() + " Moved on " + move);
 				}
 			}
 			else if ((board[x+2][y].getPiece() instanceof Pawn )&& (board[x+2][y].getPiece().getColor() == 0)&& whiteTurn==true) { 
@@ -106,12 +110,15 @@ public class Game {
 				if (possMoves.contains(board[x][y])) {
 					board[x+2][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add(move);
+					movesDone.add("White Pawn: "+move); 		//va bene così?
 					p.incrementMoves();
 					whiteTurn=false;
+					System.out.println(p.getType() + " Moved on " + move);
 				}
 			}
-			System.out.println("Illegal move, please try again:");
+			else {
+				System.out.println("Illegal move, please try again:");
+			}
 		}
 		else {
 			char chosenPiece=move.charAt(0);
@@ -439,6 +446,10 @@ public class Game {
 
 	public boolean getWhiteTurn() {
 		return this.whiteTurn;
+	}
+
+	public void setWhiteTurn() {
+		this.whiteTurn = true;
 	}
 
 	public static Cell getCell(int x, int y) {

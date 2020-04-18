@@ -1,12 +1,11 @@
 package it.uniba.main;
 
 public class Cell {
-	boolean empty=true;
+	
 	Piece piece;
 	
 	Cell(Piece piece) {
 		this.piece=piece;
-		empty=false;
 	};
 
 	public Piece getPiece() {
@@ -17,7 +16,6 @@ public class Cell {
 		this.piece = null;
 	}
 	void setPiece(Piece piece) {
-		if(empty==true) empty=false;
 		this.piece=piece;
 	};
 	
