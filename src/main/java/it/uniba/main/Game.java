@@ -74,7 +74,7 @@ public class Game {
 				if (possMoves.contains(board[x][y])) {
 					board[x-1][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add(move);
+					movesDone.add("Black Pawn: "+move);
 					p.incrementMoves();
 					whiteTurn=true;
 					System.out.println(p.getType() + " Moved on " + move);
@@ -86,7 +86,7 @@ public class Game {
 				if (possMoves.contains(board[x][y])) {
 					board[x-2][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add(move);
+					movesDone.add("Black Pawn: "+move);
 					p.incrementMoves();
 					whiteTurn=true;
 					System.out.println(p.getType() + " Moved on " + move);
@@ -98,7 +98,7 @@ public class Game {
 				if (possMoves.contains(board[x][y])) {
 					board[x+1][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add(move);
+					movesDone.add("White Pawn: "+move);
 					p.incrementMoves();
 					whiteTurn=false;
 					System.out.println(p.getType() + " Moved on " + move);
@@ -110,7 +110,7 @@ public class Game {
 				if (possMoves.contains(board[x][y])) {
 					board[x+2][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add(move);
+					movesDone.add("White Pawn: "+move); 		//va bene così?
 					p.incrementMoves();
 					whiteTurn=false;
 					System.out.println(p.getType() + " Moved on " + move);

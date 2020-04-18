@@ -31,7 +31,12 @@ public class Menu {
 	
 	public void moves(){
 		ArrayList<String> movesDone = game.getMoves();
+		if (game.getMoves().size() == 0) {
+			System.out.println("No moves done");
+		}
+		else {
 		System.out.println(movesDone);
+		}
 	}
 	
 	public void play(){
@@ -52,8 +57,18 @@ public class Menu {
 	}
 	
 	public void captures() {
+		if (game.getBlacks().size() == 0) {
+			System.out.println("No black pieces captured");
+		}
+		else {
 		System.out.println("Captured black pieces: " + game.getBlacks());
+		}
+		if (game.getWhites().size() == 0) {
+			System.out.println("No white pieces captured");
+		}
+		else {
 		System.out.println("Captured white pieces: " + game.getWhites());
+		}
 	}
 	
 	public boolean quit() {
