@@ -1,14 +1,13 @@
 package it.uniba.main;
 
 
-import java.util.ArrayList;
 
-public class Rook extends Piece {
+
+class Rook extends Piece {
 
 	
-	public Rook(int col, int x, int y) {
-		this.x = x;
-		this.y = y;
+	Rook(int col) {
+		
 		this.color = col;
 		if (col == 0) {
 			this.pieceType = "\u265C"; //Torre nera
@@ -24,10 +23,6 @@ public class Rook extends Piece {
 		
 	}
 
-	@Override
-	public ArrayList<Cell> availableMoves(Cell[][] statoGioco) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

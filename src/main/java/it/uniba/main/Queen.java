@@ -4,12 +4,11 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 
-public class Queen extends Piece {
+class Queen extends Piece {
 
 	
-	public Queen(int col, int x, int y) {
-		this.x = x;
-		this.y = y;
+	Queen(int col) {
+		
 		this.color = col;
 		if (col == 0) {
 			this.pieceType = "\u265B"; //Regina nera
@@ -25,10 +24,6 @@ public class Queen extends Piece {
 		
 	}
 
-	@Override
-	public ArrayList<Cell> availableMoves(Cell[][] statoGioco) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

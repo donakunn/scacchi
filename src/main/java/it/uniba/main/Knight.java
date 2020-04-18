@@ -1,13 +1,12 @@
 package it.uniba.main;
 
-import java.util.ArrayList;
 
-public class Knight extends Piece {
+
+class Knight extends Piece {
 
 	
-	public Knight(int col, int x, int y) {
-		this.x = x;
-		this.y = y;
+	Knight(int col) {
+		
 		this.color= col;
 		if (col == 0) {
 			this.pieceType = "\u265E"; //Cavallo nero
@@ -23,10 +22,6 @@ public class Knight extends Piece {
 		
 	}
 
-	@Override
-	public ArrayList<Cell> availableMoves(Cell[][] statoGioco) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

@@ -1,14 +1,13 @@
 package it.uniba.main;
 
-import java.util.ArrayList;
 
 
-public class King extends Piece {
+
+class King extends Piece {
 
 	
-	public King(int col, int x, int y) {
-		this.x = x;
-		this.y = y;
+	King(int col) {
+		
 		this.color= col;
 		if (col == 0) {
 			this.pieceType = "\u265A"; //Re nero 
@@ -24,10 +23,6 @@ public class King extends Piece {
 		
 	}
 
-	@Override
-	public ArrayList<Cell> availableMoves(Cell[][] statoGioco) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }

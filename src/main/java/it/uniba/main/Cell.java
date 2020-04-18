@@ -1,6 +1,6 @@
 package it.uniba.main;
 
-public class Cell {
+class Cell {
 	
 	Piece piece;
 	
@@ -8,11 +8,11 @@ public class Cell {
 		this.piece=piece;
 	};
 
-	public Piece getPiece() {
+	Piece getPiece() {
 		return this.piece;
 	}
 	
-	public void setEmpty() {
+	void setEmpty() {
 		this.piece = null;
 	}
 	void setPiece(Piece piece) {

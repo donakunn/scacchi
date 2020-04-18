@@ -1,9 +1,9 @@
 package it.uniba.main;
 import java.util.Scanner;
 import java.util.ArrayList;
-public class Menu {
+class Menu {
 	private Game game=new Game();
-	public void help() {
+	void help() {
         System.out.println("List of executable commands:");
         System.out.println("help");
         System.out.println("play");
@@ -12,24 +12,24 @@ public class Menu {
         System.out.println("board");
         System.out.println("captures");
         System.out.println("moves");
-        System.out.println("To perform a move it is sufficient to specify it in algebraic notation.");
+		System.out.println("To perform a move it is sufficient to specify it in algebraic notation; \nFor en Passant captures add 'e.p.' at the end of algebric notation'");
     }
 	
-	public void board() {
-		System.out.println("\ta\tb\tc\td\te\tf\tg\th");
+	void board() {
+		System.out.println("    a    b    c    d    e    f    g    h");
 		for (int i = 0; i < 8; i++) {
-			System.out.print(8 - i + ".\t");
+			System.out.print(8 - i + "  ");
 			for (int j = 0; j < 8; j++) {
 				Cell c = Game.getCell(i,j);
-				System.out.print(c + ".\t");
+				System.out.print(c + "  ");
 			}
-			System.out.print(8 - i + ".\t");
+			System.out.print(8 - i + "  ");
 			System.out.println("\n");
 		}
-		System.out.println("\ta\tb\tc\td\te\tf\tg\th");
+		System.out.println("    a    b    c    d    e    f    g    h");
 	}
 	
-	public void moves(){
+	void moves(){
 		ArrayList<String> movesDone = game.getMoves();
 		if (game.getMoves().size() == 0) {
 			System.out.println("No moves done");
@@ -39,24 +39,27 @@ public class Menu {
 		}
 	}
 	
-	public void play(){
+	void play(){
 		game.newGame();
 	}
 	
-	public void getMove(String input){
+	void getMove(String input){
 		if (input.length()==2) {
 			game.move(input);
 		}else if(input.length()==4) {
-			if(input.substring(0,2)=="Px");
-				//game.Capture(player, move);
+			if(input.substring(1,2)=="x");
+				game.capture(input);
+
 		}else if(input.length()==8) {
 			if((input.substring(0,2)=="Px")&&(input.substring(4,8)=="e.p."));
-			//AHAHAHSHSHUQDHGUWEHFUIWEFHI
-			//game.CaptureEnPassant(player, move);
+			game.captureEnPassant(input);
+		}
+		else {
+			System.out.println("Illegal Move, please try again");
 		}
 	}
 	
-	public void captures() {
+	void captures() {
 		if (game.getBlacks().size() == 0) {
 			System.out.println("No black pieces captured");
 		}
@@ -71,7 +74,7 @@ public class Menu {
 		}
 	}
 	
-	public boolean quit() {
+	boolean quit() {
 		Scanner in = new Scanner(System.in);
 		String answer;
 		System.out.println("Are you sure you want to quit?:");
@@ -89,11 +92,11 @@ public class Menu {
 		}
 	}
 	
-	public boolean getTurn() {
+	boolean getTurn() {
 		return game.getWhiteTurn();
 	}
 
-	public void resetTurn() {
+	void resetTurn() {
 		game.setWhiteTurn();
 	}
 }
