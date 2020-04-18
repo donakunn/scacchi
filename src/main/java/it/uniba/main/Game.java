@@ -19,6 +19,9 @@ class Game {
 	}
 
 	void newGame() {
+		movesDone.clear();
+		BlacksCaptured.clear();
+		WhitesCaptured.clear();
 		System.out.println("Creating game...");
 		for(int j=0;j<8;j++) {
 			//initialize pawns a2-h2 (white side)
