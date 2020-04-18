@@ -39,14 +39,21 @@ public class Menu {
 	}
 	
 	public void getMove(String input){
-		game.move(input);
+		if (input.length()==2) {
+			game.move(input);
+		}else if(input.length()==4) {
+			if(input.substring(0,2)=="Px");
+				//game.Capture(player, move);
+		}else if(input.length()==8) {
+			if((input.substring(0,2)=="Px")&&(input.substring(4,8)=="e.p."));
+			//AHAHAHSHSHUQDHGUWEHFUIWEFHI
+			//game.CaptureEnPassant(player, move);
+		}
 	}
 	
 	public void captures() {
-		ArrayList<Piece> BlacksCaptured = game.getBlacks();
-		ArrayList<Piece> WhitesCaptured = game.getWhites();
-		System.out.println(BlacksCaptured);
-		System.out.println(WhitesCaptured);
+		System.out.println("Captured black pieces: " + game.getBlacks());
+		System.out.println("Captured white pieces: " + game.getWhites());
 	}
 	
 	public boolean quit() {
@@ -65,5 +72,9 @@ public class Menu {
 			}
 			in.close();
 		}
-	}	
+	}
+	
+	public boolean getTurn() {
+		return game.getWhiteTurn();
+	}
 }
