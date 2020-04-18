@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public abstract class Piece {		//classe astratta che fattorizza proprietà comuni dei pezzi del gioco degli scacchi
 
-	protected int color; //0 bianco, 1 Nero
+	protected int color; //0 nero, 1 bianco
 	protected String pieceType;
 	protected int x; //ascissa della posizione del pezzo
 	protected int y; //ordinata della posizione del pezzo
