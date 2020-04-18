@@ -172,10 +172,13 @@ class Game {
 							whiteTurn=true;
 							System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4));
 						}
-					}
+						else System.out.println("Illegal move, Please try again:");
+					} 
+					else System.out.println("Illegal move, Please try again:");
 				} 
+				else System.out.println("Illegal move, Please try again:");
 				
-			}
+			} 
 			else if ( z == y+1) { 
 				if (board[x][y] != null) {
 					if (board[x-1][y+1].getPiece() instanceof Pawn) { //cattura in diagonale da destra
@@ -189,10 +192,12 @@ class Game {
 							this.WhitesCaptured.add(caught);
 							whiteTurn=true;
 							System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4));
-						}
+						} 
+						else System.out.println("Illegal move, Please try again:");
 					}
+					else System.out.println("Illegal move, Please try again:");
 				}
-				
+				else System.out.println("Illegal move, Please try again:");
 			}
 			else {
 				System.err.println("Moves not allowed");
@@ -216,8 +221,11 @@ class Game {
 							whiteTurn=false;
 							System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4));
 						}
+						else System.out.println("Illegal move, Please try again:");
 					}
+					else System.out.println("Illegal move, Please try again:");
 				} 
+				else System.out.println("Illegal move, Please try again:");
 				
 				
 			}
@@ -235,8 +243,11 @@ class Game {
 							whiteTurn=false;
 							System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4));
 						}
+						else System.out.println("Illegal move, Please try again:");
 					}
+					else System.out.println("Illegal move, Please try again:");
 				}
+				else System.out.println("Illegal move, Please try again:");
 				
 
 			}
@@ -259,7 +270,7 @@ class Game {
 		x = 8 - Integer.parseInt(move.substring(3,4));
 		z = Colonna.valueOf(move.substring(0,1)).ordinal();
 		if (whiteTurn == false) {		//neri
-			
+			if (z == y-1) {	
 					if (board[x-1][y-1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da sinistra
 						if (board[x-1][y].getPiece() instanceof Pawn) {
 							p = (Pawn)board[x-1][y-1].getPiece();
@@ -273,9 +284,13 @@ class Game {
 								whiteTurn=true;
 								System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4)+ " e.p.");
 							}
+							else System.out.println("Illegal move, Please try again:");
 						}
-					}
-		
+						else System.out.println("Illegal move, Please try again:");
+					} 
+					else System.out.println("Illegal move, Please try again:");
+				}
+				
 			else if ( z == y+1) { 
 				
 					if (board[x-1][y+1].getPiece() instanceof Pawn) {       //cattura en Passant in diagonale da destra
@@ -292,8 +307,11 @@ class Game {
 								whiteTurn=true;
 								System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4)+ " e.p.");
 							}
+							else System.out.println("Illegal move, Please try again:");
 						}
+						else System.out.println("Illegal move, Please try again:");
 					}
+					else System.out.println("Illegal move, Please try again:");
 
 			}
 			else {
@@ -320,8 +338,11 @@ class Game {
 								whiteTurn=false;
 								System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4)+ " e.p.");
 							}
+							else System.out.println("Illegal move, Please try again:");
 						}
+						else System.out.println("Illegal move, Please try again:");
 					}
+					else System.out.println("Illegal move, Please try again:");
 				}
 			
 			else if ( z == y+1) { 
@@ -341,8 +362,11 @@ class Game {
 								whiteTurn=false;
 								System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4)+ " e.p.");
 							}
+							else System.out.println("Illegal move, Please try again:");
 						}
-					}
+						else System.out.println("Illegal move, Please try again:");
+					} 
+					else System.out.println("Illegal move, Please try again:");
 			
 
 			}
