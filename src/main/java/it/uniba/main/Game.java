@@ -64,7 +64,7 @@ class Game {
 		System.out.println("Game created...");
 	};
 
-	void move(String move) throws IllegalMoveException {
+	void moveAPawn(String move) throws IllegalMoveException {
 		int x; // ascissa
 		int y; // ordinata
 
@@ -81,7 +81,7 @@ class Game {
 				if (board[x][y].getPiece() == null) {
 					board[x - 1][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add("Black Pawn: " + move);
+					movesDone.add(move);
 					p.incrementMoves();
 					whiteTurn = true;
 					System.out.println(p.getType() + " Moved on " + move);
@@ -94,7 +94,7 @@ class Game {
 				if (board[x][y].getPiece() == null) {
 					board[x - 2][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add("Black Pawn: " + move);
+					movesDone.add(move);
 					p.incrementMoves();
 					whiteTurn = true;
 					System.out.println(p.getType() + " Moved on " + move);
@@ -107,7 +107,7 @@ class Game {
 				if (board[x][y].getPiece() == null) {
 					board[x + 1][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add("White Pawn: " + move);
+					movesDone.add(move);
 					p.incrementMoves();
 					whiteTurn = false;
 					System.out.println(p.getType() + " Moved on " + move);
@@ -120,7 +120,7 @@ class Game {
 				if (board[x][y].getPiece() == null) {
 					board[x + 2][y].setEmpty();
 					board[x][y].setPiece(p);
-					movesDone.add("White Pawn: " + move);
+					movesDone.add(move);
 					p.incrementMoves();
 					whiteTurn = false;
 					System.out.println(p.getType() + " Moved on " + move);
@@ -148,7 +148,7 @@ class Game {
 
 	}
 
-	void capture(String move) throws IllegalMoveException {
+	void pawnCapture(String move) throws IllegalMoveException {
 		int x; // ascissa
 		int y; // ordinata
 		int z; // colonna del pezzo di provenienza
@@ -170,8 +170,7 @@ class Game {
 							caught = board[x][y].getPiece();
 							board[x][y].setPiece(p);
 							board[x - 1][y - 1].setEmpty();
-							movesDone
-									.add(p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+							movesDone.add(move);
 							this.WhitesCaptured.add(caught);
 							whiteTurn = true;
 							System.out.println(
@@ -193,10 +192,7 @@ class Game {
 							caught = board[x][y].getPiece();
 							board[x][y].setPiece(p);
 							board[x - 1][y + 1].setEmpty();
-							movesDone
-									.add(p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4)); // da
-																															// implementare
-																															// stampa
+							movesDone.add(move); 
 							this.WhitesCaptured.add(caught);
 							whiteTurn = true;
 							System.out.println(
@@ -222,10 +218,7 @@ class Game {
 							caught = board[x][y].getPiece();
 							board[x][y].setPiece(p);
 							board[x + 1][y - 1].setEmpty();
-							movesDone
-									.add(p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4)); // da
-																															// implementare
-																															// stampa
+							movesDone.add(move); 
 							this.BlacksCaptured.add(caught);
 							whiteTurn = false;
 							System.out.println(
@@ -247,10 +240,7 @@ class Game {
 							caught = board[x][y].getPiece();
 							board[x][y].setPiece(p);
 							board[x + 1][y + 1].setEmpty();
-							movesDone
-									.add(p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4)); // da
-																															// implementare
-																															// stampa
+							movesDone.add(move); 
 							this.BlacksCaptured.add(caught);
 							whiteTurn = false;
 							System.out.println(
@@ -288,8 +278,7 @@ class Game {
 							board[x][y].setPiece(p);
 							board[x - 1][y - 1].setEmpty();
 							board[x - 1][y].setEmpty();
-							movesDone.add(p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4)
-									+ " e.p.");
+							movesDone.add(move);
 							this.WhitesCaptured.add(caught);
 							whiteTurn = true;
 							System.out.println(p.getType() + " captured " + caught.getType() + " on "
@@ -313,8 +302,7 @@ class Game {
 							board[x][y].setPiece(p);
 							board[x - 1][y + 1].setEmpty();
 							board[x - 1][y].setEmpty();
-							movesDone.add(p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4)
-									+ " e.p.");
+							movesDone.add(move);
 							this.WhitesCaptured.add(caught);
 							whiteTurn = true;
 							System.out.println(p.getType() + " captured " + caught.getType() + " on "
@@ -342,8 +330,7 @@ class Game {
 							board[x][y].setPiece(p);
 							board[x + 1][y - 1].setEmpty();
 							board[x + 1][y].setEmpty();
-							movesDone.add(p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4)
-									+ " e.p.");
+							movesDone.add(move);
 							this.BlacksCaptured.add(caught);
 							whiteTurn = false;
 							System.out.println(p.getType() + " captured " + caught.getType() + " on "
@@ -367,8 +354,7 @@ class Game {
 							board[x][y].setPiece(p);
 							board[x + 1][y + 1].setEmpty();
 							board[x + 1][y].setEmpty();
-							movesDone.add(p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4)
-									+ " e.p.");
+							movesDone.add(move);
 							this.BlacksCaptured.add(caught);
 							whiteTurn = false;
 							System.out.println(p.getType() + " captured " + caught.getType() + " on "

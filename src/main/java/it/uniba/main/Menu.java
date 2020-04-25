@@ -38,8 +38,23 @@ class Menu {
 		if (game.getMoves().size() == 0) {
 			System.out.println("No moves done");
 		} else {
-			System.out.println(movesDone);
+			int j; // secondo indice
+			int k = 1; // numero mossa
+			for (int i = 0; i < movesDone.size(); i++) {
+				j = i + 1;
+				if (j < movesDone.size()) {
+
+					System.out.println(k + ". " + movesDone.get(i) + " " + movesDone.get(j));
+					i++;
+					k++;
+
+				} else if (i == movesDone.size() - 1) {
+					System.out.println(k + ". " + movesDone.get(i));
+
+				}
+			}
 		}
+
 	}
 
 	void play() {
@@ -49,23 +64,25 @@ class Menu {
 	void getMove(String input) {
 		if (input.length() == 2) {
 			try {
-				game.move(input);
+				game.moveAPawn(input);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Illegal move; Please try again");
+				System.err.println("Illegal move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Illegal move; Please try again");
+				System.err.println("Illegal move; Please try again");
 			} catch (IllegalMoveException e) {
+				System.err.println(e.getMessage());
 			}
 		} else if (input.length() == 4) {
 			if (input.substring(1, 2) == "x")
 				;
 			try {
-				game.capture(input);
+				game.pawnCapture(input);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Illegal move; Please try again");
+				System.err.println("Illegal move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Illegal move; Please try again");
+				System.err.println("Illegal move; Please try again");
 			} catch (IllegalMoveException e) {
+				System.err.println(e.getMessage());
 			}
 
 		} else if (input.length() == 8) {
@@ -74,10 +91,11 @@ class Menu {
 			try {
 				game.captureEnPassant(input);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Illegal move; Please try again");
+				System.err.println("Illegal move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Illegal move; Please try again");
+				System.err.println("Illegal move; Please try again");
 			} catch (IllegalMoveException e) {
+				System.err.println(e.getMessage());
 			}
 		} else {
 			System.out.println("Illegal move, please try again");
