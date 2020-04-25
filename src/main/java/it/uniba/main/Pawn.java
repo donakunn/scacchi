@@ -1,43 +1,36 @@
 package it.uniba.main;
 
+class Pawn extends Piece {
 
+	private int movesDone; // numero di mosse effettuate
 
-
-class Pawn extends Piece{
-
-	private int movesDone; //numero di mosse effettuate
-	
-	Pawn(int col) {		//costruttore classe Pedone
+	Pawn(int col) { // costruttore classe Pedone
 		movesDone = 0;
-		
+
 		this.color = col;
 		if (col == 0) {
-			this.pieceType = "\u265F"; //pedone nero
-			
-		}
-		else if (col == 1) {
-			this.pieceType = "\u2659"; //pedone bianco
-			
-			
-		}
-		else throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
+			this.pieceType = "\u265F"; // pedone nero
+
+		} else if (col == 1) {
+			this.pieceType = "\u2659"; // pedone bianco
+
+		} else
+			throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
 
 	}
-	
+
 	void incrementMoves() {
-		this.movesDone ++;
+		this.movesDone++;
 	}
-	
-	
-	Boolean enPassantCatturable(int x) {											//restituisce true se il pedone ha effettuato una sola mossa con salto di 2, false altrimenti
-		if ((getColor() == 0)&& (movesDone == 1) && (x == 4 )) {
+
+	Boolean enPassantCatturable(int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
+											// false altrimenti
+		if ((getColor() == 0) && (movesDone == 1) && (x == 4)) {
 			return true;
-		}
-		else if ((getColor() == 1)&& (movesDone == 1) && (x == 3 )) {
+		} else if ((getColor() == 1) && (movesDone == 1) && (x == 3)) {
 			return true;
-		} 
-		else return false;
+		} else
+			return false;
 	}
-	
 
 }
