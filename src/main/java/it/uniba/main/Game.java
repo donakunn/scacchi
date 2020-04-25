@@ -159,22 +159,54 @@ class Game {
 		x = 8 - Integer.parseInt(move.substring(3, 4));
 		z = Colonna.valueOf(move.substring(0, 1)).ordinal();
 
-		if (whiteTurn == false) { // neri
-			if (z == y - 1) {
-				if (board[x][y] != null) {
-					if (board[x - 1][y - 1].getPiece() instanceof Pawn) { // cattura in diagonale da sinistra
-						p = (Pawn) board[x - 1][y - 1].getPiece();
+		if (board[x][y].getPiece() == null) {
+			try {
+				this.captureEnPassant(move);
+			} catch (IllegalMoveException e) {
+				System.err.println(e.getMessage());
+			}
+		} else {
 
-						if ((board[x][y].getPiece() instanceof Pawn)
-								&& (board[x][y].getPiece().getColor() != p.getColor())) {
-							caught = board[x][y].getPiece();
-							board[x][y].setPiece(p);
-							board[x - 1][y - 1].setEmpty();
-							movesDone.add(move);
-							this.WhitesCaptured.add(caught);
-							whiteTurn = true;
-							System.out.println(
-									p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+			if (whiteTurn == false) { // neri
+				if (z == y - 1) {
+					if (board[x][y] != null) {
+						if (board[x - 1][y - 1].getPiece() instanceof Pawn) { // cattura in diagonale da sinistra
+							p = (Pawn) board[x - 1][y - 1].getPiece();
+
+							if ((board[x][y].getPiece() instanceof Pawn)
+									&& (board[x][y].getPiece().getColor() != p.getColor())) {
+								caught = board[x][y].getPiece();
+								board[x][y].setPiece(p);
+								board[x - 1][y - 1].setEmpty();
+								movesDone.add(move);
+								this.WhitesCaptured.add(caught);
+								whiteTurn = true;
+								System.out.println(
+										p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+							} else
+								throw new IllegalMoveException("Illegal move. Please try again.");
+						} else
+							throw new IllegalMoveException("Illegal move. Please try again.");
+					} else
+						throw new IllegalMoveException("Illegal move. Please try again.");
+
+				} else if (z == y + 1) {
+					if (board[x][y] != null) {
+						if (board[x - 1][y + 1].getPiece() instanceof Pawn) { // cattura in diagonale da destra
+							p = (Pawn) board[x - 1][y + 1].getPiece();
+
+							if ((board[x][y].getPiece() instanceof Pawn)
+									&& (board[x][y].getPiece().getColor() != p.getColor())) {
+								caught = board[x][y].getPiece();
+								board[x][y].setPiece(p);
+								board[x - 1][y + 1].setEmpty();
+								movesDone.add(move);
+								this.WhitesCaptured.add(caught);
+								whiteTurn = true;
+								System.out.println(
+										p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+							} else
+								throw new IllegalMoveException("Illegal move. Please try again.");
 						} else
 							throw new IllegalMoveException("Illegal move. Please try again.");
 					} else
@@ -182,78 +214,55 @@ class Game {
 				} else
 					throw new IllegalMoveException("Illegal move. Please try again.");
 
-			} else if (z == y + 1) {
-				if (board[x][y] != null) {
-					if (board[x - 1][y + 1].getPiece() instanceof Pawn) { // cattura in diagonale da destra
-						p = (Pawn) board[x - 1][y + 1].getPiece();
+			} else { // bianchi
 
-						if ((board[x][y].getPiece() instanceof Pawn)
-								&& (board[x][y].getPiece().getColor() != p.getColor())) {
-							caught = board[x][y].getPiece();
-							board[x][y].setPiece(p);
-							board[x - 1][y + 1].setEmpty();
-							movesDone.add(move); 
-							this.WhitesCaptured.add(caught);
-							whiteTurn = true;
-							System.out.println(
-									p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+				if (z == y - 1) {
+					if (board[x][y] != null) {
+						if (board[x + 1][y - 1].getPiece() instanceof Pawn) { // cattura in diagonale da sinistra
+							p = (Pawn) board[x + 1][y - 1].getPiece();
+
+							if ((board[x][y].getPiece() instanceof Pawn)
+									&& (board[x][y].getPiece().getColor() != p.getColor())) {
+								caught = board[x][y].getPiece();
+								board[x][y].setPiece(p);
+								board[x + 1][y - 1].setEmpty();
+								movesDone.add(move);
+								this.BlacksCaptured.add(caught);
+								whiteTurn = false;
+								System.out.println(
+										p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+							} else
+								throw new IllegalMoveException("Illegal move. Please try again.");
 						} else
 							throw new IllegalMoveException("Illegal move. Please try again.");
 					} else
 						throw new IllegalMoveException("Illegal move. Please try again.");
-				} else
-					throw new IllegalMoveException("Illegal move. Please try again.");
-			} else
-				throw new IllegalMoveException("Illegal move. Please try again.");
 
-		} else { // bianchi
+				} else if (z == y + 1) {
+					if (board[x][y] != null) {
+						if (board[x + 1][y + 1].getPiece() instanceof Pawn) { // cattura in diagonale da destra
+							p = (Pawn) board[x + 1][y + 1].getPiece();
 
-			if (z == y - 1) {
-				if (board[x][y] != null) {
-					if (board[x + 1][y - 1].getPiece() instanceof Pawn) { // cattura in diagonale da sinistra
-						p = (Pawn) board[x + 1][y - 1].getPiece();
-
-						if ((board[x][y].getPiece() instanceof Pawn)
-								&& (board[x][y].getPiece().getColor() != p.getColor())) {
-							caught = board[x][y].getPiece();
-							board[x][y].setPiece(p);
-							board[x + 1][y - 1].setEmpty();
-							movesDone.add(move); 
-							this.BlacksCaptured.add(caught);
-							whiteTurn = false;
-							System.out.println(
-									p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+							if ((board[x][y].getPiece() instanceof Pawn)
+									&& (board[x][y].getPiece().getColor() != p.getColor())) {
+								caught = board[x][y].getPiece();
+								board[x][y].setPiece(p);
+								board[x + 1][y + 1].setEmpty();
+								movesDone.add(move);
+								this.BlacksCaptured.add(caught);
+								whiteTurn = false;
+								System.out.println(
+										p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+							} else
+								throw new IllegalMoveException("Illegal move. Please try again.");
 						} else
 							throw new IllegalMoveException("Illegal move. Please try again.");
 					} else
 						throw new IllegalMoveException("Illegal move. Please try again.");
+
 				} else
 					throw new IllegalMoveException("Illegal move. Please try again.");
-
-			} else if (z == y + 1) {
-				if (board[x][y] != null) {
-					if (board[x + 1][y + 1].getPiece() instanceof Pawn) { // cattura in diagonale da destra
-						p = (Pawn) board[x + 1][y + 1].getPiece();
-
-						if ((board[x][y].getPiece() instanceof Pawn)
-								&& (board[x][y].getPiece().getColor() != p.getColor())) {
-							caught = board[x][y].getPiece();
-							board[x][y].setPiece(p);
-							board[x + 1][y + 1].setEmpty();
-							movesDone.add(move); 
-							this.BlacksCaptured.add(caught);
-							whiteTurn = false;
-							System.out.println(
-									p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
-						} else
-							throw new IllegalMoveException("Illegal move. Please try again.");
-					} else
-						throw new IllegalMoveException("Illegal move. Please try again.");
-				} else
-					throw new IllegalMoveException("Illegal move. Please try again.");
-
-			} else
-				throw new IllegalMoveException("Illegal move. Please try again.");
+			}
 		}
 	}
 

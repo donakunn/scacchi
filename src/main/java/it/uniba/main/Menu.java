@@ -16,7 +16,7 @@ class Menu {
 		System.out.println("captures");
 		System.out.println("moves");
 		System.out.println(
-				"To perform a move it is sufficient to specify it in algebric notation; \nFor en Passant captures add 'e.p.' at the end of algebric notation'");
+				"To perform a move it is sufficient to specify it in algebric notation; \nFor en Passant captures you can add 'e.p.' or 'ep' at the end of algebric notation'");
 	}
 
 	void board() {
@@ -86,17 +86,32 @@ class Menu {
 			}
 
 		} else if (input.length() == 8) {
-			if ((input.substring(0, 2) == "Px") && (input.substring(4, 8) == "e.p."))
-				;
-			try {
-				game.captureEnPassant(input);
-			} catch (IllegalArgumentException e) {
-				System.err.println("Illegal move; Please try again");
-			} catch (IndexOutOfBoundsException e) {
-				System.err.println("Illegal move; Please try again");
-			} catch (IllegalMoveException e) {
-				System.err.println(e.getMessage());
-			}
+			if ((input.substring(1, 2).toLowerCase().equals("x")) && (input.substring(4, 8).toLowerCase().equals("e.p."))) {
+
+				try {
+					game.captureEnPassant(input);
+				} catch (IllegalArgumentException e) {
+					System.err.println("Illegal move; Please try again");
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Illegal move; Please try again");
+				} catch (IllegalMoveException e) {
+					System.err.println(e.getMessage());
+				}
+			} else System.err.println("Illegal move; Please try again");
+
+		} else if (input.length() == 6) {
+			if ((input.substring(1, 2).toLowerCase().equals("x")) && (input.substring(4, 6).toLowerCase().equals("ep"))) {
+
+				try {
+					game.captureEnPassant(input);
+				} catch (IllegalArgumentException e) {
+					System.err.println("Illegal move; Please try again");
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Illegal move; Please try again");
+				} catch (IllegalMoveException e) {
+					System.err.println(e.getMessage());
+				}
+			} else System.err.println("Illegal move; Please try again");
 		} else {
 			System.out.println("Illegal move, please try again");
 		}
