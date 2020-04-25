@@ -12,7 +12,7 @@ class Menu {
         System.out.println("board");
         System.out.println("captures");
         System.out.println("moves");
-		System.out.println("To perform a move it is sufficient to specify it in algebraic notation; \nFor en Passant captures add 'e.p.' at the end of algebric notation'");
+		System.out.println("To perform a move it is sufficient to specify it in algebric notation; \nFor en Passant captures add 'e.p.' at the end of algebric notation'");
     }
 	
 	void board() {
@@ -47,30 +47,30 @@ class Menu {
 		if (input.length()==2) {
 			try { game.move(input);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Illegal Move; Please try again");
+				System.out.println("Illegal move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Illegal Move; Please try again");
-			}
+				System.out.println("Illegal move; Please try again");
+			} catch (IllegalMoveException e) {}
 		}else if(input.length()==4) {
 			if(input.substring(1,2)=="x");
 			try { game.capture(input);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Illegal Move; Please try again");
+				System.out.println("Illegal move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Illegal Move; Please try again");
-			}
+				System.out.println("Illegal move; Please try again");
+			} catch (IllegalMoveException e) {}
 
 		}else if(input.length()==8) {
 			if((input.substring(0,2)=="Px")&&(input.substring(4,8)=="e.p."));
 			try { game.captureEnPassant(input);
 			} catch (IllegalArgumentException e) {
-				System.out.println("Illegal Move; Please try again");
+				System.out.println("Illegal move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
-				System.out.println("Illegal Move; Please try again");
-			}
+				System.out.println("Illegal move; Please try again");
+			} catch (IllegalMoveException e) {}
 		}
 		else {
-			System.out.println("Illegal Move, please try again");
+			System.out.println("Illegal move, please try again");
 		}
 	}
 	
