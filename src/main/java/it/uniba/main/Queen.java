@@ -1,6 +1,8 @@
 package it.uniba.main;
 
 
+import java.util.ArrayList;
+
 
 class Queen extends Piece {
 
