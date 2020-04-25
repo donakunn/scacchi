@@ -50,8 +50,6 @@ class Menu {
 				System.out.println("Illegal Move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
 				System.out.println("Illegal Move; Please try again");
-			} catch (IllegalMoveException e) {
-
 			}
 		}else if(input.length()==4) {
 			if(input.substring(1,2)=="x");
@@ -60,8 +58,6 @@ class Menu {
 				System.out.println("Illegal Move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
 				System.out.println("Illegal Move; Please try again");
-			} catch (IllegalMoveException e) {
-				
 			}
 
 		}else if(input.length()==8) {
@@ -71,8 +67,6 @@ class Menu {
 				System.out.println("Illegal Move; Please try again");
 			} catch (IndexOutOfBoundsException e) {
 				System.out.println("Illegal Move; Please try again");
-			} catch (IllegalMoveException e) {
-				
 			}
 		}
 		else {

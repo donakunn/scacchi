@@ -59,7 +59,7 @@ class Game {
 		System.out.println("Game created...");
 	};
 
-	void move(String move) throws IllegalMoveException {
+	void move(String move) {
 		int x; //ascissa
 		int y; //ordinata
 		
@@ -81,7 +81,7 @@ class Game {
 					whiteTurn=true;
 					System.out.println(p.getType() + " Moved on " + move);
 				}
-				else throw new IllegalMoveException();
+				else System.out.println("Illegal move, please try again: ");
 			}
 			else if ((board[x-2][y].getPiece() instanceof Pawn )&& (board[x-2][y].getPiece().getColor() == 1)&& whiteTurn==false) { 
 				p = (Pawn) board[x-2][y].getPiece();
@@ -94,7 +94,8 @@ class Game {
 					whiteTurn=true;
 					System.out.println(p.getType() + " Moved on " + move);
 				}
-				else throw new IllegalMoveException();			}
+				else System.out.println("Illegal move, please try again: ");
+			}
 			else if ((board[x+1][y].getPiece() instanceof Pawn )&& (board[x+1][y].getPiece().getColor() == 0)&& whiteTurn==true) { //bianchi
 				p = (Pawn) board[x+1][y].getPiece();
 			
@@ -106,7 +107,8 @@ class Game {
 					whiteTurn=false;
 					System.out.println(p.getType() + " Moved on " + move);
 				}
-				else throw new IllegalMoveException();			}
+				else System.out.println("Illegal move, please try again: ");
+			}
 			else if ((board[x+2][y].getPiece() instanceof Pawn )&& (board[x+2][y].getPiece().getColor() == 0)&& whiteTurn==true) { 
 				p = (Pawn) board[x+2][y].getPiece();
 				
@@ -118,9 +120,11 @@ class Game {
 					whiteTurn=false;
 					System.out.println(p.getType() + " Moved on " + move);
 				}
-				else throw new IllegalMoveException();			
+				else System.out.println("Illegal move, please try again: ");
 			}
-			else throw new IllegalMoveException();
+			else {
+				System.out.println("Illegal move, please try again:");
+			}
 		}
 		else {
 			char chosenPiece=move.charAt(0);
@@ -142,7 +146,7 @@ class Game {
 		
 	}
 
-	void capture(String move) throws IllegalMoveException {
+	void capture(String move) {
 		int x; //ascissa
 		int y; //ordinata
 		int z; //colonna del pezzo di provenienza
@@ -168,11 +172,11 @@ class Game {
 							whiteTurn=true;
 							System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4));
 						}
-						else throw new IllegalMoveException();
+						else System.out.println("Illegal move, Please try again:");
 					} 
-					else throw new IllegalMoveException();
+					else System.out.println("Illegal move, Please try again:");
 				} 
-				else throw new IllegalMoveException();
+				else System.out.println("Illegal move, Please try again:");
 				
 			} 
 			else if ( z == y+1) { 
@@ -189,11 +193,11 @@ class Game {
 							whiteTurn=true;
 							System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4));
 						} 
-						else throw new IllegalMoveException();
+						else System.out.println("Illegal move, Please try again:");
 					}
-					else throw new IllegalMoveException();
+					else System.out.println("Illegal move, Please try again:");
 				}
-				else throw new IllegalMoveException();
+				else System.out.println("Illegal move, Please try again:");
 			}
 			else {
 				System.err.println("Moves not allowed");
@@ -217,11 +221,11 @@ class Game {
 							whiteTurn=false;
 							System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4));
 						}
-						else throw new IllegalMoveException();
+						else System.out.println("Illegal move, Please try again:");
 					}
-					else throw new IllegalMoveException();
+					else System.out.println("Illegal move, Please try again:");
 				} 
-				else throw new IllegalMoveException();
+				else System.out.println("Illegal move, Please try again:");
 				
 				
 			}
@@ -239,11 +243,11 @@ class Game {
 							whiteTurn=false;
 							System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4));
 						}
-						else throw new IllegalMoveException();
+						else System.out.println("Illegal move, Please try again:");
 					}
-					else throw new IllegalMoveException();
+					else System.out.println("Illegal move, Please try again:");
 				}
-				else throw new IllegalMoveException();
+				else System.out.println("Illegal move, Please try again:");
 				
 
 			}
@@ -254,7 +258,7 @@ class Game {
 			}
 	}
 
-	void captureEnPassant(String move) throws IllegalMoveException {
+	void captureEnPassant(String move) {
 
 		int x; //ascissa
 		int y; //ordinata
@@ -280,11 +284,11 @@ class Game {
 								whiteTurn=true;
 								System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4)+ " e.p.");
 							}
-							else throw new IllegalMoveException();
+							else System.out.println("Illegal move, Please try again:");
 						}
-						else throw new IllegalMoveException();
+						else System.out.println("Illegal move, Please try again:");
 					} 
-					else throw new IllegalMoveException();
+					else System.out.println("Illegal move, Please try again:");
 				}
 				
 			else if ( z == y+1) { 
@@ -303,11 +307,11 @@ class Game {
 								whiteTurn=true;
 								System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4)+ " e.p.");
 							}
-							else throw new IllegalMoveException();
+							else System.out.println("Illegal move, Please try again:");
 						}
-						else throw new IllegalMoveException();
+						else System.out.println("Illegal move, Please try again:");
 					}
-					else throw new IllegalMoveException();
+					else System.out.println("Illegal move, Please try again:");
 
 			}
 			else {
@@ -334,11 +338,11 @@ class Game {
 								whiteTurn=false;
 								System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4)+ " e.p.");
 							}
-							else throw new IllegalMoveException();
+							else System.out.println("Illegal move, Please try again:");
 						}
-						else throw new IllegalMoveException();
+						else System.out.println("Illegal move, Please try again:");
 					}
-					else throw new IllegalMoveException();
+					else System.out.println("Illegal move, Please try again:");
 				}
 			
 			else if ( z == y+1) { 
@@ -358,11 +362,11 @@ class Game {
 								whiteTurn=false;
 								System.out.println(p.getType() +" captured "+ caught.getType() + " on " + move.substring(2,4)+ " e.p.");
 							}
-							else throw new IllegalMoveException();
+							else System.out.println("Illegal move, Please try again:");
 						}
-						else throw new IllegalMoveException();
+						else System.out.println("Illegal move, Please try again:");
 					} 
-					else throw new IllegalMoveException();
+					else System.out.println("Illegal move, Please try again:");
 			
 
 			}
