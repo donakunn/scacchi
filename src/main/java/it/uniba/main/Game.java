@@ -3,7 +3,7 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 class Game {
-	private boolean whiteTurn = true;
+	private static boolean whiteTurn = true;
 	private static Cell board[][] = new Cell[8][8];
 
 	private enum Colonna {
@@ -68,7 +68,7 @@ class Game {
 		int x; // ascissa
 		int y; // ordinata
 
-		if (move.length() == 2) {
+		
 			y = Colonna.valueOf(move.substring(0, 1)).ordinal();
 			x = 8 - Integer.parseInt(move.substring(1, 2));
 
@@ -129,23 +129,7 @@ class Game {
 			} else {
 				throw new IllegalMoveException("Illegal move. Please try again.");
 			}
-		} else {
-			char chosenPiece = move.charAt(0);
-			switch (chosenPiece) {
-				case 'R':
-					System.err.println("Pezzo non ancora implementato");// muovi Torre
-				case 'N':
-					System.err.println("Pezzo non ancora implementato");// muovi Cavallo
-				case 'B':
-					System.err.println("Pezzo non ancora implementato");// muovi Alfiere
-				case 'Q':
-					System.err.println("Pezzo non ancora implementato");// muovi Donna
-				case 'K':
-					System.err.println("Pezzo non ancora implementato");// muovi Re
-			}
-
-		}
-
+		
 	}
 
 	void pawnCapture(String move) throws IllegalMoveException {
@@ -380,12 +364,12 @@ class Game {
 		}
 	}
 
-	boolean getWhiteTurn() {
-		return this.whiteTurn;
+	static boolean getTurn() {
+		return whiteTurn;
 	}
 
 	void setWhiteTurn() {
-		this.whiteTurn = true;
+		whiteTurn = true;
 	}
 
 	static Cell getCell(int x, int y) {
