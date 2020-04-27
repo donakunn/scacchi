@@ -38,7 +38,7 @@ public final class AppMain {
 
 		while (!exit) {
 
-			if (menu.getTurn() == false) {
+			if (Game.getTurn() == false) {
 				turn = "black";
 			} else {
 				turn = "white";

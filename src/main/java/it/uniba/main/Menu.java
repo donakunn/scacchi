@@ -112,9 +112,23 @@ class Menu {
 					System.err.println(e.getMessage());
 				}
 			} else System.err.println("Illegal move; Please try again");
-		} else {
-			System.out.println("Illegal move, please try again");
+		}  else {
+			char chosenPiece = input.charAt(0);
+			switch (chosenPiece) {
+				case 'R':
+					System.err.println("Pezzo non ancora implementato");// muovi Torre
+				case 'N':
+					System.err.println("Pezzo non ancora implementato");// muovi Cavallo
+				case 'B':
+					System.err.println("Pezzo non ancora implementato");// muovi Alfiere
+				case 'Q':
+					System.err.println("Pezzo non ancora implementato");// muovi Donna
+				case 'K':
+					System.err.println("Pezzo non ancora implementato");// muovi Re
+			}
+
 		}
+
 	}
 
 	void captures() {
@@ -146,10 +160,6 @@ class Menu {
 			}
 			in.close();
 		}
-	}
-
-	boolean getTurn() {
-		return game.getWhiteTurn();
 	}
 
 	void resetTurn() {
