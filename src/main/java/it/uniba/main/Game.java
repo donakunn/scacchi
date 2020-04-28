@@ -167,6 +167,7 @@ class Game {
 								whiteTurn = true;
 								System.out.println(
 										p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+										System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 							} else
 								throw new IllegalMoveException("Illegal move. Please try again.");
 						} else
@@ -189,6 +190,7 @@ class Game {
 								whiteTurn = true;
 								System.out.println(
 										p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+										System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 							} else
 								throw new IllegalMoveException("Illegal move. Please try again.");
 						} else
@@ -215,6 +217,7 @@ class Game {
 								whiteTurn = false;
 								System.out.println(
 										p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+								System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 							} else
 								throw new IllegalMoveException("Illegal move. Please try again.");
 						} else
@@ -237,6 +240,7 @@ class Game {
 								whiteTurn = false;
 								System.out.println(
 										p.getType() + " captured " + caught.getType() + " on " + move.substring(2, 4));
+								System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 							} else
 								throw new IllegalMoveException("Illegal move. Please try again.");
 						} else
@@ -276,6 +280,7 @@ class Game {
 							whiteTurn = true;
 							System.out.println(p.getType() + " captured " + caught.getType() + " on "
 									+ move.substring(2, 4) + " e.p.");
+							System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 						} else
 							throw new IllegalMoveException("Illegal move. Please try again.");
 					} else
@@ -300,6 +305,7 @@ class Game {
 							whiteTurn = true;
 							System.out.println(p.getType() + " captured " + caught.getType() + " on "
 									+ move.substring(2, 4) + " e.p.");
+							System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 						} else
 							throw new IllegalMoveException("Illegal move. Please try again.");
 					} else
@@ -328,6 +334,7 @@ class Game {
 							whiteTurn = false;
 							System.out.println(p.getType() + " captured " + caught.getType() + " on "
 									+ move.substring(2, 4) + " e.p.");
+							System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 						} else
 							throw new IllegalMoveException("Illegal move. Please try again.");
 					} else
@@ -352,6 +359,7 @@ class Game {
 							whiteTurn = false;
 							System.out.println(p.getType() + " captured " + caught.getType() + " on "
 									+ move.substring(2, 4) + " e.p.");
+							System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 						} else
 							throw new IllegalMoveException("Illegal move. Please try again.");
 					} else
