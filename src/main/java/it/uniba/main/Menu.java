@@ -96,21 +96,23 @@ class Menu {
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
-						break;
-					} else System.err.println("Mossa non consentita per la Donna");
 					break;
-				case 'R':
-					try {
-						game.moveKing(input);
-					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
-					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
-					} catch (IllegalMoveException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-				default: if (input.length() == 2) {
+				} else
+					System.err.println("Mossa non consentita per la Donna");
+				break;
+			case 'R':
+				try {
+					game.moveKing(input);
+				} catch (IllegalArgumentException e) {
+					System.err.println("Illegal move; Please try again");
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Illegal move; Please try again");
+				} catch (IllegalMoveException e) {
+					System.err.println(e.getMessage());
+				}
+				break;
+			default:
+				if (input.length() == 2) {
 					try {
 						game.moveAPawn(input);
 					} catch (IllegalArgumentException e) {
@@ -122,50 +124,55 @@ class Menu {
 					}
 				} else if (input.length() == 4) {
 					if (input.substring(1, 2).equals("x")) {
-						
-					try {
-						game.pawnCapture(input);
-					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
-					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
-					} catch (IllegalMoveException e) {
-						System.err.println(e.getMessage());
-					}
-				} else System.err.println("Mossa non valida"); 
-		
-				} else if (input.length() == 8) {
-					if ((input.substring(1, 2).toLowerCase().equals("x")) && (input.substring(4, 8).toLowerCase().equals("e.p."))) {
-		
-						try {
-							game.captureEnPassant(input);
-						} catch (IllegalArgumentException e) {
-							System.err.println("Illegal move; Please try again");
-						} catch (IndexOutOfBoundsException e) {
-							System.err.println("Illegal move; Please try again");
-						} catch (IllegalMoveException e) {
-							System.err.println(e.getMessage());
-						}
-					} else System.err.println("Illegal move; Please try again");
-		
-				} else if (input.length() == 6) {
-					if ((input.substring(1, 2).toLowerCase().equals("x")) && (input.substring(4, 6).toLowerCase().equals("ep"))) {
-		
-						try {
-							game.captureEnPassant(input);
-						} catch (IllegalArgumentException e) {
-							System.err.println("Illegal move; Please try again");
-						} catch (IndexOutOfBoundsException e) {
-							System.err.println("Illegal move; Please try again");
-						} catch (IllegalMoveException e) {
-							System.err.println(e.getMessage());
-						}
-					} else System.err.println("Illegal move; Please try again");
-				}  else System.err.println("Mossa illegale o comando inesistente; Riprova utilizzando un comando consentito o inserisci una mossa legale");
-				
-			}
 
-		
+						try {
+							game.pawnCapture(input);
+						} catch (IllegalArgumentException e) {
+							System.err.println("Illegal move; Please try again");
+						} catch (IndexOutOfBoundsException e) {
+							System.err.println("Illegal move; Please try again");
+						} catch (IllegalMoveException e) {
+							System.err.println(e.getMessage());
+						}
+					} else
+						System.err.println("Mossa non valida");
+
+				} else if (input.length() == 8) {
+					if ((input.substring(1, 2).toLowerCase().equals("x"))
+							&& (input.substring(4, 8).toLowerCase().equals("e.p."))) {
+
+						try {
+							game.captureEnPassant(input);
+						} catch (IllegalArgumentException e) {
+							System.err.println("Illegal move; Please try again");
+						} catch (IndexOutOfBoundsException e) {
+							System.err.println("Illegal move; Please try again");
+						} catch (IllegalMoveException e) {
+							System.err.println(e.getMessage());
+						}
+					} else
+						System.err.println("Illegal move; Please try again");
+
+				} else if (input.length() == 6) {
+					if ((input.substring(1, 2).toLowerCase().equals("x"))
+							&& (input.substring(4, 6).toLowerCase().equals("ep"))) {
+
+						try {
+							game.captureEnPassant(input);
+						} catch (IllegalArgumentException e) {
+							System.err.println("Illegal move; Please try again");
+						} catch (IndexOutOfBoundsException e) {
+							System.err.println("Illegal move; Please try again");
+						} catch (IllegalMoveException e) {
+							System.err.println(e.getMessage());
+						}
+					} else
+						System.err.println("Illegal move; Please try again");
+				} else
+					System.err.println(
+							"Mossa illegale o comando inesistente; Riprova utilizzando un comando consentito o inserisci una mossa legale");
+
+		}
 
 	}
 
