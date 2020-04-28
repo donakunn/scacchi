@@ -62,23 +62,50 @@ class Menu {
 	}
 
 	void getMove(String input) {
-			char chosenPiece = input.charAt(0);
-			switch (chosenPiece) {
-				case 'T':
-					System.err.println("Pezzo non ancora implementato");// muovi Torre
+		char chosenPiece = input.charAt(0);
+		switch (chosenPiece) {
+			case 'T':
+				System.err.println("Pezzo non ancora implementato");// muovi Torre
+				break;
+			case 'C':
+				System.err.println("Pezzo non ancora implementato");// muovi Cavallo
+				break;
+			case 'A':
+				System.err.println("Pezzo non ancora implementato");// muovi Alfiere
+				break;
+			case 'D':
+				if (input.length() == 3) {
+					try {
+						game.moveQueen(input);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
 					break;
-				case 'C':
-					System.err.println("Pezzo non ancora implementato");// muovi Cavallo
-					break;
-				case 'A':
-					System.err.println("Pezzo non ancora implementato");// muovi Alfiere
-					break;
-				case 'D':
-					System.err.println("Pezzo non ancora implementato");// muovi Donna
+
+				} else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
+					try {
+						game.captureQueen(input);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+						break;
+					} else System.err.println("Mossa non consentita per la Donna");
 					break;
 				case 'R':
 					try {
 						game.moveKing(input);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Illegal move; Please try again");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -134,7 +161,7 @@ class Menu {
 							System.err.println(e.getMessage());
 						}
 					} else System.err.println("Illegal move; Please try again");
-				}  else throw new IllegalArgumentException("Mossa illegale; Riprova utilizzando un comando consentito");
+				}  else System.err.println("Mossa illegale o comando inesistente; Riprova utilizzando un comando consentito o inserisci una mossa legale");
 				
 			}
 

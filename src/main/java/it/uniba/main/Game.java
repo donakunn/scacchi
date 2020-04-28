@@ -427,6 +427,703 @@ class Game {
 		whiteTurn=!whiteTurn;
 		System.out.println(board[x][y].getPiece().getType() + " Moved to " + (char) (y+97) + (8-x) );		
 	}
+
+	void moveQueen(String move) throws IllegalMoveException {
+		int x; // ascissa
+		int y; // ordinata
+		int vCheck; //sentinella dell'ascissa
+		int hCheck; //sentinella dell'ordinata
+		Queen q;
+
+			y = Colonna.valueOf(move.substring(1, 2)).ordinal();
+			x = 8 - Integer.parseInt(move.substring(2, 3));
+			if (whiteTurn == true) {				
+				if (board[x][y].getPiece() == null) {
+					vCheck = x+1;					//controllo in verticale, verso il basso (della matrice) 
+					while(vCheck <8) {
+						if ((board[vCheck][y].getPiece() instanceof Queen)&& (board[vCheck][y].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][y].getPiece();
+							board[vCheck][y].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+
+						} 
+						else if (board[vCheck][y].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+						}
+					}
+					vCheck = x-1;
+					while (vCheck >=0) {							//controllo in verticale, verso l'alto (della matrice)
+						if ((board[vCheck][y].getPiece() instanceof Queen)&& (board[vCheck][y].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][y].getPiece();
+							board[vCheck][y].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][y].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+						}
+					}
+					hCheck= y+1;							//controllo in orizzontale a destra
+					while (hCheck < 8 ) {
+						if ((board[x][hCheck].getPiece() instanceof Queen)&& (board[x][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[x][hCheck].getPiece();
+							board[x][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[x][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							hCheck++;
+						}
+					}
+					hCheck = y-1;
+					while (hCheck >= 0 ) {			//controllo in orizzontale a sinistra
+						if ((board[x][hCheck].getPiece() instanceof Queen)&& (board[x][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[x][hCheck].getPiece();
+							board[x][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						}
+						else if (board[x][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							hCheck--;
+						}
+					}
+					vCheck = x-1;
+					hCheck = y-1;
+					while (vCheck >= 0 && hCheck >= 0 ) {			//controllo diagonale alta sinistra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+							hCheck--;
+						}
+					}
+					vCheck = x-1;
+					hCheck = y+1;
+					while (vCheck >= 0 && hCheck < 8 ) {			//controllo diagonale alta destra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+							hCheck++;
+						}
+					}
+					vCheck = x+1;
+					hCheck = y-1;
+					while (vCheck < 8 && hCheck >= 0 ) {			//controllo diagonale bassa sinistra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+							hCheck--;
+						}
+					}
+
+					vCheck = x+1;
+					hCheck = y+1;
+					while (vCheck < 8 && hCheck < 8 ) {			//controllo diagonale bassa destra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+							hCheck++;
+						}
+					}
+					throw new IllegalMoveException("Mossa illegale, il percorso della regina verso la casella non è libero");
+
+					} else throw new IllegalMoveException("Mossa illegale, la casella di destinazione non è vuota");
+
+			} else {						//neri
+				if (board[x][y].getPiece() == null) {
+					vCheck = x+1;					//controllo in verticale, verso il basso (della matrice) 
+					while(vCheck <8) {
+						if ((board[vCheck][y].getPiece() instanceof Queen)&& (board[vCheck][y].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][y].getPiece();
+							board[vCheck][y].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+
+						} 
+						else if (board[vCheck][y].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+						}
+					}
+					vCheck = x-1;
+					while (vCheck >=0) {							//controllo in verticale, verso l'alto (della matrice)
+						if ((board[vCheck][y].getPiece() instanceof Queen)&& (board[vCheck][y].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][y].getPiece();
+							board[vCheck][y].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][y].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+						}
+					}
+					hCheck= y+1;							//controllo in orizzontale a destra
+					while (hCheck < 8 ) {
+						if ((board[x][hCheck].getPiece() instanceof Queen)&& (board[x][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[x][hCheck].getPiece();
+							board[x][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[x][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							hCheck++;
+						}
+					}
+					hCheck = y-1;
+					while (hCheck >= 0 ) {			//controllo in orizzontale a sinistra
+						if ((board[x][hCheck].getPiece() instanceof Queen)&& (board[x][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[x][hCheck].getPiece();
+							board[x][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						}
+						else if (board[x][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							hCheck--;
+						}
+					}
+					vCheck = x-1;
+					hCheck = y-1;
+					while (vCheck >= 0 && hCheck >= 0 ) {			//controllo diagonale alta sinistra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+							hCheck--;
+						}
+					}
+					vCheck = x-1;
+					hCheck = y+1;
+					while (vCheck >= 0 && hCheck < 8 ) {			//controllo diagonale alta destra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+							hCheck++;
+						}
+					}
+					vCheck = x+1;
+					hCheck = y-1;
+					while (vCheck < 8 && hCheck >= 0 ) {			//controllo diagonale bassa sinistra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+							hCheck--;
+						}
+					}
+
+					vCheck = x+1;
+					hCheck = y+1;
+					while (vCheck < 8 && hCheck < 8 ) {			//controllo diagonale bassa destra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(1,3));
+							return;
+
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+							hCheck++;
+						}
+					}
+					throw new IllegalMoveException("Mossa illegale, il percorso della regina verso la casella non è libero");
+					} else throw new IllegalMoveException("Mossa illegale, la casella di destinazione non è vuota");
+
+			}
+			
+	}
+	void captureQueen(String move) throws IllegalMoveException {
+		int x; // ascissa
+		int y; // ordinata
+		int vCheck; //sentinella dell'ascissa
+		int hCheck; //sentinella dell'ordinata
+		Queen q;
+
+			y = Colonna.valueOf(move.substring(2, 3)).ordinal();
+			x = 8 - Integer.parseInt(move.substring(3, 4));
+			if (whiteTurn == true) {				
+				if (board[x][y].getPiece() != null) {
+					vCheck = x+1;					//controllo in verticale, verso il basso (della matrice) 
+					while(vCheck <8) {
+						if ((board[vCheck][y].getPiece() instanceof Queen)&& (board[vCheck][y].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][y].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							BlacksCaptured.add(board[x][y].getPiece());
+							board[vCheck][y].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+
+						} 
+						else if (board[vCheck][y].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+						}
+					}
+					vCheck = x-1;
+					while (vCheck >=0) {							//controllo in verticale, verso l'alto (della matrice)
+						if ((board[vCheck][y].getPiece() instanceof Queen)&& (board[vCheck][y].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][y].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							BlacksCaptured.add(board[x][y].getPiece());
+							board[vCheck][y].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][y].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+						}
+					}
+					hCheck= y+1;							//controllo in orizzontale a destra
+					while (hCheck < 8 ) {
+						if ((board[x][hCheck].getPiece() instanceof Queen)&& (board[x][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[x][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							BlacksCaptured.add(board[x][y].getPiece());
+							board[x][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[x][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							hCheck++;
+						}
+					}
+					hCheck = y-1;
+					while (hCheck >= 0 ) {			//controllo in orizzontale a sinistra
+						if ((board[x][hCheck].getPiece() instanceof Queen)&& (board[x][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[x][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							BlacksCaptured.add(board[x][y].getPiece());
+							board[x][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						}
+						else if (board[x][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							hCheck--;
+						}
+					}
+					vCheck = x-1;
+					hCheck = y-1;
+					while (vCheck >= 0 && hCheck >= 0 ) {			//controllo diagonale alta sinistra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							BlacksCaptured.add(board[x][y].getPiece());
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+							hCheck--;
+						}
+					}
+					vCheck = x-1;
+					hCheck = y+1;
+					while (vCheck >= 0 && hCheck < 8 ) {			//controllo diagonale alta destra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							BlacksCaptured.add(board[x][y].getPiece());
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4) );
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+							hCheck++;
+						}
+					}
+					vCheck = x+1;
+					hCheck = y-1;
+					while (vCheck < 8 && hCheck >= 0 ) {			//controllo diagonale bassa sinistra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							BlacksCaptured.add(board[x][y].getPiece());
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+							hCheck--;
+						}
+					}
+
+					vCheck = x+1;
+					hCheck = y+1;
+					while (vCheck < 8 && hCheck < 8 ) {			//controllo diagonale bassa destra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							BlacksCaptured.add(board[x][y].getPiece());
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = false;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+							hCheck++;
+						}
+					}
+					throw new IllegalMoveException("Mossa illegale, il percorso della regina verso la casella non è libero");
+					} else throw new IllegalMoveException("Mossa illegale, la casella di destinazione è vuota");
+
+			} else {						//neri
+				if (board[x][y].getPiece() != null) {
+					vCheck = x+1;					//controllo in verticale, verso il basso (della matrice) 
+					while(vCheck <8) {
+						if ((board[vCheck][y].getPiece() instanceof Queen)&& (board[vCheck][y].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][y].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							WhitesCaptured.add(board[x][y].getPiece());
+							board[vCheck][y].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+
+						} 
+						else if (board[vCheck][y].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+						}
+					}
+					vCheck = x-1;
+					while (vCheck >=0) {							//controllo in verticale, verso l'alto (della matrice)
+						if ((board[vCheck][y].getPiece() instanceof Queen)&& (board[vCheck][y].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][y].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							WhitesCaptured.add(board[x][y].getPiece());
+							board[vCheck][y].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][y].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+						}
+					}
+					hCheck= y+1;							//controllo in orizzontale a destra
+					while (hCheck < 8 ) {
+						if ((board[x][hCheck].getPiece() instanceof Queen)&& (board[x][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[x][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							WhitesCaptured.add(board[x][y].getPiece());
+							board[x][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[x][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							hCheck++;
+						}
+					}
+					hCheck = y-1;
+					while (hCheck >= 0 ) {			//controllo in orizzontale a sinistra
+						if ((board[x][hCheck].getPiece() instanceof Queen)&& (board[x][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[x][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							WhitesCaptured.add(board[x][y].getPiece());
+							board[x][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						}
+						else if (board[x][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							hCheck--;
+						}
+					}
+					vCheck = x-1;
+					hCheck = y-1;
+					while (vCheck >= 0 && hCheck >= 0 ) {			//controllo diagonale alta sinistra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							WhitesCaptured.add(board[x][y].getPiece());
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+							hCheck--;
+						}
+					}
+					vCheck = x-1;
+					hCheck = y+1;
+					while (vCheck >= 0 && hCheck < 8 ) {			//controllo diagonale alta destra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							WhitesCaptured.add(board[x][y].getPiece());
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck--;
+							hCheck++;
+						}
+					}
+					vCheck = x+1;
+					hCheck = y-1;
+					while (vCheck < 8 && hCheck >= 0 ) {			//controllo diagonale bassa sinistra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							WhitesCaptured.add(board[x][y].getPiece());
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+							hCheck--;
+						}
+					}
+
+					vCheck = x+1;
+					hCheck = y+1;
+					while (vCheck < 8 && hCheck < 8 ) {			//controllo diagonale bassa destra
+						if ((board[vCheck][hCheck].getPiece() instanceof Queen)&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							q= (Queen) board[vCheck][hCheck].getPiece();
+							System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType() + " in " + move.substring(2,4) );
+							WhitesCaptured.add(board[x][y].getPiece());
+							board[vCheck][hCheck].setEmpty();
+							board[x][y].setPiece(q);
+							movesDone.add(move);
+							whiteTurn = true;
+							System.out.println(q.getType() + " spostata su " + move.substring(2,4));
+							return;
+						} 
+						else if (board[vCheck][hCheck].getPiece() != null) {
+							break;
+						}
+						else {
+							vCheck++;
+							hCheck++;
+						}
+					}
+					throw new IllegalMoveException("Mossa illegale, il percorso della regina verso la casella non è libero");
+					} else throw new IllegalMoveException("Mossa illegale, la casella di destinazione è vuota");
+
+			}
+			
+	}
+
 	
 	
 	static boolean getTurn() {
