@@ -72,7 +72,7 @@ class Menu {
 			} catch (IllegalMoveException e) {
 				System.err.println(e.getMessage());
 			}
-		} else if (input.length() == 4) {
+		} else if (input.length() == 4 && input.charAt(0)=='P') {
 			if (input.substring(1, 2) == "x")
 				;
 			try {
@@ -117,14 +117,23 @@ class Menu {
 			switch (chosenPiece) {
 				case 'R':
 					System.err.println("Pezzo non ancora implementato");// muovi Torre
+					break;
 				case 'N':
 					System.err.println("Pezzo non ancora implementato");// muovi Cavallo
+					break;
 				case 'B':
 					System.err.println("Pezzo non ancora implementato");// muovi Alfiere
+					break;
 				case 'Q':
 					System.err.println("Pezzo non ancora implementato");// muovi Donna
+					break;
 				case 'K':
-					System.err.println("Pezzo non ancora implementato");// muovi Re
+					try {
+						game.moveKing(input);
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+					break;
 			}
 
 		}

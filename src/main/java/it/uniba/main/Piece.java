@@ -1,9 +1,7 @@
 package it.uniba.main;
 
-abstract class Piece { // classe astratta che fattorizza proprietà comuni dei pezzi del gioco degli
-						// scacchi
-
-	protected int color; // 0 nero, 1 bianco
+abstract class Piece {
+	protected int color; // 0 black, 1 white
 	protected String pieceType;
 
 	String getType() {

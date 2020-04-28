@@ -5,7 +5,7 @@ import java.util.ArrayList;
 class Game {
 	private static boolean whiteTurn = true;
 	private static Cell board[][] = new Cell[8][8];
-
+	
 	private enum Colonna {
 		a, b, c, d, e, f, g, h
 	};
@@ -35,7 +35,7 @@ class Game {
 			board[6][j] = new Cell(new Pawn(0));
 		}
 		;
-		// initialize pieces a1-h1 (black side)
+		// initialize pieces a1-h1 (white side)
 		board[0][0] = new Cell(new Rook(1));
 		board[0][1] = new Cell(new Knight(1));
 		board[0][2] = new Cell(new Bishop(1));
@@ -362,6 +362,227 @@ class Game {
 			} else
 				throw new IllegalMoveException("Illegal move. Please try again.");
 		}
+	}
+	
+	void moveKing(String move) throws IllegalMoveException{
+		int x=2;
+		int y=1;
+		
+		if(move.length()==4) {
+			x=3;
+			y=2;
+		}
+		
+		y = Colonna.valueOf(move.substring(y, y+1)).ordinal();
+		x = 8 - Integer.parseInt(move.substring(x, x+1));
+		
+		if(board[x][y].getPiece() != null && board[x][y].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+			throw new IllegalMoveException("There is another allied piece in that position, please try again");
+		}
+		int xK=-1;
+		int yK=-1;
+		
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				if(board[i][j].getPiece() instanceof King &&  board[i][j].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+					xK=i;
+					yK=j;
+					break;
+				}
+			}
+		}
+		if(Math.abs(x-xK)>1||Math.abs(y-yK)>1) {
+			throw new IllegalMoveException("Your King cannot move there");
+		}
+		if(isThreatened(x,y)) {
+			throw new IllegalMoveException("Invalid move, it would put your King in check");
+		}
+		
+		if(board[x][y].getPiece() == null) {
+			if(move.charAt(1)=='x') {
+				throw new IllegalMoveException("Invalid move, there is no piece you can capture in that position.");
+			}
+		}else {
+			if(move.charAt(1)!='x') {
+				throw new IllegalMoveException("Invalid move, you must specify the capture as denoted in algebraic notation.");
+			}
+			if (whiteTurn) {
+				BlacksCaptured.add(board[x][y].getPiece());
+			}else {
+				WhitesCaptured.add(board[x][y].getPiece());
+			}
+			System.out.println(board[xK][yK].getPiece().getType()+" captured "+ board[x][y].getPiece().getType() +"!");
+		}
+		board[x][y].setPiece(board[xK][yK].getPiece());
+		board[xK][yK].setEmpty();
+		movesDone.add(move);
+		whiteTurn=!whiteTurn;
+		System.out.println(board[x][y].getPiece().getType() + " Moved to " + (char) (y+97) + (8-x) );		
+	}
+	
+	private boolean isThreatened(int x, int y) {
+		int i,j;
+		if(!whiteTurn) {
+			if(x<7) {
+				if(y>0 && board[x+1][y-1].getPiece() instanceof Pawn && board[x+1][y-1].getPiece().getColor() == 0) {
+					return true;
+				}
+				if(y<7 && board[x+1][y+1].getPiece() instanceof Pawn && board[x+1][y+1].getPiece().getColor() == 0) {
+					return true;
+				}
+			}
+		}
+		if(whiteTurn) {
+			if(x>0) {
+				if(y>0 && board[x-1][y-1].getPiece() instanceof Pawn && board[x-1][y-1].getPiece().getColor() == 1) {
+					return true;
+				}
+				if(y<7 && board[x-1][y+1].getPiece() instanceof Pawn && board[x-1][y+1].getPiece().getColor() == 1) {
+					return true;
+				}
+			}
+		}
+		//up right
+		i=1;
+		j=1;
+		while(x-i>=0 && y+j<=7) {
+			if(board[x-i][y+j].getPiece() == null) {
+				i++;
+				j++;
+				continue;
+			}
+			if(board[x-i][y+j].getPiece().getColor() != (whiteTurn ? 1 : 0)) break;
+			if(board[x-i][y+j].getPiece() instanceof Bishop || board[x-i][y+j].getPiece() instanceof Queen) 
+				return true;
+			i++;
+			j++;		
+		}
+		//down right
+		i=1;
+		j=1;
+		while(x+i<=7 && y+j<=7) {
+			if(board[x+i][y+j].getPiece() == null) {
+				i++;
+				j++;
+				continue;
+			}
+			if(board[x+i][y+j].getPiece().getColor() != (whiteTurn ? 1 : 0))
+				break;
+			if(board[x+i][y+j].getPiece() instanceof Bishop || board[x+i][y+j].getPiece() instanceof Queen) 
+				return true;
+			i++;
+			j++;
+		}
+		//down left
+		i=1;
+		j=1;
+		while(x+i<=7 && y-j>=0) {
+			if(board[x+i][y-j].getPiece() == null) {
+				i++;
+				j++;
+				continue;
+			}
+			if(board[x+i][y-j].getPiece().getColor() != (whiteTurn ? 1 : 0)) break;
+			if(board[x+i][y-j].getPiece() instanceof Bishop || board[x+i][y-j].getPiece() instanceof Queen) 
+				return true;
+			i++;
+			j++;		
+		}
+		//up left
+		i=1;
+		j=1;
+		while(x-i>=0 && y-j>=0) {
+			if(board[x-i][y-j].getPiece() == null) {
+				i++;
+				j++;
+				continue;
+			}
+			if(board[x-i][y-j].getPiece().getColor() != (whiteTurn ? 1 : 0)) break;
+			if(board[x-i][y-j].getPiece() instanceof Bishop || board[x-i][y-j].getPiece() instanceof Queen) 
+				return true;
+			i++;
+			j++;		
+		}
+		
+		
+		//right
+		j=1;
+		while(y+j<=7) {
+			if(board[x][y+j].getPiece() == null) {
+				i++;
+				j++;
+				continue;
+			}
+			if(board[x][y+j].getPiece().getColor() != (whiteTurn ? 1 : 0)) break;
+			if(board[x][y+j].getPiece() instanceof Rook || board[x][y+j].getPiece() instanceof Queen) 
+				return true;
+			j++;		
+		}
+		//down
+		i=1;
+		while(x+i<=7) {
+			if(board[x+i][y].getPiece() == null) {
+				i++;
+				j++;
+				continue;
+			}
+			if(board[x+i][y].getPiece().getColor() != (whiteTurn ? 1 : 0)) break;
+			if(board[x+i][y].getPiece() instanceof Rook || board[x+i][y].getPiece() instanceof Queen) 
+				return true;
+			i++;		
+		}
+		//left
+		j=1;
+		while(y-j>=0) {
+			if(board[x][y-j].getPiece() == null) {
+				i++;
+				j++;
+				continue;
+			}
+			if(board[x][y-j].getPiece().getColor() != (whiteTurn ? 1 : 0)) break;
+			if(board[x][y-j].getPiece() instanceof Rook || board[x][y-j].getPiece() instanceof Queen) 
+				return true;
+			j++;		
+		}
+		//up
+		i=1;
+		while(x-i>=0) {
+			if(board[x-i][y].getPiece() == null) {
+				i++;
+				j++;
+				continue;
+			}
+			if(board[x-i][y].getPiece().getColor() != (whiteTurn ? 1 : 0)) break;
+			if(board[x-i][y].getPiece() instanceof Rook || board[x-i][y].getPiece() instanceof Queen) 
+				return true;
+			i++;		
+		}
+		//knight
+		if(y+2<=7) {
+			if(x-1>=0 && board[x-1][y+2].getPiece() instanceof Knight && board[x-1][y+2].getPiece().getColor() == (whiteTurn ? 1 : 0)) 
+				return true;
+			if(x+1<=7 && board[x+1][y+2].getPiece() instanceof Knight && board[x+1][y+2].getPiece().getColor() == (whiteTurn ? 1 : 0)) 
+				return true;
+		}
+		if(y+1<=7) {
+			if(x-2>=0 && board[x-2][y+1].getPiece() instanceof Knight && board[x-2][y+1].getPiece().getColor() == (whiteTurn ? 1 : 0)) 
+				return true;
+			if(x+2<=7 && board[x+2][y+1].getPiece() instanceof Knight && board[x+2][y+1].getPiece().getColor() == (whiteTurn ? 1 : 0)) 
+				return true;
+		}
+		if(y-1>=0) {
+			if(x-2>=0 && board[x-2][y-1].getPiece() instanceof Knight && board[x-2][y-1].getPiece().getColor() == (whiteTurn ? 1 : 0)) 
+				return true;
+			if(x+2<=7 && board[x+2][y-1].getPiece() instanceof Knight && board[x+2][y-1].getPiece().getColor() == (whiteTurn ? 1 : 0)) 
+				return true;
+		}
+		if(y-2>=0) {
+			if(x-1>=0 && board[x-1][y-2].getPiece() instanceof Knight && board[x-1][y-2].getPiece().getColor() == (whiteTurn ? 1 : 0)) 
+				return true;
+			if(x+1<=7 && board[x+1][y-2].getPiece() instanceof Knight && board[x+1][y-2].getPiece().getColor() == (whiteTurn ? 1 : 0)) 
+				return true;
+		}
+		return false;
 	}
 
 	static boolean getTurn() {
