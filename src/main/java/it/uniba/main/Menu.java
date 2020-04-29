@@ -71,7 +71,30 @@ class Menu {
 				System.err.println("Pezzo non ancora implementato");// muovi Cavallo
 				break;
 			case 'A':
-				System.err.println("Pezzo non ancora implementato");// muovi Alfiere
+				if (input.length() == 3) {
+					try {
+						game.moveBishop(input);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+					break;
+				} else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
+					try {
+						game.captureBishop(input);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Illegal move; Please try again");
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+					break;
+				} else
+					System.err.println("Mossa non consentita per l'Alfiere");
 				break;
 			case 'D':
 				if (input.length() == 3) {
