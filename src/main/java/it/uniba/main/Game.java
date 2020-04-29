@@ -1306,7 +1306,7 @@ class Game {
 
 		y = Colonna.valueOf(move.substring(2, 3)).ordinal();
 		x = 8 - Integer.parseInt(move.substring(3, 4));
-		if (whiteTurn == true) {
+		if (whiteTurn == true) { //controlli per bianchi
 			if (board[x][y].getPiece() != null) {
 				xb = x - 1;
 				yb = y - 1;
@@ -1332,7 +1332,7 @@ class Game {
 				}
 				xb = x - 1;
 				yb = y + 1;
-				while (xb >= 0 && yb < 8) { // controllo diagonale alta destra
+				while (xb >= 0 && yb < 8) { 
 					if ((board[xb][yb].getPiece() instanceof Bishop)
 							&& (board[xb][yb].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
