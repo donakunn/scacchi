@@ -1300,203 +1300,207 @@ class Game {
 	void captureBishop(String move) throws IllegalMoveException {
 		int x; 
 		int y; 
-		int xB; 
-		int yB; 
+		int xb; 
+		int yb; 
 		Bishop b;
+
 		y = Colonna.valueOf(move.substring(2, 3)).ordinal();
 		x = 8 - Integer.parseInt(move.substring(3, 4));
 		if (whiteTurn == true) {
 			if (board[x][y].getPiece() != null) {
-				xB = -1;
-				yB = -1;
-				while(xB >= 0 && yB >= 0) {
-					if(board[xB][yB].getPiece() instanceof Bishop && board[xB][yB].getPiece().getColor() == 0) {
-					 b= (Bishop) board[xB][yB].getPiece();
-					 System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
-						+ " in " + move.substring(2, 4));
-					 BlacksCaptured.add(board[x][y].getPiece());
-					 board[xB][yB].setEmpty();
-					 board[x][y].setPiece(b);
-					 movesDone.add(move);
-					 whiteTurn = false;
-					 System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-					 return; 
-					}else if(board[xB][yB].getPiece() != null)
-					{
+				xb = x - 1;
+				yb = y - 1;
+				while (xb >= 0 && yb >= 0) {
+					if ((board[xb][yb].getPiece() instanceof Bishop)
+							&& (board[xb][yb].getPiece().getColor() == 0)) {
+						b = (Bishop) board[xb][yb].getPiece();
+						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+								+ " in " + move.substring(2, 4));
+						BlacksCaptured.add(board[x][y].getPiece());
+						board[xb][yb].setEmpty();
+						board[x][y].setPiece(b);
+						movesDone.add(move);
+						whiteTurn = false;
+						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
+						return;
+					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
-						xB--;
-						yB--;
+						xb--;
+						yb--;
 					}
 				}
-				xB = -1;
-				yB = +1;
-				while(xB >= 0 && yB < 8) {
-					if(board[xB][yB].getPiece() instanceof Bishop && board[xB][yB].getPiece().getColor() == 0) {
-					 b= (Bishop) board[xB][yB].getPiece();
-					 System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
-						+ " in " + move.substring(2, 4));
-					 BlacksCaptured.add(board[x][y].getPiece());
-					 board[xB][yB].setEmpty();
-					 board[x][y].setPiece(b);
-					 movesDone.add(move);
-					 whiteTurn = false;
-					 System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-					 return; 
-					}else if(board[xB][yB].getPiece() != null)
-					{
+				xb = x - 1;
+				yb = y + 1;
+				while (xb >= 0 && yb < 8) { // controllo diagonale alta destra
+					if ((board[xb][yb].getPiece() instanceof Bishop)
+							&& (board[xb][yb].getPiece().getColor() == 0)) {
+						b = (Bishop) board[xb][yb].getPiece();
+						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+								+ " in " + move.substring(2, 4));
+						BlacksCaptured.add(board[x][y].getPiece());
+						board[xb][yb].setEmpty();
+						board[x][y].setPiece(b);
+						movesDone.add(move);
+						whiteTurn = false;
+						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
+						return;
+					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
-						xB--;
-						yB++;
+						xb--;
+						yb++;
 					}
 				}
-				xB = +1;
-				yB = -1;
-				while(xB < 8 && yB >= 0) {
-					if(board[xB][yB].getPiece() instanceof Bishop && board[xB][yB].getPiece().getColor() == 0) {
-					 b= (Bishop) board[xB][yB].getPiece();
-					 System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
-						+ " in " + move.substring(2, 4));
-					 BlacksCaptured.add(board[x][y].getPiece());
-					 board[xB][yB].setEmpty();
-					 board[x][y].setPiece(b);
-					 movesDone.add(move);
-					 whiteTurn = false;
-					 System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-					 return; 
-					}else if(board[xB][yB].getPiece() != null)
-					{
+				xb= x + 1;
+				yb = y - 1;
+				while (xb < 8 && yb >= 0) {
+					if ((board[xb][yb].getPiece() instanceof Bishop)
+							&& (board[xb][yb].getPiece().getColor() == 0)) {
+						b = (Bishop) board[xb][yb].getPiece();
+						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+								+ " in " + move.substring(2, 4));
+						BlacksCaptured.add(board[x][y].getPiece());
+						board[xb][yb].setEmpty();
+						board[x][y].setPiece(b);
+						movesDone.add(move);
+						whiteTurn = false;
+						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
+						return;
+					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
-						xB++;
-						yB--;
+						xb++;
+						yb--;
 					}
 				}
-				xB = +1;
-				yB = +1;
-				while(xB < 8 && yB < 8) {
-					if(board[xB][yB].getPiece() instanceof Bishop && board[xB][yB].getPiece().getColor() == 0) {
-					 b= (Bishop) board[xB][yB].getPiece();
-					 System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
-						+ " in " + move.substring(2, 4));
-					 BlacksCaptured.add(board[x][y].getPiece());
-					 board[xB][yB].setEmpty();
-					 board[x][y].setPiece(b);
-					 movesDone.add(move);
-					 whiteTurn = false;
-					 System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-					 return; 
-					}else if(board[xB][yB].getPiece() != null)
-					{
+
+				xb = x + 1;
+				yb = y + 1;
+				while (xb < 8 && yb < 8) { 
+					if ((board[xb][yb].getPiece() instanceof Bishop)
+							&& (board[xb][yb].getPiece().getColor() == 0)) {
+						b = (Bishop) board[xb][yb].getPiece();
+						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+								+ " in " + move.substring(2, 4));
+						BlacksCaptured.add(board[x][y].getPiece());
+						board[xb][yb].setEmpty();
+						board[x][y].setPiece(b);
+						movesDone.add(move);
+						whiteTurn = false;
+						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
+						return;
+					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
-						xB++;
-						yB++;
+						xb++;
+						yb++;
 					}
 				}
 				throw new IllegalMoveException(
 						"Mossa illegale, l'alfiere non può muoversi qui");
-			 } else throw new IllegalMoveException(
-					    "Mossa illegale, la casella di destinazione non è vuota");
-			 
-	       } else { //neri
+			} else
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione è vuota");
+
+		} else { // controlli per i pezzi neri
 			if (board[x][y].getPiece() != null) {
-				xB = -1;
-				yB = -1;
-				while(xB >= 0 && yB >= 0) {
-					if(board[xB][yB].getPiece() instanceof Bishop && board[xB][yB].getPiece().getColor() == 1) {
-					 b= (Bishop) board[xB][yB].getPiece();
-					 System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
-						+ " in " + move.substring(2, 4));
-					 WhitesCaptured.add(board[x][y].getPiece());
-					 board[xB][yB].setEmpty();
-					 board[x][y].setPiece(b);
-					 movesDone.add(move);
-					 whiteTurn = true;
-					 System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-					 return; 
-					}else if(board[xB][yB].getPiece() != null)
-					{
+				xb = x - 1;
+				yb = y - 1;
+				while (xb >= 0 && yb >= 0) { 
+					if ((board[xb][yb].getPiece() instanceof Bishop)
+							&& (board[xb][yb].getPiece().getColor() == 1)) {
+						b = (Bishop) board[xb][yb].getPiece();
+						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+								+ " in " + move.substring(2, 4));
+						WhitesCaptured.add(board[x][y].getPiece());
+						board[xb][yb].setEmpty();
+						board[x][y].setPiece(b);
+						movesDone.add(move);
+						whiteTurn = true;
+						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
+						return;
+					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
-						xB--;
-						yB--;
+						xb--;
+						yb--;
 					}
 				}
-				xB = -1;
-				yB = +1;
-				while(xB >= 0 && yB < 8) {
-					if(board[xB][yB].getPiece() instanceof Bishop && board[xB][yB].getPiece().getColor() == 1) {
-					 b= (Bishop) board[xB][yB].getPiece();
-					 System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
-						+ " in " + move.substring(2, 4));
-					 WhitesCaptured.add(board[x][y].getPiece());
-					 board[xB][yB].setEmpty();
-					 board[x][y].setPiece(b);
-					 movesDone.add(move);
-					 whiteTurn = true;
-					 System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-					 return; 
-					}else if(board[xB][yB].getPiece() != null)
-					{
+				xb = x - 1;
+				yb = y + 1;
+				while (xb >= 0 && yb < 8) { 
+					if ((board[xb][yb].getPiece() instanceof Bishop)
+							&& (board[xb][yb].getPiece().getColor() == 1)) {
+						b = (Bishop) board[xb][yb].getPiece();
+						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+								+ " in " + move.substring(2, 4));
+						WhitesCaptured.add(board[x][y].getPiece());
+						board[xb][yb].setEmpty();
+						board[x][y].setPiece(b);
+						movesDone.add(move);
+						whiteTurn = true;
+						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
+						return;
+					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
-						xB--;
-						yB++;
+						xb--;
+						yb++;
 					}
 				}
-				xB = +1;
-				yB = -1;
-				while(xB < 8 && yB >= 0) {
-					if(board[xB][yB].getPiece() instanceof Bishop && board[xB][yB].getPiece().getColor() == 1) {
-					 b= (Bishop) board[xB][yB].getPiece();
-					 System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
-						+ " in " + move.substring(2, 4));
-					 WhitesCaptured.add(board[x][y].getPiece());
-					 board[xB][yB].setEmpty();
-					 board[x][y].setPiece(b);
-					 movesDone.add(move);
-					 whiteTurn = true;
-					 System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-					 return; 
-					}else if(board[xB][yB].getPiece() != null)
-					{
+				xb = x + 1;
+				yb = y - 1;
+				while (xb < 8 && yb >= 0) { 
+					if ((board[xb][yb].getPiece() instanceof Bishop)
+							&& (board[xb][yb].getPiece().getColor() == 1)) {
+						b = (Bishop) board[xb][yb].getPiece();
+						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+								+ " in " + move.substring(2, 4));
+						WhitesCaptured.add(board[x][y].getPiece());
+						board[xb][yb].setEmpty();
+						board[x][y].setPiece(b);
+						movesDone.add(move);
+						whiteTurn = true;
+						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
+						return;
+					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
-						xB++;
-						yB--;
+						xb++;
+						yb--;
 					}
 				}
-				xB = +1;
-				yB = +1;
-				while(xB < 8 && yB < 8) {
-					if(board[xB][yB].getPiece() instanceof Bishop && board[xB][yB].getPiece().getColor() == 1) {
-					 b= (Bishop) board[xB][yB].getPiece();
-					 System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
-						+ " in " + move.substring(2, 4));
-					 WhitesCaptured.add(board[x][y].getPiece());
-					 board[xB][yB].setEmpty();
-					 board[x][y].setPiece(b);
-					 movesDone.add(move);
-					 whiteTurn = true;
-					 System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-					 return; 
-					}else if(board[xB][yB].getPiece() != null)
-					{
+
+				xb = x + 1;
+				yb = y + 1;
+				while (xb < 8 && yb < 8) { 
+					if ((board[xb][yb].getPiece() instanceof Bishop)
+							&& (board[xb][yb].getPiece().getColor() == 1)) {
+						b = (Bishop) board[xb][yb].getPiece();
+						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+								+ " in " + move.substring(2, 4));
+						WhitesCaptured.add(board[x][y].getPiece());
+						board[xb][yb].setEmpty();
+						board[x][y].setPiece(b);
+						movesDone.add(move);
+						whiteTurn = true;
+						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
+						return;
+					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
-						xB++;
-						yB++;
+						xb++;
+						yb++;
 					}
 				}
 				throw new IllegalMoveException(
 						"Mossa illegale, l'alfiere non può muoversi qui");
-			 } else throw new IllegalMoveException(
-					    "Mossa illegale, la casella di destinazione non è vuota");
-			
-	       }
+			} else
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione è vuota");
+
 		}
+
+	}
 	
     static boolean getTurn() {
 		return whiteTurn;
