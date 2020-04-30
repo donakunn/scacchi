@@ -68,8 +68,18 @@ class Menu {
 				System.err.println("Pezzo non ancora implementato");// muovi Torre
 				break;
 			case 'C':
-				System.err.println("Pezzo non ancora implementato");// muovi Cavallo
+				if (input.length() == 3) {
+					try {
+						game.moveKnight(input);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Illegal move1; Please try again");
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Illegal move2; Please try again");
+					}catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
 				break;
+				}
 			case 'A':
 				if (input.length() == 3) {
 					try {
