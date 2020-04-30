@@ -68,7 +68,30 @@ class Menu {
 				System.err.println("Pezzo non ancora implementato");// muovi Torre
 				break;
 			case 'C':
-				System.err.println("Pezzo non ancora implementato");// muovi Cavallo
+				if (input.length() == 3) {
+					try {
+						game.moveKnight(input);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Illegal move1; Please try again");
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Illegal move2; Please try again");
+					}catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+				break;
+				}else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
+					try {
+						game.captureKnight(input);
+					} catch (IllegalArgumentException e) {
+						System.err.println("Illegal move3; Please try again");
+					} catch (IndexOutOfBoundsException e) {
+						System.err.println("Illegal move4; Please try again");
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+					break;
+				} else
+					System.err.println("Mossa non consentita per il Cavallo");
 				break;
 			case 'A':
 				if (input.length() == 3) {
