@@ -23,7 +23,9 @@ public final class AppMain {
 	}
 
 	/**
-	 * * This is the main entry of the application.
+	 * «boundary»<br>
+	 * This is the main entry of the application.
+	 * It executes the chess app.
 	 *
 	 * @param args The command-line arguments.
 	 */
