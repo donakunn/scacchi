@@ -1,5 +1,13 @@
 package it.uniba.main;
 
+/**
+* «entity»<br>
+* Pawn class, implementing the abstract class {@link Piece}<br>
+* Includes a counter for moves done and a method to verify the en-passant capturable condition
+* 
+* @author Donato Lucente
+* 
+*/
 class Pawn extends Piece {
 
 	private int movesDone; // numero di mosse effettuate

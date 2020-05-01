@@ -1,5 +1,12 @@
 package it.uniba.main;
 
+/**
+* «entity»<br>
+* Knight class, implementing the abstract class {@link Piece}<br>
+* 
+* @author Donato Lucente
+* 
+*/
 class Knight extends Piece {
 
 	Knight(int col) {

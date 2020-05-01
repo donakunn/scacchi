@@ -3,6 +3,17 @@ package it.uniba.main;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+* «control»<br>
+* Menu class, containing all methods of the command list.
+* 
+* @author Megi Gjata
+* @author Mario Giordano
+* @author Donato Lucente
+* @author Patrick Clark
+* @author Filippo Iacobellis
+* 
+*/
 class Menu {
 	private Game game = new Game();
 

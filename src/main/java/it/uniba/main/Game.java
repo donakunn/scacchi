@@ -2,6 +2,18 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
+/**
+* «entity»<br>
+* Game is the main entity of the application. It contains the chessboard, turn of player currently playing, white and black pieces
+* captured, moves done. It also contains the main methods to activate a move or a capture event for each piece.
+* 
+* @author Megi Gjata
+* @author Mario Giordano
+* @author Donato Lucente
+* @author Patrick Clark
+* @author Filippo Iacobellis
+* 
+*/
 class Game {
 	private static boolean whiteTurn = true;
 	private static Cell board[][] = new Cell[8][8];
@@ -1502,8 +1514,6 @@ class Game {
 
 	}
 
-
-	
 	void moveKnight(String move) throws IllegalMoveException{
 		int x;
 		int y;
@@ -2031,6 +2041,7 @@ class Game {
 					 throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
 			}
 		}
+	
 	void moveRook(String move) throws IllegalMoveException{
 		int x; 
 		int y; 
@@ -2197,6 +2208,7 @@ class Game {
 
 		}
 	    }
+	
 	void captureRook(String move) throws IllegalMoveException{
 		int x; // ascissa
 		int y; // ordinata

@@ -1,5 +1,12 @@
 package it.uniba.main;
 
+/**
+* «entity»<br>
+* Rook class, implementing the abstract class {@link Piece}<br>
+*
+* @author Donato Lucente
+* 
+*/
 class Rook extends Piece {
 
 	Rook(int col) {
