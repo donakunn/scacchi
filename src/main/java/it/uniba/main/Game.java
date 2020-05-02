@@ -2253,6 +2253,7 @@ class Game {
 				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
 			} else
 				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non ÃÂ¨ vuota");
+		}
 
 		}
 
