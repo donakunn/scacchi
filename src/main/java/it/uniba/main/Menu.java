@@ -194,7 +194,7 @@ class Menu {
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
-				}
+				} else System.err.println("errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
 				break;
 			case 'O':
 				if (input.equals("O-O")) {
@@ -209,7 +209,7 @@ class Menu {
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
-				}
+				} else System.err.println("errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
 				break;
 			default:
 				if (input.length() == 2) {
