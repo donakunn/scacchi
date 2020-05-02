@@ -1557,7 +1557,115 @@ class Game {
         return false;
     }
 	
-	
+	void moveKnight(String move)throws IllegalMoveException{
+        int count=0;
+        int xC1=-1,yC1=-1,xC2=-1,yC2=-1;
+        int a = 8 - Integer.parseInt(move.substring(move.length()-1));
+        int b = Colonna.valueOf(move.substring(move.length()-2,move.length()-1)).ordinal();
+        if(board[a][b].getPiece()!=null && board[a][b].getPiece().getColor() != (whiteTurn ? 1:0)) {
+            throw new IllegalMoveException("Non puoi spostarti sulla casa di un alleato.");
+        }
+        for(int i=0; i<=7; i++) {
+            for(int j=0; j<=7; j++) {
+                if(board[i][j].getPiece() instanceof Knight && board[i][j].getPiece().getColor() != (whiteTurn ? 1:0)) {
+                    if(xC1==-1) {
+                        xC1=i;
+                        yC1=j;
+                    }else {
+                        xC2=i;
+                        yC2=j;
+                    }
+                }
+            }
+        }
+        if(xC1 != -1 && yC1 != -1) {
+        if(isMovableKnight(xC1,yC1,a,b)) {
+            count=count+1;
+        }
+        }
+        if(xC2 != -1 && yC2 != -1) {
+        if(isMovableKnight(xC2,yC2,a,b)) {
+            count=count+2;
+        }
+	}
+ 
+
+        if(count==0) {
+            throw new IllegalMoveException("Nessun cavallo puo' spostarsi in quella casa.");
+        }
+
+ 
+
+        if(count==1) {
+            if(move.charAt(1)=='x') {
+                captureKnight(xC1,yC1,a,b,move);
+            }else if(move.charAt(1)>='a' && move.charAt(1)<='h'){
+                actualMoveKnight(xC1, yC1, a, b, move);
+            }else {
+                throw new IllegalMoveException("Mossa non riconosciuta.");
+            }
+        }else if(count==2) {
+            if(move.charAt(1)=='x') {
+                captureKnight(xC2,yC2,a,b,move);
+            }else if(move.charAt(1)>='a' && move.charAt(1)<='h'){
+                actualMoveKnight(xC2, yC2, a, b, move);
+            }else {
+                throw new IllegalMoveException("Mossa non riconosciuta.");
+            }
+        }else if(count==3) {
+            if(move.charAt(1)=='x') {
+                throw new IllegalMoveException("Mossa ambigua, devi specificare quale dei due cavalli muovere secondo la notazione algebrica.");
+            }
+            if(move.length()==3) {
+                throw new IllegalMoveException("Mossa ambigua, devi specificare quale dei due cavalli muovere secondo la notazione algebrica.");
+            }
+            
+            int x,y;
+            if(move.charAt(1)>='1' && move.charAt(1)<='8') {
+                if(xC1==xC2) {
+                    throw new IllegalMoveException("Quando i due cavalli si trovano sulla stessa riga è necessario specificare la colonna!");
+                }
+                if(xC1==(8 - Integer.parseInt(move.substring(1, 2)))) {
+                    x=xC1;
+                    y=yC1;
+                }else if(xC2==(8 - Integer.parseInt(move.substring(1, 2)))){
+                    x=xC2;
+                    y=yC2;
+                }else {
+                    throw new IllegalMoveException("Nessun cavallo appartenente alla riga di disambiguazione specificata.");
+                }
+                if(move.length()==4) {
+                    actualMoveKnight(x, y, a, b, move);
+                }else if(move.length()==5){
+                    captureKnight(x,y,a,b,move);
+                }else {
+                    throw new IllegalMoveException("Mossa non riconosciuta.");
+                }
+            }else if(move.charAt(1)>='a' && move.charAt(1)<='h') {
+                if(yC1==yC2) {
+                    throw new IllegalMoveException("Quando i due cavalli si trovano sulla stessa colonna è necessario specificare la riga!");
+                }
+                if(yC1==Colonna.valueOf(move.substring(1,2)).ordinal()) {
+                    x=xC1;
+                    y=yC1;
+                }else if(yC2==Colonna.valueOf(move.substring(1,2)).ordinal()){
+                    x=xC2;
+                    y=yC2;
+                }else {
+                    throw new IllegalMoveException("Nessun cavallo appartenente alla colonna di disambiguazione specificata.");
+                }
+                if(move.length()==4) {
+                    actualMoveKnight(x, y, a, b, move);
+                }else if(move.length()==5){
+                    captureKnight(x,y,a,b,move);
+                }else {
+                    throw new IllegalMoveException("Mossa non riconosciuta.");
+                }
+            }else {
+                throw new IllegalMoveException("Mossa non riconosciuta.");
+            }
+        }
+    }
 	
 	void captureKnight(String move) throws IllegalMoveException {
 		int x;
