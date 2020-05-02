@@ -89,7 +89,7 @@ class Game {
 		if ((board[x - 1][y].getPiece() instanceof Pawn) && (board[x - 1][y].getPiece().getColor() == 1) // check se
 																											// casella
 																											// in x-1
-																											// c'è
+																											// c'Ã¨
 																											// pedone
 																											// con
 																											// colore 1
@@ -104,13 +104,13 @@ class Game {
 				whiteTurn = true;
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
-				throw new IllegalMoveException("mossa illegale; la cella di destinazione non è vuota.");
+				throw new IllegalMoveException("mossa illegale; la cella di destinazione non Ã¨ vuota.");
 		} else if ((board[x - 2][y].getPiece() instanceof Pawn) && (board[x - 2][y].getPiece().getColor() == 1) // check
 																												// se
 																												// casella
 																												// in
 																												// x-2
-																												// c'è
+																												// c'Ã¨
 																												// pedone
 																												// con
 																												// colore
@@ -126,13 +126,13 @@ class Game {
 				whiteTurn = true;
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
-				throw new IllegalMoveException("mossa illegale; la cella di destinazione non è vuota.");
+				throw new IllegalMoveException("mossa illegale; la cella di destinazione non Ã¨ vuota.");
 		} else if ((board[x + 1][y].getPiece() instanceof Pawn) && (board[x + 1][y].getPiece().getColor() == 0) // check
 																												// se
 																												// casella
 																												// in
 																												// x+1
-																												// c'è
+																												// c'Ã¨
 																												// pedone
 																												// con
 																												// colore
@@ -148,13 +148,13 @@ class Game {
 				whiteTurn = false;
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
-				throw new IllegalMoveException("mossa illegale; la cella di destinazione non è vuota.");
+				throw new IllegalMoveException("mossa illegale; la cella di destinazione non Ã¨ vuota.");
 		} else if ((board[x + 2][y].getPiece() instanceof Pawn) && (board[x + 2][y].getPiece().getColor() == 0) // check
 																												// se
 																												// casella
 																												// in
 																												// x+2
-																												// c'è
+																												// c'Ã¨
 																												// pedone
 																												// con
 																												// colore
@@ -170,9 +170,9 @@ class Game {
 				whiteTurn = false;
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
-				throw new IllegalMoveException("mossa illegale; la cella di destinazione non è vuota.");
+				throw new IllegalMoveException("mossa illegale; la cella di destinazione non Ã¨ vuota.");
 		} else {
-			throw new IllegalMoveException("mossa illegale; nessun pedone può spostarsi qui");
+			throw new IllegalMoveException("mossa illegale; nessun pedone puÃ² spostarsi qui");
 		}
 
 	}
@@ -188,7 +188,7 @@ class Game {
 		x = 8 - Integer.parseInt(move.substring(3, 4)); // calcolo x,y di cella di destinazione e z colonna di partenza
 		z = Colonna.valueOf(move.substring(0, 1)).ordinal();
 
-		if (board[x][y].getPiece() == null) { // se cella di destinazione è vuota prova a fare cattura en passant
+		if (board[x][y].getPiece() == null) { // se cella di destinazione Ã¨ vuota prova a fare cattura en passant
 			try {
 				this.captureEnPassant(move);
 			} catch (IllegalMoveException e) {
@@ -209,7 +209,7 @@ class Game {
 								movesDone.add(move);
 								this.WhitesCaptured.add(caught);
 								whiteTurn = true;
-								System.out.println(caught.getType() + " è stato catturato da " + p.getType() + " su "
+								System.out.println(caught.getType() + " Ã¨ stato catturato da " + p.getType() + " su "
 										+ move.substring(2, 4));
 								System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 							} else
@@ -217,9 +217,9 @@ class Game {
 										"mossa illegale; Impossibile catturare pezzo dello stesso colore.");
 						} else
 							throw new IllegalMoveException(
-									"mossa illegale; Nessun pedone può catturare dalla colonna di partenza indicata.");
+									"mossa illegale; Nessun pedone puÃ² catturare dalla colonna di partenza indicata.");
 					} else
-						throw new IllegalMoveException("mossa illegale. La cella è vuota.");
+						throw new IllegalMoveException("mossa illegale. La cella Ã¨ vuota.");
 
 				} else if (z == y + 1) {
 					if (board[x][y] != null) {
@@ -233,7 +233,7 @@ class Game {
 								movesDone.add(move);
 								this.WhitesCaptured.add(caught);
 								whiteTurn = true;
-								System.out.println(caught.getType() + " è stato catturato da " + p.getType() + " su "
+								System.out.println(caught.getType() + " Ã¨ stato catturato da " + p.getType() + " su "
 										+ move.substring(2, 4));
 								System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 							} else
@@ -241,9 +241,9 @@ class Game {
 										"mossa illegale; Impossibile catturare pezzo dello stesso colore.");
 						} else
 							throw new IllegalMoveException(
-									"mossa illegale; Nessun pedone può catturare dalla colonna di partenza indicata.");
+									"mossa illegale; Nessun pedone puÃ² catturare dalla colonna di partenza indicata.");
 					} else
-						throw new IllegalMoveException("mossa illegale. La cella è vuota.");
+						throw new IllegalMoveException("mossa illegale. La cella Ã¨ vuota.");
 				} else
 					throw new IllegalMoveException(
 							"mossa illegale; Nessuna possibile cattura da parte di un Pedone a partire dalla colonna indicata");
@@ -262,7 +262,7 @@ class Game {
 								movesDone.add(move);
 								this.BlacksCaptured.add(caught);
 								whiteTurn = false;
-								System.out.println(caught.getType() + " è stato catturato da " + p.getType() + " su "
+								System.out.println(caught.getType() + " Ã¨ stato catturato da " + p.getType() + " su "
 										+ move.substring(2, 4));
 								System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 							} else
@@ -270,9 +270,9 @@ class Game {
 										"mossa illegale; Impossibile catturare pezzo dello stesso colore.");
 						} else
 							throw new IllegalMoveException(
-									"mossa illegale; Nessun pedone può catturare dalla colonna di partenza indicata.");
+									"mossa illegale; Nessun pedone puÃ² catturare dalla colonna di partenza indicata.");
 					} else
-						throw new IllegalMoveException("mossa illegale. La cella è vuota.");
+						throw new IllegalMoveException("mossa illegale. La cella Ã¨ vuota.");
 
 				} else if (z == y + 1) {
 					if (board[x][y] != null) {
@@ -286,7 +286,7 @@ class Game {
 								movesDone.add(move);
 								this.BlacksCaptured.add(caught);
 								whiteTurn = false;
-								System.out.println(caught.getType() + " è stato catturato da " + p.getType() + " su "
+								System.out.println(caught.getType() + " Ã¨ stato catturato da " + p.getType() + " su "
 										+ move.substring(2, 4));
 								System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 							} else
@@ -294,9 +294,9 @@ class Game {
 										"mossa illegale; Impossibile catturare pezzo dello stesso colore.");
 						} else
 							throw new IllegalMoveException(
-									"mossa illegale; Nessun pedone può catturare dalla colonna di partenza indicata.");
+									"mossa illegale; Nessun pedone puÃ² catturare dalla colonna di partenza indicata.");
 					} else
-						throw new IllegalMoveException("mossa illegale. La cella è vuota.");
+						throw new IllegalMoveException("mossa illegale. La cella Ã¨ vuota.");
 				} else
 					throw new IllegalMoveException(
 							"mossa illegale; Nessuna possibile cattura da parte di un Pedone a partire dalla colonna indicata");
@@ -328,7 +328,7 @@ class Game {
 							movesDone.add(move);
 							this.WhitesCaptured.add(caught);
 							whiteTurn = true;
-							System.out.println(caught.getType() + " è stato catturato da " + p.getType() + " su "
+							System.out.println(caught.getType() + " Ã¨ stato catturato da " + p.getType() + " su "
 									+ move.substring(2, 4) + " e.p.");
 							System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 						} else
@@ -339,7 +339,7 @@ class Game {
 								"mossa illegale; Nessun pedone catturabile e.p. alla posizione indicata.");
 				} else
 					throw new IllegalMoveException(
-							"mossa illegale; Nessun Pedone può effettuare cattura e.p. a partire dalla colonna inserita");
+							"mossa illegale; Nessun Pedone puÃ² effettuare cattura e.p. a partire dalla colonna inserita");
 			}
 
 			else if (z == y + 1) {
@@ -356,7 +356,7 @@ class Game {
 							movesDone.add(move);
 							this.WhitesCaptured.add(caught);
 							whiteTurn = true;
-							System.out.println(caught.getType() + " è stato catturato da " + p.getType() + " su "
+							System.out.println(caught.getType() + " Ã¨ stato catturato da " + p.getType() + " su "
 									+ move.substring(2, 4) + " e.p.");
 							System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 						} else
@@ -367,7 +367,7 @@ class Game {
 								"mossa illegale; Nessun pedone catturabile e.p. alla posizione indicata.");
 				} else
 					throw new IllegalMoveException(
-							"mossa illegale; Nessun Pedone può effettuare cattura e.p. a partire dalla colonna inserita");
+							"mossa illegale; Nessun Pedone puÃ² effettuare cattura e.p. a partire dalla colonna inserita");
 			} else
 				throw new IllegalMoveException(
 						"mossa illegale; Nessuna possibile cattura da parte di un Pedone a partire dalla colonna indicata");
@@ -388,7 +388,7 @@ class Game {
 							movesDone.add(move);
 							this.BlacksCaptured.add(caught);
 							whiteTurn = false;
-							System.out.println(caught.getType() + " è stato catturato da " + p.getType() + " su "
+							System.out.println(caught.getType() + " Ã¨ stato catturato da " + p.getType() + " su "
 									+ move.substring(2, 4) + " e.p.");
 							System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 						} else
@@ -399,7 +399,7 @@ class Game {
 								"mossa illegale; Nessun pedone catturabile e.p. alla posizione indicata.");
 				} else
 					throw new IllegalMoveException(
-							"mossa illegale; Nessun Pedone può effettuare cattura e.p. a partire dalla colonna inserita");
+							"mossa illegale; Nessun Pedone puÃ² effettuare cattura e.p. a partire dalla colonna inserita");
 			}
 
 			else if (z == y + 1) {
@@ -416,7 +416,7 @@ class Game {
 							movesDone.add(move);
 							this.BlacksCaptured.add(caught);
 							whiteTurn = false;
-							System.out.println(caught.getType() + " è stato catturato da " + p.getType() + " su "
+							System.out.println(caught.getType() + " Ã¨ stato catturato da " + p.getType() + " su "
 									+ move.substring(2, 4) + " e.p.");
 							System.out.println(p.getType() + " spostato su " + move.substring(2, 4));
 						} else
@@ -427,7 +427,7 @@ class Game {
 								"mossa illegale; Nessun pedone catturabile e.p. alla posizione indicata.");
 				} else
 					throw new IllegalMoveException(
-							"mossa illegale; Nessun Pedone può effettuare cattura e.p. a partire dalla colonna inserita");
+							"mossa illegale; Nessun Pedone puÃ² effettuare cattura e.p. a partire dalla colonna inserita");
 			} else
 				throw new IllegalMoveException(
 						"mossa illegale; Nessuna possibile cattura da parte di un Pedone a partire dalla colonna indicata");
@@ -651,10 +651,10 @@ class Game {
 						hCheck++;
 					}
 				}
-				throw new IllegalMoveException("mossa illegale; la donna non può muoversi qui");
+				throw new IllegalMoveException("mossa illegale; la donna non puÃ² muoversi qui");
 
 			} else
-				throw new IllegalMoveException("mossa illegale; la casella di destinazione non è vuota");
+				throw new IllegalMoveException("mossa illegale; la casella di destinazione non Ã¨ vuota");
 
 		} else { // neri
 			if (board[x][y].getPiece() == null) {
@@ -805,9 +805,9 @@ class Game {
 						hCheck++;
 					}
 				}
-				throw new IllegalMoveException("mossa illegale; la donna non può muoversi qui");
+				throw new IllegalMoveException("mossa illegale; la donna non puÃ² muoversi qui");
 			} else
-				throw new IllegalMoveException("mossa illegale; la casella di destinazione non è vuota");
+				throw new IllegalMoveException("mossa illegale; la casella di destinazione non Ã¨ vuota");
 
 		}
 	}
@@ -829,7 +829,7 @@ class Game {
 					if ((board[vCheck][y].getPiece() instanceof Queen)
 							&& (board[vCheck][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[vCheck][y].setEmpty();
@@ -851,7 +851,7 @@ class Game {
 					if ((board[vCheck][y].getPiece() instanceof Queen)
 							&& (board[vCheck][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[vCheck][y].setEmpty();
@@ -871,7 +871,7 @@ class Game {
 					if ((board[x][hCheck].getPiece() instanceof Queen)
 							&& (board[x][hCheck].getPiece().getColor() == 0)) {
 						q = (Queen) board[x][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[x][hCheck].setEmpty();
@@ -891,7 +891,7 @@ class Game {
 					if ((board[x][hCheck].getPiece() instanceof Queen)
 							&& (board[x][hCheck].getPiece().getColor() == 0)) {
 						q = (Queen) board[x][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[x][hCheck].setEmpty();
@@ -912,7 +912,7 @@ class Game {
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
 							&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[vCheck][hCheck].setEmpty();
@@ -934,7 +934,7 @@ class Game {
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
 							&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[vCheck][hCheck].setEmpty();
@@ -956,7 +956,7 @@ class Game {
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
 							&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[vCheck][hCheck].setEmpty();
@@ -979,7 +979,7 @@ class Game {
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
 							&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[vCheck][hCheck].setEmpty();
@@ -996,9 +996,9 @@ class Game {
 					}
 				}
 				throw new IllegalMoveException(
-						"mossa illegale; la donna non può effettuare la cattura nella cella di destinazione data");
+						"mossa illegale; la donna non puÃ² effettuare la cattura nella cella di destinazione data");
 			} else
-				throw new IllegalMoveException("mossa illegale; la casella di destinazione è vuota");
+				throw new IllegalMoveException("mossa illegale; la casella di destinazione Ã¨ vuota");
 
 		} else { // neri
 			if (board[x][y].getPiece() != null) {
@@ -1007,7 +1007,7 @@ class Game {
 					if ((board[vCheck][y].getPiece() instanceof Queen)
 							&& (board[vCheck][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[vCheck][y].setEmpty();
@@ -1028,7 +1028,7 @@ class Game {
 					if ((board[vCheck][y].getPiece() instanceof Queen)
 							&& (board[vCheck][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[vCheck][y].setEmpty();
@@ -1048,7 +1048,7 @@ class Game {
 					if ((board[x][hCheck].getPiece() instanceof Queen)
 							&& (board[x][hCheck].getPiece().getColor() == 1)) {
 						q = (Queen) board[x][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[x][hCheck].setEmpty();
@@ -1068,7 +1068,7 @@ class Game {
 					if ((board[x][hCheck].getPiece() instanceof Queen)
 							&& (board[x][hCheck].getPiece().getColor() == 1)) {
 						q = (Queen) board[x][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[x][hCheck].setEmpty();
@@ -1089,7 +1089,7 @@ class Game {
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
 							&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[vCheck][hCheck].setEmpty();
@@ -1111,7 +1111,7 @@ class Game {
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
 							&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[vCheck][hCheck].setEmpty();
@@ -1133,7 +1133,7 @@ class Game {
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
 							&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[vCheck][hCheck].setEmpty();
@@ -1156,7 +1156,7 @@ class Game {
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
 							&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + q.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[vCheck][hCheck].setEmpty();
@@ -1173,9 +1173,9 @@ class Game {
 					}
 				}
 				throw new IllegalMoveException(
-						"mossa illegale; la donna non può effettuare la cattura nella cella di destinazione data");
+						"mossa illegale; la donna non puÃ² effettuare la cattura nella cella di destinazione data");
 			} else
-				throw new IllegalMoveException("mossa illegale; la casella di destinazione è vuota");
+				throw new IllegalMoveException("mossa illegale; la casella di destinazione Ã¨ vuota");
 		}
 
 	}
@@ -1266,9 +1266,9 @@ class Game {
 						yB++;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, l'alfiere non può muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, l'alfiere non puÃ² muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non è vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non Ã¨ vuota");
 
 		} else { // else per il caso di turno dei pezzi neri
 			if (board[x][y].getPiece() == null) {
@@ -1346,9 +1346,9 @@ class Game {
 						yB++;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, l'alfiere non può muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, l'alfiere non puÃ² muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non è vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non Ã¨ vuota");
 
 		}
 
@@ -1370,7 +1370,7 @@ class Game {
 				while (xb >= 0 && yb >= 0) {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[xb][yb].setEmpty();
@@ -1391,7 +1391,7 @@ class Game {
 				while (xb >= 0 && yb < 8) {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[xb][yb].setEmpty();
@@ -1412,7 +1412,7 @@ class Game {
 				while (xb < 8 && yb >= 0) {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[xb][yb].setEmpty();
@@ -1434,7 +1434,7 @@ class Game {
 				while (xb < 8 && yb < 8) {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[xb][yb].setEmpty();
@@ -1450,9 +1450,9 @@ class Game {
 						yb++;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, l'alfiere non può muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, l'alfiere non puÃ² muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione è vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione Ã¨ vuota");
 
 		} else { // controlli per i pezzi neri
 			if (board[x][y].getPiece() != null) {
@@ -1461,7 +1461,7 @@ class Game {
 				while (xb >= 0 && yb >= 0) {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[xb][yb].setEmpty();
@@ -1482,7 +1482,7 @@ class Game {
 				while (xb >= 0 && yb < 8) {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[xb][yb].setEmpty();
@@ -1503,7 +1503,7 @@ class Game {
 				while (xb < 8 && yb >= 0) {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[xb][yb].setEmpty();
@@ -1525,7 +1525,7 @@ class Game {
 				while (xb < 8 && yb < 8) {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + b.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[xb][yb].setEmpty();
@@ -1541,15 +1541,17 @@ class Game {
 						yb++;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, l'alfiere non può muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, l'alfiere non puÃ² muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione è vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione Ã¨ vuota");
 
 		}
 
 	}
 
-	void moveKnight(String move) throws IllegalMoveException {
+
+	void moveKnight(String move) throws IllegalMoveException{
+
 		int x;
 		int y;
 		int lCk; // l sta per lenght, controllo sulle ascisse
@@ -1672,7 +1674,7 @@ class Game {
 						return;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, il cavallo non può muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, il cavallo non puÃ² muoversi qui");
 			} else
 				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
 		} else {
@@ -1788,11 +1790,12 @@ class Game {
 						return;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, il cavallo non può muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, il cavallo non puÃ² muoversi qui");
 
 			} else
 				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
 		}
+
 	}
 
 	void captureKnight(String move) throws IllegalMoveException {
@@ -1812,7 +1815,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 0) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1829,7 +1832,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 0) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1846,7 +1849,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 0) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1863,7 +1866,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 0) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1880,7 +1883,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 0) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1897,7 +1900,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 0) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1914,7 +1917,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 0) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1931,7 +1934,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 0) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1942,7 +1945,7 @@ class Game {
 						return;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, il cavallo non può muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, il cavallo non puÃ² muoversi qui");
 			} else
 				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
 		} else {
@@ -1952,7 +1955,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 1) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1969,7 +1972,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 1) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -1986,7 +1989,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 1) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -2003,7 +2006,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 1) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -2020,7 +2023,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 1) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -2037,7 +2040,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 1) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -2054,7 +2057,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 1) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -2071,7 +2074,7 @@ class Game {
 				if (lCk >= 0 && lCk < 8 && hCk >= 0 && hCk < 8) {
 					if (board[lCk][hCk].getPiece() instanceof Knight && board[lCk][hCk].getPiece().getColor() == 1) {
 						kn = (Knight) board[lCk][hCk].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " è stato catturato da: " + kn.getType()
+						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + kn.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[lCk][hCk].setEmpty();
@@ -2082,18 +2085,19 @@ class Game {
 						return;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, il cavallo non può muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, il cavallo non puÃ² muoversi qui");
 
 			} else
 				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
 		}
 	}
 
-	void moveRook(String move) throws IllegalMoveException {
-		int x;
-		int y;
-		int mcheck; // vcheck
-		int ncheck; // hcheck
+	
+	void moveRook(String move) throws IllegalMoveException{
+		int x; 
+		int y; 
+		int mcheck; //vcheck
+		int ncheck; //hcheck
 		Rook r;
 
 		y = Colonna.valueOf(move.substring(1, 2)).ordinal();
@@ -2170,10 +2174,10 @@ class Game {
 					}
 				}
 
-				throw new IllegalMoveException("Mossa illegale, la torre non puÃ² muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
 
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non Ã¨ vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non ÃÂ¨ vuota");
 
 		} else { // neri
 			if (board[x][y].getPiece() == null) {
@@ -2246,14 +2250,14 @@ class Game {
 						ncheck--;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puÃ² muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non Ã¨ vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non ÃÂ¨ vuota");
 
 		}
-	}
 
-	void captureRook(String move) throws IllegalMoveException {
+	
+	void captureRook(String move) throws IllegalMoveException{
 		int x; // ascissa
 		int y; // ordinata
 		int mcheck; // sentinella dell'ascissa
@@ -2269,7 +2273,7 @@ class Game {
 					if ((board[mcheck][y].getPiece() instanceof Rook)
 							&& (board[mcheck][y].getPiece().getColor() == 0)) {
 						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[mcheck][y].setEmpty();
@@ -2291,7 +2295,7 @@ class Game {
 					if ((board[mcheck][y].getPiece() instanceof Rook)
 							&& (board[mcheck][y].getPiece().getColor() == 0)) {
 						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[mcheck][y].setEmpty();
@@ -2311,7 +2315,7 @@ class Game {
 					if ((board[x][ncheck].getPiece() instanceof Rook)
 							&& (board[x][ncheck].getPiece().getColor() == 0)) {
 						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[x][ncheck].setEmpty();
@@ -2331,7 +2335,7 @@ class Game {
 					if ((board[x][ncheck].getPiece() instanceof Rook)
 							&& (board[x][ncheck].getPiece().getColor() == 0)) {
 						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[x][ncheck].setEmpty();
@@ -2346,9 +2350,9 @@ class Game {
 						ncheck--;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puÃ² muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione Ã¨ vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione ÃÂ¨ vuota");
 
 		} else { // neri
 			if (board[x][y].getPiece() != null) {
@@ -2357,7 +2361,7 @@ class Game {
 					if ((board[mcheck][y].getPiece() instanceof Rook)
 							&& (board[mcheck][y].getPiece().getColor() == 1)) {
 						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[mcheck][y].setEmpty();
@@ -2378,7 +2382,7 @@ class Game {
 					if ((board[mcheck][y].getPiece() instanceof Rook)
 							&& (board[mcheck][y].getPiece().getColor() == 1)) {
 						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[mcheck][y].setEmpty();
@@ -2398,7 +2402,7 @@ class Game {
 					if ((board[x][ncheck].getPiece() instanceof Rook)
 							&& (board[x][ncheck].getPiece().getColor() == 1)) {
 						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[x][ncheck].setEmpty();
@@ -2418,7 +2422,7 @@ class Game {
 					if ((board[x][ncheck].getPiece() instanceof Rook)
 							&& (board[x][ncheck].getPiece().getColor() == 1)) {
 						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " Ã¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[x][ncheck].setEmpty();
@@ -2433,9 +2437,9 @@ class Game {
 						ncheck--;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puÃ² muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione Ã¨ vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione ÃÂ¨ vuota");
 
 		}
 	}
@@ -2456,7 +2460,7 @@ class Game {
 																													// il
 																													// re
 																													// non
-																													// è,
+																													// Ã¨,
 																													// e
 																													// non
 																													// finisce
@@ -2467,10 +2471,10 @@ class Game {
 																													// mossa
 							|| (King.isThreatened(board, whiteTurn, 7, 6))) {
 						throw new IllegalMoveException(
-								"mossa illegale; Il re è sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+								"mossa illegale; Il re Ã¨ sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[7][5].getPiece() == null) && (board[7][6].getPiece() == null)) { // controllo se il
-																									// percorso è libero
+																									// percorso Ã¨ libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[7][6].setPiece(k);
@@ -2480,13 +2484,13 @@ class Game {
 							System.out.println("Arrocco corto eseguito");
 							whiteTurn = false;
 						} else {
-							throw new IllegalMoveException("mossa illegale; il percorso non è libero");
+							throw new IllegalMoveException("mossa illegale; il percorso non Ã¨ libero");
 						}
 					}
 
 				} else {
 					throw new IllegalMoveException(
-							"mossa illegale; Il re o la torre sono già stati mossi in precedenza");
+							"mossa illegale; Il re o la torre sono giÃ  stati mossi in precedenza");
 				}
 
 			} else {
@@ -2504,13 +2508,13 @@ class Game {
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
 																					// ancora mossi
 					if ((King.isThreatened(board, whiteTurn, 0, 4)) || (King.isThreatened(board, whiteTurn, 0, 5))
-							|| (King.isThreatened(board, whiteTurn, 0, 6))) { // controllo che il re non è, e non
+							|| (King.isThreatened(board, whiteTurn, 0, 6))) { // controllo che il re non Ã¨, e non
 																				// finisce sotto scacco durante la mossa
 						throw new IllegalMoveException(
-								"mossa illegale; Il re è sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+								"mossa illegale; Il re Ã¨ sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) { // controllo se il
-																									// percorso è libero
+																									// percorso Ã¨ libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[0][6].setPiece(k);
@@ -2520,13 +2524,13 @@ class Game {
 							System.out.println("Arrocco corto eseguito");
 							whiteTurn = true;
 						} else {
-							throw new IllegalMoveException("mossa illegale; il percorso non è libero");
+							throw new IllegalMoveException("mossa illegale; il percorso non Ã¨ libero");
 						}
 					}
 
 				} else {
 					throw new IllegalMoveException(
-							"mossa illegale; Il re o la torre sono già stati mossi in precedenza");
+							"mossa illegale; Il re o la torre sono giÃ  stati mossi in precedenza");
 				}
 
 			} else {
@@ -2553,7 +2557,7 @@ class Game {
 																													// il
 																													// re
 																													// non
-																													// è,
+																													// Ã¨,
 																													// e
 																													// non
 																													// finisce
@@ -2564,10 +2568,10 @@ class Game {
 																													// mossa
 							|| (King.isThreatened(board, whiteTurn, 7, 2))) {
 						throw new IllegalMoveException(
-								"mossa illegale; Il re è sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+								"mossa illegale; Il re Ã¨ sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) { // controllo se il
-																									// percorso è libero
+																									// percorso Ã¨ libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[7][2].setPiece(k);
@@ -2577,13 +2581,13 @@ class Game {
 							System.out.println("Arrocco lungo eseguito");
 							whiteTurn = false;
 						} else {
-							throw new IllegalMoveException("mossa illegale; il percorso non è libero");
+							throw new IllegalMoveException("mossa illegale; il percorso non Ã¨ libero");
 						}
 					}
 
 				} else {
 					throw new IllegalMoveException(
-							"mossa illegale; Il re o la torre sono già stati mossi in precedenza");
+							"mossa illegale; Il re o la torre sono giÃ  stati mossi in precedenza");
 				}
 
 			} else {
@@ -2601,13 +2605,13 @@ class Game {
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
 																					// ancora mossi
 					if ((King.isThreatened(board, whiteTurn, 0, 4)) || (King.isThreatened(board, whiteTurn, 0, 3))
-							|| (King.isThreatened(board, whiteTurn, 0, 2))) { // controllo che il re non è, e non
+							|| (King.isThreatened(board, whiteTurn, 0, 2))) { // controllo che il re non Ã¨, e non
 																				// finisce sotto scacco durante la mossa
 						throw new IllegalMoveException(
-								"mossa illegale; Il re è sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+								"mossa illegale; Il re Ã¨ sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) { // controllo se il
-																									// percorso è libero
+																									// percorso Ã¨ libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[0][2].setPiece(k);
@@ -2617,13 +2621,13 @@ class Game {
 							System.out.println("Arroco lungo eseguito");
 							whiteTurn = true;
 						} else {
-							throw new IllegalMoveException("mossa illegale; il percorso non è libero");
+							throw new IllegalMoveException("mossa illegale; il percorso non Ã¨ libero");
 						}
 					}
 
 				} else {
 					throw new IllegalMoveException(
-							"mossa illegale; Il re o la torre sono già stati mossi in precedenza");
+							"mossa illegale; Il re o la torre sono giÃ  stati mossi in precedenza");
 				}
 
 			} else {
