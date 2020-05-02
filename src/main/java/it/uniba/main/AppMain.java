@@ -9,6 +9,7 @@ import java.util.Scanner;
 //import it.uniba.sotorrent.GoogleDocsUtils;
 
 /**
+ * «boundary»<br>
  * The main class for the project. It must be customized to meet the project
  * assignment specifications.
  * 
@@ -23,7 +24,6 @@ public final class AppMain {
 	}
 
 	/**
-	 * «boundary»<br>
 	 * This is the main entry of the application.
 	 * It executes the chess app.
 	 *
@@ -45,7 +45,11 @@ public final class AppMain {
 			} else {
 				turn = "white";
 			}
-			System.out.println("Please type a command (" + turn + " turn)");
+			if(inGame) {
+				System.out.println("Please type a command (" + turn + " turn)");
+			}else {
+				System.out.println("Please type a command:");
+			}
 			String input = in.nextLine();
 			switch (input) {
 				case "board":
@@ -101,7 +105,12 @@ public final class AppMain {
 					break;
 				default:
 					if (inGame) {
-						menu.getMove(input);
+						try {
+							menu.getMove(input);
+						}catch(StringIndexOutOfBoundsException e){
+							System.err.println("Comando non valido.");
+						}
+						
 						break;
 					} else {
 						System.err.println("That is not a valid command nor move.");

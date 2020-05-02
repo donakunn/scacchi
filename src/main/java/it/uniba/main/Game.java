@@ -3,7 +3,7 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
-* Â«entityÂ»<br>
+* «entity»<br>
 * Game is the main entity of the application. It contains the chessboard, turn of player currently playing, white and black pieces
 * captured, moves done. It also contains the main methods to activate a move or a capture event for each piece.
 * 

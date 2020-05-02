@@ -72,7 +72,7 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x - i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0))
+			if (board[x - i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x - i][y + j].getPiece() instanceof Pawn)
 				break;
 			if (board[x - i][y + j].getPiece() instanceof Bishop || board[x - i][y + j].getPiece() instanceof Queen)
 				return true;
@@ -88,7 +88,7 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x + i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0))
+			if (board[x + i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x + i][y + j].getPiece() instanceof Pawn)
 				break;
 			if (board[x + i][y + j].getPiece() instanceof Bishop || board[x + i][y + j].getPiece() instanceof Queen)
 				return true;
@@ -104,7 +104,7 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x + i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0))
+			if (board[x + i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x + i][y - j].getPiece() instanceof Pawn)
 				break;
 			if (board[x + i][y - j].getPiece() instanceof Bishop || board[x + i][y - j].getPiece() instanceof Queen)
 				return true;
@@ -120,7 +120,7 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x - i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0))
+			if (board[x - i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x - i][y - j].getPiece() instanceof Pawn)
 				break;
 			if (board[x - i][y - j].getPiece() instanceof Bishop || board[x - i][y - j].getPiece() instanceof Queen)
 				return true;
@@ -136,7 +136,7 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0))
+			if (board[x][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x][y + j].getPiece() instanceof Pawn)
 				break;
 			if (board[x][y + j].getPiece() instanceof Rook || board[x][y + j].getPiece() instanceof Queen)
 				return true;
@@ -150,7 +150,7 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x + i][y].getPiece().getColor() != (whiteTurn ? 1 : 0))
+			if (board[x + i][y].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x + i][y].getPiece() instanceof Pawn)
 				break;
 			if (board[x + i][y].getPiece() instanceof Rook || board[x + i][y].getPiece() instanceof Queen)
 				return true;
@@ -164,7 +164,7 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0))
+			if (board[x][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x][y - j].getPiece() instanceof Pawn)
 				break;
 			if (board[x][y - j].getPiece() instanceof Rook || board[x][y - j].getPiece() instanceof Queen)
 				return true;
@@ -178,7 +178,7 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x - i][y].getPiece().getColor() != (whiteTurn ? 1 : 0))
+			if (board[x - i][y].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x - i][y].getPiece() instanceof Pawn)
 				break;
 			if (board[x - i][y].getPiece() instanceof Rook || board[x - i][y].getPiece() instanceof Queen)
 				return true;
