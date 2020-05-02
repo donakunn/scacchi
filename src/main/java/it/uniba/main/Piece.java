@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
-* «control»<br>
+* «entity»<br>
 * Piece is the abstract class for all pieces. <br>
 * Contains the color of the piece, its unicode string and a toString method for printing
 * the symbol.
