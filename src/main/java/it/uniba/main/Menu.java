@@ -99,11 +99,11 @@ class Menu {
 						System.err.println("Illegal move1; Please try again");
 					} catch (IndexOutOfBoundsException e) {
 						System.err.println("Illegal move2; Please try again");
-					}catch (IllegalMoveException e) {
+					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
-				break;
-				}else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
+					break;
+				} else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
 					try {
 						game.captureKnight(input);
 					} catch (IllegalArgumentException e) {
@@ -181,6 +181,36 @@ class Menu {
 					System.err.println(e.getMessage());
 				}
 				break;
+			case '0':
+				if (input.equals("0-0")) {
+					try {
+						game.shortCastling();
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+				} else if (input.equals("0-0-0")) {
+					try {
+						game.longCastling();
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+				}
+				break;
+			case 'O':
+				if (input.equals("O-O")) {
+					try {
+						game.shortCastling();
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+				} else if (input.equals("O-O-O")) {
+					try {
+						game.longCastling();
+					} catch (IllegalMoveException e) {
+						System.err.println(e.getMessage());
+					}
+				}
+				break;
 			default:
 				if (input.length() == 2) {
 					try {
@@ -241,6 +271,7 @@ class Menu {
 				} else
 					System.err.println(
 							"Mossa illegale o comando inesistente; Riprova utilizzando un comando consentito o inserisci una mossa legale");
+				break;
 
 		}
 
