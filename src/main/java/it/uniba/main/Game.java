@@ -3,7 +3,7 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
-* �entity�<br>
+* �entity�<br>
 * Game is the main entity of the application. It contains the chessboard, turn of player currently playing, white and black pieces
 * captured, moves done. It also contains the main methods to activate a move or a capture event for each piece.
 * 
@@ -2111,6 +2111,7 @@ class Game {
 						r = (Rook) board[mcheck][y].getPiece();
 						board[mcheck][y].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = false;
 						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
@@ -2129,6 +2130,7 @@ class Game {
 						r = (Rook) board[mcheck][y].getPiece();
 						board[mcheck][y].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = false;
 						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
@@ -2146,6 +2148,7 @@ class Game {
 						r = (Rook) board[x][ncheck].getPiece();
 						board[x][ncheck].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = false;
 						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
@@ -2163,6 +2166,7 @@ class Game {
 						r = (Rook) board[x][ncheck].getPiece();
 						board[x][ncheck].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = false;
 						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
@@ -2174,10 +2178,10 @@ class Game {
 					}
 				}
 
-				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, la torre non puo' muoversi qui");
 
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non ÃÂ¨ vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
 
 		} else { // neri
 			if (board[x][y].getPiece() == null) {
@@ -2188,6 +2192,7 @@ class Game {
 						r = (Rook) board[mcheck][y].getPiece();
 						board[mcheck][y].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = true;
 						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
@@ -2206,6 +2211,7 @@ class Game {
 						r = (Rook) board[mcheck][y].getPiece();
 						board[mcheck][y].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = true;
 						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
@@ -2223,6 +2229,7 @@ class Game {
 						r = (Rook) board[x][ncheck].getPiece();
 						board[x][ncheck].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = true;
 						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
@@ -2240,6 +2247,7 @@ class Game {
 						r = (Rook) board[x][ncheck].getPiece();
 						board[x][ncheck].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = true;
 						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
@@ -2250,9 +2258,9 @@ class Game {
 						ncheck--;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, la torre non puo' muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non ÃÂ¨ vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
 		}
 
 		}
@@ -2274,11 +2282,12 @@ class Game {
 					if ((board[mcheck][y].getPiece() instanceof Rook)
 							&& (board[mcheck][y].getPiece().getColor() == 0)) {
 						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[mcheck][y].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = false;
 
@@ -2296,11 +2305,12 @@ class Game {
 					if ((board[mcheck][y].getPiece() instanceof Rook)
 							&& (board[mcheck][y].getPiece().getColor() == 0)) {
 						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[mcheck][y].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = false;
 						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
@@ -2316,11 +2326,12 @@ class Game {
 					if ((board[x][ncheck].getPiece() instanceof Rook)
 							&& (board[x][ncheck].getPiece().getColor() == 0)) {
 						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[x][ncheck].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = false;
 						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
@@ -2336,11 +2347,12 @@ class Game {
 					if ((board[x][ncheck].getPiece() instanceof Rook)
 							&& (board[x][ncheck].getPiece().getColor() == 0)) {
 						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						BlacksCaptured.add(board[x][y].getPiece());
 						board[x][ncheck].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = false;
 						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
@@ -2351,9 +2363,9 @@ class Game {
 						ncheck--;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, la torre non puo' muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione ÃÂ¨ vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione e' vuota");
 
 		} else { // neri
 			if (board[x][y].getPiece() != null) {
@@ -2362,11 +2374,12 @@ class Game {
 					if ((board[mcheck][y].getPiece() instanceof Rook)
 							&& (board[mcheck][y].getPiece().getColor() == 1)) {
 						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[mcheck][y].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = true;
 						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
@@ -2383,11 +2396,12 @@ class Game {
 					if ((board[mcheck][y].getPiece() instanceof Rook)
 							&& (board[mcheck][y].getPiece().getColor() == 1)) {
 						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[mcheck][y].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = true;
 						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
@@ -2403,11 +2417,12 @@ class Game {
 					if ((board[x][ncheck].getPiece() instanceof Rook)
 							&& (board[x][ncheck].getPiece().getColor() == 1)) {
 						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[x][ncheck].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = true;
 						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
@@ -2423,11 +2438,12 @@ class Game {
 					if ((board[x][ncheck].getPiece() instanceof Rook)
 							&& (board[x][ncheck].getPiece().getColor() == 1)) {
 						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " ÃÂ¨ stato catturato da: " + r.getType()
+						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
 								+ " in " + move.substring(2, 4));
 						WhitesCaptured.add(board[x][y].getPiece());
 						board[x][ncheck].setEmpty();
 						board[x][y].setPiece(r);
+						((Rook) board[x][y].getPiece()).incrementMoves();
 						movesDone.add(move);
 						whiteTurn = true;
 						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
@@ -2438,9 +2454,9 @@ class Game {
 						ncheck--;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puÃÂ² muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, la torre non puo' muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione ÃÂ¨ vuota");
+				throw new IllegalMoveException("Mossa illegale, la casella di destinazione e' vuota");
 
 		}
 	}
@@ -2472,7 +2488,7 @@ class Game {
 																													// mossa
 							|| (King.isThreatened(board, whiteTurn, 7, 6))) {
 						throw new IllegalMoveException(
-								"mossa illegale; Il re Ã¨ sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[7][5].getPiece() == null) && (board[7][6].getPiece() == null)) { // controllo se il
 																									// percorso Ã¨ libero
@@ -2485,18 +2501,18 @@ class Game {
 							System.out.println("Arrocco corto eseguito");
 							whiteTurn = false;
 						} else {
-							throw new IllegalMoveException("mossa illegale; il percorso non Ã¨ libero");
+							throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
 						}
 					}
 
 				} else {
 					throw new IllegalMoveException(
-							"mossa illegale; Il re o la torre sono giÃ  stati mossi in precedenza");
+							"Mossa illegale; Il re o la torre sono gia' stati mossi in precedenza");
 				}
 
 			} else {
 				throw new IllegalMoveException(
-						"mossa illegale; Impossibile effettuare arrocco corto, Re e torre non sono nella posizione iniziale");
+						"Mossa illegale; Impossibile effettuare arrocco corto, Re e torre non sono nella posizione iniziale");
 			}
 		} else {
 			if ((board[0][4].getPiece() instanceof King) && (board[0][7].getPiece() instanceof Rook)) { // controllo che
@@ -2512,7 +2528,7 @@ class Game {
 							|| (King.isThreatened(board, whiteTurn, 0, 6))) { // controllo che il re non Ã¨, e non
 																				// finisce sotto scacco durante la mossa
 						throw new IllegalMoveException(
-								"mossa illegale; Il re Ã¨ sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) { // controllo se il
 																									// percorso Ã¨ libero
@@ -2525,18 +2541,18 @@ class Game {
 							System.out.println("Arrocco corto eseguito");
 							whiteTurn = true;
 						} else {
-							throw new IllegalMoveException("mossa illegale; il percorso non Ã¨ libero");
+							throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
 						}
 					}
 
 				} else {
 					throw new IllegalMoveException(
-							"mossa illegale; Il re o la torre sono giÃ  stati mossi in precedenza");
+							"Mossa illegale; Il re o la torre sono gia'  stati mossi in precedenza");
 				}
 
 			} else {
 				throw new IllegalMoveException(
-						"mossa illegale; Impossibile effettuare arrocco corto, Re e torre non sono nella posizione iniziale");
+						"Mossa illegale; Impossibile effettuare arrocco corto, Re e torre non sono nella posizione iniziale");
 			}
 		}
 
@@ -2569,7 +2585,7 @@ class Game {
 																													// mossa
 							|| (King.isThreatened(board, whiteTurn, 7, 2))) {
 						throw new IllegalMoveException(
-								"mossa illegale; Il re Ã¨ sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) { // controllo se il
 																									// percorso Ã¨ libero
@@ -2582,18 +2598,18 @@ class Game {
 							System.out.println("Arrocco lungo eseguito");
 							whiteTurn = false;
 						} else {
-							throw new IllegalMoveException("mossa illegale; il percorso non Ã¨ libero");
+							throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
 						}
 					}
 
 				} else {
 					throw new IllegalMoveException(
-							"mossa illegale; Il re o la torre sono giÃ  stati mossi in precedenza");
+							"Mossa illegale; Il re o la torre sono gia' stati mossi in precedenza");
 				}
 
 			} else {
 				throw new IllegalMoveException(
-						"mossa illegale; Impossibile effettuare arrocco lungo, Re e torre non sono nella posizione iniziale");
+						"Mossa illegale; Impossibile effettuare arrocco lungo, Re e torre non sono nella posizione iniziale");
 			}
 		} else {
 			if ((board[0][4].getPiece() instanceof King) && (board[0][0].getPiece() instanceof Rook)) { // controllo che
@@ -2609,7 +2625,7 @@ class Game {
 							|| (King.isThreatened(board, whiteTurn, 0, 2))) { // controllo che il re non Ã¨, e non
 																				// finisce sotto scacco durante la mossa
 						throw new IllegalMoveException(
-								"mossa illegale; Il re Ã¨ sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) { // controllo se il
 																									// percorso Ã¨ libero
@@ -2622,18 +2638,18 @@ class Game {
 							System.out.println("Arroco lungo eseguito");
 							whiteTurn = true;
 						} else {
-							throw new IllegalMoveException("mossa illegale; il percorso non Ã¨ libero");
+							throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
 						}
 					}
 
 				} else {
 					throw new IllegalMoveException(
-							"mossa illegale; Il re o la torre sono giÃ  stati mossi in precedenza");
+							"Mossa illegale; Il re o la torre sono gia'  stati mossi in precedenza");
 				}
 
 			} else {
 				throw new IllegalMoveException(
-						"mossa illegale; Impossibile effettuare arrocco lungo, Re e torre non sono nella posizione iniziale");
+						"Mossa illegale; Impossibile effettuare arrocco lungo, Re e torre non sono nella posizione iniziale");
 			}
 		}
 
