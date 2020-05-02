@@ -11,18 +11,30 @@ package it.uniba.main;
 */
 class King extends Piece {
 
+	private int nMoves;
+
 	King(int col) {
 
 		this.color = col;
 		if (col == 0) {
 			this.pieceType = "\u265A"; // Re nero
+			nMoves = 0;
 
 		} else if (col == 1) {
 			this.pieceType = "\u2654"; // Re bianco
+			nMoves = 0;
 
 		} else
 			throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
 
+	}
+
+	void incrementMoves() {
+		nMoves++;
+	}
+
+	int getNumberOfMoves() {
+		return this.nMoves;
 	}
 
 	static boolean isThreatened(Cell[][] board, boolean whiteTurn, int x, int y) {
