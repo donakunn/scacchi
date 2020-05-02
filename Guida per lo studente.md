@@ -369,7 +369,7 @@ Si svolgano le seguenti operazioni:
 
 - se si utilizza Windows selezionare `Switch to Linux containers` nel menu di Docker;
 
-- recarsi alla pagina principale del repository [softeng1920-inf-uniba/docker_1920](https://github.com/softeng1920-inf-uniba/docker_1920) su GitHub e fare click sul link *"package"*, nella barra evidenziata in figura;
+- recarsi alla pagina principale del repository [softeng1920-inf-uniba/progetto1920-newell](https://github.com/softeng1920-inf-uniba/progetto1920-newell) su GitHub e fare click sul link *"package"*, nella barra evidenziata in figura;
    **N.B.**: se i Secret menzionati in questa guida sono stati impostati correttamente e se almeno un'esecuzione del workflow di GitHub Actions è andata a buon fine, la vostra immagine Docker (nella sua ultima versione) dovrebbe essere disponibile tra quelle elencate alla pagina successiva.
    ![ExecuteDockerImage_1](./res/img/guida-studente/ExecuteDockerImage_1.png)
 
