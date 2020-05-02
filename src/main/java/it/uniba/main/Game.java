@@ -1666,6 +1666,17 @@ class Game {
             }
         }
     }
+
+	  void actualMoveKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
+	        if(board[x][y].getPiece() != null && board[x][y].getPiece().getColor() == (whiteTurn ? 1 : 0)) {
+	            throw new IllegalMoveException("Mossa non valida, devi specificare la cattura come da notazione algebrica.");
+	        }
+	        board[x][y].setPiece(board[xC][yC].getPiece());
+	        board[xC][yC].setEmpty();
+	        movesDone.add(move);
+	        whiteTurn = !whiteTurn;
+	        System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
+	    }
 	
 	void captureKnight(String move) throws IllegalMoveException {
 		int x;
