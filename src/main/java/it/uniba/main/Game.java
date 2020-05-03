@@ -1696,373 +1696,171 @@ class Game {
 	    }
 
 	
-	void moveRook(String move) throws IllegalMoveException{
-		int x; 
-		int y; 
-		int mcheck; //vcheck
-		int ncheck; //hcheck
-		Rook r;
+	  boolean isMovableRook(int x, int y, int a, int b){
+			int i;
 
-		y = Colonna.valueOf(move.substring(1, 2)).ordinal();
-		x = 8 - Integer.parseInt(move.substring(2, 3));
-		if (whiteTurn == true) {
-			if (board[x][y].getPiece() == null) {
-				mcheck = x + 1; // controllo in verticale, verso il basso (della matrice)
-				while (mcheck < 8) {
-					if ((board[mcheck][y].getPiece() instanceof Rook)
-							&& (board[mcheck][y].getPiece().getColor() == 0)) {
-						r = (Rook) board[mcheck][y].getPiece();
-						board[mcheck][y].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = false;
-						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
-						return;
+		    
+		    if (x == a && y == b)
+		        return false;
 
-					} else if (board[mcheck][y].getPiece() != null) {
-						break;
-					} else {
-						mcheck++;
-					}
-				}
-				mcheck = x - 1;
-				while (mcheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
-					if ((board[mcheck][y].getPiece() instanceof Rook)
-							&& (board[mcheck][y].getPiece().getColor() == 0)) {
-						r = (Rook) board[mcheck][y].getPiece();
-						board[mcheck][y].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = false;
-						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
-						return;
-					} else if (board[mcheck][y].getPiece() != null) {
-						break;
-					} else {
-						mcheck--;
-					}
-				}
-				ncheck = y + 1; // controllo in orizzontale a destra
-				while (ncheck < 8) {
-					if ((board[x][ncheck].getPiece() instanceof Rook)
-							&& (board[x][ncheck].getPiece().getColor() == 0)) {
-						r = (Rook) board[x][ncheck].getPiece();
-						board[x][ncheck].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = false;
-						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
-						return;
-					} else if (board[x][ncheck].getPiece() != null) {
-						break;
-					} else {
-						ncheck++;
-					}
-				}
-				ncheck = y - 1;
-				while (ncheck >= 0) { // controllo in orizzontale a sinistra
-					if ((board[x][ncheck].getPiece() instanceof Rook)
-							&& (board[x][ncheck].getPiece().getColor() == 0)) {
-						r = (Rook) board[x][ncheck].getPiece();
-						board[x][ncheck].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = false;
-						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
-						return;
-					} else if (board[x][ncheck].getPiece() != null) {
-						break;
-					} else {
-						ncheck--;
-					}
-				}
+		   
+		    if (x == a) { // controllo orizzontale
+		        int dx = (y < b) ? 1 : -1;
 
-				throw new IllegalMoveException("Mossa illegale, la torre non puo' muoversi qui");
+		        for (i = y + dx; i != b; i += dx)
+		            if (board[x][i].getPiece() != null)
+		                return false;
+		    } else if (y == b) { // in verticale
+		        int dy = (x < a) ? 1 : -1;
 
-			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
+		        for (i = x + dy; i != a; i += dy)
+		            if (board[i][y].getPiece() != null)
+		                return false;
+		    } else { // Non valido
+		        return false;
+		    }
 
-		} else { // neri
-			if (board[x][y].getPiece() == null) {
-				mcheck = x + 1; // controllo in verticale, verso il basso (della matrice)
-				while (mcheck < 8) {
-					if ((board[mcheck][y].getPiece() instanceof Rook)
-							&& (board[mcheck][y].getPiece().getColor() == 1)) {
-						r = (Rook) board[mcheck][y].getPiece();
-						board[mcheck][y].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = true;
-						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
-						return;
-
-					} else if (board[mcheck][y].getPiece() != null) {
-						break;
-					} else {
-						mcheck++;
-					}
-				}
-				mcheck = x - 1;
-				while (mcheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
-					if ((board[mcheck][y].getPiece() instanceof Rook)
-							&& (board[mcheck][y].getPiece().getColor() == 1)) {
-						r = (Rook) board[mcheck][y].getPiece();
-						board[mcheck][y].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = true;
-						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
-						return;
-					} else if (board[mcheck][y].getPiece() != null) {
-						break;
-					} else {
-						mcheck--;
-					}
-				}
-				ncheck = y + 1; // controllo in orizzontale a destra
-				while (ncheck < 8) {
-					if ((board[x][ncheck].getPiece() instanceof Rook)
-							&& (board[x][ncheck].getPiece().getColor() == 1)) {
-						r = (Rook) board[x][ncheck].getPiece();
-						board[x][ncheck].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = true;
-						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
-						return;
-					} else if (board[x][ncheck].getPiece() != null) {
-						break;
-					} else {
-						ncheck++;
-					}
-				}
-				ncheck = y - 1;
-				while (ncheck >= 0) { // controllo in orizzontale a sinistra
-					if ((board[x][ncheck].getPiece() instanceof Rook)
-							&& (board[x][ncheck].getPiece().getColor() == 1)) {
-						r = (Rook) board[x][ncheck].getPiece();
-						board[x][ncheck].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = true;
-						System.out.println(r.getType() + " spostata su " + move.substring(1, 3));
-						return;
-					} else if (board[x][ncheck].getPiece() != null) {
-						break;
-					} else {
-						ncheck--;
-					}
-				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puo' muoversi qui");
-			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
+		    // Return true 
+		    return true;
+	    }
+		void moveRook(String move)throws IllegalMoveException{
+	        int count=0;
+	        int xC1=-1,yC1=-1,xC2=-1,yC2=-1;
+	        int a = 8 - Integer.parseInt(move.substring(move.length()-1));
+	        int b = Colonna.valueOf(move.substring(move.length()-2,move.length()-1)).ordinal();
+	        if(board[a][b].getPiece()!=null && board[a][b].getPiece().getColor() != (whiteTurn ? 1:0))
+	        {
+	            throw new IllegalMoveException("Non puoi spostarti sulla casa di un alleato.");
+	        }
+	        for(int i=0; i<=7; i++) {
+	            for(int j=0; j<=7; j++) {
+	                if(board[i][j].getPiece() instanceof Rook && board[i][j].getPiece().getColor() != (whiteTurn ? 1:0)) {
+	                    if(xC1==-1) {
+	                        xC1=i;
+	                        yC1=j;
+	                    }else {
+	                        xC2=i;
+	                        yC2=j;
+	                    }
+	                }
+	            }
+	        }
+	        if(xC1 != -1 && yC1 != -1) {
+	        if(isMovableRook(xC1,yC1,a,b)) {
+	            count=count+1;
+	        }
+	        }
+	        if(xC2 != -1 && yC2 != -1) {
+	        if(isMovableRook(xC2,yC2,a,b)) {
+	            count=count+2;
+	        }
 		}
 
-		}
 
-	
-	void captureRook(String move) throws IllegalMoveException{
-		int x; // ascissa
-		int y; // ordinata
-		int mcheck; // sentinella dell'ascissa
-		int ncheck; // sentinella dell'ordinata
-		Rook r;
+	        if(count==0) {
+	            throw new IllegalMoveException("Nessuna torre puo' spostarsi in quella casa.");
+	        }
 
-		y = Colonna.valueOf(move.substring(2, 3)).ordinal();
-		x = 8 - Integer.parseInt(move.substring(3, 4));
-		if (whiteTurn == true) {
-			if (board[x][y].getPiece() != null) {
-				mcheck = x + 1; // controllo in verticale, verso il basso (della matrice)
-				while (mcheck < 8) {
-					if ((board[mcheck][y].getPiece() instanceof Rook)
-							&& (board[mcheck][y].getPiece().getColor() == 0)) {
-						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
-								+ " in " + move.substring(2, 4));
-						BlacksCaptured.add(board[x][y].getPiece());
-						board[mcheck][y].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = false;
 
-						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
-						return;
 
-					} else if (board[mcheck][y].getPiece() != null) {
-						break;
-					} else {
-						mcheck++;
-					}
-				}
-				mcheck = x - 1;
-				while (mcheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
-					if ((board[mcheck][y].getPiece() instanceof Rook)
-							&& (board[mcheck][y].getPiece().getColor() == 0)) {
-						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
-								+ " in " + move.substring(2, 4));
-						BlacksCaptured.add(board[x][y].getPiece());
-						board[mcheck][y].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = false;
-						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
-						return;
-					} else if (board[mcheck][y].getPiece() != null) {
-						break;
-					} else {
-						mcheck--;
-					}
-				}
-				ncheck = y + 1; // controllo in orizzontale a destra
-				while (ncheck < 8) {
-					if ((board[x][ncheck].getPiece() instanceof Rook)
-							&& (board[x][ncheck].getPiece().getColor() == 0)) {
-						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
-								+ " in " + move.substring(2, 4));
-						BlacksCaptured.add(board[x][y].getPiece());
-						board[x][ncheck].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = false;
-						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
-						return;
-					} else if (board[x][ncheck].getPiece() != null) {
-						break;
-					} else {
-						ncheck++;
-					}
-				}
-				ncheck = y - 1;
-				while (ncheck >= 0) { // controllo in orizzontale a sinistra
-					if ((board[x][ncheck].getPiece() instanceof Rook)
-							&& (board[x][ncheck].getPiece().getColor() == 0)) {
-						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
-								+ " in " + move.substring(2, 4));
-						BlacksCaptured.add(board[x][y].getPiece());
-						board[x][ncheck].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = false;
-						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
-						return;
-					} else if (board[x][ncheck].getPiece() != null) {
-						break;
-					} else {
-						ncheck--;
-					}
-				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puo' muoversi qui");
-			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione e' vuota");
+	        if(count==1) {
+	            if(move.charAt(1)=='x') {
+	                captureRook(xC1,yC1,a,b,move);
+	            }else if(move.charAt(1)>='a' && move.charAt(1)<='h'){
+	                actualMoveRook(xC1, yC1, a, b, move);
+	            }else {
+	                throw new IllegalMoveException("Mossa non riconosciuta.");
+	            }
+	        }else if(count==2) {
+	            if(move.charAt(1)=='x') {
+	                captureRook(xC2,yC2,a,b,move);
+	            }else if(move.charAt(1)>='a' && move.charAt(1)<='h'){
+	                actualMoveRook(xC2, yC2, a, b, move);
+	            }else {
+	                throw new IllegalMoveException("Mossa non riconosciuta.");
+	            }
+	        }else if(count==3) {
+	            if(move.charAt(1)=='x') {
+	                throw new IllegalMoveException("Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
+	            }
+	            if(move.length()==3) {
+	                throw new IllegalMoveException("Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
+	            }
 
-		} else { // neri
-			if (board[x][y].getPiece() != null) {
-				mcheck = x + 1; // controllo in verticale, verso il basso (della matrice)
-				while (mcheck < 8) {
-					if ((board[mcheck][y].getPiece() instanceof Rook)
-							&& (board[mcheck][y].getPiece().getColor() == 1)) {
-						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
-								+ " in " + move.substring(2, 4));
-						WhitesCaptured.add(board[x][y].getPiece());
-						board[mcheck][y].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = true;
-						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
-						return;
-
-					} else if (board[mcheck][y].getPiece() != null) {
-						break;
-					} else {
-						mcheck++;
-					}
-				}
-				mcheck = x - 1;
-				while (mcheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
-					if ((board[mcheck][y].getPiece() instanceof Rook)
-							&& (board[mcheck][y].getPiece().getColor() == 1)) {
-						r = (Rook) board[mcheck][y].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
-								+ " in " + move.substring(2, 4));
-						WhitesCaptured.add(board[x][y].getPiece());
-						board[mcheck][y].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = true;
-						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
-						return;
-					} else if (board[mcheck][y].getPiece() != null) {
-						break;
-					} else {
-						mcheck--;
-					}
-				}
-				ncheck = y + 1; // controllo in orizzontale a destra
-				while (ncheck < 8) {
-					if ((board[x][ncheck].getPiece() instanceof Rook)
-							&& (board[x][ncheck].getPiece().getColor() == 1)) {
-						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
-								+ " in " + move.substring(2, 4));
-						WhitesCaptured.add(board[x][y].getPiece());
-						board[x][ncheck].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = true;
-						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
-						return;
-					} else if (board[x][ncheck].getPiece() != null) {
-						break;
-					} else {
-						ncheck++;
-					}
-				}
-				ncheck = y - 1;
-				while (ncheck >= 0) { // controllo in orizzontale a sinistra
-					if ((board[x][ncheck].getPiece() instanceof Rook)
-							&& (board[x][ncheck].getPiece().getColor() == 1)) {
-						r = (Rook) board[x][ncheck].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + r.getType()
-								+ " in " + move.substring(2, 4));
-						WhitesCaptured.add(board[x][y].getPiece());
-						board[x][ncheck].setEmpty();
-						board[x][y].setPiece(r);
-						((Rook) board[x][y].getPiece()).incrementMoves();
-						movesDone.add(move);
-						whiteTurn = true;
-						System.out.println(r.getType() + " spostata su " + move.substring(2, 4));
-						return;
-					} else if (board[x][ncheck].getPiece() != null) {
-						break;
-					} else {
-						ncheck--;
-					}
-				}
-				throw new IllegalMoveException("Mossa illegale, la torre non puo' muoversi qui");
-			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione e' vuota");
-
-		}
-	}
+	            int x,y;
+	            if(move.charAt(1)>='1' && move.charAt(1)<='8') {
+	                if(xC1==xC2) {
+	                    throw new IllegalMoveException("Quando le due torri si trovano sulla stessa riga è necessario specificare la colonna!");
+	                }
+	                if(xC1==(8 - Integer.parseInt(move.substring(1, 2)))) {
+	                    x=xC1;
+	                    y=yC1;
+	                }else if(xC2==(8 - Integer.parseInt(move.substring(1, 2)))){
+	                    x=xC2;
+	                    y=yC2;
+	                }else {
+	                    throw new IllegalMoveException("Nessuna torre appartenente alla riga di disambiguazione specificata.");
+	                }
+	                if(move.length()==4) {
+	                    actualMoveRook(x, y, a, b, move);
+	                }else if(move.length()==5){
+	                    captureRook(x,y,a,b,move);
+	                }else {
+	                    throw new IllegalMoveException("Mossa non riconosciuta.");
+	                }
+	            }else if(move.charAt(1)>='a' && move.charAt(1)<='h') {
+	                if(yC1==yC2) {
+	                    throw new IllegalMoveException("Quando le due torri si trovano sulla stessa colonna è necessario specificare la riga!");
+	                }
+	                if(yC1==Colonna.valueOf(move.substring(1,2)).ordinal()) {
+	                    x=xC1;
+	                    y=yC1;
+	                }else if(yC2==Colonna.valueOf(move.substring(1,2)).ordinal()){
+	                    x=xC2;
+	                    y=yC2;
+	                }else {
+	                    throw new IllegalMoveException("Nessuna torre appartenente alla colonna di disambiguazione specificata.");
+	                }
+	                if(move.length()==4) {
+	                    actualMoveRook(x, y, a, b, move);
+	                }else if(move.length()==5){
+	                    captureRook(x,y,a,b,move);
+	                }else {
+	                    throw new IllegalMoveException("Mossa non riconosciuta.");
+	                }
+	            }else {
+	                throw new IllegalMoveException("Mossa non riconosciuta.");
+	            }
+	        }
+	    }
+		void actualMoveRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
+	        if(board[x][y].getPiece() != null && board[x][y].getPiece().getColor() == (whiteTurn ? 1 : 0)) {
+	            throw new IllegalMoveException("Mossa non valida, devi specificare la cattura come da notazione algebrica.");
+	        }
+	        board[x][y].setPiece(board[xC][yC].getPiece());
+	        board[xC][yC].setEmpty();
+	        movesDone.add(move);
+	        ((Rook) board[x][y].getPiece()).incrementMoves();
+	        whiteTurn = !whiteTurn;
+	        System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
+	    }
+		void captureRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
+	        if(board[x][y].getPiece() == null) {
+	            throw new IllegalMoveException("Mossa non valida, non c'è nessun pezzo da catturare.");
+	        }
+	        System.out.println(board[xC][yC].getPiece().getType() + " ha catturato " + board[x][y].getPiece().getType() + "!");
+	        if(board[x][y].getPiece().getColor()==0) {
+	        	WhitesCaptured.add(board[x][y].getPiece());
+	        } else {
+	        	BlacksCaptured.add(board[x][y].getPiece());
+	        }
+	        board[x][y].setPiece(board[xC][yC].getPiece());
+	        board[xC][yC].setEmpty();
+	        movesDone.add(move);
+	        ((Rook) board[x][y].getPiece()).incrementMoves();
+	        whiteTurn = !whiteTurn;
+	        System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
+	    }
 
 	void shortCastling() throws IllegalMoveException {
 		if (whiteTurn == true) {
