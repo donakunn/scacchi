@@ -1682,8 +1682,12 @@ class Game {
 	        if(board[x][y].getPiece() == null) {
 	            throw new IllegalMoveException("Mossa non valida, non c'è nessun pezzo da catturare.");
 	        }
-	        System.out.println(
-	                board[xC][yC].getPiece().getType() + " ha catturato " + board[x][y].getPiece().getType() + "!");
+	        System.out.println(board[xC][yC].getPiece().getType() + " ha catturato " + board[x][y].getPiece().getType() + "!");
+	        if(board[x][y].getPiece().getColor() == 0) {
+	        	WhitesCaptured.add(board[x][y].getPiece());
+	        }else {
+	        	BlacksCaptured.add(board[x][y].getPiece());
+	        }
 	        board[x][y].setPiece(board[xC][yC].getPiece());
 	        board[xC][yC].setEmpty();
 	        movesDone.add(move);
