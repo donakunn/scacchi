@@ -278,13 +278,15 @@ class Menu {
 			answer = in.nextLine();
 			answer = answer.toUpperCase();
 			if (answer.equals("YES")) {
+				in.close();
 				return true;
 			} else if (answer.equals("NO")) {
+				in.close();
 				return false;
 			} else {
 				System.out.println("Invalid answer, please type again:");
 			}
-			in.close();
+			
 		}
 	}
 

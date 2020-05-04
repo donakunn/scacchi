@@ -1,14 +1,13 @@
 package it.uniba.main;
 
 /**
-* «entity»<br>
+* ï¿½entityï¿½<br>
 * Rook class, implementing the abstract class {@link Piece}<br>
 *
 * @author Donato Lucente
 * 
 */
 class Rook extends Piece {
-	private int nMoves;
 
 	Rook(int col) {
 

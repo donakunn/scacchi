@@ -115,7 +115,7 @@ class Game {
 																												// con
 																												// colore
 																												// 1
-				&& whiteTurn == false) { // se le condizioni sono rispettate fa la mossa
+				&& (whiteTurn == false) && (board[x - 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono rispettate fa la mossa
 			p = (Pawn) board[x - 2][y].getPiece();
 
 			if (board[x][y].getPiece() == null) {
@@ -159,7 +159,7 @@ class Game {
 																												// con
 																												// colore
 																												// 1
-				&& whiteTurn == true) { // se le condizioni sono rispettate fa la mossa
+				&& (whiteTurn == true) && (board[x + 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono rispettate fa la mossa
 			p = (Pawn) board[x + 2][y].getPiece();
 
 			if (board[x][y].getPiece() == null) {

@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
-* «entity»<br>
+* ï¿½entityï¿½<br>
 * King class, implementing the abstract class {@link Piece}<br>
 * Includes a method to verify the checkmate event.
 * 
@@ -11,7 +11,6 @@ package it.uniba.main;
 */
 class King extends Piece {
 
-	private int nMoves;
 
 	King(int col) {
 

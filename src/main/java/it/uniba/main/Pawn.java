@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
-* «entity»<br>
+* ï¿½entityï¿½<br>
 * Pawn class, implementing the abstract class {@link Piece}<br>
 * Includes a counter for moves done and a method to verify the en-passant capturable condition
 * 
@@ -10,10 +10,9 @@ package it.uniba.main;
 */
 class Pawn extends Piece {
 
-	private int movesDone; // numero di mosse effettuate
 
 	Pawn(int col) { // costruttore classe Pedone
-		movesDone = 0;
+		nMoves = 0;
 
 		this.color = col;
 		if (col == 0) {
@@ -28,14 +27,14 @@ class Pawn extends Piece {
 	}
 
 	void incrementMoves() {
-		this.movesDone++;
+		this.nMoves++;
 	}
 
 	Boolean enPassantCatturable(int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
 											// false altrimenti
-		if ((getColor() == 0) && (movesDone == 1) && (x == 4)) {
+		if ((getColor() == 0) && (nMoves == 1) && (x == 4)) {
 			return true;
-		} else if ((getColor() == 1) && (movesDone == 1) && (x == 3)) {
+		} else if ((getColor() == 1) && (nMoves == 1) && (x == 3)) {
 			return true;
 		} else
 			return false;
