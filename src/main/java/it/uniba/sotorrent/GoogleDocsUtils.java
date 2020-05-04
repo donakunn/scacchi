@@ -20,16 +20,13 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.Permission;
 
-
 /**
  * Utility class for creating, sharing, and deleting documents on Google Drive.
  */
 public class GoogleDocsUtils {
 
-
 	/*
-	TODO:
-	Write here your methods to work with the Google Cloud API.
+	 * TODO: Write here your methods to work with the Google Cloud API.
 	 */
 
 }

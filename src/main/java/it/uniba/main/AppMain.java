@@ -46,7 +46,7 @@ public final class AppMain {
 				turn = "bianchi";
 			}
 			if(inGame) {
-				System.out.println("Inserire comando (turno dei " + turn );
+				System.out.println("Inserire comando (turno dei " + turn + ")");
 			}else {
 				System.out.println("Inserire comando:");
 			}

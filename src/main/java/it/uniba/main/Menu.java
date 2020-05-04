@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
-* �control�<br>
+* ï¿½controlï¿½<br>
 * Menu class, containing all methods of the command list.
 * 
 * @author Megi Gjata
@@ -277,7 +277,8 @@ class Menu {
 		while (true) {
 			answer = in.nextLine();
 			answer = answer.toUpperCase();
-			if (answer.equals("YES") || answer.equals("SI") || answer.equals("S�")) {
+
+			if (answer.equals("YES") || answer.equals("SI") || answer.equals("SÌ")) {
 				in.close();
 				return true;
 			} else if (answer.equals("NO")) {
@@ -286,6 +287,7 @@ class Menu {
 			} else {
 				System.out.println("Invalid answer, please type again:");
 			}
+
 		}
 	}
 
