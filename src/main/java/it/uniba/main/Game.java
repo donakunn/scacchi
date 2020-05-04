@@ -1561,7 +1561,7 @@ class Game {
         int count=0;
         int xC1=-1,yC1=-1,xC2=-1,yC2=-1;
         int a = 8 - Integer.parseInt(move.substring(move.length()-1));
-        int b = Colonna.valueOf(move.substring(move.length()-2,move.length()-1)).ordinal();
+        int b = (int) move.charAt(move.length()-2) -97;
         if(board[a][b].getPiece()!=null && board[a][b].getPiece().getColor() != (whiteTurn ? 1:0)) {
             throw new IllegalMoveException("Non puoi spostarti sulla casa di un alleato.");
         }
