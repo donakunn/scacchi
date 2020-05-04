@@ -81,7 +81,7 @@ class Game {
 		int x; // ascissa
 		int y; // ordinata
 
-		y = Colonna.valueOf(move.substring(0, 1)).ordinal(); // lettura x e y casella di destinazione
+		y = (int)(move.charAt(0)) -97 ; // lettura x e y casella di destinazione
 		x = 8 - Integer.parseInt(move.substring(1, 2));
 
 		Pawn p;
@@ -172,7 +172,7 @@ class Game {
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non Ã¨ vuota.");
 		} else {
-			throw new IllegalMoveException("mossa illegale; nessun pedone puÃ² spostarsi qui");
+			throw new IllegalMoveException("mossa illegale; nessun pedone puo' spostarsi qui");
 		}
 
 	}
@@ -184,9 +184,9 @@ class Game {
 
 		Piece p, caught;
 
-		y = Colonna.valueOf(move.substring(2, 3)).ordinal();
+		y = (int)(move.charAt(2)) -97; 
 		x = 8 - Integer.parseInt(move.substring(3, 4)); // calcolo x,y di cella di destinazione e z colonna di partenza
-		z = Colonna.valueOf(move.substring(0, 1)).ordinal();
+		z = (int)(move.charAt(0)) -97; 
 
 		if (board[x][y].getPiece() == null) { // se cella di destinazione Ã¨ vuota prova a fare cattura en passant
 			try {
