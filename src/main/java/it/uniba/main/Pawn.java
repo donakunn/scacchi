@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
-* �entity�<br>
+* <<entity>><br>
 * Pawn class, implementing the abstract class {@link Piece}<br>
 * Includes a counter for moves done and a method to verify the en-passant capturable condition
 * 

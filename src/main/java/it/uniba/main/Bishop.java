@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
-* «entity»<br>
+* <<entity>><br>
 * Bishop class, implementing the abstract class {@link Piece}
 * 
 * @author Donato Lucente
