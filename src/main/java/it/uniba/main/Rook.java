@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
-* �entity�<br>
+* <<entity>><br>
 * Rook class, implementing the abstract class {@link Piece}<br>
 *
 * @author Donato Lucente

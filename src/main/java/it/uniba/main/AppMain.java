@@ -9,7 +9,7 @@ import java.util.Scanner;
 //import it.uniba.sotorrent.GoogleDocsUtils;
 
 /**
- * �boundary�<br>
+ * <<boundary>><br>
  * The main class for the project. It must be customized to meet the project
  * assignment specifications.
  * 

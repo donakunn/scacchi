@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
-* ï¿½controlï¿½<br>
+* <<control>><br>
 * Menu class, containing all methods of the command list.
 * 
 * @author Megi Gjata
@@ -90,7 +90,7 @@ class Menu {
 				try {
 					game.moveKnight(input);
 				} catch (IllegalArgumentException e) {
-					System.err.println("Illegal move knightillegalargument; Please try again");
+					System.err.println("Illegal move; Please try again");
 				} catch (IndexOutOfBoundsException e) {
 					System.err.println("Illegal move; Please try again");
 				} catch (IllegalMoveException e) {

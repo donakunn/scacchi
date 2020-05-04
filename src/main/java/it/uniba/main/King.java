@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
-* �entity�<br>
+* <<entity>><br>
 * King class, implementing the abstract class {@link Piece}<br>
 * Includes a method to verify the checkmate event.
 * 
