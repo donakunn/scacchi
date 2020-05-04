@@ -90,7 +90,7 @@ class Menu {
 				try {
 					game.moveKnight(input);
 				} catch (IllegalArgumentException e) {
-					System.err.println("Illegal move; Please try again");
+					System.err.println("Illegal move knightillegalargument; Please try again");
 				} catch (IndexOutOfBoundsException e) {
 					System.err.println("Illegal move; Please try again");
 				} catch (IllegalMoveException e) {
@@ -277,14 +277,15 @@ class Menu {
 		while (true) {
 			answer = in.nextLine();
 			answer = answer.toUpperCase();
-			if (answer.equals("YES")) {
+			if (answer.equals("YES") || answer.equals("SI") || answer.equals("SÌ")) {
+				in.close();
 				return true;
 			} else if (answer.equals("NO")) {
+				in.close();
 				return false;
 			} else {
 				System.out.println("Invalid answer, please type again:");
 			}
-			in.close();
 		}
 	}
 
