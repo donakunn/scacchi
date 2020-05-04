@@ -76,31 +76,15 @@ class Menu {
 		char chosenPiece = input.charAt(0);
 		switch (chosenPiece) {
 			case 'T':
-				if (input.length() == 3) {
-					try {
-						game.moveRook(input);
-					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
-					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
-					} catch (IllegalMoveException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-
-				} else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
-					try {
-						game.captureRook(input);
-					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
-					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
-					} catch (IllegalMoveException e) {
-						System.err.println(e.getMessage());
-					}
-					break;
-				} else
-					System.err.println("Mossa non consentita per la Torre");
+				try {
+					game.moveRook(input);
+				} catch (IllegalArgumentException e) {
+					System.err.println("Illegal move; Please try again");
+				} catch (IndexOutOfBoundsException e) {
+					System.err.println("Illegal move; Please try again");
+				} catch (IllegalMoveException e) {
+					System.err.println(e.getMessage());
+				}
 				break;
 			case 'C':
 				try {
