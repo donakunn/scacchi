@@ -9,7 +9,7 @@ import java.util.Scanner;
 //import it.uniba.sotorrent.GoogleDocsUtils;
 
 /**
- * «boundary»<br>
+ * ï¿½boundaryï¿½<br>
  * The main class for the project. It must be customized to meet the project
  * assignment specifications.
  * 
@@ -35,20 +35,20 @@ public final class AppMain {
 		boolean inGame = false;
 		boolean exit = false;
 		Scanner in = new Scanner(System.in);
-		System.out.println("Welcome to the chess app!");
-		System.out.println("Please type commands to be executed or type help to show a list of them.");
+		System.out.println("Benvenuto nel gioco degli scacchi!");
+		System.out.println("Inserire comando da eseguire oppure inserire help per la lista dei comandi.");
 
 		while (!exit) {
 
 			if (Game.getTurn() == false) {
-				turn = "black";
+				turn = "neri";
 			} else {
-				turn = "white";
+				turn = "bianchi";
 			}
 			if(inGame) {
-				System.out.println("Please type a command (" + turn + " turn)");
+				System.out.println("Inserire comando (turno dei " + turn );
 			}else {
-				System.out.println("Please type a command:");
+				System.out.println("Inserire comando:");
 			}
 			String input = in.nextLine();
 			switch (input) {
@@ -57,7 +57,7 @@ public final class AppMain {
 						menu.board();
 						break;
 					} else {
-						System.err.println("You have to be in an active game to use that command.");
+						System.err.println("Devi essere in gioco per usare questo comando.");
 						break;
 					}
 				case "captures":
@@ -65,7 +65,7 @@ public final class AppMain {
 						menu.captures();
 						break;
 					} else {
-						System.err.println("You have to be in an active game to use that command.");
+						System.err.println("Devi essere in gioco per usare questo comando.");
 						break;
 					}
 				case "help":
@@ -76,7 +76,7 @@ public final class AppMain {
 						menu.moves();
 						break;
 					} else {
-						System.err.println("You have to be in an active game to use that command.");
+						System.err.println("Devi essere in gioco per usare questo comando.");
 						break;
 
 					}
@@ -85,18 +85,18 @@ public final class AppMain {
 						inGame = true;
 						menu.play();
 					} else {
-						System.out.println("There is already a started game. Are you sure? ");
+						System.out.println("Partita giÃ  avviata. Vuoi cancellarla ed iniziare un nuova?");
 						while (true) {
 							String answer = in.nextLine();
-							if (answer.toUpperCase().equals("YES")) {
-								System.out.println("Deleting current game and starting new one");
+							if (answer.toUpperCase().equals("SI") || answer.toUpperCase().equals("YES") ) {
+								System.out.println("Cancello la partita in corso e ne avvio una nuova");
 								menu.play();
 								menu.resetTurn();
 								break;
 							} else if (answer.toUpperCase().equals("NO")) {
 								break;
 							} else
-								System.out.println("Invalid answer; Type yes or no");
+								System.out.println("Risposta non valida; inserire si (yes) o no");
 						}
 					}
 					break;
@@ -113,7 +113,7 @@ public final class AppMain {
 						
 						break;
 					} else {
-						System.err.println("That is not a valid command nor move.");
+						System.err.println("Comando o mossa non riconosciuta");
 						break;
 					}
 			}
