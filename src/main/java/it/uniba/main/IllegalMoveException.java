@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
-* «exception»<br>
+* ï¿½noECBï¿½<br>
 * Exception class for illegal move cases.
 * 
 * @author Donato Lucente
