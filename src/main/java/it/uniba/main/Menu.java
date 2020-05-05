@@ -285,8 +285,7 @@ class Menu {
 		}
 	}
 
-	boolean quit() {
-		Scanner in = new Scanner(System.in);
+	boolean quit(Scanner in) {
 		String answer;
 		System.out.println("Sei sicuro di voler uscire?:");
 		while (true) {
@@ -297,10 +296,9 @@ class Menu {
 				in.close();
 				return true;
 			} else if (answer.equals("NO")) {
-				in.close();
 				return false;
 			} else {
-				System.out.println("Invalid answer, please type again:");
+				System.out.println("Risposta non valida, inserisci si o no");
 			}
 
 		}

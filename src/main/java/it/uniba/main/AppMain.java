@@ -100,7 +100,7 @@ public final class AppMain {
 					}
 					break;
 				case "quit":
-					exit = menu.quit();
+					exit = menu.quit(in);
 					break;
 				default:
 					if (inGame) {
