@@ -39,7 +39,7 @@ class Game {
 		movesDone.clear();
 		BlacksCaptured.clear();
 		WhitesCaptured.clear();
-		System.out.println("Creating game...");
+		System.out.println("Creo nuova partita..");
 		for (int j = 0; j < 8; j++) {
 			// initialize pawns a2-h2 (white side)
 			board[1][j] = new Cell(new Pawn(1));
@@ -74,7 +74,7 @@ class Game {
 		board[7][5] = new Cell(new Bishop(0));
 		board[7][6] = new Cell(new Knight(0));
 		board[7][7] = new Cell(new Rook(0));
-		System.out.println("Game created...");
+		System.out.println("Partita creata.");
 	};
 
 	void moveAPawn(String move) throws IllegalMoveException {
@@ -86,13 +86,8 @@ class Game {
 
 		Pawn p;
 
-		if ((board[x - 1][y].getPiece() instanceof Pawn) && (board[x - 1][y].getPiece().getColor() == 1) // check se
-																											// casella
-																											// in x-1
-																											// c'e'
-																											// pedone
-																											// con
-																											// colore 1
+		if ((board[x - 1][y].getPiece() instanceof Pawn) && (board[x - 1][y].getPiece().getColor() == 1) 
+																					// check se casella in x-1 c'e' pedone con colore 1
 				&& whiteTurn == false) {
 			p = (Pawn) board[x - 1][y].getPiece(); // se le condizioni sono rispettate fa la mossa
 
@@ -105,16 +100,8 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x - 2][y].getPiece() instanceof Pawn) && (board[x - 2][y].getPiece().getColor() == 1) // check
-																												// se
-																												// casella
-																												// in
-																												// x-2
-																												// c'e'
-																												// pedone
-																												// con
-																												// colore
-																												// 1
+		} else if ((board[x - 2][y].getPiece() instanceof Pawn) && (board[x - 2][y].getPiece().getColor() == 1) 
+																					// check se casella in x-2 c'e' pedone con colore 1
 				&& (whiteTurn == false) && (board[x - 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono rispettate fa la mossa
 			p = (Pawn) board[x - 2][y].getPiece();
 
@@ -127,16 +114,8 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x + 1][y].getPiece() instanceof Pawn) && (board[x + 1][y].getPiece().getColor() == 0) // check
-																												// se
-																												// casella
-																												// in
-																												// x+1
-																												// c'e'
-																												// pedone
-																												// con
-																												// colore
-																												// 0
+		} else if ((board[x + 1][y].getPiece() instanceof Pawn) && (board[x + 1][y].getPiece().getColor() == 0) 
+																					// check se casella in x+1 c'e' pedone con colore 0
 				&& whiteTurn == true) { // se le condizioni sono rispettate fa la mossa
 			p = (Pawn) board[x + 1][y].getPiece();
 
@@ -149,16 +128,8 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x + 2][y].getPiece() instanceof Pawn) && (board[x + 2][y].getPiece().getColor() == 0) // check
-																												// se
-																												// casella
-																												// in
-																												// x+2
-																												// c'e'
-																												// pedone
-																												// con
-																												// colore
-																												// 1
+		} else if ((board[x + 2][y].getPiece() instanceof Pawn) && (board[x + 2][y].getPiece().getColor() == 0) 
+																					// check se casella in x+2 c'e' pedone con colore 1
 				&& (whiteTurn == true) && (board[x + 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono rispettate fa la mossa
 			p = (Pawn) board[x + 2][y].getPiece();
 
@@ -312,9 +283,9 @@ class Game {
 
 		Piece p;
 
-		y = Colonna.valueOf(move.substring(2, 3)).ordinal();
+		y = (int)(move.charAt(2)) -97; 
 		x = 8 - Integer.parseInt(move.substring(3, 4));
-		z = Colonna.valueOf(move.substring(0, 1)).ordinal();
+		z = (int)(move.charAt(0)) -97;
 		if (whiteTurn == false) { // neri
 			if (z == y - 1) {
 				if (board[x - 1][y - 1].getPiece() instanceof Pawn) { // cattura en Passant in diagonale da sinistra
