@@ -21,9 +21,7 @@ class Game {
 	private static boolean whiteTurn = true;
 	private static Cell board[][] = new Cell[8][8];
 
-	private enum Colonna {
-		a, b, c, d, e, f, g, h
-	};
+	
 
 	private ArrayList<String> movesDone = new ArrayList<String>();
 	private ArrayList<Piece> BlacksCaptured = new ArrayList<Piece>();
