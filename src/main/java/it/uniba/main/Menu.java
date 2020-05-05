@@ -287,7 +287,7 @@ class Menu {
 
 	boolean quit(Scanner in) {
 		String answer;
-		System.out.println("Sei sicuro di voler uscire?:");
+		System.out.println("Sei sicuro di voler uscire? ");
 		while (true) {
 			answer = in.nextLine();
 			answer = answer.toUpperCase();
@@ -298,7 +298,7 @@ class Menu {
 			} else if (answer.equals("NO")) {
 				return false;
 			} else {
-				System.out.println("Risposta non valida, inserisci si o no");
+				System.out.println("Risposta non valida, inserisci si (yes) o no");
 			}
 
 		}
