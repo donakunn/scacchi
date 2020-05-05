@@ -447,7 +447,7 @@ class Game {
 		x = 8 - Integer.parseInt(move.substring(x, x + 1));
 
 		if (board[x][y].getPiece() != null && board[x][y].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
-			throw new IllegalMoveException("There is another allied piece in that position, please try again");
+			throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
 		}
 		int xK = -1;
 		int yK = -1;
@@ -463,20 +463,20 @@ class Game {
 			}
 		}
 		if (Math.abs(x - xK) > 1 || Math.abs(y - yK) > 1) {
-			throw new IllegalMoveException("Your King cannot move there");
+			throw new IllegalMoveException("Il Re non può muoversi in quella cella");
 		}
 		if (King.isThreatened(board, whiteTurn, x, y)) {
-			throw new IllegalMoveException("Invalid move, it would put your King in check");
+			throw new IllegalMoveException("Mossa illegale, metterebbe il Re sotto scacco");
 		}
 
 		if (board[x][y].getPiece() == null) {
 			if (move.charAt(1) == 'x') {
-				throw new IllegalMoveException("Invalid move, there is no piece you can capture in that position.");
+				throw new IllegalMoveException("Mossa illegale, non c'è nessun pezzo da catturare nella cella di arrivo");
 			}
 		} else {
 			if (move.charAt(1) != 'x') {
 				throw new IllegalMoveException(
-						"Invalid move, you must specify the capture as denoted in algebraic notation.");
+						"Mossa illegale, devi specificare la cattura come da notazione algebrica");
 			}
 			if (whiteTurn) {
 				BlacksCaptured.add(board[x][y].getPiece());
@@ -484,14 +484,14 @@ class Game {
 				WhitesCaptured.add(board[x][y].getPiece());
 			}
 			System.out.println(
-					board[xK][yK].getPiece().getType() + " captured " + board[x][y].getPiece().getType() + "!");
+					board[x][y].getPiece().getType() + " e' stato catturato da: " + board[xK][yK].getPiece().getType() + " in " + move.substring(2, 4));
 		}
 		board[x][y].setPiece(board[xK][yK].getPiece());
 		((King) board[x][y].getPiece()).incrementMoves(); // da controllare
 		board[xK][yK].setEmpty();
 		movesDone.add(move);
 		whiteTurn = !whiteTurn;
-		System.out.println(board[x][y].getPiece().getType() + " Moved to " + (char) (y + 97) + (8 - x));
+		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
 	}
 
 	void moveQueen(String move) throws IllegalMoveException {
@@ -654,7 +654,7 @@ class Game {
 				throw new IllegalMoveException("mossa illegale; la donna non puo' muoversi qui");
 
 			} else
-				throw new IllegalMoveException("mossa illegale; la casella di destinazione non e' vuota");
+				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota");
 
 		} else { // neri
 			if (board[x][y].getPiece() == null) {
@@ -807,7 +807,7 @@ class Game {
 				}
 				throw new IllegalMoveException("mossa illegale; la donna non puo' muoversi qui");
 			} else
-				throw new IllegalMoveException("mossa illegale; la casella di destinazione non e' vuota");
+				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota");
 
 		}
 	}
@@ -998,7 +998,7 @@ class Game {
 				throw new IllegalMoveException(
 						"mossa illegale; la donna non puo' effettuare la cattura nella cella di destinazione data");
 			} else
-				throw new IllegalMoveException("mossa illegale; la casella di destinazione e' vuota");
+				throw new IllegalMoveException("mossa illegale; la cella di destinazione e' vuota");
 
 		} else { // neri
 			if (board[x][y].getPiece() != null) {
@@ -1175,7 +1175,7 @@ class Game {
 				throw new IllegalMoveException(
 						"mossa illegale; la donna non puo' effettuare la cattura nella cella di destinazione data");
 			} else
-				throw new IllegalMoveException("mossa illegale; la casella di destinazione e' vuota");
+				throw new IllegalMoveException("mossa illegale; la cella di destinazione e' vuota");
 		}
 
 	}
@@ -1201,7 +1201,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = false;
-						System.out.println(b.getType() + "spostato su" + move.substring(1, 3));
+						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
 						return;
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
@@ -1220,7 +1220,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = false;
-						System.out.println(b.getType() + "spostato su" + move.substring(1, 3));
+						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
 						return;
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
@@ -1239,7 +1239,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = false;
-						System.out.println(b.getType() + "spostato su" + move.substring(1, 3));
+						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
 						return;
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
@@ -1257,7 +1257,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = false;
-						System.out.println(b.getType() + "spostato su" + move.substring(1, 3));
+						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
 						return;
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
@@ -1268,7 +1268,7 @@ class Game {
 				}
 				throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
+				throw new IllegalMoveException("Mossa illegale, la cella di destinazione non e' vuota");
 
 		} else { // else per il caso di turno dei pezzi neri
 			if (board[x][y].getPiece() == null) {
@@ -1281,7 +1281,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = true;
-						System.out.println(b.getType() + "spostato su" + move.substring(1, 3));
+						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
 						return;
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
@@ -1300,7 +1300,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = true;
-						System.out.println(b.getType() + "spostato su" + move.substring(1, 3));
+						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
 						return;
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
@@ -1319,7 +1319,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = true;
-						System.out.println(b.getType() + "spostato su" + move.substring(1, 3));
+						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
 						return;
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
@@ -1337,7 +1337,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = true;
-						System.out.println(b.getType() + "spostato su" + move.substring(1, 3));
+						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
 						return;
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
@@ -1348,7 +1348,7 @@ class Game {
 				}
 				throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione non e' vuota");
+				throw new IllegalMoveException("Mossa illegale, la cella di destinazione non e' vuota");
 
 		}
 
@@ -1452,7 +1452,7 @@ class Game {
 				}
 				throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione e' vuota");
+				throw new IllegalMoveException("Mossa illegale, la cella di destinazione e' vuota");
 
 		} else { // controlli per i pezzi neri
 			if (board[x][y].getPiece() != null) {
@@ -1543,7 +1543,7 @@ class Game {
 				}
 				throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' muoversi qui");
 			} else
-				throw new IllegalMoveException("Mossa illegale, la casella di destinazione e' vuota");
+				throw new IllegalMoveException("Mossa illegale, la cella di destinazione e' vuota");
 
 		}
 
@@ -1563,7 +1563,7 @@ class Game {
         int a = 8 - Integer.parseInt(move.substring(move.length()-1));
         int b = (int) move.charAt(move.length()-2) -97;
         if(board[a][b].getPiece()!=null && board[a][b].getPiece().getColor() != (whiteTurn ? 1:0)) {
-            throw new IllegalMoveException("Non puoi spostarti sulla casa di un alleato.");
+            throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
         }
         for(int i=0; i<=7; i++) {
             for(int j=0; j<=7; j++) {
@@ -1591,7 +1591,7 @@ class Game {
  
 
         if(count==0) {
-            throw new IllegalMoveException("Nessun cavallo puo' spostarsi in quella casa.");
+            throw new IllegalMoveException("Nessun cavallo puo' spostarsi in quella cella.");
         }
 
  
@@ -1682,7 +1682,7 @@ class Game {
 	        if(board[x][y].getPiece() == null) {
 	            throw new IllegalMoveException("Mossa non valida, non c'e' nessun pezzo da catturare.");
 	        }
-	        System.out.println(board[xC][yC].getPiece().getType() + " ha catturato " + board[x][y].getPiece().getType() + "!");
+	        System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + board[xC][yC].getPiece().getType() + " in " + move.substring(2, 4));
 	        if(board[x][y].getPiece().getColor() == 0) {
 	        	WhitesCaptured.add(board[x][y].getPiece());
 	        }else {
@@ -1730,7 +1730,7 @@ class Game {
 	        int b = (int) move.charAt(move.length()-2) -97;
 	        if(board[a][b].getPiece()!=null && board[a][b].getPiece().getColor() != (whiteTurn ? 1:0))
 	        {
-	            throw new IllegalMoveException("Non puoi spostarti sulla casa di un alleato.");
+	            throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
 	        }
 	        for(int i=0; i<=7; i++) {
 	            for(int j=0; j<=7; j++) {
@@ -1758,7 +1758,7 @@ class Game {
 
 
 	        if(count==0) {
-	            throw new IllegalMoveException("Nessuna torre puo' spostarsi in quella casa.");
+	            throw new IllegalMoveException("Nessuna torre puo' spostarsi in quella cella.");
 	        }
 
 
@@ -1848,7 +1848,7 @@ class Game {
 	        if(board[x][y].getPiece() == null) {
 	            throw new IllegalMoveException("Mossa non valida, non c'e' nessun pezzo da catturare.");
 	        }
-	        System.out.println(board[xC][yC].getPiece().getType() + " ha catturato " + board[x][y].getPiece().getType() + "!");
+	        System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + board[xC][yC].getPiece().getType() + " in " + move.substring(2, 4));
 	        if(board[x][y].getPiece().getColor()==0) {
 	        	WhitesCaptured.add(board[x][y].getPiece());
 	        } else {

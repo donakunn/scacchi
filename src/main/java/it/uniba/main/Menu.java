@@ -18,16 +18,16 @@ class Menu {
 	private Game game = new Game();
 
 	void help() {
-		System.out.println("List of executable commands:");
+		System.out.println("Lista di comandi utilizzabili:");
 		System.out.println("help");
 		System.out.println("play");
 		System.out.println("quit");
-		System.out.println("\nList of commands that can only be executed in the game:");
+		System.out.println("\nLista di comandi utilizzabili solo se in partita:");
 		System.out.println("board");
 		System.out.println("captures");
 		System.out.println("moves");
 		System.out.println(
-				"To perform a move it is sufficient to specify it in algebric notation; \nFor en Passant captures you can add 'e.p.' or 'ep' at the end of algebric notation'");
+				"Per effettuare una mossa è necessario specificarla in notazione algebrica; \nPer la cattura en passant si può specificare 'e.p.' or 'ep' alla fine della mossa in notazione algebrica");
 	}
 
 	void board() {
@@ -47,7 +47,7 @@ class Menu {
 	void moves() {
 		ArrayList<String> movesDone = game.getMoves();
 		if (game.getMoves().size() == 0) {
-			System.out.println("No moves done");
+			System.out.println("Non sono ancora state effettuate mosse");
 		} else {
 			int j; // secondo indice
 			int k = 1; // numero mossa
@@ -79,9 +79,9 @@ class Menu {
 				try {
 					game.moveRook(input);
 				} catch (IllegalArgumentException e) {
-					System.err.println("Illegal move; Please try again");
+					System.err.println("Mossa non riconosciuta");
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Illegal move; Please try again");
+					System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 				} catch (IllegalMoveException e) {
 					System.err.println(e.getMessage());
 				}
@@ -90,9 +90,9 @@ class Menu {
 				try {
 					game.moveKnight(input);
 				} catch (IllegalArgumentException e) {
-					System.err.println("Illegal move; Please try again");
+					System.err.println("Mossa non riconosciuta");
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Illegal move; Please try again");
+					System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 				} catch (IllegalMoveException e) {
 					System.err.println(e.getMessage());
 				}
@@ -102,9 +102,9 @@ class Menu {
 					try {
 						game.moveBishop(input);
 					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -113,9 +113,9 @@ class Menu {
 					try {
 						game.captureBishop(input);
 					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -128,9 +128,9 @@ class Menu {
 					try {
 						game.moveQueen(input);
 					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -140,9 +140,9 @@ class Menu {
 					try {
 						game.captureQueen(input);
 					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -154,9 +154,9 @@ class Menu {
 				try {
 					game.moveKing(input);
 				} catch (IllegalArgumentException e) {
-					System.err.println("Illegal move; Please try again");
+					System.err.println("Mossa non riconosciuta");
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Illegal move; Please try again");
+					System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 				} catch (IllegalMoveException e) {
 					System.err.println(e.getMessage());
 				}
@@ -196,9 +196,9 @@ class Menu {
 					try {
 						game.moveAPawn(input);
 					} catch (IllegalArgumentException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -208,9 +208,9 @@ class Menu {
 						try {
 							game.pawnCapture(input);
 						} catch (IllegalArgumentException e) {
-							System.err.println("Illegal move; Please try again");
+							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
-							System.err.println("Illegal move; Please try again");
+							System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 						} catch (IllegalMoveException e) {
 							System.err.println(e.getMessage());
 						}
@@ -224,14 +224,14 @@ class Menu {
 						try {
 							game.captureEnPassant(input);
 						} catch (IllegalArgumentException e) {
-							System.err.println("Illegal move; Please try again");
+							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
-							System.err.println("Illegal move; Please try again");
+							System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 						} catch (IllegalMoveException e) {
 							System.err.println(e.getMessage());
 						}
 					} else
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa non valida");
 
 				} else if (input.length() == 6) {
 					if ((input.substring(1, 2).toLowerCase().equals("x"))
@@ -240,14 +240,14 @@ class Menu {
 						try {
 							game.captureEnPassant(input);
 						} catch (IllegalArgumentException e) {
-							System.err.println("Illegal move; Please try again");
+							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
-							System.err.println("Illegal move; Please try again");
+							System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8");
 						} catch (IllegalMoveException e) {
 							System.err.println(e.getMessage());
 						}
 					} else
-						System.err.println("Illegal move; Please try again");
+						System.err.println("Mossa non valida");
 				} else
 					System.err.println(
 							"Mossa illegale o comando inesistente; Riprova utilizzando un comando consentito o inserisci una mossa legale");
@@ -259,21 +259,21 @@ class Menu {
 
 	void captures() {
 		if (game.getBlacks().size() == 0) {
-			System.out.println("No black pieces captured");
+			System.out.println("Nessun pezzo nero catturato");
 		} else {
-			System.out.println("Captured black pieces: " + game.getBlacks());
+			System.out.println("Pezzi neri catturati: " + game.getBlacks());
 		}
 		if (game.getWhites().size() == 0) {
-			System.out.println("No white pieces captured");
+			System.out.println("Nessun pezzo bianco catturato");
 		} else {
-			System.out.println("Captured white pieces: " + game.getWhites());
+			System.out.println("Pezzi bianchi catturati: " + game.getWhites());
 		}
 	}
 
 	boolean quit() {
 		Scanner in = new Scanner(System.in);
 		String answer;
-		System.out.println("Are you sure you want to quit?:");
+		System.out.println("Sei sicuro di voler uscire?:");
 		while (true) {
 			answer = in.nextLine();
 			answer = answer.toUpperCase();
