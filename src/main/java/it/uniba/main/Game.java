@@ -1851,36 +1851,19 @@ class Game {
 
 	void shortCastling() throws IllegalMoveException {
 		if (whiteTurn == true) {
-			if ((board[7][4].getPiece() instanceof King) && (board[7][7].getPiece() instanceof Rook)) { // controllo che
-																										// re e torre
-																										// siano nella
-																										// posizione
-																										// corretta
+			if ((board[7][4].getPiece() instanceof King) && (board[7][7].getPiece() instanceof Rook)) { 
+																		// controllo che re e torre siano nella posizione corretta
 				King k = (King) board[7][4].getPiece();
 				Rook r = (Rook) board[7][7].getPiece();
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
 																					// ancora mossi
-					if ((King.isThreatened(board, whiteTurn, 7, 4)) || (King.isThreatened(board, whiteTurn, 7, 5)) // controllo
-																													// che
-																													// il
-																													// re
-																													// non
-																													// e',
-																													// e
-																													// non
-																													// finisce
-																													// sotto
-																													// scacco
-																													// durante
-																													// la
-																													// mossa
+					if ((King.isThreatened(board, whiteTurn, 7, 4)) || (King.isThreatened(board, whiteTurn, 7, 5)) 
+																// controllo che il re non e', e non finisce sotto scacco durante la mossa
 							|| (King.isThreatened(board, whiteTurn, 7, 6))) {
 						throw new IllegalMoveException(
 								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
-						if ((board[7][5].getPiece() == null) && (board[7][6].getPiece() == null)) { // controllo se il
-																									// percorso e'
-																									// libero
+						if ((board[7][5].getPiece() == null) && (board[7][6].getPiece() == null)) { // controllo se il percorso e' libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[7][6].setPiece(k);
@@ -1904,11 +1887,8 @@ class Game {
 						"Mossa illegale; Impossibile effettuare arrocco corto, Re e torre non sono nella posizione iniziale");
 			}
 		} else {
-			if ((board[0][4].getPiece() instanceof King) && (board[0][7].getPiece() instanceof Rook)) { // controllo che
-																										// re e torre
-																										// siano nella
-																										// posizione
-																										// corretta
+			if ((board[0][4].getPiece() instanceof King) && (board[0][7].getPiece() instanceof Rook)) { 
+																	// controllo che re e torre siano nella posizione corretta
 				King k = (King) board[0][4].getPiece();
 				Rook r = (Rook) board[0][7].getPiece();
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
@@ -1919,9 +1899,8 @@ class Game {
 						throw new IllegalMoveException(
 								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
-						if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) { // controllo se il
-																									// percorso e'
-																									// libero
+						if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) { 
+																					// controllo se il percorso e' libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[0][6].setPiece(k);
@@ -1950,36 +1929,20 @@ class Game {
 
 	void longCastling() throws IllegalMoveException {
 		if (whiteTurn == true) {
-			if ((board[7][4].getPiece() instanceof King) && (board[7][0].getPiece() instanceof Rook)) { // controllo che
-																										// re e torre
-																										// siano nella
-																										// posizione
-																										// corretta
+			if ((board[7][4].getPiece() instanceof King) && (board[7][0].getPiece() instanceof Rook)) { 
+																		// controllo che re e torre siano nella posizione corretta
 				King k = (King) board[7][4].getPiece();
 				Rook r = (Rook) board[7][0].getPiece();
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
 																					// ancora mossi
-					if ((King.isThreatened(board, whiteTurn, 7, 4)) || (King.isThreatened(board, whiteTurn, 7, 3)) // controllo
-																													// che
-																													// il
-																													// re
-																													// non
-																													// e',
-																													// e
-																													// non
-																													// finisce
-																													// sotto
-																													// scacco
-																													// durante
-																													// la
-																													// mossa
+					if ((King.isThreatened(board, whiteTurn, 7, 4)) || (King.isThreatened(board, whiteTurn, 7, 3)) 
+														// controllo che il re non e', e non finisce sotto scacco durante la mossa
 							|| (King.isThreatened(board, whiteTurn, 7, 2))) {
 						throw new IllegalMoveException(
 								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
-						if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) { // controllo se il
-																									// percorso e'
-																									// libero
+						if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) { 
+																							// controllo se il percorso e' libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[7][2].setPiece(k);
@@ -2003,11 +1966,8 @@ class Game {
 						"Mossa illegale; Impossibile effettuare arrocco lungo, Re e torre non sono nella posizione iniziale");
 			}
 		} else {
-			if ((board[0][4].getPiece() instanceof King) && (board[0][0].getPiece() instanceof Rook)) { // controllo che
-																										// re e torre
-																										// siano nella
-																										// posizione
-																										// corretta
+			if ((board[0][4].getPiece() instanceof King) && (board[0][0].getPiece() instanceof Rook)) { 
+																	// controllo che re e torre siano nella posizione corretta
 				King k = (King) board[0][4].getPiece();
 				Rook r = (Rook) board[0][0].getPiece();
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
@@ -2018,9 +1978,8 @@ class Game {
 						throw new IllegalMoveException(
 								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
-						if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) { // controllo se il
-																									// percorso e'
-																									// libero
+						if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) { 
+																					// controllo se il percorso e' libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[0][2].setPiece(k);
