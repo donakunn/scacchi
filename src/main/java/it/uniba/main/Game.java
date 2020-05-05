@@ -21,8 +21,6 @@ class Game {
 	private static boolean whiteTurn = true;
 	private static Cell board[][] = new Cell[8][8];
 
-	
-
 	private ArrayList<String> movesDone = new ArrayList<String>();
 	private ArrayList<Piece> BlacksCaptured = new ArrayList<Piece>();
 	private ArrayList<Piece> WhitesCaptured = new ArrayList<Piece>();
@@ -86,8 +84,9 @@ class Game {
 
 		Pawn p;
 
-		if ((board[x - 1][y].getPiece() instanceof Pawn) && (board[x - 1][y].getPiece().getColor() == 1)
-		// check se casella in x-1 c'e' pedone con colore 1
+		if ((x > 0) && (x < 8) && (board[x - 1][y].getPiece() instanceof Pawn)
+				&& (board[x - 1][y].getPiece().getColor() == 1)
+				// check se casella in x-1 c'e' pedone con colore 1
 				&& whiteTurn == false) {
 			p = (Pawn) board[x - 1][y].getPiece(); // se le condizioni sono rispettate fa la mossa
 
@@ -100,8 +99,9 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x - 2][y].getPiece() instanceof Pawn) && (board[x - 2][y].getPiece().getColor() == 1)
-		// check se casella in x-2 c'e' pedone con colore 1
+		} else if ((x > 1) && (x < 8) && (board[x - 2][y].getPiece() instanceof Pawn)
+				&& (board[x - 2][y].getPiece().getColor() == 1)
+				// check se casella in x-2 c'e' pedone con colore 1
 				&& (whiteTurn == false) && (board[x - 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono
 																							// rispettate fa la mossa
 			p = (Pawn) board[x - 2][y].getPiece();
@@ -115,8 +115,9 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x + 1][y].getPiece() instanceof Pawn) && (board[x + 1][y].getPiece().getColor() == 0)
-		// check se casella in x+1 c'e' pedone con colore 0
+		} else if ((x >= 0) && (x < 7) && (board[x + 1][y].getPiece() instanceof Pawn)
+				&& (board[x + 1][y].getPiece().getColor() == 0)
+				// check se casella in x+1 c'e' pedone con colore 0
 				&& whiteTurn == true) { // se le condizioni sono rispettate fa la mossa
 			p = (Pawn) board[x + 1][y].getPiece();
 
@@ -129,8 +130,9 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x + 2][y].getPiece() instanceof Pawn) && (board[x + 2][y].getPiece().getColor() == 0)
-		// check se casella in x+2 c'e' pedone con colore 1
+		} else if ((x >= 0) && (x < 6) && (board[x + 2][y].getPiece() instanceof Pawn)
+				&& (board[x + 2][y].getPiece().getColor() == 0)
+				// check se casella in x+2 c'e' pedone con colore 1
 				&& (whiteTurn == true) && (board[x + 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono
 																							// rispettate fa la mossa
 			p = (Pawn) board[x + 2][y].getPiece();
@@ -1849,30 +1851,31 @@ class Game {
 
 	void shortCastling() throws IllegalMoveException {
 		if (whiteTurn == true) {
-			if ((board[7][4].getPiece() instanceof King) && (board[7][7].getPiece() instanceof Rook)) { 
-																		// controllo che re e torre siano nella posizione corretta
+			if ((board[7][4].getPiece() instanceof King) && (board[7][7].getPiece() instanceof Rook)) {
+				// controllo che re e torre siano nella posizione corretta
 				King k = (King) board[7][4].getPiece();
 				Rook r = (Rook) board[7][7].getPiece();
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
 																					// ancora mossi
-					if ((King.isThreatened(board, whiteTurn, 7, 4)) || (King.isThreatened(board, whiteTurn, 7, 5)) 
-																// controllo che il re non e', e non finisce sotto scacco durante la mossa
-							|| (King.isThreatened(board, whiteTurn, 7, 6))) {
-						throw new IllegalMoveException(
-								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
-					} else {
-						if ((board[7][5].getPiece() == null) && (board[7][6].getPiece() == null)) { // controllo se il percorso e' libero
-							k.incrementMoves();
-							r.incrementMoves();
-							board[7][6].setPiece(k);
-							board[7][5].setPiece(r);
-							board[7][4].setEmpty();
-							board[7][7].setEmpty();
-							System.out.println("Arrocco corto eseguito");
-							whiteTurn = false;
-						} else {
-							throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
+
+					if ((board[7][5].getPiece() == null) && (board[7][6].getPiece() == null)) { // controllo se il
+																								// percorso e' libero
+						if ((King.isThreatened(board, whiteTurn, 7, 4)) || (King.isThreatened(board, whiteTurn, 7, 5))
+						// controllo che il re non e', e non finisce sotto scacco durante la mossa
+								|| (King.isThreatened(board, whiteTurn, 7, 6))) {
+							throw new IllegalMoveException(
+									"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 						}
+						k.incrementMoves();
+						r.incrementMoves();
+						board[7][6].setPiece(k);
+						board[7][5].setPiece(r);
+						board[7][4].setEmpty();
+						board[7][7].setEmpty();
+						System.out.println("Arrocco corto eseguito");
+						whiteTurn = false;
+					} else {
+						throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
 					}
 
 				} else {
@@ -1885,31 +1888,32 @@ class Game {
 						"Mossa illegale; Impossibile effettuare arrocco corto, Re e torre non sono nella posizione iniziale");
 			}
 		} else {
-			if ((board[0][4].getPiece() instanceof King) && (board[0][7].getPiece() instanceof Rook)) { 
-																	// controllo che re e torre siano nella posizione corretta
+			if ((board[0][4].getPiece() instanceof King) && (board[0][7].getPiece() instanceof Rook)) {
+				// controllo che re e torre siano nella posizione corretta
 				King k = (King) board[0][4].getPiece();
 				Rook r = (Rook) board[0][7].getPiece();
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
 																					// ancora mossi
-					if ((King.isThreatened(board, whiteTurn, 0, 4)) || (King.isThreatened(board, whiteTurn, 0, 5))
-							|| (King.isThreatened(board, whiteTurn, 0, 6))) { // controllo che il re non e', e non
-																				// finisce sotto scacco durante la mossa
-						throw new IllegalMoveException(
-								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
-					} else {
-						if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) { 
-																					// controllo se il percorso e' libero
-							k.incrementMoves();
-							r.incrementMoves();
-							board[0][6].setPiece(k);
-							board[0][5].setPiece(r);
-							board[0][4].setEmpty();
-							board[0][7].setEmpty();
-							System.out.println("Arrocco corto eseguito");
-							whiteTurn = true;
-						} else {
-							throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
+
+					if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) {
+						if ((King.isThreatened(board, whiteTurn, 0, 4)) || (King.isThreatened(board, whiteTurn, 0, 5))
+								|| (King.isThreatened(board, whiteTurn, 0, 6))) { // controllo che il re non e', e non
+																					// finisce sotto scacco durante la
+																					// mossa
+							throw new IllegalMoveException(
+									"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 						}
+						// controllo se il percorso e' libero
+						k.incrementMoves();
+						r.incrementMoves();
+						board[0][6].setPiece(k);
+						board[0][5].setPiece(r);
+						board[0][4].setEmpty();
+						board[0][7].setEmpty();
+						System.out.println("Arrocco corto eseguito");
+						whiteTurn = true;
+					} else {
+						throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
 					}
 
 				} else {
@@ -1927,31 +1931,31 @@ class Game {
 
 	void longCastling() throws IllegalMoveException {
 		if (whiteTurn == true) {
-			if ((board[7][4].getPiece() instanceof King) && (board[7][0].getPiece() instanceof Rook)) { 
-																		// controllo che re e torre siano nella posizione corretta
+			if ((board[7][4].getPiece() instanceof King) && (board[7][0].getPiece() instanceof Rook)) {
+				// controllo che re e torre siano nella posizione corretta
 				King k = (King) board[7][4].getPiece();
 				Rook r = (Rook) board[7][0].getPiece();
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
 																					// ancora mossi
-					if ((King.isThreatened(board, whiteTurn, 7, 4)) || (King.isThreatened(board, whiteTurn, 7, 3)) 
-														// controllo che il re non e', e non finisce sotto scacco durante la mossa
-							|| (King.isThreatened(board, whiteTurn, 7, 2))) {
-						throw new IllegalMoveException(
-								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
-					} else {
-						if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) { 
-																							// controllo se il percorso e' libero
-							k.incrementMoves();
-							r.incrementMoves();
-							board[7][2].setPiece(k);
-							board[7][3].setPiece(r);
-							board[7][4].setEmpty();
-							board[7][0].setEmpty();
-							System.out.println("Arrocco lungo eseguito");
-							whiteTurn = false;
-						} else {
-							throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
+
+					if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) {
+						if ((King.isThreatened(board, whiteTurn, 7, 4)) || (King.isThreatened(board, whiteTurn, 7, 3))
+						// controllo che il re non e', e non finisce sotto scacco durante la mossa
+								|| (King.isThreatened(board, whiteTurn, 7, 2))) {
+							throw new IllegalMoveException(
+									"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 						}
+						// controllo se il percorso e' libero
+						k.incrementMoves();
+						r.incrementMoves();
+						board[7][2].setPiece(k);
+						board[7][3].setPiece(r);
+						board[7][4].setEmpty();
+						board[7][0].setEmpty();
+						System.out.println("Arrocco lungo eseguito");
+						whiteTurn = false;
+					} else {
+						throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
 					}
 
 				} else {
@@ -1964,31 +1968,32 @@ class Game {
 						"Mossa illegale; Impossibile effettuare arrocco lungo, Re e torre non sono nella posizione iniziale");
 			}
 		} else {
-			if ((board[0][4].getPiece() instanceof King) && (board[0][0].getPiece() instanceof Rook)) { 
-																	// controllo che re e torre siano nella posizione corretta
+			if ((board[0][4].getPiece() instanceof King) && (board[0][0].getPiece() instanceof Rook)) {
+				// controllo che re e torre siano nella posizione corretta
 				King k = (King) board[0][4].getPiece();
 				Rook r = (Rook) board[0][0].getPiece();
 				if ((k.getNumberOfMoves() == 0) && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
 																					// ancora mossi
-					if ((King.isThreatened(board, whiteTurn, 0, 4)) || (King.isThreatened(board, whiteTurn, 0, 3))
-							|| (King.isThreatened(board, whiteTurn, 0, 2))) { // controllo che il re non e', e non
-																				// finisce sotto scacco durante la mossa
-						throw new IllegalMoveException(
-								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
-					} else {
-						if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) { 
-																					// controllo se il percorso e' libero
-							k.incrementMoves();
-							r.incrementMoves();
-							board[0][2].setPiece(k);
-							board[0][3].setPiece(r);
-							board[0][4].setEmpty();
-							board[0][0].setEmpty();
-							System.out.println("Arroco lungo eseguito");
-							whiteTurn = true;
-						} else {
-							throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
+
+					if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) {
+						if ((King.isThreatened(board, whiteTurn, 0, 4)) || (King.isThreatened(board, whiteTurn, 0, 3))
+								|| (King.isThreatened(board, whiteTurn, 0, 2))) { // controllo che il re non e', e non
+																					// finisce sotto scacco durante la
+																					// mossa
+							throw new IllegalMoveException(
+									"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 						}
+						// controllo se il percorso e' libero
+						k.incrementMoves();
+						r.incrementMoves();
+						board[0][2].setPiece(k);
+						board[0][3].setPiece(r);
+						board[0][4].setEmpty();
+						board[0][0].setEmpty();
+						System.out.println("Arroco lungo eseguito");
+						whiteTurn = true;
+					} else {
+						throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
 					}
 
 				} else {
