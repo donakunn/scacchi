@@ -27,7 +27,7 @@ class Menu {
 		System.out.println("captures");
 		System.out.println("moves");
 		System.out.println(
-				"Per effettuare una mossa è necessario specificarla in notazione algebrica; \nPer la cattura en passant si può specificare 'e.p.' or 'ep' alla fine della mossa in notazione algebrica");
+				"Per effettuare una mossa è necessario specificarla in notazione algebrica; \nPer la cattura en passant si può specificare 'e.p.' o 'ep' alla fine della mossa in notazione algebrica");
 	}
 
 	void board() {
