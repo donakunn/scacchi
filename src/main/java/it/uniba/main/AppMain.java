@@ -24,8 +24,7 @@ public final class AppMain {
 	}
 
 	/**
-	 * This is the main entry of the application.
-	 * It executes the chess app.
+	 * This is the main entry of the application. It executes the chess app.
 	 *
 	 * @param args The command-line arguments.
 	 */
@@ -45,9 +44,9 @@ public final class AppMain {
 			} else {
 				turn = "bianchi";
 			}
-			if(inGame) {
+			if (inGame) {
 				System.out.println("Inserire comando (turno dei " + turn + ")");
-			}else {
+			} else {
 				System.out.println("Inserire comando:");
 			}
 			String input = in.nextLine();
@@ -88,7 +87,7 @@ public final class AppMain {
 						System.out.println("Partita già avviata. Vuoi cancellarla ed iniziare un nuova?");
 						while (true) {
 							String answer = in.nextLine();
-							if (answer.toUpperCase().equals("SI") || answer.toUpperCase().equals("YES") ) {
+							if (answer.toUpperCase().equals("SI") || answer.toUpperCase().equals("YES")) {
 								System.out.println("Cancello la partita in corso e ne avvio una nuova");
 								menu.play();
 								menu.resetTurn();
@@ -107,10 +106,10 @@ public final class AppMain {
 					if (inGame) {
 						try {
 							menu.getMove(input);
-						}catch(StringIndexOutOfBoundsException e){
+						} catch (StringIndexOutOfBoundsException e) {
 							System.err.println("Comando non valido.");
 						}
-						
+
 						break;
 					} else {
 						System.err.println("Comando o mossa non riconosciuta");

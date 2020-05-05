@@ -3,17 +3,19 @@ package it.uniba.main;
 import java.util.ArrayList;
 
 /**
-* <<entity>><br>
-* Game is the main entity of the application. It contains the chessboard, turn of player currently playing, white and black pieces
-* captured, moves done. It also contains the main methods to activate a move or a capture event for each piece.
-* 
-* @author Megi Gjata
-* @author Mario Giordano
-* @author Donato Lucente
-* @author Patrick Clark
-* @author Filippo Iacobellis
-* 
-*/
+ * <<entity>><br>
+ * Game is the main entity of the application. It contains the chessboard, turn
+ * of player currently playing, white and black pieces captured, moves done. It
+ * also contains the main methods to activate a move or a capture event for each
+ * piece.
+ * 
+ * @author Megi Gjata
+ * @author Mario Giordano
+ * @author Donato Lucente
+ * @author Patrick Clark
+ * @author Filippo Iacobellis
+ * 
+ */
 
 class Game {
 	private static boolean whiteTurn = true;
@@ -81,13 +83,13 @@ class Game {
 		int x; // ascissa
 		int y; // ordinata
 
-		y = (int)(move.charAt(0)) -97 ; // lettura x e y casella di destinazione
+		y = (int) (move.charAt(0)) - 97; // lettura x e y casella di destinazione
 		x = 8 - Integer.parseInt(move.substring(1, 2));
 
 		Pawn p;
 
-		if ((board[x - 1][y].getPiece() instanceof Pawn) && (board[x - 1][y].getPiece().getColor() == 1) 
-																					// check se casella in x-1 c'e' pedone con colore 1
+		if ((board[x - 1][y].getPiece() instanceof Pawn) && (board[x - 1][y].getPiece().getColor() == 1)
+		// check se casella in x-1 c'e' pedone con colore 1
 				&& whiteTurn == false) {
 			p = (Pawn) board[x - 1][y].getPiece(); // se le condizioni sono rispettate fa la mossa
 
@@ -100,9 +102,10 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x - 2][y].getPiece() instanceof Pawn) && (board[x - 2][y].getPiece().getColor() == 1) 
-																					// check se casella in x-2 c'e' pedone con colore 1
-				&& (whiteTurn == false) && (board[x - 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono rispettate fa la mossa
+		} else if ((board[x - 2][y].getPiece() instanceof Pawn) && (board[x - 2][y].getPiece().getColor() == 1)
+		// check se casella in x-2 c'e' pedone con colore 1
+				&& (whiteTurn == false) && (board[x - 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono
+																							// rispettate fa la mossa
 			p = (Pawn) board[x - 2][y].getPiece();
 
 			if (board[x][y].getPiece() == null) {
@@ -114,8 +117,8 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x + 1][y].getPiece() instanceof Pawn) && (board[x + 1][y].getPiece().getColor() == 0) 
-																					// check se casella in x+1 c'e' pedone con colore 0
+		} else if ((board[x + 1][y].getPiece() instanceof Pawn) && (board[x + 1][y].getPiece().getColor() == 0)
+		// check se casella in x+1 c'e' pedone con colore 0
 				&& whiteTurn == true) { // se le condizioni sono rispettate fa la mossa
 			p = (Pawn) board[x + 1][y].getPiece();
 
@@ -128,9 +131,10 @@ class Game {
 				System.out.println(p.getType() + " spostato su " + move);
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
-		} else if ((board[x + 2][y].getPiece() instanceof Pawn) && (board[x + 2][y].getPiece().getColor() == 0) 
-																					// check se casella in x+2 c'e' pedone con colore 1
-				&& (whiteTurn == true) && (board[x + 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono rispettate fa la mossa
+		} else if ((board[x + 2][y].getPiece() instanceof Pawn) && (board[x + 2][y].getPiece().getColor() == 0)
+		// check se casella in x+2 c'e' pedone con colore 1
+				&& (whiteTurn == true) && (board[x + 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono
+																							// rispettate fa la mossa
 			p = (Pawn) board[x + 2][y].getPiece();
 
 			if (board[x][y].getPiece() == null) {
@@ -155,9 +159,9 @@ class Game {
 
 		Piece p, caught;
 
-		y = (int)(move.charAt(2)) -97; 
+		y = (int) (move.charAt(2)) - 97;
 		x = 8 - Integer.parseInt(move.substring(3, 4)); // calcolo x,y di cella di destinazione e z colonna di partenza
-		z = (int)(move.charAt(0)) -97; 
+		z = (int) (move.charAt(0)) - 97;
 
 		if (board[x][y].getPiece() == null) { // se cella di destinazione e' vuota prova a fare cattura en passant
 			try {
@@ -283,9 +287,9 @@ class Game {
 
 		Piece p;
 
-		y = (int)(move.charAt(2)) -97; 
+		y = (int) (move.charAt(2)) - 97;
 		x = 8 - Integer.parseInt(move.substring(3, 4));
-		z = (int)(move.charAt(0)) -97;
+		z = (int) (move.charAt(0)) - 97;
 		if (whiteTurn == false) { // neri
 			if (z == y - 1) {
 				if (board[x - 1][y - 1].getPiece() instanceof Pawn) { // cattura en Passant in diagonale da sinistra
@@ -414,7 +418,7 @@ class Game {
 			y = 2;
 		}
 
-		y = (int) move.charAt(y) -97;
+		y = (int) move.charAt(y) - 97;
 		x = 8 - Integer.parseInt(move.substring(x, x + 1));
 
 		if (board[x][y].getPiece() != null && board[x][y].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
@@ -442,7 +446,8 @@ class Game {
 
 		if (board[x][y].getPiece() == null) {
 			if (move.charAt(1) == 'x') {
-				throw new IllegalMoveException("Mossa illegale, non c'è nessun pezzo da catturare nella cella di arrivo");
+				throw new IllegalMoveException(
+						"Mossa illegale, non c'è nessun pezzo da catturare nella cella di arrivo");
 			}
 		} else {
 			if (move.charAt(1) != 'x') {
@@ -454,8 +459,8 @@ class Game {
 			} else {
 				WhitesCaptured.add(board[x][y].getPiece());
 			}
-			System.out.println(
-					board[x][y].getPiece().getType() + " e' stato catturato da: " + board[xK][yK].getPiece().getType() + " in " + move.substring(2, 4));
+			System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: "
+					+ board[xK][yK].getPiece().getType() + " in " + move.substring(2, 4));
 		}
 		board[x][y].setPiece(board[xK][yK].getPiece());
 		((King) board[x][y].getPiece()).incrementMoves(); // da controllare
@@ -472,7 +477,7 @@ class Game {
 		int hCheck; // sentinella dell'ordinata
 		Queen q;
 
-		y = (int) move.charAt(1) -97;
+		y = (int) move.charAt(1) - 97;
 		x = 8 - Integer.parseInt(move.substring(2, 3));
 		if (whiteTurn == true) {
 			if (board[x][y].getPiece() == null) {
@@ -791,7 +796,7 @@ class Game {
 		int hCheck; // sentinella dell'ordinata
 		Queen q;
 
-		y = (int) move.charAt(2) -97;
+		y = (int) move.charAt(2) - 97;
 		x = 8 - Integer.parseInt(move.substring(3, 4));
 		if (whiteTurn == true) {
 			if (board[x][y].getPiece() != null) {
@@ -1158,7 +1163,7 @@ class Game {
 		int yB;
 		Bishop b;
 
-		y = (int) move.charAt(1) -97;
+		y = (int) move.charAt(1) - 97;
 		x = 8 - Integer.parseInt(move.substring(2, 3));
 
 		if (whiteTurn == true) { // tutti i controlli per i pezzi bianchi
@@ -1332,7 +1337,7 @@ class Game {
 		int yb;
 		Bishop b;
 
-		y = (int) move.charAt(2) -97;
+		y = (int) move.charAt(2) - 97;
 		x = 8 - Integer.parseInt(move.substring(3, 4));
 		if (whiteTurn == true) { // controlli per bianchi
 			if (board[x][y].getPiece() != null) {
@@ -1520,318 +1525,329 @@ class Game {
 
 	}
 
-	boolean isMovableKnight(int x, int y, int a, int b){
-        if((Math.abs(x-a)==1 && Math.abs(y-b)==2) || (Math.abs(y-b)==1 && Math.abs(x-a)==2)) {
-            if (board[a][b].getPiece()==null || board[a][b].getPiece().getColor() == (whiteTurn ? 1 : 0))
-                return true;
-        }
-        return false;
-    }
-	
-	void moveKnight(String move)throws IllegalMoveException{
-        int count=0;
-        int xC1=-1,yC1=-1,xC2=-1,yC2=-1;
-        int a = 8 - Integer.parseInt(move.substring(move.length()-1));
-        int b = (int) move.charAt(move.length()-2) -97;
-        if(board[a][b].getPiece()!=null && board[a][b].getPiece().getColor() != (whiteTurn ? 1:0)) {
-            throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
-        }
-        for(int i=0; i<=7; i++) {
-            for(int j=0; j<=7; j++) {
-                if(board[i][j].getPiece() instanceof Knight && board[i][j].getPiece().getColor() != (whiteTurn ? 1:0)) {
-                    if(xC1==-1) {
-                        xC1=i;
-                        yC1=j;
-                    }else {
-                        xC2=i;
-                        yC2=j;
-                    }
-                }
-            }
-        }
-        if(xC1 != -1 && yC1 != -1) {
-        if(isMovableKnight(xC1,yC1,a,b)) {
-            count=count+1;
-        }
-        }
-        if(xC2 != -1 && yC2 != -1) {
-        if(isMovableKnight(xC2,yC2,a,b)) {
-            count=count+2;
-        }
+	boolean isMovableKnight(int x, int y, int a, int b) {
+		if ((Math.abs(x - a) == 1 && Math.abs(y - b) == 2) || (Math.abs(y - b) == 1 && Math.abs(x - a) == 2)) {
+			if (board[a][b].getPiece() == null || board[a][b].getPiece().getColor() == (whiteTurn ? 1 : 0))
+				return true;
+		}
+		return false;
 	}
- 
 
-        if(count==0) {
-            throw new IllegalMoveException("Nessun cavallo puo' spostarsi in quella cella.");
-        }
-
- 
-
-        if(count==1) {
-            if(move.charAt(1)=='x') {
-                captureKnight(xC1,yC1,a,b,move);
-            }else if(move.charAt(1)>='a' && move.charAt(1)<='h'){
-                actualMoveKnight(xC1, yC1, a, b, move);
-            }else {
-                throw new IllegalMoveException("Mossa non riconosciuta.");
-            }
-        }else if(count==2) {
-            if(move.charAt(1)=='x') {
-                captureKnight(xC2,yC2,a,b,move);
-            }else if(move.charAt(1)>='a' && move.charAt(1)<='h'){
-                actualMoveKnight(xC2, yC2, a, b, move);
-            }else {
-                throw new IllegalMoveException("Mossa non riconosciuta.");
-            }
-        }else if(count==3) {
-            if(move.charAt(1)=='x') {
-                throw new IllegalMoveException("Mossa ambigua, devi specificare quale dei due cavalli muovere secondo la notazione algebrica.");
-            }
-            if(move.length()==3) {
-                throw new IllegalMoveException("Mossa ambigua, devi specificare quale dei due cavalli muovere secondo la notazione algebrica.");
-            }
-            
-            int x,y;
-            if(move.charAt(1)>='1' && move.charAt(1)<='8') {
-                if(xC1==xC2) {
-                    throw new IllegalMoveException("Quando i due cavalli si trovano sulla stessa riga e' necessario specificare la colonna!");
-                }
-                if(xC1==(8 - Integer.parseInt(move.substring(1, 2)))) {
-                    x=xC1;
-                    y=yC1;
-                }else if(xC2==(8 - Integer.parseInt(move.substring(1, 2)))){
-                    x=xC2;
-                    y=yC2;
-                }else {
-                    throw new IllegalMoveException("Nessun cavallo appartenente alla riga di disambiguazione specificata.");
-                }
-                if(move.length()==4) {
-                    actualMoveKnight(x, y, a, b, move);
-                }else if(move.length()==5){
-                    captureKnight(x,y,a,b,move);
-                }else {
-                    throw new IllegalMoveException("Mossa non riconosciuta.");
-                }
-            }else if(move.charAt(1)>='a' && move.charAt(1)<='h') {
-                if(yC1==yC2) {
-                    throw new IllegalMoveException("Quando i due cavalli si trovano sulla stessa colonna e' necessario specificare la riga!");
-                }
-                if(yC1==((int) move.charAt(1) -97)) {
-                    x=xC1;
-                    y=yC1;
-                }else if(yC2==((int) move.charAt(1) -97)){
-                    x=xC2;
-                    y=yC2;
-                }else {
-                    throw new IllegalMoveException("Nessun cavallo appartenente alla colonna di disambiguazione specificata.");
-                }
-                if(move.length()==4) {
-                    actualMoveKnight(x, y, a, b, move);
-                }else if(move.length()==5){
-                    captureKnight(x,y,a,b,move);
-                }else {
-                    throw new IllegalMoveException("Mossa non riconosciuta.");
-                }
-            }else {
-                throw new IllegalMoveException("Mossa non riconosciuta.");
-            }
-        }
-    }
-
-	  void actualMoveKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
-	        if(board[x][y].getPiece() != null && board[x][y].getPiece().getColor() == (whiteTurn ? 1 : 0)) {
-	            throw new IllegalMoveException("Mossa non valida, devi specificare la cattura come da notazione algebrica.");
-	        }
-	        board[x][y].setPiece(board[xC][yC].getPiece());
-	        board[xC][yC].setEmpty();
-	        movesDone.add(move);
-	        whiteTurn = !whiteTurn;
-	        System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
-	    }
-	
-	  void captureKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
-	        if(board[x][y].getPiece() == null) {
-	            throw new IllegalMoveException("Mossa non valida, non c'e' nessun pezzo da catturare.");
-	        }
-	        System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + board[xC][yC].getPiece().getType() + " in " + move.substring(2, 4));
-	        if(board[x][y].getPiece().getColor() == 0) {
-	        	WhitesCaptured.add(board[x][y].getPiece());
-	        }else {
-	        	BlacksCaptured.add(board[x][y].getPiece());
-	        }
-	        board[x][y].setPiece(board[xC][yC].getPiece());
-	        board[xC][yC].setEmpty();
-	        movesDone.add(move);
-	        whiteTurn = !whiteTurn;
-	        System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
-	    }
-
-	
-	  boolean isMovableRook(int x, int y, int a, int b){
-			int i;
-
-		    
-		    if (x == a && y == b)
-		        return false;
-
-		   
-		    if (x == a) { // controllo orizzontale
-		        int dx = (y < b) ? 1 : -1;
-
-		        for (i = y + dx; i != b; i += dx)
-		            if (board[x][i].getPiece() != null)
-		                return false;
-		    } else if (y == b) { // in verticale
-		        int dy = (x < a) ? 1 : -1;
-
-		        for (i = x + dy; i != a; i += dy)
-		            if (board[i][y].getPiece() != null)
-		                return false;
-		    } else { // Non valido
-		        return false;
-		    }
-
-		    // Return true 
-		    return true;
-	    }
-		void moveRook(String move)throws IllegalMoveException{
-	        int count=0;
-	        int xC1=-1,yC1=-1,xC2=-1,yC2=-1;
-	        int a = 8 - Integer.parseInt(move.substring(move.length()-1));
-	        int b = (int) move.charAt(move.length()-2) -97;
-	        if(board[a][b].getPiece()!=null && board[a][b].getPiece().getColor() != (whiteTurn ? 1:0))
-	        {
-	            throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
-	        }
-	        for(int i=0; i<=7; i++) {
-	            for(int j=0; j<=7; j++) {
-	                if(board[i][j].getPiece() instanceof Rook && board[i][j].getPiece().getColor() != (whiteTurn ? 1:0)) {
-	                    if(xC1==-1) {
-	                        xC1=i;
-	                        yC1=j;
-	                    }else {
-	                        xC2=i;
-	                        yC2=j;
-	                    }
-	                }
-	            }
-	        }
-	        if(xC1 != -1 && yC1 != -1) {
-	        if(isMovableRook(xC1,yC1,a,b)) {
-	            count=count+1;
-	        }
-	        }
-	        if(xC2 != -1 && yC2 != -1) {
-	        if(isMovableRook(xC2,yC2,a,b)) {
-	            count=count+2;
-	        }
+	void moveKnight(String move) throws IllegalMoveException {
+		int count = 0;
+		int xC1 = -1, yC1 = -1, xC2 = -1, yC2 = -1;
+		int a = 8 - Integer.parseInt(move.substring(move.length() - 1));
+		int b = (int) move.charAt(move.length() - 2) - 97;
+		if (board[a][b].getPiece() != null && board[a][b].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+			throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
+		}
+		for (int i = 0; i <= 7; i++) {
+			for (int j = 0; j <= 7; j++) {
+				if (board[i][j].getPiece() instanceof Knight
+						&& board[i][j].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+					if (xC1 == -1) {
+						xC1 = i;
+						yC1 = j;
+					} else {
+						xC2 = i;
+						yC2 = j;
+					}
+				}
+			}
+		}
+		if (xC1 != -1 && yC1 != -1) {
+			if (isMovableKnight(xC1, yC1, a, b)) {
+				count = count + 1;
+			}
+		}
+		if (xC2 != -1 && yC2 != -1) {
+			if (isMovableKnight(xC2, yC2, a, b)) {
+				count = count + 2;
+			}
 		}
 
+		if (count == 0) {
+			throw new IllegalMoveException("Nessun cavallo puo' spostarsi in quella cella.");
+		}
 
-	        if(count==0) {
-	            throw new IllegalMoveException("Nessuna torre puo' spostarsi in quella cella.");
-	        }
+		if (count == 1) {
+			if (move.charAt(1) == 'x') {
+				captureKnight(xC1, yC1, a, b, move);
+			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
+				actualMoveKnight(xC1, yC1, a, b, move);
+			} else {
+				throw new IllegalMoveException("Mossa non riconosciuta.");
+			}
+		} else if (count == 2) {
+			if (move.charAt(1) == 'x') {
+				captureKnight(xC2, yC2, a, b, move);
+			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
+				actualMoveKnight(xC2, yC2, a, b, move);
+			} else {
+				throw new IllegalMoveException("Mossa non riconosciuta.");
+			}
+		} else if (count == 3) {
+			if (move.charAt(1) == 'x') {
+				throw new IllegalMoveException(
+						"Mossa ambigua, devi specificare quale dei due cavalli muovere secondo la notazione algebrica.");
+			}
+			if (move.length() == 3) {
+				throw new IllegalMoveException(
+						"Mossa ambigua, devi specificare quale dei due cavalli muovere secondo la notazione algebrica.");
+			}
 
+			int x, y;
+			if (move.charAt(1) >= '1' && move.charAt(1) <= '8') {
+				if (xC1 == xC2) {
+					throw new IllegalMoveException(
+							"Quando i due cavalli si trovano sulla stessa riga e' necessario specificare la colonna!");
+				}
+				if (xC1 == (8 - Integer.parseInt(move.substring(1, 2)))) {
+					x = xC1;
+					y = yC1;
+				} else if (xC2 == (8 - Integer.parseInt(move.substring(1, 2)))) {
+					x = xC2;
+					y = yC2;
+				} else {
+					throw new IllegalMoveException(
+							"Nessun cavallo appartenente alla riga di disambiguazione specificata.");
+				}
+				if (move.length() == 4) {
+					actualMoveKnight(x, y, a, b, move);
+				} else if (move.length() == 5) {
+					captureKnight(x, y, a, b, move);
+				} else {
+					throw new IllegalMoveException("Mossa non riconosciuta.");
+				}
+			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
+				if (yC1 == yC2) {
+					throw new IllegalMoveException(
+							"Quando i due cavalli si trovano sulla stessa colonna e' necessario specificare la riga!");
+				}
+				if (yC1 == ((int) move.charAt(1) - 97)) {
+					x = xC1;
+					y = yC1;
+				} else if (yC2 == ((int) move.charAt(1) - 97)) {
+					x = xC2;
+					y = yC2;
+				} else {
+					throw new IllegalMoveException(
+							"Nessun cavallo appartenente alla colonna di disambiguazione specificata.");
+				}
+				if (move.length() == 4) {
+					actualMoveKnight(x, y, a, b, move);
+				} else if (move.length() == 5) {
+					captureKnight(x, y, a, b, move);
+				} else {
+					throw new IllegalMoveException("Mossa non riconosciuta.");
+				}
+			} else {
+				throw new IllegalMoveException("Mossa non riconosciuta.");
+			}
+		}
+	}
 
+	void actualMoveKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
+		if (board[x][y].getPiece() != null && board[x][y].getPiece().getColor() == (whiteTurn ? 1 : 0)) {
+			throw new IllegalMoveException(
+					"Mossa non valida, devi specificare la cattura come da notazione algebrica.");
+		}
+		board[x][y].setPiece(board[xC][yC].getPiece());
+		board[xC][yC].setEmpty();
+		movesDone.add(move);
+		whiteTurn = !whiteTurn;
+		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
+	}
 
-	        if(count==1) {
-	            if(move.charAt(1)=='x') {
-	                captureRook(xC1,yC1,a,b,move);
-	            }else if(move.charAt(1)>='a' && move.charAt(1)<='h'){
-	                actualMoveRook(xC1, yC1, a, b, move);
-	            }else {
-	                throw new IllegalMoveException("Mossa non riconosciuta.");
-	            }
-	        }else if(count==2) {
-	            if(move.charAt(1)=='x') {
-	                captureRook(xC2,yC2,a,b,move);
-	            }else if(move.charAt(1)>='a' && move.charAt(1)<='h'){
-	                actualMoveRook(xC2, yC2, a, b, move);
-	            }else {
-	                throw new IllegalMoveException("Mossa non riconosciuta.");
-	            }
-	        }else if(count==3) {
-	            if(move.charAt(1)=='x') {
-	                throw new IllegalMoveException("Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
-	            }
-	            if(move.length()==3) {
-	                throw new IllegalMoveException("Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
-	            }
+	void captureKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
+		if (board[x][y].getPiece() == null) {
+			throw new IllegalMoveException("Mossa non valida, non c'e' nessun pezzo da catturare.");
+		}
+		System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: "
+				+ board[xC][yC].getPiece().getType() + " in " + move.substring(2, 4));
+		if (board[x][y].getPiece().getColor() == 0) {
+			WhitesCaptured.add(board[x][y].getPiece());
+		} else {
+			BlacksCaptured.add(board[x][y].getPiece());
+		}
+		board[x][y].setPiece(board[xC][yC].getPiece());
+		board[xC][yC].setEmpty();
+		movesDone.add(move);
+		whiteTurn = !whiteTurn;
+		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
+	}
 
-	            int x,y;
-	            if(move.charAt(1)>='1' && move.charAt(1)<='8') {
-	                if(xC1==xC2) {
-	                    throw new IllegalMoveException("Quando le due torri si trovano sulla stessa riga e' necessario specificare la colonna!");
-	                }
-	                if(xC1==(8 - Integer.parseInt(move.substring(1, 2)))) {
-	                    x=xC1;
-	                    y=yC1;
-	                }else if(xC2==(8 - Integer.parseInt(move.substring(1, 2)))){
-	                    x=xC2;
-	                    y=yC2;
-	                }else {
-	                    throw new IllegalMoveException("Nessuna torre appartenente alla riga di disambiguazione specificata.");
-	                }
-	                if(move.length()==4) {
-	                    actualMoveRook(x, y, a, b, move);
-	                }else if(move.length()==5){
-	                    captureRook(x,y,a,b,move);
-	                }else {
-	                    throw new IllegalMoveException("Mossa non riconosciuta.");
-	                }
-	            }else if(move.charAt(1)>='a' && move.charAt(1)<='h') {
-	                if(yC1==yC2) {
-	                    throw new IllegalMoveException("Quando le due torri si trovano sulla stessa colonna e' necessario specificare la riga!");
-	                }
-	                if(yC1==((int) move.charAt(1) -97)) {
-	                    x=xC1;
-	                    y=yC1;
-	                }else if(yC2==((int) move.charAt(1) -97)){
-	                    x=xC2;
-	                    y=yC2;
-	                }else {
-	                    throw new IllegalMoveException("Nessuna torre appartenente alla colonna di disambiguazione specificata.");
-	                }
-	                if(move.length()==4) {
-	                    actualMoveRook(x, y, a, b, move);
-	                }else if(move.length()==5){
-	                    captureRook(x,y,a,b,move);
-	                }else {
-	                    throw new IllegalMoveException("Mossa non riconosciuta.");
-	                }
-	            }else {
-	                throw new IllegalMoveException("Mossa non riconosciuta.");
-	            }
-	        }
-	    }
-		void actualMoveRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
-	        if(board[x][y].getPiece() != null && board[x][y].getPiece().getColor() == (whiteTurn ? 1 : 0)) {
-	            throw new IllegalMoveException("Mossa non valida, devi specificare la cattura come da notazione algebrica.");
-	        }
-	        board[x][y].setPiece(board[xC][yC].getPiece());
-	        board[xC][yC].setEmpty();
-	        movesDone.add(move);
-	        ((Rook) board[x][y].getPiece()).incrementMoves();
-	        whiteTurn = !whiteTurn;
-	        System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
-	    }
-		void captureRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
-	        if(board[x][y].getPiece() == null) {
-	            throw new IllegalMoveException("Mossa non valida, non c'e' nessun pezzo da catturare.");
-	        }
-	        System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + board[xC][yC].getPiece().getType() + " in " + move.substring(2, 4));
-	        if(board[x][y].getPiece().getColor()==0) {
-	        	WhitesCaptured.add(board[x][y].getPiece());
-	        } else {
-	        	BlacksCaptured.add(board[x][y].getPiece());
-	        }
-	        board[x][y].setPiece(board[xC][yC].getPiece());
-	        board[xC][yC].setEmpty();
-	        movesDone.add(move);
-	        ((Rook) board[x][y].getPiece()).incrementMoves();
-	        whiteTurn = !whiteTurn;
-	        System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
-	    }
+	boolean isMovableRook(int x, int y, int a, int b) {
+		int i;
+
+		if (x == a && y == b)
+			return false;
+
+		if (x == a) { // controllo orizzontale
+			int dx = (y < b) ? 1 : -1;
+
+			for (i = y + dx; i != b; i += dx)
+				if (board[x][i].getPiece() != null)
+					return false;
+		} else if (y == b) { // in verticale
+			int dy = (x < a) ? 1 : -1;
+
+			for (i = x + dy; i != a; i += dy)
+				if (board[i][y].getPiece() != null)
+					return false;
+		} else { // Non valido
+			return false;
+		}
+
+		// Return true
+		return true;
+	}
+
+	void moveRook(String move) throws IllegalMoveException {
+		int count = 0;
+		int xC1 = -1, yC1 = -1, xC2 = -1, yC2 = -1;
+		int a = 8 - Integer.parseInt(move.substring(move.length() - 1));
+		int b = (int) move.charAt(move.length() - 2) - 97;
+		if (board[a][b].getPiece() != null && board[a][b].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+			throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
+		}
+		for (int i = 0; i <= 7; i++) {
+			for (int j = 0; j <= 7; j++) {
+				if (board[i][j].getPiece() instanceof Rook
+						&& board[i][j].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+					if (xC1 == -1) {
+						xC1 = i;
+						yC1 = j;
+					} else {
+						xC2 = i;
+						yC2 = j;
+					}
+				}
+			}
+		}
+		if (xC1 != -1 && yC1 != -1) {
+			if (isMovableRook(xC1, yC1, a, b)) {
+				count = count + 1;
+			}
+		}
+		if (xC2 != -1 && yC2 != -1) {
+			if (isMovableRook(xC2, yC2, a, b)) {
+				count = count + 2;
+			}
+		}
+
+		if (count == 0) {
+			throw new IllegalMoveException("Nessuna torre puo' spostarsi in quella cella.");
+		}
+
+		if (count == 1) {
+			if (move.charAt(1) == 'x') {
+				captureRook(xC1, yC1, a, b, move);
+			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
+				actualMoveRook(xC1, yC1, a, b, move);
+			} else {
+				throw new IllegalMoveException("Mossa non riconosciuta.");
+			}
+		} else if (count == 2) {
+			if (move.charAt(1) == 'x') {
+				captureRook(xC2, yC2, a, b, move);
+			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
+				actualMoveRook(xC2, yC2, a, b, move);
+			} else {
+				throw new IllegalMoveException("Mossa non riconosciuta.");
+			}
+		} else if (count == 3) {
+			if (move.charAt(1) == 'x') {
+				throw new IllegalMoveException(
+						"Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
+			}
+			if (move.length() == 3) {
+				throw new IllegalMoveException(
+						"Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
+			}
+
+			int x, y;
+			if (move.charAt(1) >= '1' && move.charAt(1) <= '8') {
+				if (xC1 == xC2) {
+					throw new IllegalMoveException(
+							"Quando le due torri si trovano sulla stessa riga e' necessario specificare la colonna!");
+				}
+				if (xC1 == (8 - Integer.parseInt(move.substring(1, 2)))) {
+					x = xC1;
+					y = yC1;
+				} else if (xC2 == (8 - Integer.parseInt(move.substring(1, 2)))) {
+					x = xC2;
+					y = yC2;
+				} else {
+					throw new IllegalMoveException(
+							"Nessuna torre appartenente alla riga di disambiguazione specificata.");
+				}
+				if (move.length() == 4) {
+					actualMoveRook(x, y, a, b, move);
+				} else if (move.length() == 5) {
+					captureRook(x, y, a, b, move);
+				} else {
+					throw new IllegalMoveException("Mossa non riconosciuta.");
+				}
+			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
+				if (yC1 == yC2) {
+					throw new IllegalMoveException(
+							"Quando le due torri si trovano sulla stessa colonna e' necessario specificare la riga!");
+				}
+				if (yC1 == ((int) move.charAt(1) - 97)) {
+					x = xC1;
+					y = yC1;
+				} else if (yC2 == ((int) move.charAt(1) - 97)) {
+					x = xC2;
+					y = yC2;
+				} else {
+					throw new IllegalMoveException(
+							"Nessuna torre appartenente alla colonna di disambiguazione specificata.");
+				}
+				if (move.length() == 4) {
+					actualMoveRook(x, y, a, b, move);
+				} else if (move.length() == 5) {
+					captureRook(x, y, a, b, move);
+				} else {
+					throw new IllegalMoveException("Mossa non riconosciuta.");
+				}
+			} else {
+				throw new IllegalMoveException("Mossa non riconosciuta.");
+			}
+		}
+	}
+
+	void actualMoveRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
+		if (board[x][y].getPiece() != null && board[x][y].getPiece().getColor() == (whiteTurn ? 1 : 0)) {
+			throw new IllegalMoveException(
+					"Mossa non valida, devi specificare la cattura come da notazione algebrica.");
+		}
+		board[x][y].setPiece(board[xC][yC].getPiece());
+		board[xC][yC].setEmpty();
+		movesDone.add(move);
+		((Rook) board[x][y].getPiece()).incrementMoves();
+		whiteTurn = !whiteTurn;
+		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
+	}
+
+	void captureRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
+		if (board[x][y].getPiece() == null) {
+			throw new IllegalMoveException("Mossa non valida, non c'e' nessun pezzo da catturare.");
+		}
+		System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: "
+				+ board[xC][yC].getPiece().getType() + " in " + move.substring(2, 4));
+		if (board[x][y].getPiece().getColor() == 0) {
+			WhitesCaptured.add(board[x][y].getPiece());
+		} else {
+			BlacksCaptured.add(board[x][y].getPiece());
+		}
+		board[x][y].setPiece(board[xC][yC].getPiece());
+		board[xC][yC].setEmpty();
+		movesDone.add(move);
+		((Rook) board[x][y].getPiece()).incrementMoves();
+		whiteTurn = !whiteTurn;
+		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
+	}
 
 	void shortCastling() throws IllegalMoveException {
 		if (whiteTurn == true) {
@@ -1863,7 +1879,8 @@ class Game {
 								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[7][5].getPiece() == null) && (board[7][6].getPiece() == null)) { // controllo se il
-																									// percorso e' libero
+																									// percorso e'
+																									// libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[7][6].setPiece(k);
@@ -1903,7 +1920,8 @@ class Game {
 								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) { // controllo se il
-																									// percorso e' libero
+																									// percorso e'
+																									// libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[0][6].setPiece(k);
@@ -1960,7 +1978,8 @@ class Game {
 								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) { // controllo se il
-																									// percorso e' libero
+																									// percorso e'
+																									// libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[7][2].setPiece(k);
@@ -2000,7 +2019,8 @@ class Game {
 								"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
 					} else {
 						if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) { // controllo se il
-																									// percorso e' libero
+																									// percorso e'
+																									// libero
 							k.incrementMoves();
 							r.incrementMoves();
 							board[0][2].setPiece(k);

@@ -1,15 +1,15 @@
 package it.uniba.main;
 
 /**
-* <<entity>><br>
-* Pawn class, implementing the abstract class {@link Piece}<br>
-* Includes a counter for moves done and a method to verify the en-passant capturable condition
-* 
-* @author Donato Lucente
-* 
-*/
+ * <<entity>><br>
+ * Pawn class, implementing the abstract class {@link Piece}<br>
+ * Includes a counter for moves done and a method to verify the en-passant
+ * capturable condition
+ * 
+ * @author Donato Lucente
+ * 
+ */
 class Pawn extends Piece {
-
 
 	Pawn(int col) { // costruttore classe Pedone
 		nMoves = 0;

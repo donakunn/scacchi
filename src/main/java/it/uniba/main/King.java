@@ -1,16 +1,15 @@
 package it.uniba.main;
 
 /**
-* <<entity>><br>
-* King class, implementing the abstract class {@link Piece}<br>
-* Includes a method to verify the checkmate event.
-* 
-* @author Donato Lucente
-* @author Filippo Iacobellis
-* 
-*/
+ * <<entity>><br>
+ * King class, implementing the abstract class {@link Piece}<br>
+ * Includes a method to verify the checkmate event.
+ * 
+ * @author Donato Lucente
+ * @author Filippo Iacobellis
+ * 
+ */
 class King extends Piece {
-
 
 	King(int col) {
 
@@ -71,7 +70,8 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x - i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x - i][y + j].getPiece() instanceof Pawn)
+			if (board[x - i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+					|| board[x - i][y + j].getPiece() instanceof Pawn)
 				break;
 			if (board[x - i][y + j].getPiece() instanceof Bishop || board[x - i][y + j].getPiece() instanceof Queen)
 				return true;
@@ -87,7 +87,8 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x + i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x + i][y + j].getPiece() instanceof Pawn)
+			if (board[x + i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+					|| board[x + i][y + j].getPiece() instanceof Pawn)
 				break;
 			if (board[x + i][y + j].getPiece() instanceof Bishop || board[x + i][y + j].getPiece() instanceof Queen)
 				return true;
@@ -103,7 +104,8 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x + i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x + i][y - j].getPiece() instanceof Pawn)
+			if (board[x + i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+					|| board[x + i][y - j].getPiece() instanceof Pawn)
 				break;
 			if (board[x + i][y - j].getPiece() instanceof Bishop || board[x + i][y - j].getPiece() instanceof Queen)
 				return true;
@@ -119,7 +121,8 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x - i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x - i][y - j].getPiece() instanceof Pawn)
+			if (board[x - i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+					|| board[x - i][y - j].getPiece() instanceof Pawn)
 				break;
 			if (board[x - i][y - j].getPiece() instanceof Bishop || board[x - i][y - j].getPiece() instanceof Queen)
 				return true;
@@ -135,7 +138,8 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x][y + j].getPiece() instanceof Pawn)
+			if (board[x][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+					|| board[x][y + j].getPiece() instanceof Pawn)
 				break;
 			if (board[x][y + j].getPiece() instanceof Rook || board[x][y + j].getPiece() instanceof Queen)
 				return true;
@@ -149,7 +153,8 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x + i][y].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x + i][y].getPiece() instanceof Pawn)
+			if (board[x + i][y].getPiece().getColor() != (whiteTurn ? 1 : 0)
+					|| board[x + i][y].getPiece() instanceof Pawn)
 				break;
 			if (board[x + i][y].getPiece() instanceof Rook || board[x + i][y].getPiece() instanceof Queen)
 				return true;
@@ -163,7 +168,8 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x][y - j].getPiece() instanceof Pawn)
+			if (board[x][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+					|| board[x][y - j].getPiece() instanceof Pawn)
 				break;
 			if (board[x][y - j].getPiece() instanceof Rook || board[x][y - j].getPiece() instanceof Queen)
 				return true;
@@ -177,7 +183,8 @@ class King extends Piece {
 				j++;
 				continue;
 			}
-			if (board[x - i][y].getPiece().getColor() != (whiteTurn ? 1 : 0) || board[x - i][y].getPiece() instanceof Pawn)
+			if (board[x - i][y].getPiece().getColor() != (whiteTurn ? 1 : 0)
+					|| board[x - i][y].getPiece() instanceof Pawn)
 				break;
 			if (board[x - i][y].getPiece() instanceof Rook || board[x - i][y].getPiece() instanceof Queen)
 				return true;
