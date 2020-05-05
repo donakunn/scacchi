@@ -1,12 +1,12 @@
 package it.uniba.main;
 
 /**
-* <<entity>><br>
-* Bishop class, implementing the abstract class {@link Piece}
-* 
-* @author Donato Lucente
-* 
-*/
+ * <<entity>><br>
+ * Bishop class, implementing the abstract class {@link Piece}
+ * 
+ * @author Donato Lucente
+ * 
+ */
 class Bishop extends Piece {
 
 	Bishop(int col) {

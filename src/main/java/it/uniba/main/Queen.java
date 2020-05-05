@@ -1,12 +1,12 @@
 package it.uniba.main;
 
 /**
-* <<entity>><br>
-* Queen class, implementing the abstract class {@link Piece}<br>
-* 
-* @author Donato Lucente
-* 
-*/
+ * <<entity>><br>
+ * Queen class, implementing the abstract class {@link Piece}<br>
+ * 
+ * @author Donato Lucente
+ * 
+ */
 class Queen extends Piece {
 
 	Queen(int col) {

@@ -4,16 +4,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
-* <<control>><br>
-* Menu class, containing all methods of the command list.
-* 
-* @author Megi Gjata
-* @author Mario Giordano
-* @author Donato Lucente
-* @author Patrick Clark
-* @author Filippo Iacobellis
-* 
-*/
+ * <<control>><br>
+ * Menu class, containing all methods of the command list.
+ * 
+ * @author Megi Gjata
+ * @author Mario Giordano
+ * @author Donato Lucente
+ * @author Patrick Clark
+ * @author Filippo Iacobellis
+ * 
+ */
 class Menu {
 	private Game game = new Game();
 
@@ -81,7 +81,8 @@ class Menu {
 				} catch (IllegalArgumentException e) {
 					System.err.println("Mossa non riconosciuta");
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+					System.err.println(
+							"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 				} catch (IllegalMoveException e) {
 					System.err.println(e.getMessage());
 				}
@@ -92,7 +93,8 @@ class Menu {
 				} catch (IllegalArgumentException e) {
 					System.err.println("Mossa non riconosciuta");
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+					System.err.println(
+							"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 				} catch (IllegalMoveException e) {
 					System.err.println(e.getMessage());
 				}
@@ -104,7 +106,8 @@ class Menu {
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+						System.err.println(
+								"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -115,7 +118,8 @@ class Menu {
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+						System.err.println(
+								"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -130,7 +134,8 @@ class Menu {
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+						System.err.println(
+								"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -142,7 +147,8 @@ class Menu {
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+						System.err.println(
+								"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -156,7 +162,8 @@ class Menu {
 				} catch (IllegalArgumentException e) {
 					System.err.println("Mossa non riconosciuta");
 				} catch (IndexOutOfBoundsException e) {
-					System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+					System.err.println(
+							"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 				} catch (IllegalMoveException e) {
 					System.err.println(e.getMessage());
 				}
@@ -174,7 +181,9 @@ class Menu {
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
-				} else System.err.println("errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
+				} else
+					System.err.println(
+							"errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
 				break;
 			case 'O':
 				if (input.equals("O-O")) {
@@ -189,7 +198,9 @@ class Menu {
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
-				} else System.err.println("errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
+				} else
+					System.err.println(
+							"errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
 				break;
 			default:
 				if (input.length() == 2) {
@@ -198,7 +209,8 @@ class Menu {
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
-						System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+						System.err.println(
+								"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -210,7 +222,8 @@ class Menu {
 						} catch (IllegalArgumentException e) {
 							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
-							System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+							System.err.println(
+									"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 						} catch (IllegalMoveException e) {
 							System.err.println(e.getMessage());
 						}
@@ -226,7 +239,8 @@ class Menu {
 						} catch (IllegalArgumentException e) {
 							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
-							System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+							System.err.println(
+									"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
 						} catch (IllegalMoveException e) {
 							System.err.println(e.getMessage());
 						}
@@ -242,7 +256,8 @@ class Menu {
 						} catch (IllegalArgumentException e) {
 							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
-							System.err.println("Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8");
+							System.err.println(
+									"Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8");
 						} catch (IllegalMoveException e) {
 							System.err.println(e.getMessage());
 						}
