@@ -1337,14 +1337,14 @@ class Game {
 		int yb;
 		Bishop b;
 
-		y = (int) move.charAt(2) - 97;
+		y = (int) move.charAt(2) -97;
 		x = 8 - Integer.parseInt(move.substring(3, 4));
 		if (whiteTurn == true) { // controlli per bianchi
 			if (board[x][y].getPiece() != null) {
 				xb = x - 1;
 				yb = y - 1;
 				while (xb >= 0 && yb >= 0) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0) && (board[x][y].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1365,7 +1365,7 @@ class Game {
 				xb = x - 1;
 				yb = y + 1;
 				while (xb >= 0 && yb < 8) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0) && (board[x][y].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1386,7 +1386,7 @@ class Game {
 				xb = x + 1;
 				yb = y - 1;
 				while (xb < 8 && yb >= 0) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0) && (board[x][y].getPiece().getColor() == 1))  {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1408,7 +1408,7 @@ class Game {
 				xb = x + 1;
 				yb = y + 1;
 				while (xb < 8 && yb < 8) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0) && (board[x][y].getPiece().getColor() == 1))  {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1426,7 +1426,7 @@ class Game {
 						yb++;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' catturare qui");
 			} else
 				throw new IllegalMoveException("Mossa illegale, la cella di destinazione e' vuota");
 
@@ -1435,7 +1435,7 @@ class Game {
 				xb = x - 1;
 				yb = y - 1;
 				while (xb >= 0 && yb >= 0) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1) && (board[x][y].getPiece().getColor() == 0))  {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1456,7 +1456,7 @@ class Game {
 				xb = x - 1;
 				yb = y + 1;
 				while (xb >= 0 && yb < 8) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1) && (board[x][y].getPiece().getColor() == 0))  {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1477,7 +1477,7 @@ class Game {
 				xb = x + 1;
 				yb = y - 1;
 				while (xb < 8 && yb >= 0) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1) && (board[x][y].getPiece().getColor() == 0))  {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1499,7 +1499,7 @@ class Game {
 				xb = x + 1;
 				yb = y + 1;
 				while (xb < 8 && yb < 8) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1) && (board[x][y].getPiece().getColor() == 0))  {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1517,7 +1517,7 @@ class Game {
 						yb++;
 					}
 				}
-				throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' muoversi qui");
+				throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' catturare qui");
 			} else
 				throw new IllegalMoveException("Mossa illegale, la cella di destinazione e' vuota");
 
