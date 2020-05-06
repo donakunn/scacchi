@@ -803,7 +803,7 @@ class Game {
 				vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
 				while (vCheck < 8) {
 					if ((board[vCheck][y].getPiece() instanceof Queen)
-							&& (board[vCheck][y].getPiece().getColor() == 0)) {
+							&& (board[vCheck][y].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
 						q = (Queen) board[vCheck][y].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -825,7 +825,7 @@ class Game {
 				vCheck = x - 1;
 				while (vCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
 					if ((board[vCheck][y].getPiece() instanceof Queen)
-							&& (board[vCheck][y].getPiece().getColor() == 0)) {
+							&& (board[vCheck][y].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
 						q = (Queen) board[vCheck][y].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -845,7 +845,7 @@ class Game {
 				hCheck = y + 1; // controllo in orizzontale a destra
 				while (hCheck < 8) {
 					if ((board[x][hCheck].getPiece() instanceof Queen)
-							&& (board[x][hCheck].getPiece().getColor() == 0)) {
+							&& (board[x][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
 						q = (Queen) board[x][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -865,7 +865,7 @@ class Game {
 				hCheck = y - 1;
 				while (hCheck >= 0) { // controllo in orizzontale a sinistra
 					if ((board[x][hCheck].getPiece() instanceof Queen)
-							&& (board[x][hCheck].getPiece().getColor() == 0)) {
+							&& (board[x][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
 						q = (Queen) board[x][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -886,7 +886,7 @@ class Game {
 				hCheck = y - 1;
 				while (vCheck >= 0 && hCheck >= 0) { // controllo diagonale alta sinistra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -908,7 +908,7 @@ class Game {
 				hCheck = y + 1;
 				while (vCheck >= 0 && hCheck < 8) { // controllo diagonale alta destra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -930,7 +930,7 @@ class Game {
 				hCheck = y - 1;
 				while (vCheck < 8 && hCheck >= 0) { // controllo diagonale bassa sinistra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -953,7 +953,7 @@ class Game {
 				hCheck = y + 1;
 				while (vCheck < 8 && hCheck < 8) { // controllo diagonale bassa destra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -981,7 +981,7 @@ class Game {
 				vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
 				while (vCheck < 8) {
 					if ((board[vCheck][y].getPiece() instanceof Queen)
-							&& (board[vCheck][y].getPiece().getColor() == 1)) {
+							&& (board[vCheck][y].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
 						q = (Queen) board[vCheck][y].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -1002,7 +1002,7 @@ class Game {
 				vCheck = x - 1;
 				while (vCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
 					if ((board[vCheck][y].getPiece() instanceof Queen)
-							&& (board[vCheck][y].getPiece().getColor() == 1)) {
+							&& (board[vCheck][y].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
 						q = (Queen) board[vCheck][y].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -1022,7 +1022,7 @@ class Game {
 				hCheck = y + 1; // controllo in orizzontale a destra
 				while (hCheck < 8) {
 					if ((board[x][hCheck].getPiece() instanceof Queen)
-							&& (board[x][hCheck].getPiece().getColor() == 1)) {
+							&& (board[x][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
 						q = (Queen) board[x][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -1042,7 +1042,7 @@ class Game {
 				hCheck = y - 1;
 				while (hCheck >= 0) { // controllo in orizzontale a sinistra
 					if ((board[x][hCheck].getPiece() instanceof Queen)
-							&& (board[x][hCheck].getPiece().getColor() == 1)) {
+							&& (board[x][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
 						q = (Queen) board[x][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -1063,7 +1063,7 @@ class Game {
 				hCheck = y - 1;
 				while (vCheck >= 0 && hCheck >= 0) { // controllo diagonale alta sinistra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -1085,7 +1085,7 @@ class Game {
 				hCheck = y + 1;
 				while (vCheck >= 0 && hCheck < 8) { // controllo diagonale alta destra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -1107,7 +1107,7 @@ class Game {
 				hCheck = y - 1;
 				while (vCheck < 8 && hCheck >= 0) { // controllo diagonale bassa sinistra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
@@ -1130,7 +1130,7 @@ class Game {
 				hCheck = y + 1;
 				while (vCheck < 8 && hCheck < 8) { // controllo diagonale bassa destra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 1)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + q.getType()
 								+ " in " + move.substring(2, 4));
