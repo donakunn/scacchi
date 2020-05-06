@@ -1872,6 +1872,7 @@ class Game {
 						board[7][5].setPiece(r);
 						board[7][4].setEmpty();
 						board[7][7].setEmpty();
+						movesDone.add("0-0");
 						System.out.println("Arrocco corto eseguito");
 						whiteTurn = false;
 					} else {
@@ -1910,6 +1911,7 @@ class Game {
 						board[0][5].setPiece(r);
 						board[0][4].setEmpty();
 						board[0][7].setEmpty();
+						movesDone.add("0-0");
 						System.out.println("Arrocco corto eseguito");
 						whiteTurn = true;
 					} else {
@@ -1953,6 +1955,7 @@ class Game {
 						board[7][4].setEmpty();
 						board[7][0].setEmpty();
 						System.out.println("Arrocco lungo eseguito");
+						movesDone.add("0-0-0");
 						whiteTurn = false;
 					} else {
 						throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
@@ -1990,6 +1993,7 @@ class Game {
 						board[0][3].setPiece(r);
 						board[0][4].setEmpty();
 						board[0][0].setEmpty();
+						movesDone.add("0-0-0");
 						System.out.println("Arroco lungo eseguito");
 						whiteTurn = true;
 					} else {
