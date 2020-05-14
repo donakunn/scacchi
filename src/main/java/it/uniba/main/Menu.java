@@ -137,7 +137,13 @@ class Menu {
 				break;
 			case 'R':
 				try {
-					game.moveKing(input);
+					String pieces[]=game.moveKing(input);
+					if(pieces[0]==null) {
+						PrintMessage.printAMove(pieces[1], input.substring(1, 3));
+					}else {
+						PrintMessage.printACapture(pieces, input.substring(2, 4));
+						PrintMessage.printAMove(pieces[1], input.substring(2, 4));
+					}
 				} catch (IllegalArgumentException e) {
 					System.err.println("Mossa non riconosciuta");
 				} catch (IndexOutOfBoundsException e) {
