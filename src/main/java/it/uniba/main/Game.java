@@ -20,8 +20,8 @@ import java.util.ArrayList;
 class Game {
 	private static boolean whiteTurn = true;
 	private static Cell board[][] = new Cell[8][8];
-	private int coordBlackKing[]=new int[2]; //coordinate re nero, [0]=x [1]=y
-	private int coordWhiteKing[]=new int[2]; //coordinate re bianco, [0]=x [1]=y
+	private int coordBlackKing[] = new int[2]; // coordinate re nero, [0]=x [1]=y
+	private int coordWhiteKing[] = new int[2]; // coordinate re bianco, [0]=x [1]=y
 	private ArrayList<String> movesDone = new ArrayList<String>();
 	private ArrayList<String> BlacksCaptured = new ArrayList<String>();
 	private ArrayList<String> WhitesCaptured = new ArrayList<String>();
@@ -52,8 +52,8 @@ class Game {
 		board[0][2] = new Cell(new Bishop(1));
 		board[0][3] = new Cell(new Queen(1));
 		board[0][4] = new Cell(new King(1));
-		coordWhiteKing[0]=0;
-		coordWhiteKing[1]=4;
+		coordWhiteKing[0] = 0;
+		coordWhiteKing[1] = 4;
 		board[0][5] = new Cell(new Bishop(1));
 		board[0][6] = new Cell(new Knight(1));
 		board[0][7] = new Cell(new Rook(1));
@@ -71,8 +71,8 @@ class Game {
 		board[7][2] = new Cell(new Bishop(0));
 		board[7][3] = new Cell(new Queen(0));
 		board[7][4] = new Cell(new King(0));
-		coordBlackKing[0]=7;
-		coordBlackKing[1]=4;
+		coordBlackKing[0] = 7;
+		coordBlackKing[1] = 4;
 		board[7][5] = new Cell(new Bishop(0));
 		board[7][6] = new Cell(new Knight(0));
 		board[7][7] = new Cell(new Rook(0));
@@ -96,10 +96,17 @@ class Game {
 			if (board[x][y].getPiece() == null) {
 				board[x - 1][y].setEmpty();
 				board[x][y].setPiece(p);
-				movesDone.add(move);
-				p.incrementMoves();
-				whiteTurn = true;
-				return p.toString();
+				if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+					board[x - 1][y].setPiece(p);
+					board[x][y].setEmpty();
+					throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+
+				} else {
+					movesDone.add(move);
+					p.incrementMoves();
+					whiteTurn = true;
+					return p.toString();
+				}
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
 		} else if ((x > 1) && (x < 8) && (board[x - 2][y].getPiece() instanceof Pawn)
@@ -112,10 +119,18 @@ class Game {
 			if (board[x][y].getPiece() == null) {
 				board[x - 2][y].setEmpty();
 				board[x][y].setPiece(p);
+				if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+					board[x - 2][y].setPiece(p);
+					board[x][y].setEmpty();
+					throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+
+				}
+				else {
 				movesDone.add(move);
 				p.incrementMoves();
 				whiteTurn = true;
 				return p.toString();
+				}
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
 		} else if ((x >= 0) && (x < 7) && (board[x + 1][y].getPiece() instanceof Pawn)
@@ -127,10 +142,18 @@ class Game {
 			if (board[x][y].getPiece() == null) {
 				board[x + 1][y].setEmpty();
 				board[x][y].setPiece(p);
+				if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+					board[x + 1][y].setPiece(p);
+					board[x][y].setEmpty();
+					throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+
+				}
+				else {
 				movesDone.add(move);
 				p.incrementMoves();
 				whiteTurn = false;
 				return p.toString();
+				}
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
 		} else if ((x >= 0) && (x < 6) && (board[x + 2][y].getPiece() instanceof Pawn)
@@ -143,26 +166,33 @@ class Game {
 			if (board[x][y].getPiece() == null) {
 				board[x + 2][y].setEmpty();
 				board[x][y].setPiece(p);
+				if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+					board[x + 2][y].setPiece(p);
+					board[x][y].setEmpty();
+					throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+
+				}
+				else {
 				movesDone.add(move);
 				p.incrementMoves();
 				whiteTurn = false;
 				return p.toString();
+				}
 			} else
 				throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota.");
 		} else {
 			throw new IllegalMoveException("mossa illegale; nessun pedone puo' spostarsi qui");
 		}
-		
 
 	}
 
-	String [] pawnCapture(String move) throws IllegalMoveException {
+	String[] pawnCapture(String move) throws IllegalMoveException {
 		int x; // ascissa
 		int y; // ordinata
 		int z; // colonna del pezzo di provenienza
 
 		Piece p, caught;
-		String[] pieces = new String[2]; //0 pezzo catturato, 1 pezzo che cattura
+		String[] pieces = new String[2]; // 0 pezzo catturato, 1 pezzo che cattura
 
 		y = (int) (move.charAt(2)) - 97;
 		x = 8 - Integer.parseInt(move.substring(3, 4)); // calcolo x,y di cella di destinazione e z colonna di partenza
@@ -187,12 +217,18 @@ class Game {
 								caught = board[x][y].getPiece();
 								board[x][y].setPiece(p);
 								board[x - 1][y - 1].setEmpty();
+								if (King.isThreatened(board, whiteTurn, coordWhiteKing[0],coordWhiteKing[1])) {
+									board[x][y].setPiece(caught);
+									board[x-1][y-1].setPiece(p);
+									throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+								} else {
 								movesDone.add(move);
 								this.WhitesCaptured.add(caught.toString());
 								whiteTurn = true;
 								pieces[0] = caught.toString();
 								pieces[1] = p.toString();
 								return pieces;
+								}
 							} else
 								throw new IllegalMoveException(
 										"mossa illegale; Impossibile catturare pezzo dello stesso colore.");
@@ -211,12 +247,18 @@ class Game {
 								caught = board[x][y].getPiece();
 								board[x][y].setPiece(p);
 								board[x - 1][y + 1].setEmpty();
+								if (King.isThreatened(board, whiteTurn, coordWhiteKing[0],coordWhiteKing[1])) {
+									board[x][y].setPiece(caught);
+									board[x-1][y+1].setPiece(p);
+									throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+								} else {
 								movesDone.add(move);
 								this.WhitesCaptured.add(caught.toString());
 								whiteTurn = true;
 								pieces[0] = caught.toString();
 								pieces[1] = p.toString();
 								return pieces;
+								}
 							} else
 								throw new IllegalMoveException(
 										"mossa illegale; Impossibile catturare pezzo dello stesso colore.");
@@ -240,12 +282,18 @@ class Game {
 								caught = board[x][y].getPiece();
 								board[x][y].setPiece(p);
 								board[x + 1][y - 1].setEmpty();
+								if (King.isThreatened(board, whiteTurn, coordBlackKing[0],coordBlackKing[1])) {
+									board[x][y].setPiece(caught);
+									board[x+1][y-1].setPiece(p);
+									throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+								} else {
 								movesDone.add(move);
-								this.BlacksCaptured.add(caught.toString());
+								this.WhitesCaptured.add(caught.toString());
 								whiteTurn = false;
 								pieces[0] = caught.toString();
 								pieces[1] = p.toString();
 								return pieces;
+								}
 							} else
 								throw new IllegalMoveException(
 										"mossa illegale; Impossibile catturare pezzo dello stesso colore.");
@@ -264,12 +312,18 @@ class Game {
 								caught = board[x][y].getPiece();
 								board[x][y].setPiece(p);
 								board[x + 1][y + 1].setEmpty();
+								if (King.isThreatened(board, whiteTurn, coordBlackKing[0],coordBlackKing[1])) {
+									board[x][y].setPiece(caught);
+									board[x+1][y+1].setPiece(p);
+									throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+								} else {
 								movesDone.add(move);
-								this.BlacksCaptured.add(caught.toString());
+								this.WhitesCaptured.add(caught.toString());
 								whiteTurn = false;
 								pieces[0] = caught.toString();
 								pieces[1] = p.toString();
 								return pieces;
+								}
 							} else
 								throw new IllegalMoveException(
 										"mossa illegale; Impossibile catturare pezzo dello stesso colore.");
@@ -293,12 +347,12 @@ class Game {
 		int z; // colonna del pezzo di provenienza
 
 		Piece p;
-		String[] pieces = new String[2]; //0 pezzo catturato, 1 pezzo che cattura
+		String[] pieces = new String[2]; // 0 pezzo catturato, 1 pezzo che cattura
 
 		y = (int) (move.charAt(2)) - 97;
 		x = 8 - Integer.parseInt(move.substring(3, 4));
 		z = (int) (move.charAt(0)) - 97;
-		if (whiteTurn == false) { // neri
+		if (whiteTurn == false) { 
 			if (z == y - 1) {
 				if (board[x - 1][y - 1].getPiece() instanceof Pawn) { // cattura en Passant in diagonale da sinistra
 					if (board[x - 1][y].getPiece() instanceof Pawn) {
@@ -308,12 +362,19 @@ class Game {
 							board[x][y].setPiece(p);
 							board[x - 1][y - 1].setEmpty();
 							board[x - 1][y].setEmpty();
+							if (King.isThreatened(board, whiteTurn, coordWhiteKing[0],coordWhiteKing[1])) {
+								board[x][y].setEmpty();
+								board[x - 1][y - 1].setPiece(p);
+								board[x - 1][y].setPiece(caught);
+								throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+							} else {
 							movesDone.add(move);
 							this.WhitesCaptured.add(caught.toString());
 							whiteTurn = true;
 							pieces[0] = caught.toString();
 							pieces[1] = p.toString();
 							return pieces;
+							}
 						} else
 							throw new IllegalMoveException(
 									"mossa illegale; Pezzo non catturabile con e.p. o cella di destinazione occupata");
@@ -336,12 +397,19 @@ class Game {
 							board[x][y].setPiece(p);
 							board[x - 1][y + 1].setEmpty();
 							board[x - 1][y].setEmpty();
+							if (King.isThreatened(board, whiteTurn, coordWhiteKing[0],coordWhiteKing[1])) {
+								board[x][y].setEmpty();
+								board[x - 1][y + 1].setPiece(p);
+								board[x - 1][y].setPiece(caught);
+								throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+							} else {
 							movesDone.add(move);
 							this.WhitesCaptured.add(caught.toString());
 							whiteTurn = true;
 							pieces[0] = caught.toString();
 							pieces[1] = p.toString();
 							return pieces;
+							}
 						} else
 							throw new IllegalMoveException(
 									"mossa illegale; Pezzo non catturabile con e.p. o cella di destinazione occupata");
@@ -355,7 +423,7 @@ class Game {
 				throw new IllegalMoveException(
 						"mossa illegale; Nessuna possibile cattura da parte di un Pedone a partire dalla colonna indicata");
 
-		} else { // bianchi
+		} else { 
 
 			if (z == y - 1) {
 
@@ -368,12 +436,19 @@ class Game {
 							board[x][y].setPiece(p);
 							board[x + 1][y - 1].setEmpty();
 							board[x + 1][y].setEmpty();
+							if (King.isThreatened(board, whiteTurn, coordBlackKing[0],coordBlackKing[1])) {
+								board[x][y].setEmpty();
+								board[x + 1][y - 1].setPiece(p);
+								board[x + 1][y].setPiece(caught);
+								throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+							} else {
 							movesDone.add(move);
-							this.BlacksCaptured.add(caught.toString());
+							this.WhitesCaptured.add(caught.toString());
 							whiteTurn = false;
 							pieces[0] = caught.toString();
 							pieces[1] = p.toString();
 							return pieces;
+							}
 						} else
 							throw new IllegalMoveException(
 									"mossa illegale; Pezzo non catturabile con e.p. o cella di destinazione occupata");
@@ -396,12 +471,19 @@ class Game {
 							board[x][y].setPiece(p);
 							board[x + 1][y + 1].setEmpty();
 							board[x + 1][y].setEmpty();
+							if (King.isThreatened(board, whiteTurn, coordBlackKing[0],coordBlackKing[1])) {
+								board[x][y].setEmpty();
+								board[x + 1][y + 1].setPiece(p);
+								board[x + 1][y].setPiece(caught);
+								throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+							} else {
 							movesDone.add(move);
-							this.BlacksCaptured.add(caught.toString());
+							this.WhitesCaptured.add(caught.toString());
 							whiteTurn = false;
 							pieces[0] = caught.toString();
 							pieces[1] = p.toString();
 							return pieces;
+							}
 						} else
 							throw new IllegalMoveException(
 									"mossa illegale; Pezzo non catturabile con e.p. o cella di destinazione occupata");
@@ -415,7 +497,7 @@ class Game {
 				throw new IllegalMoveException(
 						"mossa illegale; Nessuna possibile cattura da parte di un Pedone a partire dalla colonna indicata");
 		}
-		
+
 	}
 
 	String[] moveKing(String move) throws IllegalMoveException {
@@ -452,16 +534,16 @@ class Game {
 		if (King.isThreatened(board, whiteTurn, x, y)) {
 			throw new IllegalMoveException("Mossa illegale, metterebbe il Re sotto scacco");
 		}
-		//pezzi da ritornare a fine esecuzione
-		String printOut[]=new String[2];
-		//null valore standard perchè non sappiamo se è una cattura o meno
-		printOut[0]=null;
+		// pezzi da ritornare a fine esecuzione
+		String printOut[] = new String[2];
+		// null valore standard perchï¿½ non sappiamo se ï¿½ una cattura o meno
+		printOut[0] = null;
 		if (board[x][y].getPiece() == null) {
 			if (move.charAt(1) == 'x') {
 				throw new IllegalMoveException(
 						"Mossa illegale, non c'e' nessun pezzo da catturare nella cella di arrivo");
 			}
-			printOut[1]=board[xK][yK].getPiece().getType();
+			printOut[1] = board[xK][yK].getPiece().getType();
 		} else {
 			if (move.charAt(1) != 'x') {
 				throw new IllegalMoveException(
@@ -472,23 +554,23 @@ class Game {
 			} else {
 				WhitesCaptured.add(board[x][y].getPiece().toString());
 			}
-			printOut[0]=board[x][y].getPiece().getType();
-			printOut[1]=board[xK][yK].getPiece().getType();
+			printOut[0] = board[x][y].getPiece().getType();
+			printOut[1] = board[xK][yK].getPiece().getType();
 		}
 		board[x][y].setPiece(board[xK][yK].getPiece());
 		((King) board[x][y].getPiece()).incrementMoves();
 		board[xK][yK].setEmpty();
 		movesDone.add(move);
-		//imposta le nuove coordinate del king
-		if(whiteTurn) {
-			coordBlackKing[0]=x;
-			coordBlackKing[1]=y;
-		}else {
-			coordWhiteKing[0]=x;
-			coordWhiteKing[1]=y;
+		// imposta le nuove coordinate del king
+		if (whiteTurn) {
+			coordBlackKing[0] = x;
+			coordBlackKing[1] = y;
+		} else {
+			coordWhiteKing[0] = x;
+			coordWhiteKing[1] = y;
 		}
 		whiteTurn = !whiteTurn;
-		
+
 		return printOut;
 	}
 
@@ -498,7 +580,6 @@ class Game {
 		int vCheck; // sentinella dell'ascissa
 		int hCheck; // sentinella dell'ordinata
 		Queen q;
-		
 
 		y = (int) move.charAt(1) - 97;
 		x = 8 - Integer.parseInt(move.substring(2, 3));
@@ -810,8 +891,8 @@ class Game {
 			if (board[x][y].getPiece() != null) {
 				vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
 				while (vCheck < 8) {
-					if ((board[vCheck][y].getPiece() instanceof Queen)
-							&& (board[vCheck][y].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
+					if ((board[vCheck][y].getPiece() instanceof Queen) && (board[vCheck][y].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][y].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
@@ -830,11 +911,12 @@ class Game {
 				}
 				vCheck = x - 1;
 				while (vCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
-					if ((board[vCheck][y].getPiece() instanceof Queen)
-							&& (board[vCheck][y].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
+					if ((board[vCheck][y].getPiece() instanceof Queen) && (board[vCheck][y].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][y].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-						pieces[1] = q.toString();;
+						pieces[1] = q.toString();
+						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][y].setEmpty();
 						board[x][y].setPiece(q);
@@ -849,11 +931,12 @@ class Game {
 				}
 				hCheck = y + 1; // controllo in orizzontale a destra
 				while (hCheck < 8) {
-					if ((board[x][hCheck].getPiece() instanceof Queen)
-							&& (board[x][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
+					if ((board[x][hCheck].getPiece() instanceof Queen) && (board[x][hCheck].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[x][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-						pieces[1] = q.toString();;
+						pieces[1] = q.toString();
+						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[x][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -868,11 +951,12 @@ class Game {
 				}
 				hCheck = y - 1;
 				while (hCheck >= 0) { // controllo in orizzontale a sinistra
-					if ((board[x][hCheck].getPiece() instanceof Queen)
-							&& (board[x][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
+					if ((board[x][hCheck].getPiece() instanceof Queen) && (board[x][hCheck].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[x][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-						pieces[1] = q.toString();;
+						pieces[1] = q.toString();
+						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[x][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -889,10 +973,12 @@ class Game {
 				hCheck = y - 1;
 				while (vCheck >= 0 && hCheck >= 0) { // controllo diagonale alta sinistra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-						pieces[1] = q.toString();;
+						pieces[1] = q.toString();
+						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -910,10 +996,12 @@ class Game {
 				hCheck = y + 1;
 				while (vCheck >= 0 && hCheck < 8) { // controllo diagonale alta destra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-						pieces[1] = q.toString();;
+						pieces[1] = q.toString();
+						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -931,10 +1019,12 @@ class Game {
 				hCheck = y - 1;
 				while (vCheck < 8 && hCheck >= 0) { // controllo diagonale bassa sinistra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-						pieces[1] = q.toString();;
+						pieces[1] = q.toString();
+						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -953,10 +1043,12 @@ class Game {
 				hCheck = y + 1;
 				while (vCheck < 8 && hCheck < 8) { // controllo diagonale bassa destra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 0)&& (board[x][y].getPiece().getColor()==1)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-						pieces[1] = q.toString();;
+						pieces[1] = q.toString();
+						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -979,8 +1071,8 @@ class Game {
 			if (board[x][y].getPiece() != null) {
 				vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
 				while (vCheck < 8) {
-					if ((board[vCheck][y].getPiece() instanceof Queen)
-							&& (board[vCheck][y].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
+					if ((board[vCheck][y].getPiece() instanceof Queen) && (board[vCheck][y].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][y].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
@@ -999,12 +1091,12 @@ class Game {
 				}
 				vCheck = x - 1;
 				while (vCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
-					if ((board[vCheck][y].getPiece() instanceof Queen)
-							&& (board[vCheck][y].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
+					if ((board[vCheck][y].getPiece() instanceof Queen) && (board[vCheck][y].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][y].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-							pieces[1] = q.toString();
-					
+						pieces[1] = q.toString();
+
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][y].setEmpty();
 						board[x][y].setPiece(q);
@@ -1019,12 +1111,12 @@ class Game {
 				}
 				hCheck = y + 1; // controllo in orizzontale a destra
 				while (hCheck < 8) {
-					if ((board[x][hCheck].getPiece() instanceof Queen)
-							&& (board[x][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
+					if ((board[x][hCheck].getPiece() instanceof Queen) && (board[x][hCheck].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[x][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-							pieces[1] = q.toString();
-				
+						pieces[1] = q.toString();
+
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[x][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1039,12 +1131,12 @@ class Game {
 				}
 				hCheck = y - 1;
 				while (hCheck >= 0) { // controllo in orizzontale a sinistra
-					if ((board[x][hCheck].getPiece() instanceof Queen)
-							&& (board[x][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
+					if ((board[x][hCheck].getPiece() instanceof Queen) && (board[x][hCheck].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[x][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-							pieces[1] = q.toString();
-					
+						pieces[1] = q.toString();
+
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[x][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1061,11 +1153,12 @@ class Game {
 				hCheck = y - 1;
 				while (vCheck >= 0 && hCheck >= 0) { // controllo diagonale alta sinistra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-							pieces[1] = q.toString();
-						
+						pieces[1] = q.toString();
+
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1083,11 +1176,12 @@ class Game {
 				hCheck = y + 1;
 				while (vCheck >= 0 && hCheck < 8) { // controllo diagonale alta destra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-							pieces[1] = q.toString();
-						
+						pieces[1] = q.toString();
+
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1105,11 +1199,12 @@ class Game {
 				hCheck = y - 1;
 				while (vCheck < 8 && hCheck >= 0) { // controllo diagonale bassa sinistra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-							pieces[1] = q.toString();
-					
+						pieces[1] = q.toString();
+
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1128,11 +1223,12 @@ class Game {
 				hCheck = y + 1;
 				while (vCheck < 8 && hCheck < 8) { // controllo diagonale bassa destra
 					if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-							&& (board[vCheck][hCheck].getPiece().getColor() == 1)&& (board[x][y].getPiece().getColor()==0)) {
+							&& (board[vCheck][hCheck].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
-							pieces[1] = q.toString();
-					
+						pieces[1] = q.toString();
+
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1335,14 +1431,15 @@ class Game {
 		int yb;
 		Bishop b;
 
-		y = (int) move.charAt(2) -97;
+		y = (int) move.charAt(2) - 97;
 		x = 8 - Integer.parseInt(move.substring(3, 4));
 		if (whiteTurn == true) { // controlli per bianchi
 			if (board[x][y].getPiece() != null) {
 				xb = x - 1;
 				yb = y - 1;
 				while (xb >= 0 && yb >= 0) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0) && (board[x][y].getPiece().getColor() == 1)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1363,7 +1460,8 @@ class Game {
 				xb = x - 1;
 				yb = y + 1;
 				while (xb >= 0 && yb < 8) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0) && (board[x][y].getPiece().getColor() == 1)) {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1384,7 +1482,8 @@ class Game {
 				xb = x + 1;
 				yb = y - 1;
 				while (xb < 8 && yb >= 0) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0) && (board[x][y].getPiece().getColor() == 1))  {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1406,7 +1505,8 @@ class Game {
 				xb = x + 1;
 				yb = y + 1;
 				while (xb < 8 && yb < 8) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0) && (board[x][y].getPiece().getColor() == 1))  {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 0)
+							&& (board[x][y].getPiece().getColor() == 1)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1433,7 +1533,8 @@ class Game {
 				xb = x - 1;
 				yb = y - 1;
 				while (xb >= 0 && yb >= 0) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1) && (board[x][y].getPiece().getColor() == 0))  {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1454,7 +1555,8 @@ class Game {
 				xb = x - 1;
 				yb = y + 1;
 				while (xb >= 0 && yb < 8) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1) && (board[x][y].getPiece().getColor() == 0))  {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1475,7 +1577,8 @@ class Game {
 				xb = x + 1;
 				yb = y - 1;
 				while (xb < 8 && yb >= 0) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1) && (board[x][y].getPiece().getColor() == 0))  {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
@@ -1497,7 +1600,8 @@ class Game {
 				xb = x + 1;
 				yb = y + 1;
 				while (xb < 8 && yb < 8) {
-					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1) && (board[x][y].getPiece().getColor() == 0))  {
+					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
+							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
 						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
 								+ " in " + move.substring(2, 4));
