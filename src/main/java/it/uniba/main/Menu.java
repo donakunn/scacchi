@@ -1,6 +1,5 @@
 package it.uniba.main;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
@@ -18,54 +17,30 @@ class Menu {
 	private Game game = new Game();
 
 	void help() {
-		System.out.println("Lista di comandi utilizzabili:");
-		System.out.println("help");
-		System.out.println("play");
-		System.out.println("quit");
-		System.out.println("\nLista di comandi utilizzabili solo se in partita:");
-		System.out.println("board");
-		System.out.println("captures");
-		System.out.println("moves");
-		System.out.println(
-				"Per effettuare una mossa è necessario specificarla in notazione algebrica; \nPer la cattura en passant si può specificare 'e.p.' o 'ep' alla fine della mossa in notazione algebrica");
-	}
+		PrintMessage.helpPrint();
+		}
 
 	void board() {
-		System.out.println("    a    b    c    d    e    f    g    h");
+		String [][]board = new String[8][8] ;
 		for (int i = 0; i < 8; i++) {
-			System.out.print(8 - i + "  ");
 			for (int j = 0; j < 8; j++) {
-				Cell c = Game.getCell(i, j);
-				System.out.print(c + "  ");
+				if (Game.getCell(i, j) == null) {
+					board[i][j] = "";
+				}
+				else {
+				board[i][j] = Game.getCell(i, j).toString(); 
+				}
+				
 			}
-			System.out.print(8 - i + "  ");
-			System.out.println("\n");
 		}
-		System.out.println("    a    b    c    d    e    f    g    h");
+		
+		PrintMessage.printBoard(board);
+		
 	}
 
 	void moves() {
 		ArrayList<String> movesDone = game.getMoves();
-		if (game.getMoves().size() == 0) {
-			System.out.println("Non sono ancora state effettuate mosse");
-		} else {
-			int j; // secondo indice
-			int k = 1; // numero mossa
-			for (int i = 0; i < movesDone.size(); i++) {
-				j = i + 1;
-				if (j < movesDone.size()) {
-
-					System.out.println(k + ". " + movesDone.get(i) + " " + movesDone.get(j));
-					i++;
-					k++;
-
-				} else if (i == movesDone.size() - 1) {
-					System.out.println(k + ". " + movesDone.get(i));
-
-				}
-			}
-		}
-
+		PrintMessage.printMoves(movesDone);
 	}
 
 	void play() {
@@ -130,7 +105,8 @@ class Menu {
 			case 'D':
 				if (input.length() == 3) {
 					try {
-						game.moveQueen(input);
+						String piece = game.moveQueen(input);
+						PrintMessage.printAMove(piece, input.substring(1, 3));
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
@@ -143,7 +119,10 @@ class Menu {
 
 				} else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
 					try {
-						game.captureQueen(input);
+						String pieces[] = game.captureQueen(input);
+						PrintMessage.printACapture(pieces, input.substring(2, 4));
+						PrintMessage.printAMove(pieces[1], input.substring(2, 4));
+
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
@@ -172,12 +151,14 @@ class Menu {
 				if (input.equals("0-0")) {
 					try {
 						game.shortCastling();
+						PrintMessage.printShortCastling();
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
 				} else if (input.equals("0-0-0")) {
 					try {
 						game.longCastling();
+						PrintMessage.printLongCastling();
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -189,12 +170,14 @@ class Menu {
 				if (input.equals("O-O")) {
 					try {
 						game.shortCastling();
+						PrintMessage.printShortCastling();
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
 				} else if (input.equals("O-O-O")) {
 					try {
 						game.longCastling();
+						PrintMessage.printLongCastling();
 					} catch (IllegalMoveException e) {
 						System.err.println(e.getMessage());
 					}
@@ -205,7 +188,8 @@ class Menu {
 			default:
 				if (input.length() == 2) {
 					try {
-						game.moveAPawn(input);
+						String piece = game.moveAPawn(input);
+						PrintMessage.printAMove(piece, input);
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
@@ -218,7 +202,9 @@ class Menu {
 					if (input.substring(1, 2).equals("x")) {
 
 						try {
-							game.pawnCapture(input);
+							String []pieces = game.pawnCapture(input);
+							PrintMessage.printACapture(pieces, input.substring(2, 4));
+							PrintMessage.printAMove(pieces[1], input.substring(2, 4));
 						} catch (IllegalArgumentException e) {
 							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
@@ -235,7 +221,9 @@ class Menu {
 							&& (input.substring(4, 8).toLowerCase().equals("e.p."))) {
 
 						try {
-							game.captureEnPassant(input);
+							String []pieces = game.captureEnPassant(input);
+							PrintMessage.printACapture(pieces, input.substring(2, 4)+ " e.p.");
+							PrintMessage.printAMove(pieces[1], input.substring(2, 4));
 						} catch (IllegalArgumentException e) {
 							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
@@ -252,7 +240,9 @@ class Menu {
 							&& (input.substring(4, 6).toLowerCase().equals("ep"))) {
 
 						try {
-							game.captureEnPassant(input);
+							String []pieces = game.captureEnPassant(input);
+							PrintMessage.printACapture(pieces, input.substring(2, 4)+ " e.p.");
+							PrintMessage.printAMove(pieces[1], input.substring(2, 4));
 						} catch (IllegalArgumentException e) {
 							System.err.println("Mossa non riconosciuta");
 						} catch (IndexOutOfBoundsException e) {
@@ -273,37 +263,10 @@ class Menu {
 	}
 
 	void captures() {
-		if (game.getBlacks().size() == 0) {
-			System.out.println("Nessun pezzo nero catturato");
-		} else {
-			System.out.println("Pezzi neri catturati: " + game.getBlacks());
-		}
-		if (game.getWhites().size() == 0) {
-			System.out.println("Nessun pezzo bianco catturato");
-		} else {
-			System.out.println("Pezzi bianchi catturati: " + game.getWhites());
-		}
+		PrintMessage.printCaptures(game.getBlacks(), game.getWhites());
 	}
 
-	boolean quit(Scanner in) {
-		String answer;
-		System.out.println("Sei sicuro di voler uscire? ");
-		while (true) {
-			answer = in.nextLine();
-			answer = answer.toUpperCase();
-
-			if (answer.equals("YES") || answer.equals("SI") || answer.equals("SÌ")) {
-				in.close();
-				return true;
-			} else if (answer.equals("NO")) {
-				return false;
-			} else {
-				System.out.println("Risposta non valida, inserisci si (yes) o no");
-			}
-
-		}
-	}
-
+	
 	void resetTurn() {
 		game.setWhiteTurn();
 	}
