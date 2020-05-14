@@ -20,7 +20,8 @@ import java.util.ArrayList;
 class Game {
 	private static boolean whiteTurn = true;
 	private static Cell board[][] = new Cell[8][8];
-
+	private int coordBlackKing[]=new int[2]; //coordinate re nero, [0]=x [1]=y
+	private int coordWhiteKing[]=new int[2]; //coordinate re bianco, [0]=x [1]=y
 	private ArrayList<String> movesDone = new ArrayList<String>();
 	private ArrayList<String> BlacksCaptured = new ArrayList<String>();
 	private ArrayList<String> WhitesCaptured = new ArrayList<String>();
@@ -51,6 +52,8 @@ class Game {
 		board[0][2] = new Cell(new Bishop(1));
 		board[0][3] = new Cell(new Queen(1));
 		board[0][4] = new Cell(new King(1));
+		coordWhiteKing[0]=0;
+		coordWhiteKing[1]=4;
 		board[0][5] = new Cell(new Bishop(1));
 		board[0][6] = new Cell(new Knight(1));
 		board[0][7] = new Cell(new Rook(1));
@@ -68,6 +71,8 @@ class Game {
 		board[7][2] = new Cell(new Bishop(0));
 		board[7][3] = new Cell(new Queen(0));
 		board[7][4] = new Cell(new King(0));
+		coordBlackKing[0]=7;
+		coordBlackKing[1]=4;
 		board[7][5] = new Cell(new Bishop(0));
 		board[7][6] = new Cell(new Knight(0));
 		board[7][7] = new Cell(new Rook(0));
@@ -413,7 +418,7 @@ class Game {
 		
 	}
 
-	void moveKing(String move) throws IllegalMoveException {
+	String[] moveKing(String move) throws IllegalMoveException {
 		int x = 2;
 		int y = 1;
 
@@ -442,17 +447,21 @@ class Game {
 			}
 		}
 		if (Math.abs(x - xK) > 1 || Math.abs(y - yK) > 1) {
-			throw new IllegalMoveException("Il Re non puÃ² muoversi in quella cella");
+			throw new IllegalMoveException("Il Re non puo' muoversi in quella cella");
 		}
 		if (King.isThreatened(board, whiteTurn, x, y)) {
 			throw new IllegalMoveException("Mossa illegale, metterebbe il Re sotto scacco");
 		}
-
+		//pezzi da ritornare a fine esecuzione
+		String printOut[]=new String[2];
+		//null valore standard perchè non sappiamo se è una cattura o meno
+		printOut[0]=null;
 		if (board[x][y].getPiece() == null) {
 			if (move.charAt(1) == 'x') {
 				throw new IllegalMoveException(
-						"Mossa illegale, non c'Ã¨ nessun pezzo da catturare nella cella di arrivo");
+						"Mossa illegale, non c'e' nessun pezzo da catturare nella cella di arrivo");
 			}
+			printOut[1]=board[xK][yK].getPiece().getType();
 		} else {
 			if (move.charAt(1) != 'x') {
 				throw new IllegalMoveException(
@@ -463,15 +472,24 @@ class Game {
 			} else {
 				WhitesCaptured.add(board[x][y].getPiece().toString());
 			}
-			System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: "
-					+ board[xK][yK].getPiece().getType() + " in " + move.substring(2, 4));
+			printOut[0]=board[x][y].getPiece().getType();
+			printOut[1]=board[xK][yK].getPiece().getType();
 		}
 		board[x][y].setPiece(board[xK][yK].getPiece());
-		((King) board[x][y].getPiece()).incrementMoves(); // da controllare
+		((King) board[x][y].getPiece()).incrementMoves();
 		board[xK][yK].setEmpty();
 		movesDone.add(move);
+		//imposta le nuove coordinate del king
+		if(whiteTurn) {
+			coordBlackKing[0]=x;
+			coordBlackKing[1]=y;
+		}else {
+			coordWhiteKing[0]=x;
+			coordWhiteKing[1]=y;
+		}
 		whiteTurn = !whiteTurn;
-		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
+		
+		return printOut;
 	}
 
 	String moveQueen(String move) throws IllegalMoveException {
