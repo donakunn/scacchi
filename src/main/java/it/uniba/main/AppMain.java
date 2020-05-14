@@ -81,10 +81,12 @@ public final class AppMain {
 					}
 				case "play":
 					if (!inGame) {
+						System.out.println("Creo nuova partita..");
 						inGame = true;
 						menu.play();
+						System.out.println("Partita creata.");
 					} else {
-						System.out.println("Partita già avviata. Vuoi cancellarla ed iniziare un nuova?");
+						System.out.println("Partita gia'� avviata. Vuoi cancellarla ed iniziare un nuova?");
 						while (true) {
 							String answer = in.nextLine();
 							if (answer.toUpperCase().equals("SI") || answer.toUpperCase().equals("YES")) {
@@ -100,8 +102,23 @@ public final class AppMain {
 					}
 					break;
 				case "quit":
-					exit = menu.quit(in);
-					break;
+						String answer;
+						System.out.println("Sei sicuro di voler uscire? ");
+							answer = in.nextLine();
+							answer = answer.toUpperCase();
+
+							if (answer.equals("YES") || answer.equals("SI") || answer.equals("SÌ")) {
+								in.close();
+								exit = true;
+								break;
+							} else if (answer.equals("NO")) {
+								exit = false;
+								break;
+							} else {
+								System.out.println("Risposta non valida, inserisci si (yes) o no");
+							}
+
+
 				default:
 					if (inGame) {
 						try {
