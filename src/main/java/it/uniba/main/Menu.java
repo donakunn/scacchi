@@ -64,7 +64,22 @@ class Menu {
 				break;
 			case 'C':
 				try {
-					game.moveKnight(input);
+					String[] piece = game.moveKnight(input);
+					if(piece[0]==null) {
+						if(input.length() == 3) {
+						PrintMessage.printAMove(piece[1], input.substring(1, 3));
+						}else if(input.length()==4){ 
+							PrintMessage.printAMove(piece[1], input.substring(2, 4));
+						}
+					}else {
+						if(input.length() == 4) {
+						PrintMessage.printACapture(piece, input.substring(2, 4));
+						PrintMessage.printAMove(piece[1], input.substring(2, 4));
+						}else if (input.length()==5) {
+							PrintMessage.printACapture(piece, input.substring(3, 5));
+							PrintMessage.printAMove(piece[1], input.substring(3, 5));
+						}
+					}
 				} catch (IllegalArgumentException e) {
 					System.err.println("Mossa non riconosciuta");
 				} catch (IndexOutOfBoundsException e) {
