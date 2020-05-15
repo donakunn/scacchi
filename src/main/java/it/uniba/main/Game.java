@@ -1859,7 +1859,7 @@ class Game {
 		return true;
 	}
 
-	void moveRook(String move) throws IllegalMoveException {
+	String[] moveRook(String move) throws IllegalMoveException {
 		int count = 0;
 		int xC1 = -1, yC1 = -1, xC2 = -1, yC2 = -1;
 		int a = 8 - Integer.parseInt(move.substring(move.length() - 1));
@@ -1971,6 +1971,7 @@ class Game {
 				throw new IllegalMoveException("Mossa non riconosciuta.");
 			}
 		}
+		return printOut;
 	}
 
 	void actualMoveRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
