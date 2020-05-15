@@ -1567,15 +1567,14 @@ class Game {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
 							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
-								+ " in " + move.substring(2, 4));
+						pieces[0] = board[x][y].getPiece().toString();
+						pieces[1] = b.toString();
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[xb][yb].setEmpty();
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = true;
-						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-						return;
+						return pieces;
 					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
@@ -1590,15 +1589,14 @@ class Game {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
 							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
-						System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: " + b.getType()
-								+ " in " + move.substring(2, 4));
+						pieces[0] = board[x][y].getPiece().toString();
+						pieces[1] = b.toString();
 						WhitesCaptured.add(board[x][y].getPiece().toString());
 						board[xb][yb].setEmpty();
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = true;
-						System.out.println(b.getType() + " spostato su " + move.substring(2, 4));
-						return;
+						return pieces;
 					} else if (board[xb][yb].getPiece() != null) {
 						break;
 					} else {
