@@ -1815,7 +1815,6 @@ class Game {
 		board[xC][yC].setEmpty();
 		movesDone.add(move);
 		whiteTurn = !whiteTurn;
-		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
 	}
 
 	void captureKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
