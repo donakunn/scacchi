@@ -1632,6 +1632,7 @@ class Game {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
 							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
+						caught = board[x][y].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = b.toString();
 						board[xb][yb].setEmpty();
@@ -1659,6 +1660,7 @@ class Game {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
 							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
+						caught = board[x][y].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = b.toString();
 						board[xb][yb].setEmpty();
@@ -1687,6 +1689,7 @@ class Game {
 					if ((board[xb][yb].getPiece() instanceof Bishop) && (board[xb][yb].getPiece().getColor() == 1)
 							&& (board[x][y].getPiece().getColor() == 0)) {
 						b = (Bishop) board[xb][yb].getPiece();
+						caught = board[x][y].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = b.toString();
 						board[xb][yb].setEmpty();
