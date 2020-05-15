@@ -1821,9 +1821,7 @@ class Game {
 		if (board[x][y].getPiece() == null) {
 			throw new IllegalMoveException("Mossa non valida, non c'e' nessun pezzo da catturare.");
 		}
-		System.out.println(board[x][y].getPiece().getType() + " e' stato catturato da: "
-				+ board[xC][yC].getPiece().getType() + " in " + move.substring(2, 4));
-		if (board[x][y].getPiece().getColor() == 0) {
+				if (board[x][y].getPiece().getColor() == 0) {
 			WhitesCaptured.add(board[x][y].getPiece().toString());
 		} else {
 			BlacksCaptured.add(board[x][y].getPiece().toString());
@@ -1832,8 +1830,8 @@ class Game {
 		board[xC][yC].setEmpty();
 		movesDone.add(move);
 		whiteTurn = !whiteTurn;
-		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
 	}
+
 
 	boolean isMovableRook(int x, int y, int a, int b) {
 		int i;
