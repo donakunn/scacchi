@@ -2005,7 +2005,6 @@ class Game {
 		movesDone.add(move);
 		((Rook) board[x][y].getPiece()).incrementMoves();
 		whiteTurn = !whiteTurn;
-		System.out.println(board[x][y].getPiece().getType() + " spostato su " + (char) (y + 97) + (8 - x));
 	}
 
 	void captureRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
