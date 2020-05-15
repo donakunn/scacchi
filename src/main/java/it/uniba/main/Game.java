@@ -45,7 +45,7 @@ class Game {
 			// initialize pawns a7-h7 (black side)
 			board[6][j] = new Cell(new Pawn(0));
 		}
-		;
+
 		// initialize pieces a1-h1 (white side)
 		board[0][0] = new Cell(new Rook(1));
 		board[0][1] = new Cell(new Knight(1));
@@ -76,7 +76,7 @@ class Game {
 		board[7][5] = new Cell(new Bishop(0));
 		board[7][6] = new Cell(new Knight(0));
 		board[7][7] = new Cell(new Rook(0));
-	};
+	}
 
 	String moveAPawn(String move) throws IllegalMoveException {
 		int x; // ascissa
@@ -935,7 +935,6 @@ class Game {
 						q = (Queen) board[x][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
-						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[x][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -955,7 +954,6 @@ class Game {
 						q = (Queen) board[x][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
-						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[x][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -977,7 +975,6 @@ class Game {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
-						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1000,7 +997,6 @@ class Game {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
-						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1023,7 +1019,6 @@ class Game {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
-						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
@@ -1047,7 +1042,6 @@ class Game {
 						q = (Queen) board[vCheck][hCheck].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
-						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][hCheck].setEmpty();
 						board[x][y].setPiece(q);
