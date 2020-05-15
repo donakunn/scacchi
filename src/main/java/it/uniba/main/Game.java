@@ -1861,6 +1861,7 @@ class Game {
 
 	String[] moveRook(String move) throws IllegalMoveException {
 		int count = 0;
+		String[] printOut = new String[2];
 		int xC1 = -1, yC1 = -1, xC2 = -1, yC2 = -1;
 		int a = 8 - Integer.parseInt(move.substring(move.length() - 1));
 		int b = (int) move.charAt(move.length() - 2) - 97;
@@ -1898,17 +1899,27 @@ class Game {
 
 		if (count == 1) {
 			if (move.charAt(1) == 'x') {
+				printOut[0] = board[a][b].getPiece().getType();
+				printOut[1] = board[xC1][yC1].getPiece().getType();
 				captureRook(xC1, yC1, a, b, move);
+				return printOut;
 			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
 				actualMoveRook(xC1, yC1, a, b, move);
+				printOut[1] = board[a][b].getPiece().getType();
+				return printOut;
 			} else {
 				throw new IllegalMoveException("Mossa non riconosciuta.");
 			}
 		} else if (count == 2) {
 			if (move.charAt(1) == 'x') {
+				printOut[0] = board[a][b].getPiece().getType();
+				printOut[1] = board[xC2][yC2].getPiece().getType();
 				captureRook(xC2, yC2, a, b, move);
+				return printOut;
 			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
 				actualMoveRook(xC2, yC2, a, b, move);
+				printOut[1] = board[a][b].getPiece().getType();
+				return printOut;
 			} else {
 				throw new IllegalMoveException("Mossa non riconosciuta.");
 			}
@@ -1940,8 +1951,13 @@ class Game {
 				}
 				if (move.length() == 4) {
 					actualMoveRook(x, y, a, b, move);
+					printOut[1] = board[a][b].getPiece().getType();
+					return printOut;
 				} else if (move.length() == 5) {
+					printOut[0] = board[a][b].getPiece().getType();
+					printOut[1] = board[x][y].getPiece().getType();
 					captureRook(x, y, a, b, move);
+					return printOut;
 				} else {
 					throw new IllegalMoveException("Mossa non riconosciuta.");
 				}
@@ -1962,8 +1978,13 @@ class Game {
 				}
 				if (move.length() == 4) {
 					actualMoveRook(x, y, a, b, move);
+					printOut[1] = board[a][b].getPiece().getType();
+					return printOut;
 				} else if (move.length() == 5) {
+					printOut[0] = board[a][b].getPiece().getType();
+					printOut[1] = board[x][y].getPiece().getType();
 					captureRook(x, y, a, b, move);
+					return printOut;
 				} else {
 					throw new IllegalMoveException("Mossa non riconosciuta.");
 				}
