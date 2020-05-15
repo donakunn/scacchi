@@ -1868,10 +1868,20 @@ class Game {
 			throw new IllegalMoveException(
 					"Mossa non valida, devi specificare la cattura come da notazione algebrica.");
 		}
+		if(whiteTurn == true) {
+			if(King.isThreatened(board, whiteTurn, coordBlackKing[0],coordBlackKing[1])){
+				throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+			}
+			} else {
+				if(King.isThreatened(board, whiteTurn, coordWhiteKing[0],coordWhiteKing[1])) {
+					throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
+				}
+			}
+			
 		board[x][y].setPiece(board[xC][yC].getPiece());
 		board[xC][yC].setEmpty();
 		movesDone.add(move);
-		whiteTurn = !whiteTurn;
+		whiteTurn = !whiteTurn;		
 	}
 
 	void captureKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
