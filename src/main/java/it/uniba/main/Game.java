@@ -1250,7 +1250,7 @@ class Game {
 
 	}
 
-	void moveBishop(String move) throws IllegalMoveException {
+	String moveBishop(String move) throws IllegalMoveException {
 		int x;
 		int y;
 		int xB;
@@ -1271,8 +1271,7 @@ class Game {
 						board[x][y].setPiece(b);
 						movesDone.add(move);
 						whiteTurn = false;
-						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
-						return;
+						return b.toString();
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
 					} else {
@@ -1291,7 +1290,7 @@ class Game {
 						movesDone.add(move);
 						whiteTurn = false;
 						System.out.println(b.getType() + " spostato su " + move.substring(1, 3));
-						return;
+						return b.toString();
 					} else if (board[xB][yB].getPiece() != null) {
 						break;
 					} else {
