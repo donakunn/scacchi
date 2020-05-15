@@ -916,7 +916,6 @@ class Game {
 						q = (Queen) board[vCheck][y].getPiece();
 						pieces[0] = board[x][y].getPiece().toString();
 						pieces[1] = q.toString();
-						;
 						BlacksCaptured.add(board[x][y].getPiece().toString());
 						board[vCheck][y].setEmpty();
 						board[x][y].setPiece(q);
