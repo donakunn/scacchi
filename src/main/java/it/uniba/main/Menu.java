@@ -77,7 +77,8 @@ class Menu {
 			case 'A':
 				if (input.length() == 3) {
 					try {
-						game.moveBishop(input);
+						String piece = game.moveBishop(input);
+						PrintMessage.printAMove(piece, input);
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
