@@ -120,7 +120,9 @@ class Menu {
 					break;
 				} else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
 					try {
-						game.captureBishop(input);
+						String[] piece = game.captureBishop(input);
+						PrintMessage.printACapture(piece, input.substring(2, 4));
+						PrintMessage.printAMove(piece[1], input.substring(2, 4));
 					} catch (IllegalArgumentException e) {
 						System.err.println("Mossa non riconosciuta");
 					} catch (IndexOutOfBoundsException e) {
