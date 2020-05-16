@@ -2104,17 +2104,23 @@ class Game {
           "Mossa non valida, devi specificare la cattura come da notazione algebrica.");
     }
     if (whiteTurn == true) {
+    	 board[x][y].setPiece(board[xC][yC].getPiece());
+    	 board[xC][yC].setEmpty();
       if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+    	  board[xC][yC].setPiece(board[x][y].getPiece());
+    	  board[x][y].setEmpty();
         throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
       }
     } else {
+    	 board[x][y].setPiece(board[xC][yC].getPiece());
+    	 board[xC][yC].setEmpty();
       if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+    	  board[xC][yC].setPiece(board[x][y].getPiece());
+    	  board[x][y].setEmpty();
         throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
       }
     }
-
-    board[x][y].setPiece(board[xC][yC].getPiece());
-    board[xC][yC].setEmpty();
+    
     movesDone.add(move);
     whiteTurn = !whiteTurn;
   }
