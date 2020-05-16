@@ -3,35 +3,30 @@ package it.uniba.main;
 /**
  * <<entity>><br>
  * Piece is the abstract class for all pieces. <br>
- * Contains the color of the piece, its unicode string and a toString method for
- * printing the symbol.
- * 
+ * Contains the color of the piece, its unicode string and a toString method for printing the
+ * symbol.
+ *
  * @author Donato Lucente
- * 
  */
 abstract class Piece {
-	protected int color; // 0 black, 1 white
-	protected String pieceType;
-	protected int nMoves;
+  protected int color; // 0 black, 1 white
+  protected String pieceType;
+  protected int nMoves;
 
-	String getType() {
-		return this.pieceType;
-	}
+  String getType() {
+    return this.pieceType;
+  }
 
-	int getColor() {
-		return this.color;
-	}
+  int getColor() {
+    return this.color;
+  }
 
-	/**
-	 * @return Piece unicode string
-	 */
-	public String toString() {
-		return pieceType;
+  /** @return Piece unicode string */
+  public String toString() {
+    return pieceType;
+  }
 
-	}
-
-	public int getMoves() {
-		return this.nMoves;
-	}
-
+  public int getMoves() {
+    return this.nMoves;
+  }
 }
