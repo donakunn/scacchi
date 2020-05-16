@@ -1724,7 +1724,7 @@ class Game {
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(board[x][y].getPiece().toString());
+              BlacksCaptured.add(caught.toString());
               movesDone.add(move);
               whiteTurn = false;
               return pieces;
@@ -1753,7 +1753,7 @@ class Game {
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(board[x][y].getPiece().toString());
+              BlacksCaptured.add(caught.toString());
               movesDone.add(move);
               whiteTurn = false;
               return pieces;
@@ -1782,7 +1782,7 @@ class Game {
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(board[x][y].getPiece().toString());
+              BlacksCaptured.add(caught.toString());
               movesDone.add(move);
               whiteTurn = false;
               return pieces;
@@ -1812,7 +1812,7 @@ class Game {
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(board[x][y].getPiece().toString());
+              BlacksCaptured.add(caught.toString());
               movesDone.add(move);
               whiteTurn = false;
               return pieces;
@@ -1846,7 +1846,7 @@ class Game {
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              WhitesCaptured.add(board[x][y].getPiece().toString());
+              WhitesCaptured.add(caught.toString());
               movesDone.add(move);
               whiteTurn = true;
               return pieces;
@@ -1875,7 +1875,7 @@ class Game {
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              WhitesCaptured.add(board[x][y].getPiece().toString());
+              WhitesCaptured.add(caught.toString());
               movesDone.add(move);
               whiteTurn = true;
               return pieces;
@@ -1904,7 +1904,7 @@ class Game {
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              WhitesCaptured.add(board[x][y].getPiece().toString());
+              WhitesCaptured.add(caught.toString());
               movesDone.add(move);
               whiteTurn = true;
               return pieces;
@@ -1934,7 +1934,7 @@ class Game {
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              WhitesCaptured.add(board[x][y].getPiece().toString());
+              WhitesCaptured.add(caught.toString());
               movesDone.add(move);
               whiteTurn = true;
               return pieces;
@@ -1950,7 +1950,6 @@ class Game {
       } else throw new IllegalMoveException("Mossa illegale, la cella di destinazione e' vuota");
     }
   }
-
   boolean isMovableKnight(int x, int y, int a, int b) {
     if ((Math.abs(x - a) == 1 && Math.abs(y - b) == 2)
         || (Math.abs(y - b) == 1 && Math.abs(x - a) == 2)) {
