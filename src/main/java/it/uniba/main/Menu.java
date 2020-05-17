@@ -295,6 +295,6 @@ class Menu {
   }
 
   void resetTurn() {
-    game.setWhiteTurn();
+    game.setBlackTurn();
   }
 }
