@@ -1,12 +1,8 @@
 package it.uniba.main;
 
-// import java.io.FileNotFoundException;
-// import java.io.IOException;
-// import java.net.URISyntaxException;
-// import java.security.GeneralSecurityException;
+
 import java.util.Scanner;
 
-// import it.uniba.sotorrent.GoogleDocsUtils;
 
 /**
  * <<boundary>><br>
@@ -26,7 +22,7 @@ public final class AppMain {
    */
   public static void main(final String[] args) {
     Menu menu = new Menu();
-    String turn = "white";
+    String turn = "bianchi";
     boolean inGame = false;
     boolean exit = false;
     Scanner in = new Scanner(System.in);

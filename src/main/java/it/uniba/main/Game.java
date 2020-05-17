@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author Filippo Iacobellis
  */
 class Game {
-  private static boolean whiteTurn = true;
+  private static boolean blackTurn = true;
   private static Cell board[][] = new Cell[8][8];
   private int coordBlackKing[] = new int[2]; // coordinate re nero, [0]=x [1]=y
   private int coordWhiteKing[] = new int[2]; // coordinate re bianco, [0]=x [1]=y
@@ -89,13 +89,13 @@ class Game {
         && (board[x - 1][y].getPiece() instanceof Pawn)
         && (board[x - 1][y].getPiece().getColor() == 1)
         // check se casella in x-1 c'e' pedone con colore 1
-        && whiteTurn == false) {
+        && blackTurn == false) {
       p = (Pawn) board[x - 1][y].getPiece(); // se le condizioni sono rispettate fa la mossa
 
       if (board[x][y].getPiece() == null) {
         board[x - 1][y].setEmpty();
         board[x][y].setPiece(p);
-        if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+        if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
           board[x - 1][y].setPiece(p);
           board[x][y].setEmpty();
           throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
@@ -103,7 +103,7 @@ class Game {
         } else {
           movesDone.add(move);
           p.incrementMoves();
-          whiteTurn = true;
+          blackTurn = true;
           return p.toString();
         }
       } else
@@ -113,7 +113,7 @@ class Game {
         && (board[x - 2][y].getPiece() instanceof Pawn)
         && (board[x - 2][y].getPiece().getColor() == 1)
         // check se casella in x-2 c'e' pedone con colore 1
-        && (whiteTurn == false)
+        && (blackTurn == false)
         && (board[x - 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono
       // rispettate fa la mossa
       p = (Pawn) board[x - 2][y].getPiece();
@@ -121,7 +121,7 @@ class Game {
       if (board[x][y].getPiece() == null) {
         board[x - 2][y].setEmpty();
         board[x][y].setPiece(p);
-        if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+        if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
           board[x - 2][y].setPiece(p);
           board[x][y].setEmpty();
           throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
@@ -129,7 +129,7 @@ class Game {
         } else {
           movesDone.add(move);
           p.incrementMoves();
-          whiteTurn = true;
+          blackTurn = true;
           return p.toString();
         }
       } else
@@ -139,13 +139,13 @@ class Game {
         && (board[x + 1][y].getPiece() instanceof Pawn)
         && (board[x + 1][y].getPiece().getColor() == 0)
         // check se casella in x+1 c'e' pedone con colore 0
-        && whiteTurn == true) { // se le condizioni sono rispettate fa la mossa
+        && blackTurn == true) { // se le condizioni sono rispettate fa la mossa
       p = (Pawn) board[x + 1][y].getPiece();
 
       if (board[x][y].getPiece() == null) {
         board[x + 1][y].setEmpty();
         board[x][y].setPiece(p);
-        if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+        if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
           board[x + 1][y].setPiece(p);
           board[x][y].setEmpty();
           throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
@@ -153,7 +153,7 @@ class Game {
         } else {
           movesDone.add(move);
           p.incrementMoves();
-          whiteTurn = false;
+          blackTurn = false;
           return p.toString();
         }
       } else
@@ -163,7 +163,7 @@ class Game {
         && (board[x + 2][y].getPiece() instanceof Pawn)
         && (board[x + 2][y].getPiece().getColor() == 0)
         // check se casella in x+2 c'e' pedone con colore 1
-        && (whiteTurn == true)
+        && (blackTurn == true)
         && (board[x + 2][y].getPiece().getMoves() == 0)) { // se le condizioni sono
       // rispettate fa la mossa
       p = (Pawn) board[x + 2][y].getPiece();
@@ -171,7 +171,7 @@ class Game {
       if (board[x][y].getPiece() == null) {
         board[x + 2][y].setEmpty();
         board[x][y].setPiece(p);
-        if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+        if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
           board[x + 2][y].setPiece(p);
           board[x][y].setEmpty();
           throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
@@ -179,7 +179,7 @@ class Game {
         } else {
           movesDone.add(move);
           p.incrementMoves();
-          whiteTurn = false;
+          blackTurn = false;
           return p.toString();
         }
       } else
@@ -215,7 +215,7 @@ class Game {
       }
     } else {
 
-      if (whiteTurn == false) {
+      if (blackTurn == false) {
         if (z == y - 1) {
           if (board[x][y] != null) {
             if (board[x - 1][y - 1].getPiece()
@@ -226,14 +226,14 @@ class Game {
                 caught = board[x][y].getPiece();
                 board[x][y].setPiece(p);
                 board[x - 1][y - 1].setEmpty();
-                if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+                if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
                   board[x][y].setPiece(caught);
                   board[x - 1][y - 1].setPiece(p);
                   throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
                 } else {
                   movesDone.add(move);
                   this.WhitesCaptured.add(caught.toString());
-                  whiteTurn = true;
+                  blackTurn = true;
                   pieces[0] = caught.toString();
                   pieces[1] = p.toString();
                   return pieces;
@@ -255,14 +255,14 @@ class Game {
                 caught = board[x][y].getPiece();
                 board[x][y].setPiece(p);
                 board[x - 1][y + 1].setEmpty();
-                if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+                if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
                   board[x][y].setPiece(caught);
                   board[x - 1][y + 1].setPiece(p);
                   throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
                 } else {
                   movesDone.add(move);
                   this.WhitesCaptured.add(caught.toString());
-                  whiteTurn = true;
+                  blackTurn = true;
                   pieces[0] = caught.toString();
                   pieces[1] = p.toString();
                   return pieces;
@@ -290,14 +290,14 @@ class Game {
                 caught = board[x][y].getPiece();
                 board[x][y].setPiece(p);
                 board[x + 1][y - 1].setEmpty();
-                if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+                if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
                   board[x][y].setPiece(caught);
                   board[x + 1][y - 1].setPiece(p);
                   throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
                 } else {
                   movesDone.add(move);
                   this.BlacksCaptured.add(caught.toString());
-                  whiteTurn = false;
+                  blackTurn = false;
                   pieces[0] = caught.toString();
                   pieces[1] = p.toString();
                   return pieces;
@@ -319,14 +319,14 @@ class Game {
                 caught = board[x][y].getPiece();
                 board[x][y].setPiece(p);
                 board[x + 1][y + 1].setEmpty();
-                if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+                if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
                   board[x][y].setPiece(caught);
                   board[x + 1][y + 1].setPiece(p);
                   throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
                 } else {
                   movesDone.add(move);
                   this.BlacksCaptured.add(caught.toString());
-                  whiteTurn = false;
+                  blackTurn = false;
                   pieces[0] = caught.toString();
                   pieces[1] = p.toString();
                   return pieces;
@@ -358,7 +358,7 @@ class Game {
     y = (int) (move.charAt(2)) - 97;
     x = 8 - Integer.parseInt(move.substring(3, 4));
     z = (int) (move.charAt(0)) - 97;
-    if (whiteTurn == false) {
+    if (blackTurn == false) {
       if (z == y - 1) {
         if (board[x - 1][y - 1].getPiece()
             instanceof Pawn) { // cattura en Passant in diagonale da sinistra
@@ -369,7 +369,7 @@ class Game {
               board[x][y].setPiece(p);
               board[x - 1][y - 1].setEmpty();
               board[x - 1][y].setEmpty();
-              if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+              if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
                 board[x][y].setEmpty();
                 board[x - 1][y - 1].setPiece(p);
                 board[x - 1][y].setPiece(caught);
@@ -377,7 +377,7 @@ class Game {
               } else {
                 movesDone.add(move);
                 this.WhitesCaptured.add(caught.toString());
-                whiteTurn = true;
+                blackTurn = true;
                 pieces[0] = caught.toString();
                 pieces[1] = p.toString();
                 return pieces;
@@ -403,7 +403,7 @@ class Game {
               board[x][y].setPiece(p);
               board[x - 1][y + 1].setEmpty();
               board[x - 1][y].setEmpty();
-              if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+              if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
                 board[x][y].setEmpty();
                 board[x - 1][y + 1].setPiece(p);
                 board[x - 1][y].setPiece(caught);
@@ -411,7 +411,7 @@ class Game {
               } else {
                 movesDone.add(move);
                 this.WhitesCaptured.add(caught.toString());
-                whiteTurn = true;
+                blackTurn = true;
                 pieces[0] = caught.toString();
                 pieces[1] = p.toString();
                 return pieces;
@@ -443,7 +443,7 @@ class Game {
               board[x][y].setPiece(p);
               board[x + 1][y - 1].setEmpty();
               board[x + 1][y].setEmpty();
-              if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+              if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
                 board[x][y].setEmpty();
                 board[x + 1][y - 1].setPiece(p);
                 board[x + 1][y].setPiece(caught);
@@ -451,7 +451,7 @@ class Game {
               } else {
                 movesDone.add(move);
                 this.BlacksCaptured.add(caught.toString());
-                whiteTurn = false;
+                blackTurn = false;
                 pieces[0] = caught.toString();
                 pieces[1] = p.toString();
                 return pieces;
@@ -477,7 +477,7 @@ class Game {
               board[x][y].setPiece(p);
               board[x + 1][y + 1].setEmpty();
               board[x + 1][y].setEmpty();
-              if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+              if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
                 board[x][y].setEmpty();
                 board[x + 1][y + 1].setPiece(p);
                 board[x + 1][y].setPiece(caught);
@@ -485,7 +485,7 @@ class Game {
               } else {
                 movesDone.add(move);
                 this.BlacksCaptured.add(caught.toString());
-                whiteTurn = false;
+                blackTurn = false;
                 pieces[0] = caught.toString();
                 pieces[1] = p.toString();
                 return pieces;
@@ -518,7 +518,7 @@ class Game {
     x = 8 - Integer.parseInt(move.substring(x, x + 1));
 
     if (board[x][y].getPiece() != null
-        && board[x][y].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+        && board[x][y].getPiece().getColor() != (blackTurn ? 1 : 0)) {
       throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
     }
     int xK = -1;
@@ -527,7 +527,7 @@ class Game {
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
         if (board[i][j].getPiece() instanceof King
-            && board[i][j].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+            && board[i][j].getPiece().getColor() != (blackTurn ? 1 : 0)) {
           xK = i;
           yK = j;
           break;
@@ -537,7 +537,7 @@ class Game {
     if (Math.abs(x - xK) > 1 || Math.abs(y - yK) > 1) {
       throw new IllegalMoveException("Il Re non puo' muoversi in quella cella");
     }
-    if (King.isThreatened(board, whiteTurn, x, y)) {
+    if (King.isThreatened(board, blackTurn, x, y)) {
       throw new IllegalMoveException("Mossa illegale, metterebbe il Re sotto scacco");
     }
     // pezzi da ritornare a fine esecuzione
@@ -555,7 +555,7 @@ class Game {
         throw new IllegalMoveException(
             "Mossa illegale, devi specificare la cattura come da notazione algebrica");
       }
-      if (whiteTurn) {
+      if (blackTurn) {
         BlacksCaptured.add(board[x][y].getPiece().toString());
       } else {
         WhitesCaptured.add(board[x][y].getPiece().toString());
@@ -568,14 +568,14 @@ class Game {
     board[xK][yK].setEmpty();
     movesDone.add(move);
     // imposta le nuove coordinate del king
-    if (whiteTurn) {
+    if (blackTurn) {
       coordBlackKing[0] = x;
       coordBlackKing[1] = y;
     } else {
       coordWhiteKing[0] = x;
       coordWhiteKing[1] = y;
     }
-    whiteTurn = !whiteTurn;
+    blackTurn = !blackTurn;
 
     return printOut;
   }
@@ -589,7 +589,7 @@ class Game {
 
     y = (int) move.charAt(1) - 97;
     x = 8 - Integer.parseInt(move.substring(2, 3));
-    if (whiteTurn == true) {
+    if (blackTurn == true) {
       if (board[x][y].getPiece() == null) {
         vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
         while (vCheck < 8) {
@@ -598,13 +598,13 @@ class Game {
             q = (Queen) board[vCheck][y].getPiece();
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return q.toString();
             }
 
@@ -621,13 +621,13 @@ class Game {
             q = (Queen) board[vCheck][y].getPiece();
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return q.toString();
             }
           } else if (board[vCheck][y].getPiece() != null) {
@@ -643,13 +643,13 @@ class Game {
             q = (Queen) board[x][hCheck].getPiece();
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setEmpty();
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return q.toString();
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -665,13 +665,13 @@ class Game {
             q = (Queen) board[x][hCheck].getPiece();
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setEmpty();
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return q.toString();
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -688,13 +688,13 @@ class Game {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return q.toString();
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -712,13 +712,13 @@ class Game {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return q.toString();
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -736,13 +736,13 @@ class Game {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return q.toString();
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -761,13 +761,13 @@ class Game {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return q.toString();
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -791,13 +791,13 @@ class Game {
             q = (Queen) board[vCheck][y].getPiece();
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return q.toString();
             }
 
@@ -814,13 +814,13 @@ class Game {
             q = (Queen) board[vCheck][y].getPiece();
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return q.toString();
             }
           } else if (board[vCheck][y].getPiece() != null) {
@@ -836,13 +836,13 @@ class Game {
             q = (Queen) board[x][hCheck].getPiece();
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setEmpty();
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return q.toString();
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -858,13 +858,13 @@ class Game {
             q = (Queen) board[x][hCheck].getPiece();
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setEmpty();
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return q.toString();
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -881,13 +881,13 @@ class Game {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return q.toString();
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -905,13 +905,13 @@ class Game {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return q.toString();
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -929,13 +929,13 @@ class Game {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return q.toString();
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -954,13 +954,13 @@ class Game {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return q.toString();
             }
 
@@ -989,7 +989,7 @@ class Game {
 
     y = (int) move.charAt(2) - 97;
     x = 8 - Integer.parseInt(move.substring(3, 4));
-    if (whiteTurn == true) {
+    if (blackTurn == true) {
       if (board[x][y].getPiece() != null) {
         vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
         while (vCheck < 8) {
@@ -1002,14 +1002,14 @@ class Game {
             pieces[1] = q.toString();
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
 
@@ -1031,14 +1031,14 @@ class Game {
 
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[vCheck][y].getPiece() != null) {
@@ -1059,14 +1059,14 @@ class Game {
 
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -1087,14 +1087,14 @@ class Game {
 
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -1116,14 +1116,14 @@ class Game {
 
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1146,14 +1146,14 @@ class Game {
 
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1176,14 +1176,14 @@ class Game {
 
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1207,14 +1207,14 @@ class Game {
 
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1242,14 +1242,14 @@ class Game {
 
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
 
@@ -1271,14 +1271,14 @@ class Game {
 
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[vCheck][y].getPiece() != null) {
@@ -1299,14 +1299,14 @@ class Game {
 
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -1327,14 +1327,14 @@ class Game {
 
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -1356,14 +1356,14 @@ class Game {
 
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1386,14 +1386,14 @@ class Game {
 
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1416,14 +1416,14 @@ class Game {
 
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1447,14 +1447,14 @@ class Game {
 
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1480,7 +1480,7 @@ class Game {
     y = (int) move.charAt(1) - 97;
     x = 8 - Integer.parseInt(move.substring(2, 3));
 
-    if (whiteTurn == true) { // tutti i controlli per i pezzi bianchi
+    if (blackTurn == true) { // tutti i controlli per i pezzi bianchi
       if (board[x][y].getPiece() == null) {
         xB = x - 1;
         yB = y - 1;
@@ -1490,14 +1490,14 @@ class Game {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[xB][yB].setPiece(b);
               board[x][y].setEmpty();
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
 
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return b.toString();
             }
           } else if (board[xB][yB].getPiece() != null) {
@@ -1515,14 +1515,14 @@ class Game {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[xB][yB].setPiece(b);
               board[x][y].setEmpty();
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
 
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return b.toString();
             }
           } else if (board[xB][yB].getPiece() != null) {
@@ -1540,14 +1540,14 @@ class Game {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[xB][yB].setPiece(b);
               board[x][y].setEmpty();
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
 
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return b.toString();
             }
           } else if (board[xB][yB].getPiece() != null) {
@@ -1565,14 +1565,14 @@ class Game {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[xB][yB].setPiece(b);
               board[x][y].setEmpty();
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
 
             } else {
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return b.toString();
             }
           } else if (board[xB][yB].getPiece() != null) {
@@ -1596,14 +1596,14 @@ class Game {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[xB][yB].setPiece(b);
               board[x][y].setEmpty();
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
 
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return b.toString();
             }
           } else if (board[xB][yB].getPiece() != null) {
@@ -1621,14 +1621,14 @@ class Game {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[xB][yB].setPiece(b);
               board[x][y].setEmpty();
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
 
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return b.toString();
             }
           } else if (board[xB][yB].getPiece() != null) {
@@ -1646,14 +1646,14 @@ class Game {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[xB][yB].setPiece(b);
               board[x][y].setEmpty();
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
 
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return b.toString();
             }
           } else if (board[xB][yB].getPiece() != null) {
@@ -1671,14 +1671,14 @@ class Game {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[xB][yB].setPiece(b);
               board[x][y].setEmpty();
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
 
             } else {
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return b.toString();
             }
           } else if (board[xB][yB].getPiece() != null) {
@@ -1705,7 +1705,7 @@ class Game {
 
     y = (int) move.charAt(2) - 97;
     x = 8 - Integer.parseInt(move.substring(3, 4));
-    if (whiteTurn == true) { // controlli per bianchi
+    if (blackTurn == true) { // controlli per bianchi
       if (board[x][y].getPiece() != null) {
         xb = x - 1;
         yb = y - 1;
@@ -1719,14 +1719,14 @@ class Game {
             pieces[1] = b.toString();
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1748,14 +1748,14 @@ class Game {
             pieces[1] = b.toString();
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1777,14 +1777,14 @@ class Game {
             pieces[1] = b.toString();
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1807,14 +1807,14 @@ class Game {
             pieces[1] = b.toString();
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
               board[x][y].setPiece(caught);
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = false;
+              blackTurn = false;
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1841,14 +1841,14 @@ class Game {
             pieces[1] = b.toString();
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1870,14 +1870,14 @@ class Game {
             pieces[1] = b.toString();
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1899,14 +1899,14 @@ class Game {
             pieces[1] = b.toString();
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1929,14 +1929,14 @@ class Game {
             pieces[1] = b.toString();
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
-            if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
               board[x][y].setPiece(caught);
               board[xb][yb].setPiece(b);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              whiteTurn = true;
+              blackTurn = true;
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1954,7 +1954,7 @@ class Game {
     if ((Math.abs(x - a) == 1 && Math.abs(y - b) == 2)
         || (Math.abs(y - b) == 1 && Math.abs(x - a) == 2)) {
       if (board[a][b].getPiece() == null
-          || board[a][b].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          || board[a][b].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
     }
     return false;
   }
@@ -1966,13 +1966,13 @@ class Game {
     int a = 8 - Integer.parseInt(move.substring(move.length() - 1));
     int b = (int) move.charAt(move.length() - 2) - 97;
     if (board[a][b].getPiece() != null
-        && board[a][b].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+        && board[a][b].getPiece().getColor() != (blackTurn ? 1 : 0)) {
       throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
     }
     for (int i = 0; i <= 7; i++) {
       for (int j = 0; j <= 7; j++) {
         if (board[i][j].getPiece() instanceof Knight
-            && board[i][j].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+            && board[i][j].getPiece().getColor() != (blackTurn ? 1 : 0)) {
           if (xC1 == -1) {
             xC1 = i;
             yC1 = j;
@@ -2098,14 +2098,14 @@ class Game {
 
   void actualMoveKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
     if (board[x][y].getPiece() != null
-        && board[x][y].getPiece().getColor() == (whiteTurn ? 1 : 0)) {
+        && board[x][y].getPiece().getColor() == (blackTurn ? 1 : 0)) {
       throw new IllegalMoveException(
           "Mossa non valida, devi specificare la cattura come da notazione algebrica.");
     }
-    if (whiteTurn == true) {
+    if (blackTurn == true) {
     	 board[x][y].setPiece(board[xC][yC].getPiece());
     	 board[xC][yC].setEmpty();
-      if (King.isThreatened(board, whiteTurn, coordBlackKing[0], coordBlackKing[1])) {
+      if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
     	  board[xC][yC].setPiece(board[x][y].getPiece());
     	  board[x][y].setEmpty();
         throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
@@ -2113,7 +2113,7 @@ class Game {
     } else {
     	 board[x][y].setPiece(board[xC][yC].getPiece());
     	 board[xC][yC].setEmpty();
-      if (King.isThreatened(board, whiteTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+      if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
     	  board[xC][yC].setPiece(board[x][y].getPiece());
     	  board[x][y].setEmpty();
         throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
@@ -2121,7 +2121,7 @@ class Game {
     }
     
     movesDone.add(move);
-    whiteTurn = !whiteTurn;
+    blackTurn = !blackTurn;
   }
 
   void captureKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
@@ -2136,7 +2136,7 @@ class Game {
     board[x][y].setPiece(board[xC][yC].getPiece());
     board[xC][yC].setEmpty();
     movesDone.add(move);
-    whiteTurn = !whiteTurn;
+    blackTurn = !blackTurn;
   }
 
   boolean isMovableRook(int x, int y, int a, int b) {
@@ -2167,13 +2167,13 @@ class Game {
     int a = 8 - Integer.parseInt(move.substring(move.length() - 1));
     int b = (int) move.charAt(move.length() - 2) - 97;
     if (board[a][b].getPiece() != null
-        && board[a][b].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+        && board[a][b].getPiece().getColor() != (blackTurn ? 1 : 0)) {
       throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
     }
     for (int i = 0; i <= 7; i++) {
       for (int j = 0; j <= 7; j++) {
         if (board[i][j].getPiece() instanceof Rook
-            && board[i][j].getPiece().getColor() != (whiteTurn ? 1 : 0)) {
+            && board[i][j].getPiece().getColor() != (blackTurn ? 1 : 0)) {
           if (xC1 == -1) {
             xC1 = i;
             yC1 = j;
@@ -2299,7 +2299,7 @@ class Game {
 
   void actualMoveRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
     if (board[x][y].getPiece() != null
-        && board[x][y].getPiece().getColor() == (whiteTurn ? 1 : 0)) {
+        && board[x][y].getPiece().getColor() == (blackTurn ? 1 : 0)) {
       throw new IllegalMoveException(
           "Mossa non valida, devi specificare la cattura come da notazione algebrica.");
     }
@@ -2307,7 +2307,7 @@ class Game {
     board[xC][yC].setEmpty();
     movesDone.add(move);
     ((Rook) board[x][y].getPiece()).incrementMoves();
-    whiteTurn = !whiteTurn;
+    blackTurn = !blackTurn;
   }
 
   void captureRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
@@ -2329,11 +2329,11 @@ class Game {
     board[xC][yC].setEmpty();
     movesDone.add(move);
     ((Rook) board[x][y].getPiece()).incrementMoves();
-    whiteTurn = !whiteTurn;
+    blackTurn = !blackTurn;
   }
 
   void shortCastling() throws IllegalMoveException {
-    if (whiteTurn == true) {
+    if (blackTurn == true) {
       if ((board[7][4].getPiece() instanceof King) && (board[7][7].getPiece() instanceof Rook)) {
         // controllo che re e torre siano nella posizione corretta
         King k = (King) board[7][4].getPiece();
@@ -2345,10 +2345,10 @@ class Game {
           if ((board[7][5].getPiece() == null)
               && (board[7][6].getPiece() == null)) { // controllo se il
             // percorso e' libero
-            if ((King.isThreatened(board, whiteTurn, 7, 4))
-                || (King.isThreatened(board, whiteTurn, 7, 5))
+            if ((King.isThreatened(board, blackTurn, 7, 4))
+                || (King.isThreatened(board, blackTurn, 7, 5))
                 // controllo che il re non e', e non finisce sotto scacco durante la mossa
-                || (King.isThreatened(board, whiteTurn, 7, 6))) {
+                || (King.isThreatened(board, blackTurn, 7, 6))) {
               throw new IllegalMoveException(
                   "Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
             }
@@ -2359,7 +2359,7 @@ class Game {
             board[7][4].setEmpty();
             board[7][7].setEmpty();
             movesDone.add("0-0");
-            whiteTurn = false;
+            blackTurn = false;
           } else {
             throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
           }
@@ -2383,10 +2383,10 @@ class Game {
           // ancora mossi
 
           if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) {
-            if ((King.isThreatened(board, whiteTurn, 0, 4))
-                || (King.isThreatened(board, whiteTurn, 0, 5))
+            if ((King.isThreatened(board, blackTurn, 0, 4))
+                || (King.isThreatened(board, blackTurn, 0, 5))
                 || (King.isThreatened(
-                    board, whiteTurn, 0, 6))) { // controllo che il re non e', e non
+                    board, blackTurn, 0, 6))) { // controllo che il re non e', e non
               // finisce sotto scacco durante la
               // mossa
               throw new IllegalMoveException(
@@ -2400,7 +2400,7 @@ class Game {
             board[0][4].setEmpty();
             board[0][7].setEmpty();
             movesDone.add("0-0");
-            whiteTurn = true;
+            blackTurn = true;
           } else {
             throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
           }
@@ -2418,7 +2418,7 @@ class Game {
   }
 
   void longCastling() throws IllegalMoveException {
-    if (whiteTurn == true) {
+    if (blackTurn == true) {
       if ((board[7][4].getPiece() instanceof King) && (board[7][0].getPiece() instanceof Rook)) {
         // controllo che re e torre siano nella posizione corretta
         King k = (King) board[7][4].getPiece();
@@ -2428,10 +2428,10 @@ class Game {
           // ancora mossi
 
           if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) {
-            if ((King.isThreatened(board, whiteTurn, 7, 4))
-                || (King.isThreatened(board, whiteTurn, 7, 3))
+            if ((King.isThreatened(board, blackTurn, 7, 4))
+                || (King.isThreatened(board, blackTurn, 7, 3))
                 // controllo che il re non e', e non finisce sotto scacco durante la mossa
-                || (King.isThreatened(board, whiteTurn, 7, 2))) {
+                || (King.isThreatened(board, blackTurn, 7, 2))) {
               throw new IllegalMoveException(
                   "Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
             }
@@ -2443,7 +2443,7 @@ class Game {
             board[7][4].setEmpty();
             board[7][0].setEmpty();
             movesDone.add("0-0-0");
-            whiteTurn = false;
+            blackTurn = false;
           } else {
             throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
           }
@@ -2467,10 +2467,10 @@ class Game {
           // ancora mossi
 
           if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) {
-            if ((King.isThreatened(board, whiteTurn, 0, 4))
-                || (King.isThreatened(board, whiteTurn, 0, 3))
+            if ((King.isThreatened(board, blackTurn, 0, 4))
+                || (King.isThreatened(board, blackTurn, 0, 3))
                 || (King.isThreatened(
-                    board, whiteTurn, 0, 2))) { // controllo che il re non e', e non
+                    board, blackTurn, 0, 2))) { // controllo che il re non e', e non
               // finisce sotto scacco durante la
               // mossa
               throw new IllegalMoveException(
@@ -2484,7 +2484,7 @@ class Game {
             board[0][4].setEmpty();
             board[0][0].setEmpty();
             movesDone.add("0-0-0");
-            whiteTurn = true;
+            blackTurn = true;
           } else {
             throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
           }
@@ -2502,11 +2502,11 @@ class Game {
   }
 
   static boolean getTurn() {
-    return whiteTurn;
+    return blackTurn;
   }
 
-  void setWhiteTurn() {
-    whiteTurn = true;
+  void setBlackTurn() {
+    blackTurn = true;
   }
 
   static Cell getCell(int x, int y) {

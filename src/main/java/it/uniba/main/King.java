@@ -32,9 +32,9 @@ class King extends Piece {
     return this.nMoves;
   }
 
-  static boolean isThreatened(Cell[][] board, boolean whiteTurn, int x, int y) {
+  static boolean isThreatened(Cell[][] board, boolean blackTurn, int x, int y) {
     int i, j;
-    if (!whiteTurn) {
+    if (!blackTurn) {
       if (x < 7) {
         if (y > 0
             && board[x + 1][y - 1].getPiece() instanceof Pawn
@@ -48,7 +48,7 @@ class King extends Piece {
         }
       }
     }
-    if (whiteTurn) {
+    if (blackTurn) {
       if (x > 0) {
         if (y > 0
             && board[x - 1][y - 1].getPiece() instanceof Pawn
@@ -71,7 +71,7 @@ class King extends Piece {
         j++;
         continue;
       }
-      if (board[x - i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+      if (board[x - i][y + j].getPiece().getColor() != (blackTurn ? 1 : 0)
           || board[x - i][y + j].getPiece() instanceof Pawn) break;
       if (board[x - i][y + j].getPiece() instanceof Bishop
           || board[x - i][y + j].getPiece() instanceof Queen) return true;
@@ -87,7 +87,7 @@ class King extends Piece {
         j++;
         continue;
       }
-      if (board[x + i][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+      if (board[x + i][y + j].getPiece().getColor() != (blackTurn ? 1 : 0)
           || board[x + i][y + j].getPiece() instanceof Pawn) break;
       if (board[x + i][y + j].getPiece() instanceof Bishop
           || board[x + i][y + j].getPiece() instanceof Queen) return true;
@@ -103,7 +103,7 @@ class King extends Piece {
         j++;
         continue;
       }
-      if (board[x + i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+      if (board[x + i][y - j].getPiece().getColor() != (blackTurn ? 1 : 0)
           || board[x + i][y - j].getPiece() instanceof Pawn) break;
       if (board[x + i][y - j].getPiece() instanceof Bishop
           || board[x + i][y - j].getPiece() instanceof Queen) return true;
@@ -119,7 +119,7 @@ class King extends Piece {
         j++;
         continue;
       }
-      if (board[x - i][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+      if (board[x - i][y - j].getPiece().getColor() != (blackTurn ? 1 : 0)
           || board[x - i][y - j].getPiece() instanceof Pawn) break;
       if (board[x - i][y - j].getPiece() instanceof Bishop
           || board[x - i][y - j].getPiece() instanceof Queen) return true;
@@ -135,7 +135,7 @@ class King extends Piece {
         j++;
         continue;
       }
-      if (board[x][y + j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+      if (board[x][y + j].getPiece().getColor() != (blackTurn ? 1 : 0)
           || board[x][y + j].getPiece() instanceof Pawn) break;
       if (board[x][y + j].getPiece() instanceof Rook || board[x][y + j].getPiece() instanceof Queen)
         return true;
@@ -149,7 +149,7 @@ class King extends Piece {
         j++;
         continue;
       }
-      if (board[x + i][y].getPiece().getColor() != (whiteTurn ? 1 : 0)
+      if (board[x + i][y].getPiece().getColor() != (blackTurn ? 1 : 0)
           || board[x + i][y].getPiece() instanceof Pawn) break;
       if (board[x + i][y].getPiece() instanceof Rook || board[x + i][y].getPiece() instanceof Queen)
         return true;
@@ -163,7 +163,7 @@ class King extends Piece {
         j++;
         continue;
       }
-      if (board[x][y - j].getPiece().getColor() != (whiteTurn ? 1 : 0)
+      if (board[x][y - j].getPiece().getColor() != (blackTurn ? 1 : 0)
           || board[x][y - j].getPiece() instanceof Pawn) break;
       if (board[x][y - j].getPiece() instanceof Rook || board[x][y - j].getPiece() instanceof Queen)
         return true;
@@ -177,7 +177,7 @@ class King extends Piece {
         j++;
         continue;
       }
-      if (board[x - i][y].getPiece().getColor() != (whiteTurn ? 1 : 0)
+      if (board[x - i][y].getPiece().getColor() != (blackTurn ? 1 : 0)
           || board[x - i][y].getPiece() instanceof Pawn) break;
       if (board[x - i][y].getPiece() instanceof Rook || board[x - i][y].getPiece() instanceof Queen)
         return true;
@@ -187,34 +187,34 @@ class King extends Piece {
     if (y + 2 <= 7) {
       if (x - 1 >= 0
           && board[x - 1][y + 2].getPiece() instanceof Knight
-          && board[x - 1][y + 2].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          && board[x - 1][y + 2].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
       if (x + 1 <= 7
           && board[x + 1][y + 2].getPiece() instanceof Knight
-          && board[x + 1][y + 2].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          && board[x + 1][y + 2].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
     }
     if (y + 1 <= 7) {
       if (x - 2 >= 0
           && board[x - 2][y + 1].getPiece() instanceof Knight
-          && board[x - 2][y + 1].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          && board[x - 2][y + 1].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
       if (x + 2 <= 7
           && board[x + 2][y + 1].getPiece() instanceof Knight
-          && board[x + 2][y + 1].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          && board[x + 2][y + 1].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
     }
     if (y - 1 >= 0) {
       if (x - 2 >= 0
           && board[x - 2][y - 1].getPiece() instanceof Knight
-          && board[x - 2][y - 1].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          && board[x - 2][y - 1].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
       if (x + 2 <= 7
           && board[x + 2][y - 1].getPiece() instanceof Knight
-          && board[x + 2][y - 1].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          && board[x + 2][y - 1].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
     }
     if (y - 2 >= 0) {
       if (x - 1 >= 0
           && board[x - 1][y - 2].getPiece() instanceof Knight
-          && board[x - 1][y - 2].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          && board[x - 1][y - 2].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
       if (x + 1 <= 7
           && board[x + 1][y - 2].getPiece() instanceof Knight
-          && board[x + 1][y - 2].getPiece().getColor() == (whiteTurn ? 1 : 0)) return true;
+          && board[x + 1][y - 2].getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
     }
     return false;
   }
