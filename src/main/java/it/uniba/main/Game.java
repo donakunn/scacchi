@@ -2303,8 +2303,24 @@ class Game {
       throw new IllegalMoveException(
           "Mossa non valida, devi specificare la cattura come da notazione algebrica.");
     }
+    if (blackTurn==true) {
     board[x][y].setPiece(board[xC][yC].getPiece());
     board[xC][yC].setEmpty();
+    if(King.isThreatened(board,blackTurn,coordBlackKing[0],coordBlackKing[1])) {
+      board[xC][yC].setPiece(board[x][y].getPiece());
+  	  board[x][y].setEmpty();
+      throw new IllegalMoveException("Mossa illegale; metterebbe il re sotto scacco");
+    }
+    } else {
+    	board[x][y].setPiece(board[xC][yC].getPiece());
+   	    board[xC][yC].setEmpty();
+   	 if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
+   	     board[xC][yC].setPiece(board[x][y].getPiece());
+   	     board[x][y].setEmpty();
+         throw new IllegalMoveException("Mossa illegale; metterebbe il re sotto scacco");
+     }
+   }
+    
     movesDone.add(move);
     ((Rook) board[x][y].getPiece()).incrementMoves();
     blackTurn = !blackTurn;
