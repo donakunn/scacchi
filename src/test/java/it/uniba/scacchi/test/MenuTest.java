@@ -49,14 +49,14 @@ public class MenuTest {
 	// assertEquals(menu.help(),help);
 	// }
 	//
-	@Test
-	void PawnTest() {
-		String[] mossa = { "\u2659", null, "e4" };
-		try {
-			assertArrayEquals(mossa, menu.getMove("e4"));
-		} catch (IllegalArgumentException | IndexOutOfBoundsException | IllegalMoveException e) {
+	//@Test
+	///void PawnTest() {
+		//String[] mossa = { "\u2659", null, "e4" };
+		//try {
+			//assertArrayEquals(mossa, menu.getMove("e4"));
+		//} catch (IllegalArgumentException | IndexOutOfBoundsException | IllegalMoveException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+			//e.printStackTrace();
+		//}
+	//}
 }
