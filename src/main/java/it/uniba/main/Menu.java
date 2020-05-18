@@ -143,9 +143,11 @@ public class Menu {
 
           
         } else
+
         throw new IllegalMoveException(
               "errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
         
+
       case 'O':
         if (input.equals("O-O")) {
          
@@ -157,8 +159,10 @@ public class Menu {
             return game.longCastling();
           
         } else
+
         throw new IllegalMoveException(
               "errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
+
       default:
         if (input.length() == 2) {
           
