@@ -78,7 +78,7 @@ public final class AppMain {
             menu.play();
             System.out.println("Partita creata.");
           } else {
-            System.out.println("Partita gia'� avviata. Vuoi cancellarla ed iniziare un nuova?");
+            System.out.println("Partita gia' avviata. Vuoi cancellarla ed iniziare un nuova?");
             while (true) {
               String answer = in.nextLine();
               if (answer.toUpperCase().equals("SI") || answer.toUpperCase().equals("YES")) {
