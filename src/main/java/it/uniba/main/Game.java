@@ -603,27 +603,37 @@ class Game {
     int vCheck; // sentinella dell'ascissa
     int hCheck; // sentinella dell'ordinata
     Queen q;
+    int color; //colore della regina da muovere
+    int[] coordOfKing = new int[2];
+ 
+    if (blackTurn == true) {
+      color = 0;
+      coordOfKing = coordBlackKing;
+    } else {
+      color = 1;
+      coordOfKing = coordWhiteKing;
+    }
 
     String[] pieceAndCell = new String[3]; //0 Donna, 2 cella di dest
 
     y = (int) move.charAt(1) - 97;
     x = 8 - Integer.parseInt(move.substring(2, 3));
-    if (blackTurn == true) {
+    
       if (board[x][y].getPiece() == null) {
         vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
         while (vCheck < 8) {
           if ((board[vCheck][y].getPiece() instanceof Queen)
-              && (board[vCheck][y].getPiece().getColor() == 0)) {
+              && (board[vCheck][y].getPiece().getColor() == color)) {
             q = (Queen) board[vCheck][y].getPiece();
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][y].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
+              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -638,17 +648,17 @@ class Game {
         vCheck = x - 1;
         while (vCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
           if ((board[vCheck][y].getPiece() instanceof Queen)
-              && (board[vCheck][y].getPiece().getColor() == 0)) {
+              && (board[vCheck][y].getPiece().getColor() == color)) {
             q = (Queen) board[vCheck][y].getPiece();
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -662,17 +672,17 @@ class Game {
         hCheck = y + 1; // controllo in orizzontale a destra
         while (hCheck < 8) {
           if ((board[x][hCheck].getPiece() instanceof Queen)
-              && (board[x][hCheck].getPiece().getColor() == 0)) {
+              && (board[x][hCheck].getPiece().getColor() == color)) {
             q = (Queen) board[x][hCheck].getPiece();
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setEmpty();
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -686,17 +696,17 @@ class Game {
         hCheck = y - 1;
         while (hCheck >= 0) { // controllo in orizzontale a sinistra
           if ((board[x][hCheck].getPiece() instanceof Queen)
-              && (board[x][hCheck].getPiece().getColor() == 0)) {
+              && (board[x][hCheck].getPiece().getColor() == color)) {
             q = (Queen) board[x][hCheck].getPiece();
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setEmpty();
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -711,17 +721,17 @@ class Game {
         hCheck = y - 1;
         while (vCheck >= 0 && hCheck >= 0) { // controllo diagonale alta sinistra
           if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+              && (board[vCheck][hCheck].getPiece().getColor() == color)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -737,17 +747,17 @@ class Game {
         hCheck = y + 1;
         while (vCheck >= 0 && hCheck < 8) { // controllo diagonale alta destra
           if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+              && (board[vCheck][hCheck].getPiece().getColor() == color)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -763,17 +773,17 @@ class Game {
         hCheck = y - 1;
         while (vCheck < 8 && hCheck >= 0) { // controllo diagonale bassa sinistra
           if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+              && (board[vCheck][hCheck].getPiece().getColor() == color)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -790,17 +800,17 @@ class Game {
         hCheck = y + 1;
         while (vCheck < 8 && hCheck < 8) { // controllo diagonale bassa destra
           if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 0)) {
+              && (board[vCheck][hCheck].getPiece().getColor() == color)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setEmpty();
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -816,216 +826,6 @@ class Game {
 
       } else
         throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota");
-
-    } else { // neri
-      if (board[x][y].getPiece() == null) {
-        vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
-        while (vCheck < 8) {
-          if ((board[vCheck][y].getPiece() instanceof Queen)
-              && (board[vCheck][y].getPiece().getColor() == 1)) {
-            q = (Queen) board[vCheck][y].getPiece();
-            board[vCheck][y].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setEmpty();
-              board[vCheck][y].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
-            } else {
-              movesDone.add(move);
-              blackTurn = true;
-              pieceAndCell[0] = q.toString();
-              pieceAndCell[2] = move.substring(1, 3);
-              return pieceAndCell;
-            }
-
-          } else if (board[vCheck][y].getPiece() != null) {
-            break;
-          } else {
-            vCheck++;
-          }
-        }
-        vCheck = x - 1;
-        while (vCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
-          if ((board[vCheck][y].getPiece() instanceof Queen)
-              && (board[vCheck][y].getPiece().getColor() == 1)) {
-            q = (Queen) board[vCheck][y].getPiece();
-            board[vCheck][y].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setEmpty();
-              board[vCheck][y].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
-            } else {
-              movesDone.add(move);
-              blackTurn = true;
-              pieceAndCell[0] = q.toString();
-              pieceAndCell[2] = move.substring(1, 3);
-              return pieceAndCell;
-            }
-          } else if (board[vCheck][y].getPiece() != null) {
-            break;
-          } else {
-            vCheck--;
-          }
-        }
-        hCheck = y + 1; // controllo in orizzontale a destra
-        while (hCheck < 8) {
-          if ((board[x][hCheck].getPiece() instanceof Queen)
-              && (board[x][hCheck].getPiece().getColor() == 1)) {
-            q = (Queen) board[x][hCheck].getPiece();
-            board[x][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setEmpty();
-              board[x][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
-            } else {
-              movesDone.add(move);
-              blackTurn = true;
-              pieceAndCell[0] = q.toString();
-              pieceAndCell[2] = move.substring(1, 3);
-              return pieceAndCell;
-            }
-          } else if (board[x][hCheck].getPiece() != null) {
-            break;
-          } else {
-            hCheck++;
-          }
-        }
-        hCheck = y - 1;
-        while (hCheck >= 0) { // controllo in orizzontale a sinistra
-          if ((board[x][hCheck].getPiece() instanceof Queen)
-              && (board[x][hCheck].getPiece().getColor() == 1)) {
-            q = (Queen) board[x][hCheck].getPiece();
-            board[x][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setEmpty();
-              board[x][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
-            } else {
-              movesDone.add(move);
-              blackTurn = true;
-              pieceAndCell[0] = q.toString();
-              pieceAndCell[2] = move.substring(1, 3);
-              return pieceAndCell;
-            }
-          } else if (board[x][hCheck].getPiece() != null) {
-            break;
-          } else {
-            hCheck--;
-          }
-        }
-        vCheck = x - 1;
-        hCheck = y - 1;
-        while (vCheck >= 0 && hCheck >= 0) { // controllo diagonale alta sinistra
-          if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 1)) {
-            q = (Queen) board[vCheck][hCheck].getPiece();
-            board[vCheck][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setEmpty();
-              board[vCheck][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
-            } else {
-              movesDone.add(move);
-              blackTurn = true;
-              pieceAndCell[0] = q.toString();
-              pieceAndCell[2] = move.substring(1, 3);
-              return pieceAndCell;
-            }
-          } else if (board[vCheck][hCheck].getPiece() != null) {
-            break;
-          } else {
-            vCheck--;
-            hCheck--;
-          }
-        }
-        vCheck = x - 1;
-        hCheck = y + 1;
-        while (vCheck >= 0 && hCheck < 8) { // controllo diagonale alta destra
-          if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 1)) {
-            q = (Queen) board[vCheck][hCheck].getPiece();
-            board[vCheck][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setEmpty();
-              board[vCheck][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
-            } else {
-              movesDone.add(move);
-              blackTurn = true;
-              pieceAndCell[0] = q.toString();
-              pieceAndCell[2] = move.substring(1, 3);
-              return pieceAndCell;
-            }
-          } else if (board[vCheck][hCheck].getPiece() != null) {
-            break;
-          } else {
-            vCheck--;
-            hCheck++;
-          }
-        }
-        vCheck = x + 1;
-        hCheck = y - 1;
-        while (vCheck < 8 && hCheck >= 0) { // controllo diagonale bassa sinistra
-          if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 1)) {
-            q = (Queen) board[vCheck][hCheck].getPiece();
-            board[vCheck][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setEmpty();
-              board[vCheck][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
-            } else {
-              movesDone.add(move);
-              blackTurn = true;
-              pieceAndCell[0] = q.toString();
-              pieceAndCell[2] = move.substring(1, 3);
-              return pieceAndCell;
-            }
-          } else if (board[vCheck][hCheck].getPiece() != null) {
-            break;
-          } else {
-            vCheck++;
-            hCheck--;
-          }
-        }
-
-        vCheck = x + 1;
-        hCheck = y + 1;
-        while (vCheck < 8 && hCheck < 8) { // controllo diagonale bassa destra
-          if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 1)) {
-            q = (Queen) board[vCheck][hCheck].getPiece();
-            board[vCheck][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setEmpty();
-              board[vCheck][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illeggale; metterebbe il re sotto scacco");
-            } else {
-              movesDone.add(move);
-              blackTurn = true;
-              pieceAndCell[0] = q.toString();
-              pieceAndCell[2] = move.substring(1, 3);
-              return pieceAndCell;
-            }
-
-          } else if (board[vCheck][hCheck].getPiece() != null) {
-            break;
-          } else {
-            vCheck++;
-            hCheck++;
-          }
-        }
-        throw new IllegalMoveException("mossa illegale; la donna non puo' muoversi qui");
-      } else
-        throw new IllegalMoveException("mossa illegale; la cella di destinazione non e' vuota");
-    }
   }
 
   String[] captureQueen(String move) throws IllegalMoveException {
@@ -1037,16 +837,25 @@ class Game {
     Queen q;
     Piece caught;
     String pieces[] = new String[3];
+    int color;
+    int[]coordOfKing = new int[2];
+
+    if (blackTurn == true) {
+      color = 0;
+      coordOfKing = coordBlackKing;
+    } else {
+      color = 1;
+      coordOfKing = coordWhiteKing;
+    }
 
     y = (int) move.charAt(2) - 97;
     x = 8 - Integer.parseInt(move.substring(3, 4));
-    if (blackTurn == true) {
       if (board[x][y].getPiece() != null) {
         vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
         while (vCheck < 8) {
           if ((board[vCheck][y].getPiece() instanceof Queen)
-              && (board[vCheck][y].getPiece().getColor() == 0)
-              && (board[x][y].getPiece().getColor() == 1)) {
+              && (board[vCheck][y].getPiece().getColor() == color)
+              && (board[x][y].getPiece().getColor() != color)) {
             q = (Queen) board[vCheck][y].getPiece();
             caught = (Piece) board[x][y].getPiece();
             pieces[0] = q.toString();
@@ -1054,14 +863,18 @@ class Game {
             pieces[2] = move.substring(2, 4);
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
+              if (blackTurn) {
               BlacksCaptured.add(caught.toString());
+              } else {
+                WhitesCaptured.add(caught.toString());
+              }
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               return pieces;
             }
 
@@ -1074,8 +887,8 @@ class Game {
         vCheck = x - 1;
         while (vCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
           if ((board[vCheck][y].getPiece() instanceof Queen)
-              && (board[vCheck][y].getPiece().getColor() == 0)
-              && (board[x][y].getPiece().getColor() == 1)) {
+          && (board[vCheck][y].getPiece().getColor() == color)
+          && (board[x][y].getPiece().getColor() != color)) {
             q = (Queen) board[vCheck][y].getPiece();
             caught = (Piece) board[x][y].getPiece();
             pieces[0] = q.toString();
@@ -1083,14 +896,18 @@ class Game {
             pieces[2] = move.substring(2, 4);
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(caught.toString());
+              if (blackTurn) {
+                BlacksCaptured.add(caught.toString());
+                } else {
+                  WhitesCaptured.add(caught.toString());
+                }
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               return pieces;
             }
           } else if (board[vCheck][y].getPiece() != null) {
@@ -1102,8 +919,8 @@ class Game {
         hCheck = y + 1; // controllo in orizzontale a destra
         while (hCheck < 8) {
           if ((board[x][hCheck].getPiece() instanceof Queen)
-              && (board[x][hCheck].getPiece().getColor() == 0)
-              && (board[x][y].getPiece().getColor() == 1)) {
+          && (board[vCheck][y].getPiece().getColor() == color)
+          && (board[x][y].getPiece().getColor() != color)) {
             q = (Queen) board[x][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
             pieces[0] = q.toString();
@@ -1111,14 +928,18 @@ class Game {
             pieces[2] = move.substring(2, 4);
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setPiece(caught);
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(caught.toString());
+              if (blackTurn) {
+                BlacksCaptured.add(caught.toString());
+                } else {
+                  WhitesCaptured.add(caught.toString());
+                }
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               return pieces;
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -1130,8 +951,8 @@ class Game {
         hCheck = y - 1;
         while (hCheck >= 0) { // controllo in orizzontale a sinistra
           if ((board[x][hCheck].getPiece() instanceof Queen)
-              && (board[x][hCheck].getPiece().getColor() == 0)
-              && (board[x][y].getPiece().getColor() == 1)) {
+          && (board[vCheck][y].getPiece().getColor() == color)
+          && (board[x][y].getPiece().getColor() != color)) {
             q = (Queen) board[x][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
             pieces[0] = q.toString();
@@ -1139,14 +960,18 @@ class Game {
             pieces[2] = move.substring(2, 4);
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setPiece(caught);
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(caught.toString());
+              if (blackTurn) {
+                BlacksCaptured.add(caught.toString());
+                } else {
+                  WhitesCaptured.add(caught.toString());
+                }
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               return pieces;
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -1159,8 +984,8 @@ class Game {
         hCheck = y - 1;
         while (vCheck >= 0 && hCheck >= 0) { // controllo diagonale alta sinistra
           if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 0)
-              && (board[x][y].getPiece().getColor() == 1)) {
+          && (board[vCheck][y].getPiece().getColor() == color)
+          && (board[x][y].getPiece().getColor() != color)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
             pieces[0] = q.toString();
@@ -1168,14 +993,18 @@ class Game {
             pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(caught.toString());
+              if (blackTurn) {
+                BlacksCaptured.add(caught.toString());
+                } else {
+                  WhitesCaptured.add(caught.toString());
+                }
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1189,8 +1018,8 @@ class Game {
         hCheck = y + 1;
         while (vCheck >= 0 && hCheck < 8) { // controllo diagonale alta destra
           if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 0)
-              && (board[x][y].getPiece().getColor() == 1)) {
+          && (board[vCheck][y].getPiece().getColor() == color)
+          && (board[x][y].getPiece().getColor() != color)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
             pieces[0] = q.toString();
@@ -1198,14 +1027,18 @@ class Game {
             pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(caught.toString());
+              if (blackTurn) {
+                BlacksCaptured.add(caught.toString());
+                } else {
+                  WhitesCaptured.add(caught.toString());
+                }
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1219,8 +1052,8 @@ class Game {
         hCheck = y - 1;
         while (vCheck < 8 && hCheck >= 0) { // controllo diagonale bassa sinistra
           if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 0)
-              && (board[x][y].getPiece().getColor() == 1)) {
+          && (board[vCheck][y].getPiece().getColor() == color)
+          && (board[x][y].getPiece().getColor() != color)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
             pieces[0] = q.toString();
@@ -1228,14 +1061,18 @@ class Game {
             pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(caught.toString());
+              if (blackTurn) {
+                BlacksCaptured.add(caught.toString());
+                } else {
+                  WhitesCaptured.add(caught.toString());
+                }
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1250,8 +1087,8 @@ class Game {
         hCheck = y + 1;
         while (vCheck < 8 && hCheck < 8) { // controllo diagonale bassa destra
           if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 0)
-              && (board[x][y].getPiece().getColor() == 1)) {
+          && (board[vCheck][y].getPiece().getColor() == color)
+          && (board[x][y].getPiece().getColor() != color)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
             pieces[0] = q.toString();
@@ -1259,14 +1096,18 @@ class Game {
             pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
+            if (King.isThreatened(board, blackTurn, coordOfKing[0], coordOfKing[1])) {
               board[x][y].setPiece(caught);
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
             } else {
-              BlacksCaptured.add(caught.toString());
+              if (blackTurn) {
+                BlacksCaptured.add(caught.toString());
+                } else {
+                  WhitesCaptured.add(caught.toString());
+                }
               movesDone.add(move);
-              blackTurn = false;
+              blackTurn = !blackTurn;
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1279,247 +1120,6 @@ class Game {
         throw new IllegalMoveException(
             "mossa illegale; la donna non puo' effettuare la cattura nella cella di destinazione data");
       } else throw new IllegalMoveException("mossa illegale; la cella di destinazione e' vuota");
-
-    } else {
-      if (board[x][y].getPiece() != null) {
-        vCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
-        while (vCheck < 8) {
-          if ((board[vCheck][y].getPiece() instanceof Queen)
-              && (board[vCheck][y].getPiece().getColor() == 1)
-              && (board[x][y].getPiece().getColor() == 0)) {
-            q = (Queen) board[vCheck][y].getPiece();
-            caught = (Piece) board[x][y].getPiece();
-            pieces[0] = q.toString();
-            pieces[1] = caught.toString();
-            pieces[2] = move.substring(2, 4);
-            board[vCheck][y].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setPiece(caught);
-              board[vCheck][y].setPiece(q);
-              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
-            } else {
-              WhitesCaptured.add(caught.toString());
-              movesDone.add(move);
-              blackTurn = true;
-              return pieces;
-            }
-
-          } else if (board[vCheck][y].getPiece() != null) {
-            break;
-          } else {
-            vCheck++;
-          }
-        }
-        vCheck = x - 1;
-        while (vCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
-          if ((board[vCheck][y].getPiece() instanceof Queen)
-              && (board[vCheck][y].getPiece().getColor() == 1)
-              && (board[x][y].getPiece().getColor() == 0)) {
-            q = (Queen) board[vCheck][y].getPiece();
-            caught = (Piece) board[x][y].getPiece();
-            pieces[0] = q.toString();
-            pieces[1] = caught.toString();
-            pieces[2] = move.substring(2, 4);
-            board[vCheck][y].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setPiece(caught);
-              board[vCheck][y].setPiece(q);
-              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
-            } else {
-              WhitesCaptured.add(caught.toString());
-              movesDone.add(move);
-              blackTurn = true;
-              return pieces;
-            }
-          } else if (board[vCheck][y].getPiece() != null) {
-            break;
-          } else {
-            vCheck--;
-          }
-        }
-        hCheck = y + 1; // controllo in orizzontale a destra
-        while (hCheck < 8) {
-          if ((board[x][hCheck].getPiece() instanceof Queen)
-              && (board[x][hCheck].getPiece().getColor() == 1)
-              && (board[x][y].getPiece().getColor() == 0)) {
-            q = (Queen) board[x][hCheck].getPiece();
-            caught = (Piece) board[x][y].getPiece();
-            pieces[0] = q.toString();
-            pieces[1] = caught.toString();
-            pieces[2] = move.substring(2, 4);
-            board[x][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setPiece(caught);
-              board[x][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
-            } else {
-              WhitesCaptured.add(caught.toString());
-              movesDone.add(move);
-              blackTurn = true;
-              return pieces;
-            }
-          } else if (board[x][hCheck].getPiece() != null) {
-            break;
-          } else {
-            hCheck++;
-          }
-        }
-        hCheck = y - 1;
-        while (hCheck >= 0) { // controllo in orizzontale a sinistra
-          if ((board[x][hCheck].getPiece() instanceof Queen)
-              && (board[x][hCheck].getPiece().getColor() == 1)
-              && (board[x][y].getPiece().getColor() == 0)) {
-            q = (Queen) board[x][hCheck].getPiece();
-            caught = (Piece) board[x][y].getPiece();
-            pieces[0] = q.toString();
-            pieces[1] = caught.toString();
-            pieces[2] = move.substring(2, 4);
-            board[x][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setPiece(caught);
-              board[x][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
-            } else {
-              WhitesCaptured.add(caught.toString());
-              movesDone.add(move);
-              blackTurn = true;
-              return pieces;
-            }
-          } else if (board[x][hCheck].getPiece() != null) {
-            break;
-          } else {
-            hCheck--;
-          }
-        }
-        vCheck = x - 1;
-        hCheck = y - 1;
-        while (vCheck >= 0 && hCheck >= 0) { // controllo diagonale alta sinistra
-          if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 1)
-              && (board[x][y].getPiece().getColor() == 0)) {
-            q = (Queen) board[vCheck][hCheck].getPiece();
-            caught = (Piece) board[x][y].getPiece();
-            pieces[0] = q.toString();
-            pieces[1] = caught.toString();
-            pieces[2] = move.substring(2, 4);
-            board[vCheck][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setPiece(caught);
-              board[vCheck][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
-            } else {
-              WhitesCaptured.add(caught.toString());
-              movesDone.add(move);
-              blackTurn = true;
-              return pieces;
-            }
-          } else if (board[vCheck][hCheck].getPiece() != null) {
-            break;
-          } else {
-            vCheck--;
-            hCheck--;
-          }
-        }
-        vCheck = x - 1;
-        hCheck = y + 1;
-        while (vCheck >= 0 && hCheck < 8) { // controllo diagonale alta destra
-          if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 1)
-              && (board[x][y].getPiece().getColor() == 0)) {
-            q = (Queen) board[vCheck][hCheck].getPiece();
-            caught = (Piece) board[x][y].getPiece();
-            pieces[0] = q.toString();
-            pieces[1] = caught.toString();
-            pieces[2] = move.substring(2, 4);
-            board[vCheck][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setPiece(caught);
-              board[vCheck][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
-            } else {
-              WhitesCaptured.add(caught.toString());
-              movesDone.add(move);
-              blackTurn = true;
-              return pieces;
-            }
-          } else if (board[vCheck][hCheck].getPiece() != null) {
-            break;
-          } else {
-            vCheck--;
-            hCheck++;
-          }
-        }
-        vCheck = x + 1;
-        hCheck = y - 1;
-        while (vCheck < 8 && hCheck >= 0) { // controllo diagonale bassa sinistra
-          if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 1)
-              && (board[x][y].getPiece().getColor() == 0)) {
-            q = (Queen) board[vCheck][hCheck].getPiece();
-            caught = (Piece) board[x][y].getPiece();
-            pieces[0] = q.toString();
-            pieces[1] = caught.toString();
-            pieces[2] = move.substring(2, 4);
-            board[vCheck][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setPiece(caught);
-              board[vCheck][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
-            } else {
-              WhitesCaptured.add(caught.toString());
-              movesDone.add(move);
-              blackTurn = true;
-              return pieces;
-            }
-          } else if (board[vCheck][hCheck].getPiece() != null) {
-            break;
-          } else {
-            vCheck++;
-            hCheck--;
-          }
-        }
-
-        vCheck = x + 1;
-        hCheck = y + 1;
-        while (vCheck < 8 && hCheck < 8) { // controllo diagonale bassa destra
-          if ((board[vCheck][hCheck].getPiece() instanceof Queen)
-              && (board[vCheck][hCheck].getPiece().getColor() == 1)
-              && (board[x][y].getPiece().getColor() == 0)) {
-            q = (Queen) board[vCheck][hCheck].getPiece();
-            caught = (Piece) board[x][y].getPiece();
-            pieces[0] = q.toString();
-            pieces[1] = caught.toString();
-            pieces[2] = move.substring(2, 4);
-            board[vCheck][hCheck].setEmpty();
-            board[x][y].setPiece(q);
-            if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
-              board[x][y].setPiece(caught);
-              board[vCheck][hCheck].setPiece(q);
-              throw new IllegalMoveException("mossa illegale; metterebbe il re sotto scacco");
-            } else {
-              WhitesCaptured.add(caught.toString());
-              movesDone.add(move);
-              blackTurn = true;
-              return pieces;
-            }
-          } else if (board[vCheck][hCheck].getPiece() != null) {
-            break;
-          } else {
-            vCheck++;
-            hCheck++;
-          }
-        }
-        throw new IllegalMoveException(
-            "mossa illegale; la donna non puo' effettuare la cattura nella cella di destinazione data");
-      } else throw new IllegalMoveException("mossa illegale; la cella di destinazione e' vuota");
-    }
   }
 
   String[] moveBishop(String move) throws IllegalMoveException {
