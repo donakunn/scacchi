@@ -2371,7 +2371,7 @@ class Game {
             movesDone.add("0-0");
             blackTurn = false;
           } else {
-            throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
+            throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
           }
 
         } else {
@@ -2412,7 +2412,7 @@ class Game {
             movesDone.add("0-0");
             blackTurn = true;
           } else {
-            throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
+            throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
           }
 
         } else {
@@ -2455,7 +2455,7 @@ class Game {
             movesDone.add("0-0-0");
             blackTurn = false;
           } else {
-            throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
+            throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
           }
 
         } else {
@@ -2496,7 +2496,7 @@ class Game {
             movesDone.add("0-0-0");
             blackTurn = true;
           } else {
-            throw new IllegalMoveException("Mossa illegale; il percorso non e' libero");
+            throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
           }
 
         } else {
