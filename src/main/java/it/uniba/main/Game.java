@@ -75,7 +75,7 @@ class Game {
     board[7][7] = new Cell(new Rook(0));
   }
 
-  String moveAPawn(String move) throws IllegalMoveException {
+  String[] moveAPawn(String move) throws IllegalMoveException {
     int x; // ascissa
     int y; // ordinata
 
@@ -83,6 +83,7 @@ class Game {
     x = 8 - Integer.parseInt(move.substring(1, 2));
 
     Pawn p;
+    String[] pieceAndCell = new String[3]; //0 pezzo che viene mosso, //2 cella di destinazione
 
     if ((x > 0)
         && (x < 8)
@@ -104,7 +105,9 @@ class Game {
           movesDone.add(move);
           p.incrementMoves();
           blackTurn = true;
-          return p.toString();
+          pieceAndCell[0] = p.toString();
+          pieceAndCell[2] = move;
+          return pieceAndCell;
         }
       } else
         throw new IllegalMoveException("Mossa illegale; la cella di destinazione non e' vuota.");
@@ -130,7 +133,9 @@ class Game {
           movesDone.add(move);
           p.incrementMoves();
           blackTurn = true;
-          return p.toString();
+          pieceAndCell[0] = p.toString();
+          pieceAndCell[2] = move;
+          return pieceAndCell;
         }
       } else
         throw new IllegalMoveException("Mossa illegale; la cella di destinazione non e' vuota.");
@@ -154,7 +159,9 @@ class Game {
           movesDone.add(move);
           p.incrementMoves();
           blackTurn = false;
-          return p.toString();
+          pieceAndCell[0] = p.toString();
+          pieceAndCell[2] = move;
+          return pieceAndCell;
         }
       } else
         throw new IllegalMoveException("Mossa illegale; la cella di destinazione non e' vuota.");
@@ -180,7 +187,9 @@ class Game {
           movesDone.add(move);
           p.incrementMoves();
           blackTurn = false;
-          return p.toString();
+          pieceAndCell[0] = p.toString();
+          pieceAndCell[2] = move;
+          return pieceAndCell;
         }
       } else
         throw new IllegalMoveException("Mossa illegale; la cella di destinazione non e' vuota.");
@@ -195,7 +204,7 @@ class Game {
     int z; // colonna del pezzo di provenienza
 
     Piece p, caught;
-    String[] pieces = new String[2]; // 0 pezzo catturato, 1 pezzo che cattura
+    String[] pieces = new String[3]; // 0 pezzo che cattura, 1 pezzo catturato, 2 cella di destinazione
 
     y = (int) (move.charAt(2)) - 97;
     x =
@@ -234,8 +243,9 @@ class Game {
                   movesDone.add(move);
                   this.WhitesCaptured.add(caught.toString());
                   blackTurn = true;
-                  pieces[0] = caught.toString();
-                  pieces[1] = p.toString();
+                  pieces[0] = p.toString();
+                  pieces[1] = caught.toString();
+                  pieces[2] = move.substring(2, 4);
                   return pieces;
                 }
               } else
@@ -263,8 +273,9 @@ class Game {
                   movesDone.add(move);
                   this.WhitesCaptured.add(caught.toString());
                   blackTurn = true;
-                  pieces[0] = caught.toString();
-                  pieces[1] = p.toString();
+                  pieces[0] = p.toString();
+                  pieces[1] = caught.toString();
+                  pieces[2] = move.substring(2, 4);
                   return pieces;
                 }
               } else
@@ -298,8 +309,9 @@ class Game {
                   movesDone.add(move);
                   this.BlacksCaptured.add(caught.toString());
                   blackTurn = false;
-                  pieces[0] = caught.toString();
-                  pieces[1] = p.toString();
+                  pieces[0] = p.toString();
+                  pieces[1] = caught.toString();
+                  pieces[2] = move.substring(2, 4);
                   return pieces;
                 }
               } else
@@ -327,8 +339,9 @@ class Game {
                   movesDone.add(move);
                   this.BlacksCaptured.add(caught.toString());
                   blackTurn = false;
-                  pieces[0] = caught.toString();
-                  pieces[1] = p.toString();
+                  pieces[0] = p.toString();
+                  pieces[1] = caught.toString();
+                  pieces[2] = move.substring(2, 4);
                   return pieces;
                 }
               } else
@@ -353,7 +366,7 @@ class Game {
     int z; // colonna del pezzo di provenienza
 
     Piece p;
-    String[] pieces = new String[2]; // 0 pezzo catturato, 1 pezzo che cattura
+    String[] pieces = new String[3]; // 0 pezzo catturato, 1 pezzo che cattura //2 cella di destinazione
 
     y = (int) (move.charAt(2)) - 97;
     x = 8 - Integer.parseInt(move.substring(3, 4));
@@ -378,8 +391,9 @@ class Game {
                 movesDone.add(move);
                 this.WhitesCaptured.add(caught.toString());
                 blackTurn = true;
-                pieces[0] = caught.toString();
-                pieces[1] = p.toString();
+                pieces[0] = p.toString();
+                pieces[1] = caught.toString();
+                pieces[2] = move.substring(2, 4) + " e.p." ;
                 return pieces;
               }
             } else
@@ -412,8 +426,9 @@ class Game {
                 movesDone.add(move);
                 this.WhitesCaptured.add(caught.toString());
                 blackTurn = true;
-                pieces[0] = caught.toString();
-                pieces[1] = p.toString();
+                pieces[0] = p.toString();
+                pieces[1] = caught.toString();
+                pieces[2] = move.substring(2, 4) + " e.p." ;
                 return pieces;
               }
             } else
@@ -452,8 +467,9 @@ class Game {
                 movesDone.add(move);
                 this.BlacksCaptured.add(caught.toString());
                 blackTurn = false;
-                pieces[0] = caught.toString();
-                pieces[1] = p.toString();
+                pieces[0] = p.toString();
+                pieces[1] = caught.toString();
+                pieces[2] = move.substring(2, 4) + " e.p." ;
                 return pieces;
               }
             } else
@@ -486,8 +502,9 @@ class Game {
                 movesDone.add(move);
                 this.BlacksCaptured.add(caught.toString());
                 blackTurn = false;
-                pieces[0] = caught.toString();
-                pieces[1] = p.toString();
+                pieces[0] = p.toString();
+                pieces[1] = caught.toString();
+                pieces[2] = move.substring(2, 4) + " e.p." ;
                 return pieces;
               }
             } else
@@ -580,12 +597,14 @@ class Game {
     return printOut;
   }
 
-  String moveQueen(String move) throws IllegalMoveException {
+  String[] moveQueen(String move) throws IllegalMoveException {
     int x; // ascissa
     int y; // ordinata
     int vCheck; // sentinella dell'ascissa
     int hCheck; // sentinella dell'ordinata
     Queen q;
+
+    String[] pieceAndCell = new String[3]; //0 Donna, 2 cella di dest
 
     y = (int) move.charAt(1) - 97;
     x = 8 - Integer.parseInt(move.substring(2, 3));
@@ -605,7 +624,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
 
           } else if (board[vCheck][y].getPiece() != null) {
@@ -628,7 +649,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][y].getPiece() != null) {
             break;
@@ -650,7 +673,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[x][hCheck].getPiece() != null) {
             break;
@@ -672,7 +697,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[x][hCheck].getPiece() != null) {
             break;
@@ -695,7 +722,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
             break;
@@ -719,7 +748,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
             break;
@@ -743,7 +774,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
             break;
@@ -768,7 +801,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
             break;
@@ -798,7 +833,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
 
           } else if (board[vCheck][y].getPiece() != null) {
@@ -821,7 +858,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][y].getPiece() != null) {
             break;
@@ -843,7 +882,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[x][hCheck].getPiece() != null) {
             break;
@@ -865,7 +906,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[x][hCheck].getPiece() != null) {
             break;
@@ -888,7 +931,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
             break;
@@ -912,7 +957,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
             break;
@@ -936,7 +983,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
             break;
@@ -961,7 +1010,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return q.toString();
+              pieceAndCell[0] = q.toString();
+              pieceAndCell[2] = move.substring(1, 3);
+              return pieceAndCell;
             }
 
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -985,7 +1036,7 @@ class Game {
     int hCheck; // sentinella dell'ordinata
     Queen q;
     Piece caught;
-    String pieces[] = new String[2];
+    String pieces[] = new String[3];
 
     y = (int) move.charAt(2) - 97;
     x = 8 - Integer.parseInt(move.substring(3, 4));
@@ -998,8 +1049,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             q = (Queen) board[vCheck][y].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1026,9 +1078,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             q = (Queen) board[vCheck][y].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1054,9 +1106,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             q = (Queen) board[x][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1082,9 +1134,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             q = (Queen) board[x][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1111,9 +1163,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1141,9 +1193,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1171,9 +1223,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1202,9 +1254,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1237,9 +1289,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             q = (Queen) board[vCheck][y].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1266,9 +1318,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             q = (Queen) board[vCheck][y].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][y].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1294,9 +1346,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             q = (Queen) board[x][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1322,9 +1374,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             q = (Queen) board[x][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[x][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1351,9 +1403,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1381,9 +1433,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1411,9 +1463,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1442,9 +1494,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             q = (Queen) board[vCheck][hCheck].getPiece();
             caught = (Piece) board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = q.toString();
-
+            pieces[0] = q.toString();
+            pieces[1] = caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[vCheck][hCheck].setEmpty();
             board[x][y].setPiece(q);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1470,7 +1522,7 @@ class Game {
     }
   }
 
-  String moveBishop(String move) throws IllegalMoveException {
+  String[] moveBishop(String move) throws IllegalMoveException {
     int x;
     int y;
     int xB;
@@ -1479,6 +1531,7 @@ class Game {
 
     y = (int) move.charAt(1) - 97;
     x = 8 - Integer.parseInt(move.substring(2, 3));
+    String[] piecesAndCell = new String[3];
 
     if (blackTurn == true) { // tutti i controlli per i pezzi bianchi
       if (board[x][y].getPiece() == null) {
@@ -1498,7 +1551,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return b.toString();
+              piecesAndCell[0] = b.toString();
+              piecesAndCell[2] = move.substring(1, 3);
+              return piecesAndCell;
             }
           } else if (board[xB][yB].getPiece() != null) {
             break;
@@ -1523,7 +1578,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return b.toString();
+              piecesAndCell[0] = b.toString();
+              piecesAndCell[2] = move.substring(1, 3);
+              return piecesAndCell;
             }
           } else if (board[xB][yB].getPiece() != null) {
             break;
@@ -1548,7 +1605,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return b.toString();
+              piecesAndCell[0] = b.toString();
+              piecesAndCell[2] = move.substring(1, 3);
+              return piecesAndCell;
             }
           } else if (board[xB][yB].getPiece() != null) {
             break;
@@ -1573,7 +1632,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = false;
-              return b.toString();
+              piecesAndCell[0] = b.toString();
+              piecesAndCell[2] = move.substring(1, 3);
+              return piecesAndCell;
             }
           } else if (board[xB][yB].getPiece() != null) {
             break;
@@ -1604,7 +1665,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return b.toString();
+              piecesAndCell[0] = b.toString();
+              piecesAndCell[2] = move.substring(1, 3);
+              return piecesAndCell;
             }
           } else if (board[xB][yB].getPiece() != null) {
             break;
@@ -1629,7 +1692,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return b.toString();
+              piecesAndCell[0] = b.toString();
+              piecesAndCell[2] = move.substring(1, 3);
+              return piecesAndCell;
             }
           } else if (board[xB][yB].getPiece() != null) {
             break;
@@ -1654,7 +1719,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return b.toString();
+              piecesAndCell[0] = b.toString();
+              piecesAndCell[2] = move.substring(1, 3);
+              return piecesAndCell;
             }
           } else if (board[xB][yB].getPiece() != null) {
             break;
@@ -1679,7 +1746,9 @@ class Game {
             } else {
               movesDone.add(move);
               blackTurn = true;
-              return b.toString();
+              piecesAndCell[0] = b.toString();
+              piecesAndCell[2] = move.substring(1, 3);
+              return piecesAndCell;
             }
           } else if (board[xB][yB].getPiece() != null) {
             break;
@@ -1701,7 +1770,7 @@ class Game {
     int yb;
     Bishop b;
     Piece caught;
-    String pieces[] = new String[2];
+    String pieces[] = new String[3];
 
     y = (int) move.charAt(2) - 97;
     x = 8 - Integer.parseInt(move.substring(3, 4));
@@ -1715,8 +1784,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             b = (Bishop) board[xb][yb].getPiece();
             caught = board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = b.toString();
+            pieces[0] = b.toString();
+            pieces[1] =caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1744,8 +1814,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             b = (Bishop) board[xb][yb].getPiece();
             caught = board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = b.toString();
+            pieces[0] = b.toString();
+            pieces[1] =caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1773,8 +1844,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             b = (Bishop) board[xb][yb].getPiece();
             caught = board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = b.toString();
+            pieces[0] = b.toString();
+            pieces[1] =caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1803,8 +1875,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 1)) {
             b = (Bishop) board[xb][yb].getPiece();
             caught = board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = b.toString();
+            pieces[0] = b.toString();
+            pieces[1] =caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
             if (King.isThreatened(board, blackTurn, coordBlackKing[0], coordBlackKing[1])) {
@@ -1837,8 +1910,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             b = (Bishop) board[xb][yb].getPiece();
             caught = board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = b.toString();
+            pieces[0] = b.toString();
+            pieces[1] =caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1866,8 +1940,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             b = (Bishop) board[xb][yb].getPiece();
             caught = board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = b.toString();
+            pieces[0] = b.toString();
+            pieces[1] =caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1895,8 +1970,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             b = (Bishop) board[xb][yb].getPiece();
             caught = board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = b.toString();
+            pieces[0] = b.toString();
+            pieces[1] =caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -1925,8 +2001,9 @@ class Game {
               && (board[x][y].getPiece().getColor() == 0)) {
             b = (Bishop) board[xb][yb].getPiece();
             caught = board[x][y].getPiece();
-            pieces[0] = board[x][y].getPiece().toString();
-            pieces[1] = b.toString();
+            pieces[0] = b.toString();
+            pieces[1] =caught.toString();
+            pieces[2] = move.substring(2, 4);
             board[xb][yb].setEmpty();
             board[x][y].setPiece(b);
             if (King.isThreatened(board, blackTurn, coordWhiteKing[0], coordWhiteKing[1])) {
@@ -2342,7 +2419,8 @@ class Game {
     blackTurn = !blackTurn;
   }
 
-  void shortCastling() throws IllegalMoveException {
+  String[] shortCastling() throws IllegalMoveException {
+    String[] result = new String[2];
     if (blackTurn == true) {
       if ((board[7][4].getPiece() instanceof King) && (board[7][7].getPiece() instanceof Rook)) {
         // controllo che re e torre siano nella posizione corretta
@@ -2370,6 +2448,8 @@ class Game {
             board[7][7].setEmpty();
             movesDone.add("0-0");
             blackTurn = false;
+            result[0] = "0-0";
+            return result;
           } else {
             throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
           }
@@ -2411,6 +2491,8 @@ class Game {
             board[0][7].setEmpty();
             movesDone.add("0-0");
             blackTurn = true;
+            result[0] = "0-0";
+            return result;
           } else {
             throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
           }
@@ -2427,7 +2509,8 @@ class Game {
     }
   }
 
-  void longCastling() throws IllegalMoveException {
+  String[] longCastling() throws IllegalMoveException {
+    String[] result = new String[2];
     if (blackTurn == true) {
       if ((board[7][4].getPiece() instanceof King) && (board[7][0].getPiece() instanceof Rook)) {
         // controllo che re e torre siano nella posizione corretta
@@ -2453,7 +2536,9 @@ class Game {
             board[7][4].setEmpty();
             board[7][0].setEmpty();
             movesDone.add("0-0-0");
+            result[0] = "0-0-0";
             blackTurn = false;
+            return result;
           } else {
             throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
           }
@@ -2494,7 +2579,9 @@ class Game {
             board[0][4].setEmpty();
             board[0][0].setEmpty();
             movesDone.add("0-0-0");
+            result[0] = "0-0-0";
             blackTurn = true;
+            return result;
           } else {
             throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
           }

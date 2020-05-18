@@ -46,7 +46,7 @@ public final class AppMain {
       switch (input) {
         case "board":
           if (inGame) {
-            menu.board();
+            PrintMessage.printBoard(menu.board());
             break;
           } else {
             System.err.println("Devi essere in gioco per usare questo comando.");
@@ -61,7 +61,7 @@ public final class AppMain {
             break;
           }
         case "help":
-          menu.help();
+          System.out.println(menu.help());
           break;
         case "moves":
           if (inGame) {
@@ -112,9 +112,33 @@ public final class AppMain {
         default:
           if (inGame) {
             try {
-              menu.getMove(input);
+              String[] move= menu.getMove(input);
+              if (move[0] == "0-0") {
+                PrintMessage.printShortCastling();
+                break;
+              }
+              else if (move[0] == "0-0-0") {
+                PrintMessage.printLongCastling();
+                break;
+              }
+
+              if (move[1] == null) {
+              PrintMessage.printAMove(move);
+              } else {
+            	  PrintMessage.printACapture(move);
+            	  PrintMessage.printAMove(move);
+            	  
+              }
+              
             } catch (StringIndexOutOfBoundsException e) {
               System.err.println("Comando non valido.");
+            } catch (IllegalArgumentException e) {
+              System.err.println("Mossa non riconosciuta");
+            } catch (IndexOutOfBoundsException e) {
+              System.err.println(
+                  "Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+            } catch (IllegalMoveException e) {
+              System.err.println(e.getMessage());
             }
 
             break;
