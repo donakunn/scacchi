@@ -74,7 +74,7 @@ public class Menu {
               return pieces;
             }
           } 
-         throw new IllegalMoveException("mossa non consentita per la torre");
+         throw new IllegalMoveException("Mossa non consentita per la torre");
         
       case 'C': //da sistemare
         
@@ -97,7 +97,7 @@ public class Menu {
               return game.moveKnight(input);
             }
           }
-          throw new IllegalMoveException("mossa non consentita per il cavallo");
+          throw new IllegalMoveException("Mossa non consentita per il cavallo");
         
       case 'A':
         if (input.length() == 3) {
@@ -145,7 +145,7 @@ public class Menu {
         } else
 
         throw new IllegalMoveException(
-              "errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
+              "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
         
 
       case 'O':
@@ -161,7 +161,7 @@ public class Menu {
         } else
 
         throw new IllegalMoveException(
-              "errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
+              "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
 
       default:
         if (input.length() == 2) {
