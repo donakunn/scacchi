@@ -40,9 +40,9 @@ public class Menu {
     return board;
   }
 
-  public ArrayList<String> moves() {
-    return game.getMoves();
-    
+  void moves() {
+    ArrayList<String> movesDone = game.getMoves();
+    PrintMessage.printMoves(movesDone);
   }
 
   public void play() {
@@ -159,10 +159,12 @@ public class Menu {
     return Game.getBlackTurn(); 
   }
 
+
   public ArrayList<String> Blackcaptured() {
     return game.getBlacks();
   }
   public ArrayList<String> Whitecaptured() {
 	    return game.getWhites();
 	  }
+
 }

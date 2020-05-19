@@ -1,5 +1,6 @@
 package it.uniba.scacchi.test;
 
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -14,12 +15,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+
 import org.junit.jupiter.api.Test;
 
 import it.uniba.main.IllegalMoveException;
 import it.uniba.main.Menu;
 
 public class MenuTest {
+
 
 	private static Menu menu = new Menu();
 	private ArrayList<String> expectedMoves = new ArrayList<String>();
@@ -56,11 +59,13 @@ public class MenuTest {
 	@Test
 	@DisplayName("Testing help menu print")
 	void testhelp() {
+
 		String help = "Lista di comandi utilizzabili:\n" + "help\n" + "play\n" + "quit\n"
 				+ "Lista di comandi utilizzabili solo se in partita:\n" + "board\n" + "captures\n" + "moves\n"
 				+ "Per effettuare una mossa e' necessario specificarla in notazione algebrica; \nPer la cattura en passant si puo' specificare 'e.p.' o 'ep' alla fine della mossa in notazione algebrica";
 		assertEquals(menu.help(), help);
 	}
+
 
 	 @Test
 	 @DisplayName("Testing new game board print")
@@ -155,4 +160,5 @@ public class MenuTest {
 		
 	}
 	
+
 }
