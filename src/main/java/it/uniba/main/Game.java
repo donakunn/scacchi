@@ -130,8 +130,6 @@ class Game {
               throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
 
             } else {
-              movesDone.add(move);
-              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -155,8 +153,6 @@ class Game {
               board[vCheck][y].setPiece(q);
               throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
             } else {
-              movesDone.add(move);
-              blackTurn = !blackTurn;
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -179,8 +175,7 @@ class Game {
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
             } else {
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+            
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -203,8 +198,7 @@ class Game {
               board[x][hCheck].setPiece(q);
               throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
             } else {
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+           
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -228,8 +222,7 @@ class Game {
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
             } else {
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+           
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -254,8 +247,7 @@ class Game {
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
             } else {
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+             
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -280,8 +272,7 @@ class Game {
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
             } else {
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+          
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -307,8 +298,7 @@ class Game {
               board[vCheck][hCheck].setPiece(q);
               throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
             } else {
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+              
               pieceAndCell[0] = q.toString();
               pieceAndCell[2] = move.substring(1, 3);
               return pieceAndCell;
@@ -361,8 +351,6 @@ class Game {
               } else {
                 WhitesCaptured.add(caught.toString());
               }
-              movesDone.add(move);
-              blackTurn = !blackTurn;
               return pieces;
             }
 
@@ -394,8 +382,7 @@ class Game {
                 } else {
                   WhitesCaptured.add(caught.toString());
                 }
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+            
               return pieces;
             }
           } else if (board[vCheck][y].getPiece() != null) {
@@ -426,8 +413,7 @@ class Game {
                 } else {
                   WhitesCaptured.add(caught.toString());
                 }
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+            
               return pieces;
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -458,8 +444,7 @@ class Game {
                 } else {
                   WhitesCaptured.add(caught.toString());
                 }
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+           
               return pieces;
             }
           } else if (board[x][hCheck].getPiece() != null) {
@@ -491,8 +476,7 @@ class Game {
                 } else {
                   WhitesCaptured.add(caught.toString());
                 }
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+              
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -525,8 +509,7 @@ class Game {
                 } else {
                   WhitesCaptured.add(caught.toString());
                 }
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+              
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -559,8 +542,7 @@ class Game {
                 } else {
                   WhitesCaptured.add(caught.toString());
                 }
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+              
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -594,8 +576,7 @@ class Game {
                 } else {
                   WhitesCaptured.add(caught.toString());
                 }
-              movesDone.add(move);
-              blackTurn = !blackTurn;
+             
               return pieces;
             }
           } else if (board[vCheck][hCheck].getPiece() != null) {
@@ -1703,7 +1684,7 @@ class Game {
     return blackTurn;
   }
 
-  static void changeTurn() {
+  void changeTurn() {
     blackTurn = !blackTurn;
   }
 
@@ -1711,7 +1692,7 @@ class Game {
     return board[x][y];
   }
   
-  static void addMove(String move) {
+  void addMove(String move) {
 	    movesDone.add(move);
   }
 

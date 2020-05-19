@@ -112,12 +112,12 @@ public class Menu {
       } else throw new IllegalMoveException("Mossa non consentita per l'Alfiere");
     case 'D':
       if (input.length() == 3) {
-        
-          return game.moveQueen(input);
+        pieces = game.moveQueen(input);
+        break;
 
       } else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
-        
-          return game.captureQueen(input);
+        pieces = game.captureQueen(input);
+        break;
 
       } else throw new IllegalMoveException("Mossa non consentita per la Donna");
        
@@ -126,29 +126,17 @@ public class Menu {
           return game.moveKing(input);
  
       case '0':
-          if (input.equals("0-0")) {
-                return game.shortCastling(); 
-            } 
-           else if (input.equals("0-0-0")) {
-            
-              return game.longCastling();
+          if (input.equals("0-0") || input.equals("O-O")) {
 
-            
-          } else
-
-          throw new IllegalMoveException(
-                "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
-          
-
-        case 'O':
-          if (input.equals("O-O")) {
+            pieces = game.shortCastling(); 
+            break;
            
-              return game.shortCastling();
-             
-            
-          } else if (input.equals("O-O-O")) {
-            
-              return game.longCastling();
+         
+            } 
+           else if (input.equals("0-0-0") || input.equals("O-O-O")) {
+            pieces = game.longCastling();
+            break;
+
             
           } else
 
@@ -156,8 +144,19 @@ public class Menu {
                 "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
 
       default:
-        return game.moveAPawn(input);
+        pieces = game.moveAPawn(input);
+        break;
     }
+
+    game.addMove(input);
+    game.changeTurn();
+    return pieces;
+
+
+  }
+
+  Boolean getBlackTurn() {
+    return Game.getBlackTurn(); 
   }
 
   void captures() {
