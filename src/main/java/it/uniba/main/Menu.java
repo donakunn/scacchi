@@ -25,7 +25,7 @@ public class Menu {
 	    +"Per effettuare una mossa e' necessario specificarla in notazione algebrica; \nPer la cattura en passant si puo' specificare 'e.p.' o 'ep' alla fine della mossa in notazione algebrica";
   }
 
-  public String[][] board() {
+  String[][] board() {
     String[][] board = new String[8][8];
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
@@ -40,9 +40,9 @@ public class Menu {
     return board;
   }
 
-  public ArrayList<String> moves() {
+  void moves() {
     ArrayList<String> movesDone = game.getMoves();
-    return movesDone;
+    PrintMessage.printMoves(movesDone);
   }
 
   public void play() {
@@ -53,160 +53,114 @@ public class Menu {
     char chosenPiece = input.charAt(0);
     String[] pieces = new String[3];
     switch (chosenPiece) {
-      case 'T': //da sistemare
-          pieces = game.moveRook(input);
-          if (pieces[0] == null) {
-            if (input.length() == 3) {
-              //PrintMessage.printAMove(piece[1], input.substring(1, 3));
-              return pieces;
-            } else if (input.length() == 4) {
-              //PrintMessage.printAMove(piece[1], input.substring(2, 4));
-              return pieces;
-            }
-          } else {
-            if (input.length() == 4) {
-              //PrintMessage.printACapture(piece, input.substring(2, 4));
-              //PrintMessage.printAMove(piece[1], input.substring(2, 4));
-              return pieces;
-            } else if (input.length() == 5) {
-              //PrintMessage.printACapture(piece, input.substring(3, 5));
-              //PrintMessage.printAMove(piece[1], input.substring(3, 5));
-              return pieces;
-            }
-          } 
-         throw new IllegalMoveException("Mossa non consentita per la torre");
-        
-      case 'C': //da sistemare
-        
-          if (pieces[0] == null) {
-            if (input.length() == 3) {
-              //PrintMessage.printAMove(piece[1], input.substring(1, 3));
-              return game.moveKnight(input);
-            } else if (input.length() == 4) {
-              //PrintMessage.printAMove(piece[1], input.substring(2, 4));
-              return game.moveKnight(input);
-            }
-          } else {
-            if (input.length() == 4) {
-              //PrintMessage.printACapture(piece, input.substring(2, 4));
-              //PrintMessage.printAMove(piece[1], input.substring(2, 4));
-              return game.moveKnight(input);
-            } else if (input.length() == 5) {
-              //PrintMessage.printACapture(piece, input.substring(3, 5));
-              //PrintMessage.printAMove(piece[1], input.substring(3, 5));
-              return game.moveKnight(input);
-            }
+    case 'T': //da sistemare
+        pieces = game.moveRook(input);
+        if (pieces[0] == null) {
+          if (input.length() == 3) {
+            //PrintMessage.printAMove(piece[1], input.substring(1, 3));
+            return pieces;
+          } else if (input.length() == 4) {
+            //PrintMessage.printAMove(piece[1], input.substring(2, 4));
+            return pieces;
           }
-          throw new IllegalMoveException("Mossa non consentita per il cavallo");
-        
-      case 'A':
-        if (input.length() == 3) {
-          
-            //PrintMessage.printAMove(piece, input);
-            return game.moveBishop(input);
-        } else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
-          
-            return game.captureBishop(input);
+        } else {
+          if (input.length() == 4) {
             //PrintMessage.printACapture(piece, input.substring(2, 4));
             //PrintMessage.printAMove(piece[1], input.substring(2, 4));
-        } else throw new IllegalMoveException("Mossa non consentita per l'Alfiere");
-      case 'D':
-        if (input.length() == 3) {
-          
-            return game.moveQueen(input);
+            return pieces;
+          } else if (input.length() == 5) {
+            //PrintMessage.printACapture(piece, input.substring(3, 5));
+            //PrintMessage.printAMove(piece[1], input.substring(3, 5));
+            return pieces;
+          }
+        } 
+       throw new IllegalMoveException("Mossa non consentita per la torre");
+      
+    case 'C': //da sistemare
+      
+        if (pieces[0] == null) {
+          if (input.length() == 3) {
+            //PrintMessage.printAMove(piece[1], input.substring(1, 3));
+            return game.moveKnight(input);
+          } else if (input.length() == 4) {
+            //PrintMessage.printAMove(piece[1], input.substring(2, 4));
+            return game.moveKnight(input);
+          }
+        } else {
+          if (input.length() == 4) {
+            //PrintMessage.printACapture(piece, input.substring(2, 4));
+            //PrintMessage.printAMove(piece[1], input.substring(2, 4));
+            return game.moveKnight(input);
+          } else if (input.length() == 5) {
+            //PrintMessage.printACapture(piece, input.substring(3, 5));
+            //PrintMessage.printAMove(piece[1], input.substring(3, 5));
+            return game.moveKnight(input);
+          }
+        }
+        throw new IllegalMoveException("Mossa non consentita per il cavallo");
+      
+    case 'A':
+      if (input.length() == 3) {
+        
+          //PrintMessage.printAMove(piece, input);
+          return game.moveBishop(input);
+      } else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
+        
+          return game.captureBishop(input);
+          //PrintMessage.printACapture(piece, input.substring(2, 4));
+          //PrintMessage.printAMove(piece[1], input.substring(2, 4));
+      } else throw new IllegalMoveException("Mossa non consentita per l'Alfiere");
+    case 'D':
+      if (input.length() == 3) {
+        
+          return game.moveQueen(input);
 
-        } else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
-          
-            return game.captureQueen(input);
+      } else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
+        
+          return game.captureQueen(input);
 
-        } else throw new IllegalMoveException("Mossa non consentita per la Donna");
+      } else throw new IllegalMoveException("Mossa non consentita per la Donna");
        
       case 'R': //da sistemare
         
           return game.moveKing(input);
  
       case '0':
-        if (input.equals("0-0")) {
-              return game.shortCastling(); 
-          } 
-         else if (input.equals("0-0-0")) {
+          if (input.equals("0-0")) {
+                return game.shortCastling(); 
+            } 
+           else if (input.equals("0-0-0")) {
+            
+              return game.longCastling();
+
+            
+          } else
+
+          throw new IllegalMoveException(
+                "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
           
-            return game.longCastling();
 
-          
-        } else
-
-        throw new IllegalMoveException(
-              "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
-        
-
-      case 'O':
-        if (input.equals("O-O")) {
-         
-            return game.shortCastling();
+        case 'O':
+          if (input.equals("O-O")) {
            
-          
-        } else if (input.equals("O-O-O")) {
-          
-            return game.longCastling();
-          
-        } else
+              return game.shortCastling();
+             
+            
+          } else if (input.equals("O-O-O")) {
+            
+              return game.longCastling();
+            
+          } else
 
-        throw new IllegalMoveException(
-              "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
+          throw new IllegalMoveException(
+                "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
 
       default:
-        if (input.length() == 2) {
-          
-            return game.moveAPawn(input);
-         
-        } else if (input.length() == 4) {
-          if (input.substring(1, 2).equals("x")) {
-
-            
-              return game.pawnCapture(input);
-              
-              
-           
-          } throw new IllegalMoveException("Mossa non valida");
-
-        } else if (input.length() == 8) {
-          if ((input.substring(1, 2).toLowerCase().equals("x"))
-              && (input.substring(4, 8).toLowerCase().equals("e.p."))) {
-
-           
-              return  game.captureEnPassant(input);
-              
-            
-          } else throw new IllegalMoveException("Mossa non valida");
-
-        } else if (input.length() == 6) {
-          if ((input.substring(1, 2).toLowerCase().equals("x"))
-              && (input.substring(4, 6).toLowerCase().equals("ep"))) {
-
-            
-              return game.captureEnPassant(input);
-              
-            
-          } else throw new IllegalMoveException("Mossa non valida");
-        } else
-        throw new IllegalMoveException(
-              "Mossa illegale o comando inesistente; Riprova utilizzando un comando consentito o inserisci una mossa legale");
+        return game.moveAPawn(input);
     }
   }
 
-  ArrayList<String> Blackcaptured() {
-    return game.getBlacks(); 
-  }
-  
-  ArrayList<String> Whitescaptured() {
-	    return game.getWhites(); 
-	  }
-  
-  
-  
-
-  void resetTurn() {
-    game.setBlackTurn();
+  void captures() {
+    PrintMessage.printCaptures(game.getBlacks(), game.getWhites());
   }
 }
