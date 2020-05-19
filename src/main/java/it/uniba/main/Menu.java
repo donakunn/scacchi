@@ -159,10 +159,10 @@ public class Menu {
     return Game.getBlackTurn(); 
   }
 
-  ArrayList<String> Blackcaptured() {
+  public ArrayList<String> Blackcaptured() {
     return game.getBlacks();
   }
-  ArrayList<String> Whitecaptures() {
+  public ArrayList<String> Whitecaptured() {
 	    return game.getWhites();
 	  }
 }
