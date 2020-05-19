@@ -1,6 +1,7 @@
 package it.uniba.main;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -54,7 +55,7 @@ public final class AppMain {
           }
         case "captures":
           if (inGame) {
-            menu.captures();
+        	  PrintMessage.printCaptures(menu.Blackcaptured(), menu.Whitescaptured());
             break;
           } else {
             System.err.println("Devi essere in gioco per usare questo comando.");
@@ -65,7 +66,7 @@ public final class AppMain {
           break;
         case "moves":
           if (inGame) {
-            menu.moves();
+            PrintMessage.printMoves(menu.moves());
             break;
           } else {
             System.err.println("Devi essere in gioco per usare questo comando.");
