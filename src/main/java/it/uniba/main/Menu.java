@@ -123,15 +123,7 @@ public class Menu {
        
       case 'R': //da sistemare
         
-          pieces = game.moveKing(input);
-          if (pieces[0] == null) {
-            //PrintMessage.printAMove(pieces[1], input.substring(1, 3));
-            return pieces;
-          } else {
-            //PrintMessage.printACapture(pieces, input.substring(2, 4));
-            //PrintMessage.printAMove(pieces[1], input.substring(2, 4));
-            return pieces;
-          }
+          return game.moveKing(input);
  
       case '0':
         if (input.equals("0-0")) {

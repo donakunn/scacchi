@@ -523,78 +523,79 @@ class Game {
   }
 
   String[] moveKing(String move) throws IllegalMoveException {
-    int x = 2;
-    int y = 1;
+	    int x = 2;
+	    int y = 1;
+	    // pezzi da ritornare a fine esecuzione
+	    String printOut[] = new String[3];
 
-    if (move.length() == 4) {
-      x = 3;
-      y = 2;
-    }
+	    if (move.length() == 4) {
+	      x = 3;
+	      y = 2;
+	    }
+	    //cella di destinazione da ritornare, parti da colonna specificata e tagli fino alla fine della stringa
+	    printOut[2]=move.substring(y);
+	    y = (int) move.charAt(y) - 97;
+	    x = 8 - Integer.parseInt(move.substring(x, x + 1));
 
-    y = (int) move.charAt(y) - 97;
-    x = 8 - Integer.parseInt(move.substring(x, x + 1));
+	    if (board[x][y].getPiece() != null
+	        && board[x][y].getPiece().getColor() != (blackTurn ? 1 : 0)) {
+	      throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
+	    }
+	    int xK = -1;
+	    int yK = -1;
 
-    if (board[x][y].getPiece() != null
-        && board[x][y].getPiece().getColor() != (blackTurn ? 1 : 0)) {
-      throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
-    }
-    int xK = -1;
-    int yK = -1;
+	    for (int i = 0; i < 8; i++) {
+	      for (int j = 0; j < 8; j++) {
+	        if (board[i][j].getPiece() instanceof King
+	            && board[i][j].getPiece().getColor() != (blackTurn ? 1 : 0)) {
+	          xK = i;
+	          yK = j;
+	          break;
+	        }
+	      }
+	    }
+	    if (Math.abs(x - xK) > 1 || Math.abs(y - yK) > 1) {
+	      throw new IllegalMoveException("Il Re non puo' muoversi in quella cella");
+	    }
+	    if (King.isThreatened(board, blackTurn, x, y)) {
+	      throw new IllegalMoveException("Mossa illegale, metterebbe il Re sotto scacco");
+	    }
+	    
+	    // null valore standard perche' non sappiamo se e' una cattura o meno
+	    printOut[0] = board[xK][yK].getPiece().toString();
+	    if (board[x][y].getPiece() == null) {
+	      if (move.charAt(1) == 'x') {
+	        throw new IllegalMoveException(
+	            "Mossa illegale, non c'e' nessun pezzo da catturare nella cella di arrivo");
+	      }
+	      printOut[0] = board[xK][yK].getPiece().getType();
+	    } else {
+	      if (move.charAt(1) != 'x') {
+	        throw new IllegalMoveException(
+	            "Mossa illegale, devi specificare la cattura come da notazione algebrica");
+	      }
+	      if (blackTurn) {
+	        BlacksCaptured.add(board[x][y].getPiece().toString());
+	      } else {
+	        WhitesCaptured.add(board[x][y].getPiece().toString());
+	      }
+	      printOut[1] = board[x][y].getPiece().getType();
+	    }
+	    board[x][y].setPiece(board[xK][yK].getPiece());
+	    ((King) board[x][y].getPiece()).incrementMoves();
+	    board[xK][yK].setEmpty();
+	    movesDone.add(move);
+	    // imposta le nuove coordinate del king
+	    if (blackTurn) {
+	      coordBlackKing[0] = x;
+	      coordBlackKing[1] = y;
+	    } else {
+	      coordWhiteKing[0] = x;
+	      coordWhiteKing[1] = y;
+	    }
+	    blackTurn = !blackTurn;
 
-    for (int i = 0; i < 8; i++) {
-      for (int j = 0; j < 8; j++) {
-        if (board[i][j].getPiece() instanceof King
-            && board[i][j].getPiece().getColor() != (blackTurn ? 1 : 0)) {
-          xK = i;
-          yK = j;
-          break;
-        }
-      }
-    }
-    if (Math.abs(x - xK) > 1 || Math.abs(y - yK) > 1) {
-      throw new IllegalMoveException("Il Re non puo' muoversi in quella cella");
-    }
-    if (King.isThreatened(board, blackTurn, x, y)) {
-      throw new IllegalMoveException("Mossa illegale, metterebbe il Re sotto scacco");
-    }
-    // pezzi da ritornare a fine esecuzione
-    String printOut[] = new String[2];
-    // null valore standard perch� non sappiamo se � una cattura o meno
-    printOut[0] = null;
-    if (board[x][y].getPiece() == null) {
-      if (move.charAt(1) == 'x') {
-        throw new IllegalMoveException(
-            "Mossa illegale, non c'e' nessun pezzo da catturare nella cella di arrivo");
-      }
-      printOut[1] = board[xK][yK].getPiece().getType();
-    } else {
-      if (move.charAt(1) != 'x') {
-        throw new IllegalMoveException(
-            "Mossa illegale, devi specificare la cattura come da notazione algebrica");
-      }
-      if (blackTurn) {
-        BlacksCaptured.add(board[x][y].getPiece().toString());
-      } else {
-        WhitesCaptured.add(board[x][y].getPiece().toString());
-      }
-      printOut[0] = board[x][y].getPiece().getType();
-      printOut[1] = board[xK][yK].getPiece().getType();
-    }
-    board[x][y].setPiece(board[xK][yK].getPiece());
-    ((King) board[x][y].getPiece()).incrementMoves();
-    board[xK][yK].setEmpty();
-    movesDone.add(move);
-    // imposta le nuove coordinate del king
-    if (blackTurn) {
-      coordBlackKing[0] = x;
-      coordBlackKing[1] = y;
-    } else {
-      coordWhiteKing[0] = x;
-      coordWhiteKing[1] = y;
-    }
-    blackTurn = !blackTurn;
-
-    return printOut;
+	    return printOut;
   }
 
   String[] moveQueen(String move) throws IllegalMoveException {
