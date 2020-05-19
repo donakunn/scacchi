@@ -245,6 +245,7 @@ class King extends Piece {
 		}
 		return false;
 	}
+
 	static String[] move(String move) throws IllegalMoveException {
 		int x = 2;
 		int y = 1;
