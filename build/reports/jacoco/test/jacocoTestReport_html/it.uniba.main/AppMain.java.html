@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AppMain.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">scacchi</a> &gt; <a href="index.source.html" class="el_package">it.uniba.main</a> &gt; <span class="el_source">AppMain.java</span></div><h1>AppMain.java</h1><pre class="source lang-java linenums">package it.uniba.main;
+
+
+import java.util.Scanner;
+
+
+/**
+ * &lt;&lt;boundary&gt;&gt;&lt;br&gt;
+ * The main class for the project. It must be customized to meet the project assignment
+ * specifications.
+ *
+ * &lt;p&gt;&lt;b&gt;DO NOT RENAME&lt;/b&gt;
+ */
+public final class AppMain {
+  /** Private constructor. Change if needed. */
+  private AppMain() {}
+
+  /**
+   * This is the main entry of the application. It executes the chess app.
+   *
+   * @param args The command-line arguments.
+   */
+  public static void main(final String[] args) {
+<span class="nc" id="L24">    Menu menu = new Menu();</span>
+<span class="nc" id="L25">    String turn = &quot;bianchi&quot;;</span>
+<span class="nc" id="L26">    boolean inGame = false;</span>
+<span class="nc" id="L27">    boolean exit = false;</span>
+<span class="nc" id="L28">    Scanner in = new Scanner(System.in);</span>
+<span class="nc" id="L29">    System.out.println(&quot;Benvenuto nel gioco degli scacchi!&quot;);</span>
+<span class="nc" id="L30">    System.out.println(</span>
+        &quot;Inserire comando da eseguire oppure inserire help per la lista dei comandi.&quot;);
+
+<span class="nc bnc" id="L33" title="All 2 branches missed.">    while (!exit) {</span>
+
+<span class="nc bnc" id="L35" title="All 2 branches missed.">      if (Game.getBlackTurn() == true) {</span>
+<span class="nc" id="L36">        turn = &quot;neri&quot;;</span>
+      } else {
+<span class="nc" id="L38">        turn = &quot;bianchi&quot;;</span>
+      }
+<span class="nc bnc" id="L40" title="All 2 branches missed.">      if (inGame) {</span>
+<span class="nc" id="L41">        System.out.println(&quot;Inserire comando (turno dei &quot; + turn + &quot;)&quot;);</span>
+      } else {
+<span class="nc" id="L43">        System.out.println(&quot;Inserire comando:&quot;);</span>
+      }
+<span class="nc" id="L45">      String input = in.nextLine();</span>
+<span class="nc bnc" id="L46" title="All 7 branches missed.">      switch (input) {</span>
+        case &quot;board&quot;:
+<span class="nc bnc" id="L48" title="All 2 branches missed.">          if (inGame) {</span>
+<span class="nc" id="L49">            PrintMessage.printBoard(menu.board());</span>
+<span class="nc" id="L50">            break;</span>
+          } else {
+<span class="nc" id="L52">            System.err.println(&quot;Devi essere in gioco per usare questo comando.&quot;);</span>
+<span class="nc" id="L53">            break;</span>
+          }
+        case &quot;captures&quot;:
+<span class="nc bnc" id="L56" title="All 2 branches missed.">          if (inGame) {</span>
+<span class="nc" id="L57">            PrintMessage.printCaptures(menu.Blackcaptured(), menu.Whitecaptures());</span>
+<span class="nc" id="L58">            break;</span>
+          } else {
+<span class="nc" id="L60">            System.err.println(&quot;Devi essere in gioco per usare questo comando.&quot;);</span>
+<span class="nc" id="L61">            break;</span>
+          }
+        case &quot;help&quot;:
+<span class="nc" id="L64">          System.out.println(menu.help());</span>
+<span class="nc" id="L65">          break;</span>
+        case &quot;moves&quot;:
+<span class="nc bnc" id="L67" title="All 2 branches missed.">          if (inGame) {</span>
+<span class="nc" id="L68">            PrintMessage.printMoves(menu.moves());</span>
+<span class="nc" id="L69">            break;</span>
+          } else {
+<span class="nc" id="L71">            System.err.println(&quot;Devi essere in gioco per usare questo comando.&quot;);</span>
+<span class="nc" id="L72">            break;</span>
+          }
+        case &quot;play&quot;:
+<span class="nc bnc" id="L75" title="All 2 branches missed.">          if (!inGame) {</span>
+<span class="nc" id="L76">            System.out.println(&quot;Creo nuova partita..&quot;);</span>
+<span class="nc" id="L77">            inGame = true;</span>
+<span class="nc" id="L78">            menu.play();</span>
+<span class="nc" id="L79">            System.out.println(&quot;Partita creata.&quot;);</span>
+          } else {
+<span class="nc" id="L81">            System.out.println(&quot;Partita gia' avviata. Vuoi cancellarla ed iniziare una nuova partita?&quot;);</span>
+            while (true) {
+<span class="nc" id="L83">              String answer = in.nextLine();</span>
+<span class="nc bnc" id="L84" title="All 4 branches missed.">              if (answer.toUpperCase().equals(&quot;SI&quot;) || answer.toUpperCase().equals(&quot;YES&quot;)) {</span>
+<span class="nc" id="L85">                System.out.println(&quot;Cancello la partita in corso e ne avvio una nuova&quot;);</span>
+<span class="nc" id="L86">                menu.play();</span>
+<span class="nc" id="L87">                break;</span>
+<span class="nc bnc" id="L88" title="All 2 branches missed.">              } else if (answer.toUpperCase().equals(&quot;NO&quot;)) {</span>
+<span class="nc" id="L89">                break;</span>
+<span class="nc" id="L90">              } else System.out.println(&quot;Risposta non valida; inserire si (yes) o no&quot;);</span>
+<span class="nc" id="L91">            }</span>
+          }
+          break;
+        case &quot;quit&quot;:
+          String answer;
+<span class="nc" id="L96">          System.out.println(&quot;Sei sicuro di voler uscire? &quot;);</span>
+<span class="nc" id="L97">          answer = in.nextLine();</span>
+<span class="nc" id="L98">          answer = answer.toUpperCase();</span>
+
+<span class="nc bnc" id="L100" title="All 6 branches missed.">          if (answer.equals(&quot;YES&quot;) || answer.equals(&quot;SI&quot;) || answer.equals(&quot;SÃŒ&quot;)) {</span>
+<span class="nc" id="L101">            in.close();</span>
+<span class="nc" id="L102">            exit = true;</span>
+<span class="nc" id="L103">            break;</span>
+<span class="nc bnc" id="L104" title="All 2 branches missed.">          } else if (answer.equals(&quot;NO&quot;)) {</span>
+<span class="nc" id="L105">            exit = false;</span>
+<span class="nc" id="L106">            break;</span>
+          } else {
+<span class="nc" id="L108">            System.out.println(&quot;Risposta non valida, inserisci si (yes) o no&quot;);</span>
+          }
+
+        default:
+<span class="nc bnc" id="L112" title="All 2 branches missed.">          if (inGame) {</span>
+            try {
+<span class="nc" id="L114">              String[] move= menu.getMove(input);</span>
+<span class="nc" id="L115">              Game.addMove(input);</span>
+<span class="nc" id="L116">              Game.changeTurn();</span>
+<span class="nc bnc" id="L117" title="All 2 branches missed.">              if (move[0] == &quot;0-0&quot;) {</span>
+<span class="nc" id="L118">                PrintMessage.printShortCastling();</span>
+<span class="nc" id="L119">                break;</span>
+              }
+<span class="nc bnc" id="L121" title="All 2 branches missed.">              else if (move[0] == &quot;0-0-0&quot;) {</span>
+<span class="nc" id="L122">                PrintMessage.printLongCastling();</span>
+<span class="nc" id="L123">                break;</span>
+              }
+
+<span class="nc bnc" id="L126" title="All 2 branches missed.">              if (move[1] == null) {</span>
+<span class="nc" id="L127">              PrintMessage.printAMove(move);</span>
+              } else {
+<span class="nc" id="L129">            	  PrintMessage.printACapture(move);</span>
+<span class="nc" id="L130">            	  PrintMessage.printAMove(move);</span>
+            	  
+              }
+              
+<span class="nc" id="L134">            } catch (StringIndexOutOfBoundsException e) {</span>
+<span class="nc" id="L135">              System.err.println(&quot;Comando non valido.&quot;);</span>
+<span class="nc" id="L136">            } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L137">              System.err.println(&quot;Mossa non riconosciuta&quot;);</span>
+<span class="nc" id="L138">            } catch (IndexOutOfBoundsException e) {</span>
+<span class="nc" id="L139">              System.err.println(</span>
+                  &quot;Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)&quot;);
+<span class="nc" id="L141">            } catch (IllegalMoveException e) {</span>
+<span class="nc" id="L142">              System.err.println(e.getMessage());</span>
+<span class="nc" id="L143">            }</span>
+
+<span class="nc" id="L145">            break;</span>
+          } else {
+<span class="nc" id="L147">            System.err.println(&quot;Comando o mossa non riconosciuta&quot;);</span>
+            break;
+          }
+      }
+<span class="nc" id="L151">    }</span>
+<span class="nc" id="L152">    in.close();</span>
+<span class="nc" id="L153">    System.exit(0);</span>
+<span class="nc" id="L154">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

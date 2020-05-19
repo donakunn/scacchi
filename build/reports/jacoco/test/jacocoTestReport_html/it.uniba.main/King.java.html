@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>King.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">scacchi</a> &gt; <a href="index.source.html" class="el_package">it.uniba.main</a> &gt; <span class="el_source">King.java</span></div><h1>King.java</h1><pre class="source lang-java linenums">package it.uniba.main;
+
+/**
+ * &lt;&lt;entity&gt;&gt;&lt;br&gt;
+ * King class, implementing the abstract class {@link Piece}&lt;br&gt;
+ * Includes a method to verify the checkmate event.
+ *
+ * @author Donato Lucente
+ * @author Filippo Iacobellis
+ */
+class King extends Piece {
+<span class="nc" id="L12">	private static int coordBlackKing[] = new int[]{0,4}; // coordinate re nero, [0]=x [1]=y</span>
+<span class="nc" id="L13">	private static int coordWhiteKing[] = new int[]{7,4}; // coordinate re bianco, [0]=x [1]=y</span>
+<span class="nc" id="L14">	King(int col) {</span>
+
+<span class="nc" id="L16">		this.color = col;</span>
+<span class="nc bnc" id="L17" title="All 2 branches missed.">		if (col == 0) {</span>
+<span class="nc" id="L18">			this.pieceType = &quot;\u265A&quot;; // Re nero</span>
+<span class="nc" id="L19">			nMoves = 0;</span>
+
+<span class="nc bnc" id="L21" title="All 2 branches missed.">		} else if (col == 1) {</span>
+<span class="nc" id="L22">			this.pieceType = &quot;\u2654&quot;; // Re bianco</span>
+<span class="nc" id="L23">			nMoves = 0;</span>
+
+<span class="nc" id="L25">		} else throw new IllegalArgumentException(&quot;Valore non valido, valori accettati: 0,1&quot;);</span>
+<span class="nc" id="L26">	}</span>
+
+	void incrementMoves() {
+<span class="nc" id="L29">		nMoves++;</span>
+<span class="nc" id="L30">	}</span>
+
+	int getNumberOfMoves() {
+<span class="nc" id="L33">		return this.nMoves;</span>
+	}
+
+	static boolean isThreatened() {
+		int x,y;
+<span class="nc bnc" id="L38" title="All 2 branches missed.">		if(Game.getBlackTurn()) {</span>
+<span class="nc" id="L39">			x= coordBlackKing[0];</span>
+<span class="nc" id="L40">			y= coordBlackKing[1];</span>
+		}else {
+<span class="nc" id="L42">			x= coordWhiteKing[0];</span>
+<span class="nc" id="L43">			y= coordWhiteKing[1];</span>
+		}
+<span class="nc" id="L45">		return isThreatened(x,y);</span>
+	}
+
+	static boolean isThreatened(int x, int y) {
+		int i, j;
+		Piece checkPiece;
+<span class="nc" id="L51">		boolean blackTurn= Game.getBlackTurn();</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">		if (blackTurn) {</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">			if (x &lt; 7) {</span>
+<span class="nc" id="L54">				checkPiece=Game.getCell(x + 1, y - 1).getPiece();</span>
+<span class="nc bnc" id="L55" title="All 4 branches missed.">				if (y &gt; 0</span>
+						&amp;&amp; checkPiece instanceof Pawn
+<span class="nc bnc" id="L57" title="All 2 branches missed.">						&amp;&amp; checkPiece.getColor() == 1) {</span>
+<span class="nc" id="L58">					return true;</span>
+				}
+<span class="nc" id="L60">				checkPiece=Game.getCell(x + 1, y + 1).getPiece();</span>
+<span class="nc bnc" id="L61" title="All 4 branches missed.">				if (y &lt; 7</span>
+						&amp;&amp; checkPiece instanceof Pawn
+<span class="nc bnc" id="L63" title="All 2 branches missed.">						&amp;&amp; checkPiece.getColor() == 1) {</span>
+<span class="nc" id="L64">					return true;</span>
+				}
+			}
+		}
+<span class="nc bnc" id="L68" title="All 2 branches missed.">		if (!blackTurn) {</span>
+<span class="nc bnc" id="L69" title="All 2 branches missed.">			if (x &gt; 0) {</span>
+<span class="nc" id="L70">				checkPiece=Game.getCell(x - 1, y - 1).getPiece();</span>
+<span class="nc bnc" id="L71" title="All 4 branches missed.">				if (y &gt; 0</span>
+						&amp;&amp; checkPiece instanceof Pawn
+<span class="nc bnc" id="L73" title="All 2 branches missed.">						&amp;&amp; checkPiece.getColor() == 0) {</span>
+<span class="nc" id="L74">					return true;</span>
+				}
+<span class="nc" id="L76">				checkPiece=Game.getCell(x - 1, y + 1).getPiece();</span>
+<span class="nc bnc" id="L77" title="All 4 branches missed.">				if (y &lt; 7</span>
+						&amp;&amp; checkPiece instanceof Pawn
+<span class="nc bnc" id="L79" title="All 2 branches missed.">						&amp;&amp; checkPiece.getColor() == 0) {</span>
+<span class="nc" id="L80">					return true;</span>
+				}
+			}
+		}
+		// up right
+<span class="nc" id="L85">		i = 1;</span>
+<span class="nc" id="L86">		j = 1;</span>
+<span class="nc bnc" id="L87" title="All 4 branches missed.">		while (x - i &gt;= 0 &amp;&amp; y + j &lt;= 7) {</span>
+<span class="nc" id="L88">			checkPiece= Game.getCell(x - i, y + j).getPiece();</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">			if (checkPiece == null) {</span>
+<span class="nc" id="L90">				i++;</span>
+<span class="nc" id="L91">				j++;</span>
+<span class="nc" id="L92">				continue;</span>
+			}
+<span class="nc bnc" id="L94" title="All 6 branches missed.">			if (checkPiece.getColor() != (blackTurn ? 1 : 0)</span>
+<span class="nc" id="L95">					|| checkPiece instanceof Pawn) break;</span>
+<span class="nc bnc" id="L96" title="All 4 branches missed.">			if (checkPiece instanceof Bishop</span>
+<span class="nc" id="L97">					|| checkPiece instanceof Queen) return true;</span>
+<span class="nc" id="L98">			i++;</span>
+<span class="nc" id="L99">			j++;</span>
+		}
+		// down right
+<span class="nc" id="L102">		i = 1;</span>
+<span class="nc" id="L103">		j = 1;</span>
+<span class="nc bnc" id="L104" title="All 4 branches missed.">		while (x + i &lt;= 7 &amp;&amp; y + j &lt;= 7) {</span>
+<span class="nc" id="L105">			checkPiece= Game.getCell(x + i, y + j).getPiece();</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">			if (checkPiece == null) {</span>
+<span class="nc" id="L107">				i++;</span>
+<span class="nc" id="L108">				j++;</span>
+<span class="nc" id="L109">				continue;</span>
+			}
+<span class="nc bnc" id="L111" title="All 6 branches missed.">			if (checkPiece.getColor() != (blackTurn ? 1 : 0)</span>
+<span class="nc" id="L112">					|| checkPiece instanceof Pawn) break;</span>
+<span class="nc bnc" id="L113" title="All 4 branches missed.">			if (checkPiece instanceof Bishop</span>
+<span class="nc" id="L114">					|| checkPiece instanceof Queen) return true;</span>
+<span class="nc" id="L115">			i++;</span>
+<span class="nc" id="L116">			j++;</span>
+		}
+		// down left
+<span class="nc" id="L119">		i = 1;</span>
+<span class="nc" id="L120">		j = 1;</span>
+<span class="nc bnc" id="L121" title="All 4 branches missed.">		while (x + i &lt;= 7 &amp;&amp; y - j &gt;= 0) {</span>
+<span class="nc" id="L122">			checkPiece= Game.getCell(x + i, y - j).getPiece();</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">			if (checkPiece == null) {</span>
+<span class="nc" id="L124">				i++;</span>
+<span class="nc" id="L125">				j++;</span>
+<span class="nc" id="L126">				continue;</span>
+			}
+<span class="nc bnc" id="L128" title="All 6 branches missed.">			if (checkPiece.getColor() != (blackTurn ? 1 : 0)</span>
+<span class="nc" id="L129">					|| checkPiece instanceof Pawn) break;</span>
+<span class="nc bnc" id="L130" title="All 4 branches missed.">			if (checkPiece instanceof Bishop</span>
+<span class="nc" id="L131">					|| checkPiece instanceof Queen) return true;</span>
+<span class="nc" id="L132">			i++;</span>
+<span class="nc" id="L133">			j++;</span>
+		}
+		// up left
+<span class="nc" id="L136">		i = 1;</span>
+<span class="nc" id="L137">		j = 1;</span>
+<span class="nc bnc" id="L138" title="All 4 branches missed.">		while (x - i &gt;= 0 &amp;&amp; y - j &gt;= 0) {</span>
+<span class="nc" id="L139">			checkPiece= Game.getCell(x - i, y - j).getPiece();</span>
+<span class="nc bnc" id="L140" title="All 2 branches missed.">			if (checkPiece == null) {</span>
+<span class="nc" id="L141">				i++;</span>
+<span class="nc" id="L142">				j++;</span>
+<span class="nc" id="L143">				continue;</span>
+			}
+<span class="nc bnc" id="L145" title="All 6 branches missed.">			if (checkPiece.getColor() != (blackTurn ? 1 : 0)</span>
+<span class="nc" id="L146">					|| checkPiece instanceof Pawn) break;</span>
+<span class="nc bnc" id="L147" title="All 4 branches missed.">			if (checkPiece instanceof Bishop</span>
+<span class="nc" id="L148">					|| checkPiece instanceof Queen) return true;</span>
+<span class="nc" id="L149">			i++;</span>
+<span class="nc" id="L150">			j++;</span>
+		}
+
+		// right
+<span class="nc" id="L154">		j = 1;</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">		while (y + j &lt;= 7) {</span>
+<span class="nc" id="L156">			checkPiece= Game.getCell(x, y + j).getPiece();</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">			if (checkPiece == null) {</span>
+<span class="nc" id="L158">				i++;</span>
+<span class="nc" id="L159">				j++;</span>
+<span class="nc" id="L160">				continue;</span>
+			}
+<span class="nc bnc" id="L162" title="All 6 branches missed.">			if (checkPiece.getColor() != (blackTurn ? 1 : 0)</span>
+<span class="nc" id="L163">					|| checkPiece instanceof Pawn) break;</span>
+<span class="nc bnc" id="L164" title="All 4 branches missed.">			if (checkPiece instanceof Rook || checkPiece instanceof Queen)</span>
+<span class="nc" id="L165">				return true;</span>
+<span class="nc" id="L166">			j++;</span>
+		}
+		// down
+<span class="nc" id="L169">		i = 1;</span>
+<span class="nc bnc" id="L170" title="All 2 branches missed.">		while (x + i &lt;= 7) {</span>
+<span class="nc" id="L171">			checkPiece= Game.getCell(x + i, y).getPiece();</span>
+<span class="nc bnc" id="L172" title="All 2 branches missed.">			if (checkPiece == null) {</span>
+<span class="nc" id="L173">				i++;</span>
+<span class="nc" id="L174">				j++;</span>
+<span class="nc" id="L175">				continue;</span>
+			}
+<span class="nc bnc" id="L177" title="All 6 branches missed.">			if (checkPiece.getColor() != (blackTurn ? 1 : 0)</span>
+<span class="nc" id="L178">					|| checkPiece instanceof Pawn) break;</span>
+<span class="nc bnc" id="L179" title="All 4 branches missed.">			if (checkPiece instanceof Rook || checkPiece instanceof Queen)</span>
+<span class="nc" id="L180">				return true;</span>
+<span class="nc" id="L181">			i++;</span>
+		}
+		// left
+<span class="nc" id="L184">		j = 1;</span>
+<span class="nc bnc" id="L185" title="All 2 branches missed.">		while (y - j &gt;= 0) {</span>
+<span class="nc" id="L186">			checkPiece= Game.getCell(x, y - j).getPiece();</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">			if (checkPiece == null) {</span>
+<span class="nc" id="L188">				i++;</span>
+<span class="nc" id="L189">				j++;</span>
+<span class="nc" id="L190">				continue;</span>
+			}
+<span class="nc bnc" id="L192" title="All 6 branches missed.">			if (checkPiece.getColor() != (blackTurn ? 1 : 0)</span>
+<span class="nc" id="L193">					|| checkPiece instanceof Pawn) break;</span>
+<span class="nc bnc" id="L194" title="All 4 branches missed.">			if (checkPiece instanceof Rook || checkPiece instanceof Queen)</span>
+<span class="nc" id="L195">				return true;</span>
+<span class="nc" id="L196">			j++;</span>
+		}
+		// up
+<span class="nc" id="L199">		i = 1;</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">		while (x - i &gt;= 0) {</span>
+<span class="nc" id="L201">			checkPiece= Game.getCell(x - i, y).getPiece();</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">			if (checkPiece == null) {</span>
+<span class="nc" id="L203">				i++;</span>
+<span class="nc" id="L204">				j++;</span>
+<span class="nc" id="L205">				continue;</span>
+			}
+<span class="nc bnc" id="L207" title="All 6 branches missed.">			if (checkPiece.getColor() != (blackTurn ? 1 : 0)</span>
+<span class="nc" id="L208">					|| checkPiece instanceof Pawn) break;</span>
+<span class="nc bnc" id="L209" title="All 4 branches missed.">			if (checkPiece instanceof Rook || checkPiece instanceof Queen)</span>
+<span class="nc" id="L210">				return true;</span>
+<span class="nc" id="L211">			i++;</span>
+		}
+		// knight
+<span class="nc bnc" id="L214" title="All 2 branches missed.">		if (y + 2 &lt;= 7) {</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">			if (x - 1 &gt;= 0</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">					&amp;&amp; Game.getCell(x - 1, y + 2).getPiece() instanceof Knight</span>
+<span class="nc bnc" id="L217" title="All 4 branches missed.">					&amp;&amp; Game.getCell(x - 1, y + 2).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">			if (x + 1 &lt;= 7</span>
+<span class="nc bnc" id="L219" title="All 2 branches missed.">					&amp;&amp; Game.getCell(x + 1, y + 2).getPiece() instanceof Knight</span>
+<span class="nc bnc" id="L220" title="All 4 branches missed.">					&amp;&amp; Game.getCell(x + 1, y + 2).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;</span>
+		}
+<span class="nc bnc" id="L222" title="All 2 branches missed.">		if (y + 1 &lt;= 7) {</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">			if (x - 2 &gt;= 0</span>
+<span class="nc bnc" id="L224" title="All 2 branches missed.">					&amp;&amp; Game.getCell(x - 2, y + 1).getPiece() instanceof Knight</span>
+<span class="nc bnc" id="L225" title="All 4 branches missed.">					&amp;&amp; Game.getCell(x - 2, y + 1).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;</span>
+<span class="nc bnc" id="L226" title="All 2 branches missed.">			if (x + 2 &lt;= 7</span>
+<span class="nc bnc" id="L227" title="All 2 branches missed.">					&amp;&amp; Game.getCell(x + 2, y + 1).getPiece() instanceof Knight</span>
+<span class="nc bnc" id="L228" title="All 4 branches missed.">					&amp;&amp; Game.getCell(x + 2, y + 1).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;</span>
+		}
+<span class="nc bnc" id="L230" title="All 2 branches missed.">		if (y - 1 &gt;= 0) {</span>
+<span class="nc bnc" id="L231" title="All 2 branches missed.">			if (x - 2 &gt;= 0</span>
+<span class="nc bnc" id="L232" title="All 2 branches missed.">					&amp;&amp; Game.getCell(x - 2, y - 1).getPiece() instanceof Knight</span>
+<span class="nc bnc" id="L233" title="All 4 branches missed.">					&amp;&amp; Game.getCell(x - 2, y - 1).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;</span>
+<span class="nc bnc" id="L234" title="All 2 branches missed.">			if (x + 2 &lt;= 7</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">					&amp;&amp; Game.getCell(x + 2, y - 1).getPiece() instanceof Knight</span>
+<span class="nc bnc" id="L236" title="All 4 branches missed.">					&amp;&amp; Game.getCell(x + 2, y - 1).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;</span>
+		}
+<span class="nc bnc" id="L238" title="All 2 branches missed.">		if (y - 2 &gt;= 0) {</span>
+<span class="nc bnc" id="L239" title="All 2 branches missed.">			if (x - 1 &gt;= 0</span>
+<span class="nc bnc" id="L240" title="All 2 branches missed.">					&amp;&amp; Game.getCell(x - 1, y - 2).getPiece() instanceof Knight</span>
+<span class="nc bnc" id="L241" title="All 4 branches missed.">					&amp;&amp; Game.getCell(x - 1, y - 2).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;</span>
+<span class="nc bnc" id="L242" title="All 2 branches missed.">			if (x + 1 &lt;= 7</span>
+<span class="nc bnc" id="L243" title="All 2 branches missed.">					&amp;&amp; Game.getCell(x + 1, y - 2).getPiece() instanceof Knight</span>
+<span class="nc bnc" id="L244" title="All 4 branches missed.">					&amp;&amp; Game.getCell(x + 1, y - 2).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;</span>
+		}
+<span class="nc" id="L246">		return false;</span>
+	}
+	static String[] move(String move) throws IllegalMoveException {
+<span class="nc" id="L249">		int x = 2;</span>
+<span class="nc" id="L250">		int y = 1;</span>
+<span class="nc" id="L251">		boolean blackTurn=Game.getBlackTurn();</span>
+		// pezzi da ritornare a fine esecuzione
+<span class="nc" id="L253">		String printOut[] = new String[3];</span>
+
+<span class="nc bnc" id="L255" title="All 2 branches missed.">		if (move.length() == 4) {</span>
+<span class="nc" id="L256">			x = 3;</span>
+<span class="nc" id="L257">			y = 2;</span>
+		}
+		//cella di destinazione da ritornare, parti da colonna specificata e tagli fino alla fine della stringa
+<span class="nc" id="L260">		printOut[2]=move.substring(y);</span>
+<span class="nc" id="L261">		y = (int) move.charAt(y) - 97;</span>
+<span class="nc" id="L262">		x = 8 - Integer.parseInt(move.substring(x, x + 1));</span>
+
+<span class="nc bnc" id="L264" title="All 2 branches missed.">		if (Game.getCell(x,y).getPiece() != null</span>
+<span class="nc bnc" id="L265" title="All 4 branches missed.">				&amp;&amp; Game.getCell(x,y).getPiece().getColor() != (blackTurn ? 1 : 0)) {</span>
+<span class="nc" id="L266">			throw new IllegalMoveException(&quot;Non puoi spostarti sulla cella di un alleato.&quot;);</span>
+		}
+<span class="nc" id="L268">		int xK = -1;</span>
+<span class="nc" id="L269">		int yK = -1;</span>
+
+<span class="nc bnc" id="L271" title="All 2 branches missed.">		for (int i = 0; i &lt; 8; i++) {</span>
+<span class="nc bnc" id="L272" title="All 2 branches missed.">			for (int j = 0; j &lt; 8; j++) {</span>
+<span class="nc bnc" id="L273" title="All 2 branches missed.">				if (Game.getCell(i,j).getPiece() instanceof King</span>
+<span class="nc bnc" id="L274" title="All 4 branches missed.">						&amp;&amp; Game.getCell(i,j).getPiece().getColor() != (blackTurn ? 1 : 0)) {</span>
+<span class="nc" id="L275">					xK = i;</span>
+<span class="nc" id="L276">					yK = j;</span>
+<span class="nc" id="L277">					break;</span>
+				}
+			}
+		}
+<span class="nc bnc" id="L281" title="All 4 branches missed.">		if (Math.abs(x - xK) &gt; 1 || Math.abs(y - yK) &gt; 1) {</span>
+<span class="nc" id="L282">			throw new IllegalMoveException(&quot;Il Re non puo' muoversi in quella cella&quot;);</span>
+		}
+<span class="nc bnc" id="L284" title="All 2 branches missed.">		if (isThreatened(x,y)) {</span>
+<span class="nc" id="L285">			throw new IllegalMoveException(&quot;Mossa illegale, metterebbe il Re sotto scacco&quot;);</span>
+		}
+
+		// null valore standard perche' non sappiamo se e' una cattura o meno
+<span class="nc" id="L289">		printOut[0] = Game.getCell(xK,yK).getPiece().toString();</span>
+<span class="nc bnc" id="L290" title="All 2 branches missed.">		if (Game.getCell(x,y).getPiece() == null) {</span>
+<span class="nc bnc" id="L291" title="All 2 branches missed.">			if (move.charAt(1) == 'x') {</span>
+<span class="nc" id="L292">				throw new IllegalMoveException(</span>
+						&quot;Mossa illegale, non c'e' nessun pezzo da catturare nella cella di arrivo&quot;);
+			}
+<span class="nc" id="L295">			printOut[0] = Game.getCell(xK,yK).getPiece().getType();</span>
+		} else {
+<span class="nc bnc" id="L297" title="All 2 branches missed.">			if (move.charAt(1) != 'x') {</span>
+<span class="nc" id="L298">				throw new IllegalMoveException(</span>
+						&quot;Mossa illegale, devi specificare la cattura come da notazione algebrica&quot;);
+			}
+<span class="nc bnc" id="L301" title="All 2 branches missed.">			if (blackTurn) {</span>
+<span class="nc" id="L302">				Game.addBlackCaptured(Game.getCell(x,y).getPiece().toString());</span>
+			} else {
+<span class="nc" id="L304">				Game.addWhiteCaptured(Game.getCell(x,y).getPiece().toString());</span>
+			}
+<span class="nc" id="L306">			printOut[1] = Game.getCell(x,y).getPiece().getType();</span>
+		}
+<span class="nc" id="L308">		Game.getCell(x,y).setPiece(Game.getCell(xK,yK).getPiece());</span>
+<span class="nc" id="L309">		((King) Game.getCell(x,y).getPiece()).incrementMoves();</span>
+<span class="nc" id="L310">		Game.getCell(xK,yK).setEmpty();</span>
+		// imposta le nuove coordinate del king
+<span class="nc bnc" id="L312" title="All 2 branches missed.">		if (blackTurn) {</span>
+<span class="nc" id="L313">			coordBlackKing[0] = x;</span>
+<span class="nc" id="L314">			coordBlackKing[1] = y;</span>
+		} else {
+<span class="nc" id="L316">			coordWhiteKing[0] = x;</span>
+<span class="nc" id="L317">			coordWhiteKing[1] = y;</span>
+		}
+<span class="nc" id="L319">		return printOut;</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>
