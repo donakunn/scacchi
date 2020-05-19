@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Rook.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">scacchi</a> &gt; <a href="index.source.html" class="el_package">it.uniba.main</a> &gt; <span class="el_source">Rook.java</span></div><h1>Rook.java</h1><pre class="source lang-java linenums">package it.uniba.main;
+
+/**
+ * &lt;&lt;entity&gt;&gt;&lt;br&gt;
+ * Rook class, implementing the abstract class {@link Piece}&lt;br&gt;
+ *
+ * @author Donato Lucente
+ */
+class Rook extends Piece {
+
+<span class="nc" id="L11">  Rook(int col) {</span>
+
+<span class="nc" id="L13">    this.color = col;</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">    if (col == 0) {</span>
+<span class="nc" id="L15">      this.pieceType = &quot;\u265C&quot;; // Torre nera</span>
+<span class="nc" id="L16">      nMoves = 0;</span>
+
+<span class="nc bnc" id="L18" title="All 2 branches missed.">    } else if (col == 1) {</span>
+
+<span class="nc" id="L20">      this.pieceType = &quot;\u2656&quot;; // Torre bianca</span>
+<span class="nc" id="L21">      nMoves = 0;</span>
+
+<span class="nc" id="L23">    } else throw new IllegalArgumentException(&quot;Valore non valido, valori accettati: 0,1&quot;);</span>
+<span class="nc" id="L24">  }</span>
+
+  void incrementMoves() {
+<span class="nc" id="L27">    nMoves++;</span>
+<span class="nc" id="L28">  }</span>
+
+  int getNumberOfMoves() {
+<span class="nc" id="L31">    return this.nMoves;</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

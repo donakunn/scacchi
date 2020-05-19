@@ -54,7 +54,7 @@ public final class AppMain {
           }
         case "captures":
           if (inGame) {
-            menu.captures();
+            PrintMessage.printCaptures(menu.Blackcaptured(), menu.Whitecaptures());
             break;
           } else {
             System.err.println("Devi essere in gioco per usare questo comando.");
@@ -65,7 +65,7 @@ public final class AppMain {
           break;
         case "moves":
           if (inGame) {
-            menu.moves();
+            PrintMessage.printMoves(menu.moves());
             break;
           } else {
             System.err.println("Devi essere in gioco per usare questo comando.");
