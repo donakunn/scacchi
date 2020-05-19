@@ -604,13 +604,12 @@ class Game {
     x = 8 - Integer.parseInt(move.substring(2, 3));
     String[] piecesAndCell = new String[3];
 
-    if (blackTurn == true) { // tutti i controlli per i pezzi bianchi
       if (board[x][y].getPiece() == null) {
         xB = x - 1;
         yB = y - 1;
         while (xB >= 0 && yB >= 0) {
           if (board[xB][yB].getPiece() instanceof Bishop
-              && board[xB][yB].getPiece().getColor() == 0) {
+              && board[xB][yB].getPiece().getColor() == (blackTurn ? 0 : 1)) {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
@@ -637,7 +636,7 @@ class Game {
         yB = y + 1;
         while (xB >= 0 && yB < 8) {
           if (board[xB][yB].getPiece() instanceof Bishop
-              && board[xB][yB].getPiece().getColor() == 0) {
+              && board[xB][yB].getPiece().getColor() == (blackTurn ? 0 : 1)) {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
@@ -664,7 +663,7 @@ class Game {
         yB = y - 1;
         while (xB < 8 && yB >= 0) {
           if (board[xB][yB].getPiece() instanceof Bishop
-              && board[xB][yB].getPiece().getColor() == 0) {
+              && board[xB][yB].getPiece().getColor() == (blackTurn ? 0 : 1)) {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
@@ -691,7 +690,7 @@ class Game {
         yB = y + 1;
         while (xB < 8 && yB < 8) {
           if (board[xB][yB].getPiece() instanceof Bishop
-              && board[xB][yB].getPiece().getColor() == 0) {
+              && board[xB][yB].getPiece().getColor() == (blackTurn ? 0 : 1)) {
             b = (Bishop) board[xB][yB].getPiece();
             board[xB][yB].setEmpty();
             board[x][y].setPiece(b);
@@ -715,124 +714,9 @@ class Game {
           }
         }
         throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' muoversi qui");
-      } else
-        throw new IllegalMoveException("Mossa illegale, la cella di destinazione non e' vuota");
-
-    } else { // else per il caso di turno dei pezzi neri
-      if (board[x][y].getPiece() == null) {
-        xB = x - 1;
-        yB = y - 1;
-        while (xB >= 0 && yB >= 0) {
-          if (board[xB][yB].getPiece() instanceof Bishop
-              && board[xB][yB].getPiece().getColor() == 1) {
-            b = (Bishop) board[xB][yB].getPiece();
-            board[xB][yB].setEmpty();
-            board[x][y].setPiece(b);
-            if (King.isThreatened()) {
-              board[xB][yB].setPiece(b);
-              board[x][y].setEmpty();
-              throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
-
-            } else {
-              movesDone.add(move);
-              setNotBlackTurn();
-              piecesAndCell[0] = b.toString();
-              piecesAndCell[2] = move.substring(1, 3);
-              return piecesAndCell;
-            }
-          } else if (board[xB][yB].getPiece() != null) {
-            break;
-          } else {
-            xB--;
-            yB--;
-          }
-        }
-        xB = x - 1;
-        yB = y + 1;
-        while (xB >= 0 && yB < 8) {
-          if (board[xB][yB].getPiece() instanceof Bishop
-              && board[xB][yB].getPiece().getColor() == 1) {
-            b = (Bishop) board[xB][yB].getPiece();
-            board[xB][yB].setEmpty();
-            board[x][y].setPiece(b);
-            if (King.isThreatened()) {
-              board[xB][yB].setPiece(b);
-              board[x][y].setEmpty();
-              throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
-
-            } else {
-              movesDone.add(move);
-              setNotBlackTurn();
-              piecesAndCell[0] = b.toString();
-              piecesAndCell[2] = move.substring(1, 3);
-              return piecesAndCell;
-            }
-          } else if (board[xB][yB].getPiece() != null) {
-            break;
-          } else {
-            xB--;
-            yB++;
-          }
-        }
-        xB = x + 1;
-        yB = y - 1;
-        while (xB < 8 && yB >= 0) {
-          if (board[xB][yB].getPiece() instanceof Bishop
-              && board[xB][yB].getPiece().getColor() == 1) {
-            b = (Bishop) board[xB][yB].getPiece();
-            board[xB][yB].setEmpty();
-            board[x][y].setPiece(b);
-            if (King.isThreatened()) {
-              board[xB][yB].setPiece(b);
-              board[x][y].setEmpty();
-              throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
-
-            } else {
-              movesDone.add(move);
-              setNotBlackTurn();
-              piecesAndCell[0] = b.toString();
-              piecesAndCell[2] = move.substring(1, 3);
-              return piecesAndCell;
-            }
-          } else if (board[xB][yB].getPiece() != null) {
-            break;
-          } else {
-            xB++;
-            yB--;
-          }
-        }
-        xB = x + 1;
-        yB = y + 1;
-        while (xB < 8 && yB < 8) {
-          if (board[xB][yB].getPiece() instanceof Bishop
-              && board[xB][yB].getPiece().getColor() == 1) {
-            b = (Bishop) board[xB][yB].getPiece();
-            board[xB][yB].setEmpty();
-            board[x][y].setPiece(b);
-            if (King.isThreatened()) {
-              board[xB][yB].setPiece(b);
-              board[x][y].setEmpty();
-              throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
-
-            } else {
-              movesDone.add(move);
-              setNotBlackTurn();
-              piecesAndCell[0] = b.toString();
-              piecesAndCell[2] = move.substring(1, 3);
-              return piecesAndCell;
-            }
-          } else if (board[xB][yB].getPiece() != null) {
-            break;
-          } else {
-            xB++;
-            yB++;
-          }
-        }
-        throw new IllegalMoveException("Mossa illegale, l'alfiere non puo' muoversi qui");
-      } else
+        } else
         throw new IllegalMoveException("Mossa illegale, la cella di destinazione non e' vuota");
     }
-  }
 
   String[] captureBishop(String move) throws IllegalMoveException {
     int x;

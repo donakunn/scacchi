@@ -245,6 +245,7 @@ class King extends Piece {
 		}
 		return false;
 	}
+
 	static String[] move(String move) throws IllegalMoveException {
 		int x = 2;
 		int y = 1;
@@ -307,7 +308,6 @@ class King extends Piece {
 		}
 		Game.getCell(x,y).setPiece(Game.getCell(xK,yK).getPiece());
 		((King) Game.getCell(x,y).getPiece()).incrementMoves();
-		Game.getCell(xK,yK).setEmpty();
 		// imposta le nuove coordinate del king
 		if (blackTurn) {
 			coordBlackKing[0] = x;
