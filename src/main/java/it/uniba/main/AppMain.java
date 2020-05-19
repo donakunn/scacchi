@@ -32,7 +32,7 @@ public final class AppMain {
 
     while (!exit) {
 
-      if (Game.getBlackTurn() == true) {
+      if (menu.getBlackTurn()) {
         turn = "neri";
       } else {
         turn = "bianchi";

@@ -155,6 +155,10 @@ public class Menu {
 
   }
 
+  Boolean getBlackTurn() {
+    return Game.getBlackTurn(); 
+  }
+
   ArrayList<String> Blackcaptured() {
     return game.getBlacks();
   }
