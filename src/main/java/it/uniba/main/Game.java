@@ -22,7 +22,7 @@ class Game {
   private static ArrayList<String> WhitesCaptured = new ArrayList<String>();
 
   void newGame() {
-	blackTurn=false;
+	setBlackTurn();
     movesDone.clear();
     BlacksCaptured.clear();
     WhitesCaptured.clear();
@@ -621,7 +621,7 @@ class Game {
 
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              setBlackTurn();
               piecesAndCell[0] = b.toString();
               piecesAndCell[2] = move.substring(1, 3);
               return piecesAndCell;
@@ -648,7 +648,7 @@ class Game {
 
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              setBlackTurn();
               piecesAndCell[0] = b.toString();
               piecesAndCell[2] = move.substring(1, 3);
               return piecesAndCell;
@@ -675,7 +675,7 @@ class Game {
 
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              setBlackTurn();
               piecesAndCell[0] = b.toString();
               piecesAndCell[2] = move.substring(1, 3);
               return piecesAndCell;
@@ -702,7 +702,7 @@ class Game {
 
             } else {
               movesDone.add(move);
-              blackTurn = false;
+              setBlackTurn();
               piecesAndCell[0] = b.toString();
               piecesAndCell[2] = move.substring(1, 3);
               return piecesAndCell;
@@ -735,7 +735,7 @@ class Game {
 
             } else {
               movesDone.add(move);
-              blackTurn = true;
+              setNotBlackTurn();
               piecesAndCell[0] = b.toString();
               piecesAndCell[2] = move.substring(1, 3);
               return piecesAndCell;
@@ -762,7 +762,7 @@ class Game {
 
             } else {
               movesDone.add(move);
-              blackTurn = true;
+              setNotBlackTurn();
               piecesAndCell[0] = b.toString();
               piecesAndCell[2] = move.substring(1, 3);
               return piecesAndCell;
@@ -789,7 +789,7 @@ class Game {
 
             } else {
               movesDone.add(move);
-              blackTurn = true;
+              setNotBlackTurn();
               piecesAndCell[0] = b.toString();
               piecesAndCell[2] = move.substring(1, 3);
               return piecesAndCell;
@@ -816,7 +816,7 @@ class Game {
 
             } else {
               movesDone.add(move);
-              blackTurn = true;
+              setNotBlackTurn();
               piecesAndCell[0] = b.toString();
               piecesAndCell[2] = move.substring(1, 3);
               return piecesAndCell;
@@ -867,7 +867,7 @@ class Game {
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              blackTurn = false;
+              setBlackTurn();
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -897,7 +897,7 @@ class Game {
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              blackTurn = false;
+              setBlackTurn();
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -927,7 +927,7 @@ class Game {
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              blackTurn = false;
+              setBlackTurn();
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -958,7 +958,7 @@ class Game {
             } else {
               BlacksCaptured.add(caught.toString());
               movesDone.add(move);
-              blackTurn = false;
+              setBlackTurn();
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -993,7 +993,7 @@ class Game {
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              blackTurn = true;
+              setNotBlackTurn();
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1023,7 +1023,7 @@ class Game {
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              blackTurn = true;
+              setNotBlackTurn();
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1053,7 +1053,7 @@ class Game {
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              blackTurn = true;
+              setNotBlackTurn();
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1084,7 +1084,7 @@ class Game {
             } else {
               WhitesCaptured.add(caught.toString());
               movesDone.add(move);
-              blackTurn = true;
+              setNotBlackTurn();
               return pieces;
             }
           } else if (board[xb][yb].getPiece() != null) {
@@ -1098,6 +1098,7 @@ class Game {
       } else throw new IllegalMoveException("Mossa illegale, la cella di destinazione e' vuota");
     }
   }
+  
   boolean isMovableKnight(int x, int y, int a, int b) {
     if ((Math.abs(x - a) == 1 && Math.abs(y - b) == 2)
         || (Math.abs(y - b) == 1 && Math.abs(x - a) == 2)) {
@@ -1269,7 +1270,7 @@ class Game {
     }
     
     movesDone.add(move);
-    blackTurn = !blackTurn;
+    setNotBlackTurn();
   }
 
   void captureKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
@@ -1284,7 +1285,7 @@ class Game {
     board[x][y].setPiece(board[xC][yC].getPiece());
     board[xC][yC].setEmpty();
     movesDone.add(move);
-    blackTurn = !blackTurn;
+    setNotBlackTurn();
   }
 
   boolean isMovableRook(int x, int y, int a, int b) {
@@ -1484,7 +1485,7 @@ class Game {
     
     movesDone.add(move);
     ((Rook) board[x][y].getPiece()).incrementMoves();
-    blackTurn = !blackTurn;
+    setNotBlackTurn();
   }
 
   void captureRook(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
@@ -1500,7 +1501,7 @@ class Game {
     board[xC][yC].setEmpty();
     movesDone.add(move);
     ((Rook) board[x][y].getPiece()).incrementMoves();
-    blackTurn = !blackTurn;
+    setNotBlackTurn();
   }
 
   String[] shortCastling() throws IllegalMoveException {
@@ -1531,7 +1532,7 @@ class Game {
             board[7][4].setEmpty();
             board[7][7].setEmpty();
             movesDone.add("0-0");
-            blackTurn = false;
+            setBlackTurn();
             result[0] = "0-0";
             return result;
           } else {
@@ -1573,7 +1574,7 @@ class Game {
             board[0][4].setEmpty();
             board[0][7].setEmpty();
             movesDone.add("0-0");
-            blackTurn = true;
+            setNotBlackTurn();
             result[0] = "0-0";
             return result;
           } else {
@@ -1620,7 +1621,7 @@ class Game {
             board[7][0].setEmpty();
             movesDone.add("0-0-0");
             result[0] = "0-0-0";
-            blackTurn = false;
+            setBlackTurn();
             return result;
           } else {
             throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
@@ -1662,7 +1663,7 @@ class Game {
             board[0][0].setEmpty();
             movesDone.add("0-0-0");
             result[0] = "0-0-0";
-            blackTurn = true;
+            setNotBlackTurn();
             return result;
           } else {
             throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
@@ -1685,8 +1686,16 @@ class Game {
   }
 
   void changeTurn() {
-    blackTurn = !blackTurn;
+	  setNotBlackTurn();
   }
+  
+  private static void setBlackTurn(){
+	  blackTurn= false;
+	  }
+  
+  private static void setNotBlackTurn(){
+	  blackTurn = !blackTurn;
+	  }
 
   static Cell getCell(int x, int y) {
     return board[x][y];
