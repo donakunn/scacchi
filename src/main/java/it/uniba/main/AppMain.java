@@ -1,6 +1,7 @@
 package it.uniba.main;
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -32,7 +33,7 @@ public final class AppMain {
 
     while (!exit) {
 
-      if (Game.getBlackTurn() == true) {
+      if (Game.getTurn() == false) {
         turn = "neri";
       } else {
         turn = "bianchi";
@@ -54,7 +55,7 @@ public final class AppMain {
           }
         case "captures":
           if (inGame) {
-            menu.captures();
+        	  PrintMessage.printCaptures(menu.Blackcaptured(), menu.Whitescaptured());
             break;
           } else {
             System.err.println("Devi essere in gioco per usare questo comando.");
@@ -65,7 +66,7 @@ public final class AppMain {
           break;
         case "moves":
           if (inGame) {
-            menu.moves();
+            PrintMessage.printMoves(menu.moves());
             break;
           } else {
             System.err.println("Devi essere in gioco per usare questo comando.");
@@ -84,6 +85,7 @@ public final class AppMain {
               if (answer.toUpperCase().equals("SI") || answer.toUpperCase().equals("YES")) {
                 System.out.println("Cancello la partita in corso e ne avvio una nuova");
                 menu.play();
+                menu.resetTurn();
                 break;
               } else if (answer.toUpperCase().equals("NO")) {
                 break;
@@ -112,8 +114,6 @@ public final class AppMain {
           if (inGame) {
             try {
               String[] move= menu.getMove(input);
-              Game.addMove(input);
-              Game.changeTurn();
               if (move[0] == "0-0") {
                 PrintMessage.printShortCastling();
                 break;
