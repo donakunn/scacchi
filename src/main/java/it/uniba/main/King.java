@@ -308,6 +308,7 @@ class King extends Piece {
 		}
 		Game.getCell(x,y).setPiece(Game.getCell(xK,yK).getPiece());
 		((King) Game.getCell(x,y).getPiece()).incrementMoves();
+		Game.getCell(xK,yK).setEmpty();
 		// imposta le nuove coordinate del king
 		if (blackTurn) {
 			coordBlackKing[0] = x;
