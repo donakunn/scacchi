@@ -112,8 +112,6 @@ public final class AppMain {
           if (inGame) {
             try {
               String[] move= menu.getMove(input);
-              Game.addMove(input);
-              Game.changeTurn();
               if (move[0] == "0-0") {
                 PrintMessage.printShortCastling();
                 break;
