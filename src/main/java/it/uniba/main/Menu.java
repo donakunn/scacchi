@@ -25,7 +25,7 @@ public class Menu {
 	    +"Per effettuare una mossa e' necessario specificarla in notazione algebrica; \nPer la cattura en passant si puo' specificare 'e.p.' o 'ep' alla fine della mossa in notazione algebrica";
   }
 
-  public String[][] board() {
+  String[][] board() {
     String[][] board = new String[8][8];
     for (int i = 0; i < 8; i++) {
       for (int j = 0; j < 8; j++) {
@@ -40,9 +40,9 @@ public class Menu {
     return board;
   }
 
-  public ArrayList<String> moves() {
-    return game.getMoves();
-    
+  void moves() {
+    ArrayList<String> movesDone = game.getMoves();
+    PrintMessage.printMoves(movesDone);
   }
 
   public void play() {
@@ -160,10 +160,7 @@ public class Menu {
     }
   }
 
-  ArrayList<String> Blackcaptured() {
-    return game.getBlacks();
+  void captures() {
+    PrintMessage.printCaptures(game.getBlacks(), game.getWhites());
   }
-  ArrayList<String> Whitecaptures() {
-	    return game.getWhites();
-	  }
 }
