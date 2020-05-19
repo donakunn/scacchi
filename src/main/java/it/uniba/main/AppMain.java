@@ -54,7 +54,8 @@ public final class AppMain {
           }
         case "captures":
           if (inGame) {
-            menu.captures();
+            PrintMessage.printCaptures(menu.Blackcaptured(), menu.Whitecaptured());
+
             break;
           } else {
             System.err.println("Devi essere in gioco per usare questo comando.");
