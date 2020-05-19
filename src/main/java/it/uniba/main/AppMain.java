@@ -25,7 +25,7 @@ public final class AppMain {
     String turn = "bianchi";
     boolean inGame = false;
     boolean exit = false;
-    Scanner in = new Scanner(System.in);
+    Scanner in = new Scanner(System.in, "UTF-8");
     System.out.println("Benvenuto nel gioco degli scacchi!");
     System.out.println(
         "Inserire comando da eseguire oppure inserire help per la lista dei comandi.");
