@@ -40,7 +40,7 @@ class Pawn extends Piece {
 	/**
 	 * Il metodo enPassantCatturable controlla che il pedone sia catturabile en passant
 	 * @param x
-	 * @return true, se il pedone con ascisa x è catturabile en passant; false, altrimenti.
+	 * @return true, se il pedone con ascissa x è catturabile en passant; false, altrimenti.
 	 */
 	private Boolean enPassantCatturable(
 			int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
