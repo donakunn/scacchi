@@ -96,6 +96,10 @@ class Knight extends Piece {
 			xTarget=xC2;
 			yTarget=yC2;
 		}else if (count == 3) {
+			if (move.length() == 3) {
+				throw new IllegalMoveException(
+						"Mossa ambigua, devi specificare quale dei due cavalli muovere secondo la notazione algebrica.");
+			}
 			if (move.charAt(1) >= '1' && move.charAt(1) <= '8') {
 				if (xC1 == xC2) {
 					throw new IllegalMoveException(

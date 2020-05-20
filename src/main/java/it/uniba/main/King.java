@@ -293,7 +293,6 @@ class King extends Piece {
 				throw new IllegalMoveException(
 						"Mossa illegale, non c'e' nessun pezzo da catturare nella cella di arrivo");
 			}
-			printOut[0] = Game.getCell(xK,yK).getPiece().getType();
 		} else {
 			if (move.charAt(1) != 'x') {
 				throw new IllegalMoveException(
@@ -304,7 +303,7 @@ class King extends Piece {
 			} else {
 				Game.addWhiteCaptured(Game.getCell(x,y).getPiece().toString());
 			}
-			printOut[1] = Game.getCell(x,y).getPiece().getType();
+			printOut[1] = Game.getCell(x,y).getPiece().toString();
 		}
 		Game.getCell(x,y).setPiece(Game.getCell(xK,yK).getPiece());
 		((King) Game.getCell(x,y).getPiece()).incrementMoves();

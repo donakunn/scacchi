@@ -29,9 +29,9 @@ class Pawn extends Piece {
 	private Boolean enPassantCatturable(
 			int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
 		// false altrimenti
-		if ((getColor() == 0) && (nMoves == 1) && (x == 4)) {
+		if ((getColor() == 1) && (nMoves == 1) && (x == 4)) {
 			return true;
-		} else if ((getColor() == 1) && (nMoves == 1) && (x == 3)) {
+		} else if ((getColor() == 0) && (nMoves == 1) && (x == 3)) {
 			return true;
 		} else return false;
 	}
@@ -107,8 +107,7 @@ class Pawn extends Piece {
 		int xCheck, yCheck; //coordinate target check
 		boolean blackTurn= Game.getBlackTurn();
 
-		Pawn p;
-		Piece caught;
+		Piece p, caught;
 		String[] pieces = new String[3]; // 0 pezzo che cattura, 1 pezzo catturato, 2 cella di destinazione
 
 		y = (int) (move.charAt(2)) - 97;
@@ -168,7 +167,6 @@ class Pawn extends Piece {
 				pieces[0] = p.toString();
 				pieces[1] = caught.toString();
 				pieces[2] = move.substring(2, 4);
-				p.incrementMoves();
 				return pieces;
 			}
 		} else
@@ -183,7 +181,7 @@ class Pawn extends Piece {
 		int z; // colonna del pezzo di provenienza
 		int xCheck, yCheck; //coordinate target check
 		boolean blackTurn= Game.getBlackTurn();
-		Pawn p;
+		Piece p;
 		String[] pieces = new String[3]; // 0 pezzo catturato, 1 pezzo che cattura //2 cella di destinazione
 
 		y = (int) (move.charAt(2)) - 97;
@@ -192,7 +190,7 @@ class Pawn extends Piece {
 		if(Math.abs(z-y)>=2||(z-y)==0) {
 			throw new IllegalMoveException("Mossa illegale; Nessuna possibile cattura da parte di un pedone a partire dalla colonna indicata");
 		}
-		if (blackTurn == false) {
+		if (blackTurn == true) {
 			xCheck=x-1;
 			if (z == y - 1) {
 				yCheck=y-1;
@@ -212,7 +210,7 @@ class Pawn extends Piece {
 		if (Game.getCell(xCheck, y).getPiece() instanceof Pawn) {
 			p = (Pawn) Game.getCell(xCheck, yCheck).getPiece();
 			Pawn caught = (Pawn) Game.getCell(xCheck, y).getPiece();
-			if ((Game.getCell(x, y) == null) && (caught.enPassantCatturable(xCheck))) {
+			if ((Game.getCell(x, y).getPiece() == null) && (caught.enPassantCatturable(xCheck))) {
 				Game.getCell(x, y).setPiece(p);
 				Game.getCell(xCheck, yCheck).setEmpty();
 				Game.getCell(xCheck, y).setEmpty();
@@ -230,7 +228,6 @@ class Pawn extends Piece {
 					pieces[0] = p.toString();
 					pieces[1] = caught.toString();
 					pieces[2] = move.substring(2, 4) + " e.p." ;
-					p.incrementMoves();
 					return pieces;
 				}
 			} else
