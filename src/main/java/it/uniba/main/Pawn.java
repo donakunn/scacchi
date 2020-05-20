@@ -156,12 +156,10 @@ class Pawn extends Piece {
 
 		if (Game.getCell(x, y).getPiece()
 				== null) { // se cella di destinazione e' vuota prova a fare cattura en passant
-			try {
+			
 				pieces = captureEnPassant(move);
 				return pieces;
-			} catch (IllegalMoveException e) {
-				throw new IllegalMoveException(e.getMessage());
-			}
+			
 		}
 		if(Math.abs(z-y)>=2||(z-y)==0) {
 			throw new IllegalMoveException(
