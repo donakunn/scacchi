@@ -107,7 +107,8 @@ class Pawn extends Piece {
 		int xCheck, yCheck; //coordinate target check
 		boolean blackTurn= Game.getBlackTurn();
 
-		Piece p, caught;
+		Pawn p;
+		Piece caught;
 		String[] pieces = new String[3]; // 0 pezzo che cattura, 1 pezzo catturato, 2 cella di destinazione
 
 		y = (int) (move.charAt(2)) - 97;
@@ -167,6 +168,7 @@ class Pawn extends Piece {
 				pieces[0] = p.toString();
 				pieces[1] = caught.toString();
 				pieces[2] = move.substring(2, 4);
+				p.incrementMoves();
 				return pieces;
 			}
 		} else
@@ -181,7 +183,7 @@ class Pawn extends Piece {
 		int z; // colonna del pezzo di provenienza
 		int xCheck, yCheck; //coordinate target check
 		boolean blackTurn= Game.getBlackTurn();
-		Piece p;
+		Pawn p;
 		String[] pieces = new String[3]; // 0 pezzo catturato, 1 pezzo che cattura //2 cella di destinazione
 
 		y = (int) (move.charAt(2)) - 97;
@@ -228,6 +230,7 @@ class Pawn extends Piece {
 					pieces[0] = p.toString();
 					pieces[1] = caught.toString();
 					pieces[2] = move.substring(2, 4) + " e.p." ;
+					p.incrementMoves();
 					return pieces;
 				}
 			} else
