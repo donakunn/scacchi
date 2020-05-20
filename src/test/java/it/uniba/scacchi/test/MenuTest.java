@@ -479,6 +479,14 @@ public class MenuTest {
 		});
 
 		//test cattura ep non consentita
+				assertThrows(IllegalMoveException.class, () -> {
+					menu.play();
+					menu.getMove("d3");
+					menu.getMove("a6");
+					menu.getMove("dxe4e.p.");
+
+				});
+
 
 		//test cattura ep pezzo non catturabile ep
 
@@ -491,14 +499,7 @@ public class MenuTest {
 			menu.getMove("axf6ep");
 
 		});
-		//test cattura da pezzo diverso da pedone
-		assertThrows(IllegalMoveException.class, () -> {
-			menu.play();
-			menu.getMove("d3");
-			menu.getMove("a6");
-			menu.getMove("dxe4e.p.");
-
-		});
+	
 
 	}
 
