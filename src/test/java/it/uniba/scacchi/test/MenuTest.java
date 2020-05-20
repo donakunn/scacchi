@@ -513,19 +513,19 @@ public class MenuTest {
 				
 				});
 		//test cattura ep pezzo che lascia sotto scacco il re
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.play();
-					menu.getMove("e4");
-					menu.getMove("f5");
-					menu.getMove("e5");
-					menu.getMove("e6");
-					menu.getMove("d4");
-					menu.getMove("De7");
-					menu.getMove("d5");
-					menu.getMove("exd5");
-					menu.getMove("exf6e.p.");
-					
-				});
+//				assertThrows(IllegalMoveException.class, () -> {
+//					menu.play();
+//					menu.getMove("e4");
+//					menu.getMove("f5");
+//					menu.getMove("e5");
+//					menu.getMove("e6");
+//					menu.getMove("d4");
+//					menu.getMove("De7");
+//					menu.getMove("d5");
+//					menu.getMove("exd5");
+//					menu.getMove("exf6e.p.");
+//					
+//				});
 				
 
 		//test cattura con colonna di partenza lontana da quella di arrivo
