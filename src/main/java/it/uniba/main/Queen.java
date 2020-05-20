@@ -99,7 +99,7 @@ class Queen extends Piece {
 		while (xCheck >= 0 && yCheck >= 0) { // controllo diagonale alta sinistra
 			if ((Game.getCell(xCheck,yCheck).getPiece() instanceof Queen)
 					&& (Game.getCell(xCheck,yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
-				return actualMove(isCapture,x,y,x,yCheck);
+				return actualMove(isCapture,x,y,xCheck,yCheck);
 			} else if (Game.getCell(xCheck,yCheck).getPiece() != null) {
 				break;
 			} else {

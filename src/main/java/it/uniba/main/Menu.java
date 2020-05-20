@@ -98,16 +98,9 @@ public class Menu {
 			throw new IllegalMoveException("Mossa non consentita per il cavallo");
 
 		case 'A':
-			if (input.length() == 3) {
-
-				//PrintMessage.printAMove(piece, input);
-				return game.moveBishop(input);
-			} else if ((input.length() == 4) && (input.substring(1, 2).equals("x"))) {
-
-				return game.captureBishop(input);
-				//PrintMessage.printACapture(piece, input.substring(2, 4));
-				//PrintMessage.printAMove(piece[1], input.substring(2, 4));
-			} else throw new IllegalMoveException("Mossa non consentita per l'Alfiere");
+			pieces= game.moveBishop(input);
+			break;
+			
 		case 'D':
 			pieces= game.moveQueen(input);
 			break;
