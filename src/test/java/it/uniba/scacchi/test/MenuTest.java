@@ -1,11 +1,11 @@
 package it.uniba.scacchi.test;
 
-
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,14 +15,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-
 import org.junit.jupiter.api.Test;
 
 import it.uniba.main.IllegalMoveException;
 import it.uniba.main.Menu;
 
 public class MenuTest {
-
 
 	private static Menu menu = new Menu();
 	private ArrayList<String> expectedMoves = new ArrayList<String>();
@@ -59,13 +57,11 @@ public class MenuTest {
 	@Test
 	@DisplayName("Testing help menu print")
 	void testhelp() {
-
 		String help = "Lista di comandi utilizzabili:\n" + "help\n" + "play\n" + "quit\n"
 				+ "Lista di comandi utilizzabili solo se in partita:\n" + "board\n" + "captures\n" + "moves\n"
 				+ "Per effettuare una mossa e' necessario specificarla in notazione algebrica; \nPer la cattura en passant si puo' specificare 'e.p.' o 'ep' alla fine della mossa in notazione algebrica";
 		assertEquals(menu.help(), help);
 	}
-
 
 	 @Test
 	 @DisplayName("Testing new game board print")
@@ -82,21 +78,42 @@ public class MenuTest {
 	  	assertArrayEquals(menu.board(),board);
 	 }
 	 
-//	 @Test
-//	 void printMovesTest() {
-//		 ArrayList<String> expectedMoves = new ArrayList<String>();
-//		 expectedMoves.add("e4");
-//		 expectedMoves.add("e5");
-//		 String[] mossa1 = { "\u2659", null, "e4" };
-//		 String[] mossa2 = { "\u265F", null, "e5" };
-//		 assertAll("Moving pawns", () -> {
-//			 assertArrayEquals(mossa1, menu.getMove("e4"));
-//			 assertArrayEquals(mossa2, menu.getMove("e5"));
-//		 });
-//		 
-//		 assertEquals(expectedMoves,menu.moves());
-//		 
-//	 }
+	 @Test
+	 @DisplayName("Testing get turn")
+	 void getTurnTest() {
+		 assertFalse(menu.getBlackTurn());
+	 }
+	 
+	 @Test
+	 @DisplayName("Testing move a Pawn")
+	 void printMovesTest() {
+		 ArrayList<String> expectedMoves = new ArrayList<String>();
+		 expectedMoves.add("a4");
+		 expectedMoves.add("b5");
+		 expectedMoves.add("c3");
+		 expectedMoves.add("d6");
+		 String[] mossa1 = { "\u2659", null, "a4" };
+		 String[] mossa2 = { "\u265F", null, "b5" };
+		 String[] mossa3 = { "\u2659", null, "c3" };
+		 String[] mossa4 = { "\u265F", null, "d6" };
+		 assertAll("Moving pawns on lecit cells", () -> {
+			 assertArrayEquals(mossa1, menu.getMove("a4"));
+			 assertArrayEquals(mossa2, menu.getMove("b5"));
+			 assertArrayEquals(mossa3, menu.getMove("c3"));
+			 assertArrayEquals(mossa4, menu.getMove("d6"));
+		 });
+		 assertAll("Try a move on not lecit cell", () -> {
+			 assertThrows(IllegalMoveException.class, () -> {
+					menu.getMove("f5");
+				});
+				assertThrows(IndexOutOfBoundsException.class, () -> {
+					menu.getMove("t9");
+				});
+		 });
+		 
+		 assertEquals(expectedMoves,menu.moves());
+		 
+	 }
 	 
 	
 
@@ -160,5 +177,4 @@ public class MenuTest {
 		
 	}
 	
-
 }
