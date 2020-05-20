@@ -22,11 +22,11 @@ class Pawn extends Piece {
 		} else throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
 	}
 
-	void incrementMoves() {
+	private void incrementMoves() {
 		this.nMoves++;
 	}
 
-	Boolean enPassantCatturable(
+	 private Boolean enPassantCatturable(
 			int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
 		// false altrimenti
 		if ((getColor() == 0) && (nMoves == 1) && (x == 4)) {
