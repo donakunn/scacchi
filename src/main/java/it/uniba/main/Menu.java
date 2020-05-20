@@ -53,26 +53,8 @@ public class Menu {
 		switch (chosenPiece) {
 		case 'T': //da sistemare
 			pieces = game.moveRook(input);
-			if (pieces[0] == null) {
-				if (input.length() == 3) {
-					//PrintMessage.printAMove(piece[1], input.substring(1, 3));
-					return pieces;
-				} else if (input.length() == 4) {
-					//PrintMessage.printAMove(piece[1], input.substring(2, 4));
-					return pieces;
-				}
-			} else {
-				if (input.length() == 4) {
-					//PrintMessage.printACapture(piece, input.substring(2, 4));
-					//PrintMessage.printAMove(piece[1], input.substring(2, 4));
-					return pieces;
-				} else if (input.length() == 5) {
-					//PrintMessage.printACapture(piece, input.substring(3, 5));
-					//PrintMessage.printAMove(piece[1], input.substring(3, 5));
-					return pieces;
-				}
-			} 
-			throw new IllegalMoveException("Mossa non consentita per la torre");
+			break;
+			
 		case 'C': //da sistemare
 			pieces= game.moveKnight(input);
 			break;

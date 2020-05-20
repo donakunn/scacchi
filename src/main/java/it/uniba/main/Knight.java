@@ -23,8 +23,7 @@ class Knight extends Piece {
 	private static boolean isMovable(int x, int y, int a, int b) {
 		if ((Math.abs(x - a) == 1 && Math.abs(y - b) == 2)
 				|| (Math.abs(y - b) == 1 && Math.abs(x - a) == 2)) {
-			if (Game.getCell(a, b).getPiece() == null
-					|| Game.getCell(a, b).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1)) return true;
+			return true;
 		}
 		return false;
 	}
@@ -97,6 +96,10 @@ class Knight extends Piece {
 			xTarget=xC2;
 			yTarget=yC2;
 		}else if (count == 3) {
+			if (move.length() == 3) {
+				throw new IllegalMoveException(
+						"Mossa ambigua, devi specificare quale dei due cavalli muovere secondo la notazione algebrica.");
+			}
 			if (move.charAt(1) >= '1' && move.charAt(1) <= '8') {
 				if (xC1 == xC2) {
 					throw new IllegalMoveException(
