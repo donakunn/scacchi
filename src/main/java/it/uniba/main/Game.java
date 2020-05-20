@@ -107,10 +107,15 @@ class Game {
 
   String[] moveKnight(String move) throws IllegalMoveException {
     int count = 0;
-    String[] printOut = new String[2];
-    int xC1 = -1, yC1 = -1, xC2 = -1, yC2 = -1;
+    int xC1 = -1;
+    int yC1 = -1;
+    int xC2 = -1;
+    int yC2 = -1;
+    String[] piecesAndCell = new String[3];
+    
     int a = 8 - Integer.parseInt(move.substring(move.length() - 1));
     int b = (int) move.charAt(move.length() - 2) - 97;
+    
     if (board[a][b].getPiece() != null
         && board[a][b].getPiece().getColor() != (blackTurn ? 1 : 0)) {
       throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
@@ -145,27 +150,31 @@ class Game {
 
     if (count == 1) {
       if (move.charAt(1) == 'x') {
-        printOut[0] = board[a][b].getPiece().getType();
-        printOut[1] = board[xC1][yC1].getPiece().getType();
+    	  piecesAndCell[1] = board[a][b].getPiece().toString();
+          piecesAndCell[0] = board[xC1][yC1].getPiece().toString();
+          piecesAndCell[2] = move.substring(2, 4);
         captureKnight(xC1, yC1, a, b, move);
-        return printOut;
+        return piecesAndCell;
       } else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
         actualMoveKnight(xC1, yC1, a, b, move);
-        printOut[1] = board[a][b].getPiece().getType();
-        return printOut;
+        piecesAndCell[0] = board[a][b].getPiece().toString();
+        piecesAndCell[2] = move.substring(1, 3);
+        return piecesAndCell;
       } else {
         throw new IllegalMoveException("Mossa non riconosciuta.");
       }
     } else if (count == 2) {
       if (move.charAt(1) == 'x') {
-        printOut[0] = board[a][b].getPiece().getType();
-        printOut[1] = board[xC2][yC2].getPiece().getType();
+    	  piecesAndCell[1] = board[a][b].getPiece().toString();
+          piecesAndCell[0] = board[xC2][yC2].getPiece().toString();
+          piecesAndCell[2] = move.substring(2, 4);
         captureKnight(xC2, yC2, a, b, move);
-        return printOut;
+        return piecesAndCell;
       } else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
         actualMoveKnight(xC2, yC2, a, b, move);
-        printOut[1] = board[a][b].getPiece().getType();
-        return printOut;
+        piecesAndCell[0] = board[a][b].getPiece().toString();
+        piecesAndCell[2] = move.substring(1, 3);
+        return piecesAndCell;
       } else {
         throw new IllegalMoveException("Mossa non riconosciuta.");
       }
@@ -197,13 +206,15 @@ class Game {
         }
         if (move.length() == 4) {
           actualMoveKnight(x, y, a, b, move);
-          printOut[1] = board[a][b].getPiece().getType();
-          return printOut;
+          piecesAndCell[0] = board[a][b].getPiece().toString();
+          piecesAndCell[2] = move.substring(1, 3);
+          return piecesAndCell;
         } else if (move.length() == 5) {
-          printOut[0] = board[a][b].getPiece().getType();
-          printOut[1] = board[x][y].getPiece().getType();
+        	piecesAndCell[1] = board[a][b].getPiece().toString();
+            piecesAndCell[0] = board[x][y].getPiece().toString();
+            piecesAndCell[2] = move.substring(2, 4);
           captureKnight(x, y, a, b, move);
-          return printOut;
+          return piecesAndCell;
         } else {
           throw new IllegalMoveException("Mossa non riconosciuta.");
         }
@@ -224,13 +235,15 @@ class Game {
         }
         if (move.length() == 4) {
           actualMoveKnight(x, y, a, b, move);
-          printOut[1] = board[a][b].getPiece().getType();
-          return printOut;
+          piecesAndCell[0] = board[a][b].getPiece().toString();
+          piecesAndCell[2] = move.substring(1, 3);
+          return piecesAndCell;
         } else if (move.length() == 5) {
-          printOut[0] = board[a][b].getPiece().getType();
-          printOut[1] = board[x][y].getPiece().getType();
+        	 piecesAndCell[1] = board[a][b].getPiece().toString();
+             piecesAndCell[0] = board[x][y].getPiece().toString();
+             piecesAndCell[2] = move.substring(2, 4);
           captureKnight(x, y, a, b, move);
-          return printOut;
+          return piecesAndCell;
         } else {
           throw new IllegalMoveException("Mossa non riconosciuta.");
         }
@@ -239,7 +252,7 @@ class Game {
       }
     }
 
-    return printOut;
+    return piecesAndCell;
   }
 
   void actualMoveKnight(int xC, int yC, int x, int y, String move) throws IllegalMoveException {
