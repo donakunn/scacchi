@@ -214,34 +214,34 @@ class King extends Piece {
 		if (y + 2 <= 7) {
 			if (x - 1 >= 0
 					&& Game.getCell(x - 1, y + 2).getPiece() instanceof Knight
-					&& Game.getCell(x - 1, y + 2).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
+					&& Game.getCell(x - 1, y + 2).getPiece().getColor() != (blackTurn ? 0 : 1)) return true;
 			if (x + 1 <= 7
 					&& Game.getCell(x + 1, y + 2).getPiece() instanceof Knight
-					&& Game.getCell(x + 1, y + 2).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
+					&& Game.getCell(x + 1, y + 2).getPiece().getColor() != (blackTurn ? 0 : 1)) return true;
 		}
 		if (y + 1 <= 7) {
 			if (x - 2 >= 0
 					&& Game.getCell(x - 2, y + 1).getPiece() instanceof Knight
-					&& Game.getCell(x - 2, y + 1).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
+					&& Game.getCell(x - 2, y + 1).getPiece().getColor() != (blackTurn ? 0 : 1)) return true;
 			if (x + 2 <= 7
 					&& Game.getCell(x + 2, y + 1).getPiece() instanceof Knight
-					&& Game.getCell(x + 2, y + 1).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
+					&& Game.getCell(x + 2, y + 1).getPiece().getColor() != (blackTurn ? 0 : 1)) return true;
 		}
 		if (y - 1 >= 0) {
 			if (x - 2 >= 0
 					&& Game.getCell(x - 2, y - 1).getPiece() instanceof Knight
-					&& Game.getCell(x - 2, y - 1).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
+					&& Game.getCell(x - 2, y - 1).getPiece().getColor() != (blackTurn ? 0 : 1)) return true;
 			if (x + 2 <= 7
 					&& Game.getCell(x + 2, y - 1).getPiece() instanceof Knight
-					&& Game.getCell(x + 2, y - 1).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
+					&& Game.getCell(x + 2, y - 1).getPiece().getColor() != (blackTurn ? 0 : 1)) return true;
 		}
 		if (y - 2 >= 0) {
 			if (x - 1 >= 0
 					&& Game.getCell(x - 1, y - 2).getPiece() instanceof Knight
-					&& Game.getCell(x - 1, y - 2).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
+					&& Game.getCell(x - 1, y - 2).getPiece().getColor() != (blackTurn ? 0 : 1)) return true;
 			if (x + 1 <= 7
 					&& Game.getCell(x + 1, y - 2).getPiece() instanceof Knight
-					&& Game.getCell(x + 1, y - 2).getPiece().getColor() == (blackTurn ? 1 : 0)) return true;
+					&& Game.getCell(x + 1, y - 2).getPiece().getColor() != (blackTurn ? 0 : 1)) return true;
 		}
 		return false;
 	}

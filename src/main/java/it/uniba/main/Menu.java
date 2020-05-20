@@ -74,26 +74,8 @@ public class Menu {
 			} 
 			throw new IllegalMoveException("Mossa non consentita per la torre");
 		case 'C': //da sistemare
-			if (pieces[0] == null) {
-				if (input.length() == 3) {
-					//PrintMessage.printAMove(piece[1], input.substring(1, 3));
-					return game.moveKnight(input);
-				} else if (input.length() == 4) {
-					//PrintMessage.printAMove(piece[1], input.substring(2, 4));
-					return game.moveKnight(input);
-				}
-			} else {
-				if (input.length() == 4) {
-					//PrintMessage.printACapture(piece, input.substring(2, 4));
-					//PrintMessage.printAMove(piece[1], input.substring(2, 4));
-					return game.moveKnight(input);
-				} else if (input.length() == 5) {
-					//PrintMessage.printACapture(piece, input.substring(3, 5));
-					//PrintMessage.printAMove(piece[1], input.substring(3, 5));
-					return game.moveKnight(input);
-				}
-			}
-			throw new IllegalMoveException("Mossa non consentita per il cavallo");
+			pieces= game.moveKnight(input);
+			break;
 
 		case 'A':
 			pieces= game.moveBishop(input);
