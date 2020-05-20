@@ -34,7 +34,7 @@ class Pawn extends Piece {
 
 	/**
 	 * enPassantCatturable method checks if, with a move, a pawn has moved forward two cells on the chessboard, then checks
-	 * if it can capture en passant.
+	 * if it can be captured en passant.
 	 * @param x
 	 * @return true, if the pawn has moved forward two cells; false, if the pawn hasn't moved forward two cells.
 	 */
