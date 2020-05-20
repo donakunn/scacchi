@@ -29,20 +29,18 @@ public class Menu {
 		String[][] board = new String[8][8];
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
-				if (Game.getCell(i, j) == null) {
-					board[i][j] = "";
-				} else {
-					board[i][j] = Game.getCell(i, j).toString();
-				}
+
+				board[i][j] = Game.getCell(i, j).toString();
 			}
+
 		}
 
 		return board;
 	}
 
-	void moves() {
-		ArrayList<String> movesDone = game.getMoves();
-		PrintMessage.printMoves(movesDone);
+	public ArrayList<String> moves() {
+		return game.getMoves();
+		
 	}
 
 	public void play() {
@@ -100,7 +98,7 @@ public class Menu {
 		case 'A':
 			pieces= game.moveBishop(input);
 			break;
-			
+
 		case 'D':
 			pieces= game.moveQueen(input);
 			break;
@@ -137,7 +135,7 @@ public class Menu {
 		return pieces;
 	}
 
-	Boolean getBlackTurn() {
+	public Boolean getBlackTurn() {
 		return Game.getBlackTurn(); 
 	}
 

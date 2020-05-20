@@ -16,17 +16,17 @@ class Pawn extends Piece {
 		if (col == 0) {
 			this.pieceType = "\u265F"; // pedone nero
 
-		} else if (col == 1) {
+		} else {
 			this.pieceType = "\u2659"; // pedone bianco
 
-		} else throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
+		} 
 	}
 
 	private void incrementMoves() {
 		this.nMoves++;
 	}
 
-	 private Boolean enPassantCatturable(
+	private Boolean enPassantCatturable(
 			int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
 		// false altrimenti
 		if ((getColor() == 0) && (nMoves == 1) && (x == 4)) {
@@ -183,7 +183,7 @@ class Pawn extends Piece {
 		boolean blackTurn= Game.getBlackTurn();
 		Piece p;
 		String[] pieces = new String[3]; // 0 pezzo catturato, 1 pezzo che cattura //2 cella di destinazione
-		
+
 		y = (int) (move.charAt(2)) - 97;
 		x = 8 - Integer.parseInt(move.substring(3, 4));
 		z = (int) (move.charAt(0)) - 97;
@@ -193,16 +193,16 @@ class Pawn extends Piece {
 		if (blackTurn == false) {
 			xCheck=x-1;
 			if (z == y - 1) {
-					yCheck=y-1;
+				yCheck=y-1;
 			} else {
-					yCheck=y+1;
+				yCheck=y+1;
 			}
 		} else {
 			xCheck=x+1;
 			if (z == y - 1) {
-					yCheck=y-1;
+				yCheck=y-1;
 			} else {
-					yCheck=y+1;
+				yCheck=y+1;
 			}
 		}
 		if (!(Game.getCell(xCheck, yCheck).getPiece()

@@ -66,7 +66,7 @@ public final class AppMain {
 				break;
 			case "moves":
 				if (inGame) {
-					menu.moves();
+					PrintMessage.printMoves(menu.moves());
 					break;
 				} else {
 					System.err.println("Devi essere in gioco per usare questo comando.");
