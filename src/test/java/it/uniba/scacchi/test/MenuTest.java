@@ -489,16 +489,52 @@ public class MenuTest {
 
 
 		//test cattura ep pezzo non catturabile ep
+				assertAll("capture en passant on not catturable ep piece ", () -> {
+					menu.getMove("f3");
+					menu.getMove("g5");
+					menu.getMove("f4");
+					menu.getMove("g4");
+					
+					assertThrows(IllegalMoveException.class, () -> {
+						menu.getMove("fxg5ep");
 
+					});
+				});
 		//test cattura ep da pezzo diverso da pedone
+				assertThrows(IllegalMoveException.class, () -> {
+					menu.getMove("Dd2");
+					menu.getMove("b5");
+					menu.getMove("Dc3");
+					menu.getMove("h6");
+					menu.getMove("Dc5");
+					menu.getMove("h5");
+					menu.getMove("cxb6e.p.");
 
+				
+				});
 		//test cattura ep pezzo che lascia sotto scacco il re
+				assertThrows(IllegalMoveException.class, () -> {
+					menu.play();
+					menu.getMove("e4");
+					menu.getMove("f5");
+					menu.getMove("e5");
+					menu.getMove("e6");
+					menu.getMove("d4");
+					menu.getMove("De7");
+					menu.getMove("d5");
+					menu.getMove("exd5");
+					menu.getMove("exf6e.p.");
+					
+				});
+				
 
 		//test cattura con colonna di partenza lontana da quella di arrivo
 		assertThrows(IllegalMoveException.class, () -> {
 			menu.getMove("axf6ep");
 
 		});
+		
+		
 	
 
 	}
