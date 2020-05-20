@@ -22,10 +22,22 @@ class Pawn extends Piece {
 		} 
 	}
 
+	/**
+	 * incrementMoves method checks with a counter if a pawn who has already performed a move. if didn't perform a 
+	 * move, it can move forward cells, otherwise it can move forward one cell.
+	 * 
+	 */
+
 	private void incrementMoves() {
 		this.nMoves++;
 	}
 
+	/**
+	 * enPassantCatturable method checks if, with a move, a pawn has moved forward two cells on the chessboard, then checks
+	 * if it can capture en passant.
+	 * @param x
+	 * @return true, if the pawn has moved forward two cells; false, if the pawn hasn't moved forward two cells.
+	 */
 	private Boolean enPassantCatturable(
 			int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
 		// false altrimenti
@@ -36,6 +48,14 @@ class Pawn extends Piece {
 		} else return false;
 	}
 
+	/**
+	 * move method checks the cells and moves a pawn in the chessboard. It chekcs the pawns starting and finishing cell and
+	 * if the conditions are respected it executes the move, otherwise it raises an exception because: the move isn't legal,
+	 * the destination cell isn't empty or the move would put the king in check.
+	 * @param move
+	 * @return the String array 'pieceAndCell' that contains the Pawn that is moved converted to string and the destination cell.
+	 * @throws IllegalMoveException
+	 */
 	static String[] move(String move) throws IllegalMoveException {
 		int x; // ascissa
 		int y; // ordinata
@@ -99,6 +119,17 @@ class Pawn extends Piece {
 		pieceAndCell[2] = move;
 		return pieceAndCell;
 	}
+
+	/**
+	 * capture method allows a pawn to capture a piece in the chessboard. The method allows to perform the simple capture but 
+	 * if the destination box is empty, it tries to perform the capture en passant without it being explicitly specified.
+	 * If the move isn't legal, the user tries to capture a piece of the same color or the move put the king in check
+	 * the method raises exceptions.
+	 * @param move
+	 * @return String array 'pieces' which contains the capturing piece converted to string, the captured piece converted 
+	 * to string and the destination cell.
+	 * @throws IllegalMoveException
+	 */
 
 	static String[] capture(String move) throws IllegalMoveException {
 		int x; // ascissa
@@ -174,6 +205,15 @@ class Pawn extends Piece {
 					"Mossa illegale; Impossibile catturare pezzo dello stesso colore.");
 	}
 
+	/**
+	 * captureEnPassant method allows a pawn piece to capture en passant in the chessboard. The method allows to perform only 
+	 * the capture en passant. If the move isn't legal, the user tries to capture a piece of the same color or the move put the king 
+	 * in check the method raises exceptions.
+	 * @param move
+	 * @return String array 'pieces' which contains the capturing piece converted to string, the captured piece converted
+	 * to string and the destination cell.
+	 * @throws IllegalMoveException
+	 */
 	static String[] captureEnPassant(String move) throws IllegalMoveException {
 
 		int x; // ascissa
