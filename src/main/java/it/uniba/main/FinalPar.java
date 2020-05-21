@@ -1,6 +1,10 @@
 package it.uniba.main;
 
 public final class FinalPar {
+    private FinalPar() {
+    }
+    public static final int MAXROW = 8;
+    public static final int MAXCOL = 8;
     public static final int MOVELENGTH = 2;
     public static final int CAPTURELENGTH = 4;
     public static final int ALTEPLENGTH = 8;

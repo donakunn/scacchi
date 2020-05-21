@@ -2,22 +2,27 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
-public class PrintMessage {
+import static it.uniba.main.FinalPar.MAXCOL;
+import static it.uniba.main.FinalPar.MAXROW;
 
-    static void printBoard(String[][] board) {
+public final class PrintMessage {
+    private PrintMessage() {
+    }
+
+    static void printBoard(final String[][] board) {
         System.out.println("    a    b    c    d    e    f    g    h");
-        for (int i = 0; i < 8; i++) {
-            System.out.print(8 - i + "  ");
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < MAXROW; i++) {
+            System.out.print(MAXROW - i + "  ");
+            for (int j = 0; j < MAXCOL; j++) {
                 System.out.print(board[i][j] + "  ");
             }
-            System.out.print(8 - i + "  ");
+            System.out.print(MAXCOL - i + "  ");
             System.out.println("\n");
         }
         System.out.println("    a    b    c    d    e    f    g    h");
     }
 
-    static void printMoves(ArrayList<String> moves) {
+    static void printMoves(final ArrayList<String> moves) {
         if (moves.size() == 0) {
             System.out.println("Non sono ancora state effettuate mosse");
         } else {
@@ -38,7 +43,7 @@ public class PrintMessage {
         }
     }
 
-    static void printCaptures(ArrayList<String> capturedBlacks, ArrayList<String> capturedWhites) {
+    static void printCaptures(final ArrayList<String> capturedBlacks, final ArrayList<String> capturedWhites) {
         if (capturedBlacks.size() == 0) {
             System.out.println("Nessun pezzo nero catturato");
         } else {
@@ -51,7 +56,7 @@ public class PrintMessage {
         }
     }
 
-    static void printAMove(String[] pieceAndCell) {
+    static void printAMove(final String[] pieceAndCell) {
         System.out.println(pieceAndCell[0] + " spostato su " + pieceAndCell[2]);
     }
 
@@ -63,7 +68,7 @@ public class PrintMessage {
         System.out.println("Arrocco lungo eseguito");
     }
 
-    static void printACapture(String[] piecesAndCell) {
+    static void printACapture(final String[] piecesAndCell) {
         System.out.println(piecesAndCell[1] + " e' stato catturato da " + piecesAndCell[0] + " su " + piecesAndCell[2]);
     }
 }

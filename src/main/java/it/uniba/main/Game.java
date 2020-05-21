@@ -8,6 +8,8 @@ import static it.uniba.main.FinalPar.CHARPOS2;
 import static it.uniba.main.FinalPar.CHARPOS4;
 import static it.uniba.main.FinalPar.CHARPOS6;
 import static it.uniba.main.FinalPar.CHARPOS8;
+import static it.uniba.main.FinalPar.MAXCOL;
+import static it.uniba.main.FinalPar.MAXROW;
 import static it.uniba.main.FinalPar.MOVELENGTH;
 import static it.uniba.main.FinalPar.POS0;
 import static it.uniba.main.FinalPar.POS1;
@@ -32,10 +34,8 @@ import static it.uniba.main.FinalPar.POS7;
  * @author Filippo Iacobellis
  */
 class Game {
-    static final int ROWDIM = 8;
-    static final int COLDIM = 8;
     private static boolean blackTurn = false;
-    private static Cell[][] board = new Cell[ROWDIM][COLDIM];
+    private static Cell[][] board = new Cell[MAXROW][MAXCOL];
     private static ArrayList<String> movesDone = new ArrayList<String>();
     private static ArrayList<String> blacksCaptured = new ArrayList<String>();
     private static ArrayList<String> whitesCaptured = new ArrayList<String>();
@@ -47,7 +47,7 @@ class Game {
         movesDone.clear();
         blacksCaptured.clear();
         whitesCaptured.clear();
-        for (int j = 0; j < ROWDIM; j++) {
+        for (int j = 0; j < MAXCOL; j++) {
             // initialize pawns a2-h2 (white side)
             board[POS1][j] = new Cell(new Pawn(0));
 
@@ -67,7 +67,7 @@ class Game {
 
         // initialize empty cells
         for (int i = firstEmptyRow; i <= lastEmptyRow; i++) {
-            for (int j = 0; j < ROWDIM; j++) {
+            for (int j = 0; j < MAXCOL; j++) {
                 board[i][j] = new Cell(null);
             }
         }
