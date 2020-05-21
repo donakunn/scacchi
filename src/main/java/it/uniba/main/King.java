@@ -9,17 +9,19 @@ package it.uniba.main;
  * @author Filippo Iacobellis
  */
 class King extends Piece {
-	private static int coordBlackKing[] = new int[]{0,4}; // coordinate re nero, [0]=x [1]=y
-	private static int coordWhiteKing[] = new int[]{7,4}; // coordinate re bianco, [0]=x [1]=y
+	private static int []coordBlackKing; // coordinate re nero, [0]=x [1]=y
+	private static int [] coordWhiteKing; // coordinate re bianco, [0]=x [1]=y
 	King(int col) {
 
 		this.color = col;
 		if (col == 0) {
 			this.pieceType = "\u265A"; // Re nero
+			coordBlackKing = new int[]{0,4};
 			nMoves = 0;
 
 		} else if (col == 1) {
 			this.pieceType = "\u2654"; // Re bianco
+			coordWhiteKing = new int[]{7,4};
 			nMoves = 0;
 
 		} else throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
