@@ -72,25 +72,12 @@ public class Menu {
 			break;
 
 		case '0':
-			if (input.equals("0-0") || input.equals("O-O")) {
-
-				pieces = game.shortCastling(); 
-				break;
-
-
-			} 
-			else if (input.equals("0-0-0") || input.equals("O-O-O")) {
-				pieces = game.longCastling();
-				break;
-
-
-			} else
-
-				throw new IllegalMoveException(
-						"Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
+		case 'O':
+			pieces= game.tryCastling(input);
+			break;
 
 		default:
-			pieces = game.moveAPawn(input);
+			pieces = game.movePawn(input);
 			break;
 		}
 
