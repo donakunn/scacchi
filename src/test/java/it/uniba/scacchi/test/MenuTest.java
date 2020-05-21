@@ -125,7 +125,7 @@ public class MenuTest {
 			assertThrows(IllegalMoveException.class, () -> {
 				menu.getMove("f5");
 			});
-			assertThrows(IndexOutOfBoundsException.class, () -> {
+			assertThrows(IllegalMoveException.class, () -> {
 				menu.getMove("t9");
 			});
 
@@ -243,9 +243,6 @@ public class MenuTest {
 
 
 	}
-
-
-
 	//test di cattura da parte di pedone
 	@Test
 	void testCapturefromAPawn() {
@@ -258,15 +255,7 @@ public class MenuTest {
 		expectedMoves.add("d6");
 		expectedMoves.add("e4");
 		expectedMoves.add("dxc5");
-		expectedMoves.add("d4");
-		expectedMoves.add("c4");
-		expectedMoves.add("f4");
-		expectedMoves.add("cxd3");
-		expectedMoves.add("a4");
-		expectedMoves.add("b5");
-		expectedMoves.add("a5");
-		expectedMoves.add("f5");
-		expectedMoves.add("axb6");
+		
 
 		//pezzi catturati attesi
 
@@ -490,7 +479,7 @@ public class MenuTest {
 			assertThrows(IllegalMoveException.class, () -> {
 				menu.getMove("axf8");
 			});
-			assertThrows(IndexOutOfBoundsException.class, () -> {
+			assertThrows(IllegalMoveException.class, () -> {
 				menu.getMove("t9");
 			});
 			//test cattura da pezzo diverso da pedone
@@ -631,10 +620,81 @@ public class MenuTest {
 		//test cattura con colonna di partenza lontana da quella di arrivo
 		assertThrows(IllegalMoveException.class, () -> {
 			menu.getMove("axf6ep");
-
 		});
 	}
-	
-	//test mossa regina
-	
+
+	//test spostamento regina lecito
+	@Test
+	void testMoveQueen() {
+		String[] mossa1 = { "\u2659", null, "d4" };
+		String[] mossa2 = { "\u265F", null, "d5" };
+		String[] mossa3 = { "\u2655", null, "d3" };
+		String[] mossa4 = { "\u265B", null, "d6" };
+		String[] mossa5 = { "\u2655", null, "a3" };
+		String[] mossa6 = { "\u265B", null, "h6" };
+		String[] mossa7 = { "\u2655", null, "d6" };
+		String[] mossa8 = { "\u265B", null, "g5" };
+		String[] mossa9 = { "\u2655", null, "g3" };
+		String[] mossa10 = { "\u265B", null, "d2" };
+		expectedMoves.add("d4");
+		expectedMoves.add("d5");
+		expectedMoves.add("Dd3");
+		expectedMoves.add("Dd6");
+		expectedMoves.add("Da3");
+		expectedMoves.add("Dh6");
+		expectedMoves.add("Dd6");
+		expectedMoves.add("Dg5");
+		expectedMoves.add("Dg3");
+		expectedMoves.add("Dd2");
+
+		assertAll("Moving Queen on lecit cells", () -> {
+			assertArrayEquals(mossa1, menu.getMove("d4"));
+			assertArrayEquals(mossa2, menu.getMove("d5"));
+			assertArrayEquals(mossa3, menu.getMove("Dd3"));
+			assertArrayEquals(mossa4, menu.getMove("Dd6"));
+			assertArrayEquals(mossa5, menu.getMove("Da3"));
+			assertArrayEquals(mossa6, menu.getMove("Dh6"));
+			assertArrayEquals(mossa7, menu.getMove("Dd6"));
+			assertArrayEquals(mossa8, menu.getMove("Dg5"));
+			assertArrayEquals(mossa9, menu.getMove("Dg3"));
+			assertArrayEquals(mossa10, menu.getMove("Dd2"));
+			assertEquals(expectedMoves,menu.moves());
+
+		});
+
+	}
+	//test mossa regina lecita ma ostacolata da un altro pezzo 
+	@Test
+	void testObstacledMoveQueen() {
+		assertThrows(IllegalMoveException.class, () -> {
+			menu.getMove("Dd5");
+		});
+	}
+
+	//test mossa regina su casella occupata da alleato
+	@Test
+	void testOccupiedCellMoveQueen() {
+		assertThrows(IllegalMoveException.class, () -> {
+			menu.getMove("Dc2");
+		});
+	}
+
+	//test mossa regina illegale
+	@Test
+	void testIllegalMoveQueen() {
+		assertAll("Testing illegal moves for the Queen", () -> {
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("De3");
+			});
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Dff");
+			});
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("D44");
+			});
+		});
+	}
+
+
+
 }

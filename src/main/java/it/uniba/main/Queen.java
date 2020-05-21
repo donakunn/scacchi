@@ -14,10 +14,9 @@ class Queen extends Piece {
 		if (col == 0) {
 			this.pieceType = "\u265B"; // Regina nera
 
-		} else if (col == 1) {
+		} else  {
 			this.pieceType = "\u2655"; // Regina bianca
-
-		} else throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
+		} 
 	}
 
 	static String[] move(String move) throws IllegalMoveException {
@@ -34,22 +33,26 @@ class Queen extends Piece {
 			x=3;
 			y=2;
 		} else throw new IllegalMoveException("Mossa non consentita per la Donna");
-
+		
 		y = (int) move.charAt(y) - 97;
-		x = 8 - Integer.parseInt(move.substring(x, x+1));
+		x = 8 - (((int) move.charAt(x)) - 48);
+		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
+		
 		if (Game.getCell(x,y).getPiece() != null) {
 			//lancia eccezione se la cella di destinazione è occupata da alleato
 			if(Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) 
 				throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-			
+
 			//o se è una mossa di spostamento con cella di destinazione occupata da avversario
 			else if(Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture)
 				throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
-		
+
 			//o se è una mossa di cattura con cella di destinazione vuota
 		}else if(Game.getCell(x,y).getPiece() == null && isCapture)
 			throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
-			
+
 		xCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
 		while (xCheck < 8) {
 			if ((Game.getCell(xCheck,y).getPiece() instanceof Queen)
