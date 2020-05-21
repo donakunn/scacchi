@@ -3,7 +3,7 @@ package it.uniba.main;
 /**
  * <<entity>><br>
  * <p>Titolo: King</p>
- * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} ed è la clase che permette di utilizzare il re
+ * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} ed è la classe che permette di utilizzare il re
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente
