@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Patrick Clark
  * @author Filippo Iacobellis
  */
-public class Menu {
+public final class Menu {
     private Game game = new Game();
 
     public String help() {
@@ -51,7 +51,7 @@ public class Menu {
     public String[] getMove(String input)
             throws IllegalArgumentException, IndexOutOfBoundsException, IllegalMoveException {
         char chosenPiece = input.charAt(0);
-        String[] pieces = new String[3];
+        String[] pieces;
         switch (chosenPiece) {
             case 'T': //da sistemare
                 pieces = game.moveRook(input);
@@ -93,11 +93,11 @@ public class Menu {
     }
 
 
-    public ArrayList<String> Blackcaptured() {
+    public ArrayList<String> blackCaptured() {
         return game.getBlacks();
     }
 
-    public ArrayList<String> Whitecaptured() {
+    public ArrayList<String> whiteCaptured() {
         return game.getWhites();
     }
 

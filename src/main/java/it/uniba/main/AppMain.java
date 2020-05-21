@@ -57,7 +57,7 @@ public final class AppMain {
                     }
                 case "captures":
                     if (inGame) {
-                        PrintMessage.printCaptures(menu.Blackcaptured(), menu.Whitecaptured());
+                        PrintMessage.printCaptures(menu.blackCaptured(), menu.whiteCaptured());
 
                         break;
                     } else {
