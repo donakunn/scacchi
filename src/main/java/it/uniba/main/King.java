@@ -2,8 +2,9 @@ package it.uniba.main;
 
 /**
  * <<entity>><br>
- * King class, implementing the abstract class {@link Piece}<br>
- * Includes a method to verify the checkmate event.
+ * <p>Titolo: King</p>
+ * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} ed è la clase che permette di utilizzare il re
+ * all'interno del gioco.</p>
  *
  * @author Donato Lucente
  * @author Filippo Iacobellis
@@ -11,6 +12,12 @@ package it.uniba.main;
 class King extends Piece {
     private static int[] coordBlackKing; // coordinate re nero, [0]=x [1]=y
     private static int[] coordWhiteKing; // coordinate re bianco, [0]=x [1]=y
+
+    /**
+     * E' il costruttore della classe King.
+     *
+     * @param col: colore del pezzo.
+     */
 
     King(int col) {
 
@@ -20,23 +27,40 @@ class King extends Piece {
             coordBlackKing = new int[] {0, 4};
             nMoves = 0;
 
-        } else if (col == 1) {
+        } else {
             this.pieceType = "\u2654"; // Re bianco
             coordWhiteKing = new int[] {7, 4};
             nMoves = 0;
 
-        } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
-        }
+        } 
     }
+
+
+    /**
+     * Il metodo incrementMoves contiene un contatore che viene incrementato nel caso il re faccia una mossa.
+     */
 
     void incrementMoves() {
         nMoves++;
     }
 
+
+    /**
+     * Il metodo getNumberOfMoves memorizza le mosse effettuate dal re.
+     *
+     * @return il numero delle mosse effettuate dal re.
+     */
+
     int getNumberOfMoves() {
         return this.nMoves;
     }
+
+
+    /**
+     * Il metodo isThreatened() chiama il metodo isThreatened sulla posizione del re utilizzato dal giocatore che sta giocando in quel turno.
+     *
+     * @return le coordinate del re in quel determinato turno.
+     */
 
     static boolean isThreatened() {
         int x, y;
@@ -49,6 +73,15 @@ class King extends Piece {
         }
         return isThreatened(x, y);
     }
+
+
+    /**
+     * Il metodo isThreatened(int x, int y) verifica che il re, in posizione x-y, non sia sotto scacco.
+     *
+     * @param x: ascissa del re.
+     * @param y: ordinata del re.
+     * @return true, se il re non è sotto scacco; false, altrimenti.
+     */
 
     static boolean isThreatened(int x, int y) {
         int i, j;
@@ -295,6 +328,14 @@ class King extends Piece {
         return false;
     }
 
+    /**
+     * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche la possibilità di effettuare una cattura.
+     *
+     * @param move: mossa specificata dall'utente.
+     * @return array che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
+     * @throws IllegalMoveException
+     */
+
     static String[] move(String move) throws IllegalMoveException {
         int x = 2;
         int y = 1;
@@ -309,6 +350,7 @@ class King extends Piece {
         //cella di destinazione da ritornare, parti da colonna specificata e tagli fino alla fine della stringa
         printOut[2] = move.substring(y);
         y = (int) move.charAt(y) - 97;
+
        x = 8 - (((int) move.charAt(x)) - 48);
 		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
 			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
@@ -371,6 +413,14 @@ class King extends Piece {
         }
         return printOut;
     }
+
+    /**
+     * Il metodo castling determina se è possibile effettuare l'arrocco o meno.
+     *
+     * @param isLong: indica se l'arrocco è lungo o corto.
+     * @return array contenente la stringa che determina il tipo di arrocco.
+     * @throws IllegalMoveException
+     */
 
     static String[] castling(boolean isLong) throws IllegalMoveException {
         //isLong = true -> si tratta di longCastling
@@ -441,4 +491,6 @@ class King extends Piece {
         result[0] = isLong ? "0-0-0" : "0-0";
         return result;
     }
+
 }
+
