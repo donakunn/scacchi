@@ -33,10 +33,10 @@ class Cell {
     ;
 
     public String toString() {
-      if (piece == null) {
-        return "[ ]";
-      } else {
-        return "[" + piece.toString() + "]";
-      }
+        if (piece == null) {
+            return "[ ]";
+        } else {
+            return "[" + piece.toString() + "]";
+        }
     }
 }

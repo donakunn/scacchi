@@ -50,10 +50,10 @@ class Pawn extends Piece {
         if ((getColor() == 1) && (nMoves == 1) && (x == 4)) {
             return true;
         } else if ((getColor() == 0) && (nMoves == 1) && (x == 3)) {
-			return true;
-		} else {
-			return false;
-		}
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -186,37 +186,37 @@ class Pawn extends Piece {
                 yCheck = y + 1;
             }
         }
-		if (Game.getCell(x, y) == null) {
-			throw new IllegalMoveException("Mossa illegale. La cella e' vuota.");
-		}
-		if (!(Game.getCell(xCheck, yCheck).getPiece() instanceof Pawn)) {
-			throw new IllegalMoveException(
-					"Mossa illegale; Nessun pedone puo' catturare dalla colonna di partenza indicata.");
-		}
+        if (Game.getCell(x, y) == null) {
+            throw new IllegalMoveException("Mossa illegale. La cella e' vuota.");
+        }
+        if (!(Game.getCell(xCheck, yCheck).getPiece() instanceof Pawn)) {
+            throw new IllegalMoveException(
+                    "Mossa illegale; Nessun pedone puo' catturare dalla colonna di partenza indicata.");
+        }
         p = (Pawn) Game.getCell(xCheck, yCheck).getPiece();
-		if (Game.getCell(x, y).getPiece().getColor() != p.getColor()) {
-			caught = Game.getCell(x, y).getPiece();
-			Game.getCell(x, y).setPiece(p);
-			Game.getCell(xCheck, yCheck).setEmpty();
-			if (King.isThreatened()) {
-				Game.getCell(x, y).setPiece(caught);
-				Game.getCell(xCheck, yCheck).setPiece(p);
-				throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
-			} else {
-				if (caught.getColor() == 0) {
-					Game.addBlackCaptured(caught.toString());
-				} else {
-					Game.addWhiteCaptured(caught.toString());
-				}
-				pieces[0] = p.toString();
-				pieces[1] = caught.toString();
-				pieces[2] = move.substring(2, 4);
-				return pieces;
-			}
-		} else {
-			throw new IllegalMoveException(
-					"Mossa illegale; Impossibile catturare pezzo dello stesso colore.");
-		}
+        if (Game.getCell(x, y).getPiece().getColor() != p.getColor()) {
+            caught = Game.getCell(x, y).getPiece();
+            Game.getCell(x, y).setPiece(p);
+            Game.getCell(xCheck, yCheck).setEmpty();
+            if (King.isThreatened()) {
+                Game.getCell(x, y).setPiece(caught);
+                Game.getCell(xCheck, yCheck).setPiece(p);
+                throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+            } else {
+                if (caught.getColor() == 0) {
+                    Game.addBlackCaptured(caught.toString());
+                } else {
+                    Game.addWhiteCaptured(caught.toString());
+                }
+                pieces[0] = p.toString();
+                pieces[1] = caught.toString();
+                pieces[2] = move.substring(2, 4);
+                return pieces;
+            }
+        } else {
+            throw new IllegalMoveException(
+                    "Mossa illegale; Impossibile catturare pezzo dello stesso colore.");
+        }
     }
 
     /**
@@ -261,41 +261,41 @@ class Pawn extends Piece {
                 yCheck = y + 1;
             }
         }
-		if (!(Game.getCell(xCheck, yCheck).getPiece()
-				instanceof Pawn)) {
-			throw new IllegalMoveException(
-					"Mossa illegale; Nessun pedone puo' effettuare cattura e.p. a partire dalla colonna inserita");
-		}
-		if (Game.getCell(xCheck, y).getPiece() instanceof Pawn) {
-			p = (Pawn) Game.getCell(xCheck, yCheck).getPiece();
-			Pawn caught = (Pawn) Game.getCell(xCheck, y).getPiece();
-			if ((Game.getCell(x, y).getPiece() == null) && (caught.enPassantCatturable(xCheck))) {
-				Game.getCell(x, y).setPiece(p);
-				Game.getCell(xCheck, yCheck).setEmpty();
-				Game.getCell(xCheck, y).setEmpty();
-				if (King.isThreatened()) {
-					Game.getCell(x, y).setEmpty();
-					Game.getCell(xCheck, yCheck).setPiece(p);
-					Game.getCell(xCheck, y).setPiece(caught);
-					throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
-				} else {
-					if (caught.getColor() == 0) {
-						Game.addBlackCaptured(caught.toString());
-					} else {
-						Game.addWhiteCaptured(caught.toString());
-					}
-					pieces[0] = p.toString();
-					pieces[1] = caught.toString();
-					pieces[2] = move.substring(2, 4) + " e.p.";
-					return pieces;
-				}
-			} else {
-				throw new IllegalMoveException(
-						"Mossa illegale; Pezzo non catturabile con e.p. o cella di destinazione occupata");
-			}
-		} else {
-			throw new IllegalMoveException(
-					"Mossa illegale; Nessun pedone catturabile e.p. alla posizione indicata.");
-		}
+        if (!(Game.getCell(xCheck, yCheck).getPiece()
+                instanceof Pawn)) {
+            throw new IllegalMoveException(
+                    "Mossa illegale; Nessun pedone puo' effettuare cattura e.p. a partire dalla colonna inserita");
+        }
+        if (Game.getCell(xCheck, y).getPiece() instanceof Pawn) {
+            p = (Pawn) Game.getCell(xCheck, yCheck).getPiece();
+            Pawn caught = (Pawn) Game.getCell(xCheck, y).getPiece();
+            if ((Game.getCell(x, y).getPiece() == null) && (caught.enPassantCatturable(xCheck))) {
+                Game.getCell(x, y).setPiece(p);
+                Game.getCell(xCheck, yCheck).setEmpty();
+                Game.getCell(xCheck, y).setEmpty();
+                if (King.isThreatened()) {
+                    Game.getCell(x, y).setEmpty();
+                    Game.getCell(xCheck, yCheck).setPiece(p);
+                    Game.getCell(xCheck, y).setPiece(caught);
+                    throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+                } else {
+                    if (caught.getColor() == 0) {
+                        Game.addBlackCaptured(caught.toString());
+                    } else {
+                        Game.addWhiteCaptured(caught.toString());
+                    }
+                    pieces[0] = p.toString();
+                    pieces[1] = caught.toString();
+                    pieces[2] = move.substring(2, 4) + " e.p.";
+                    return pieces;
+                }
+            } else {
+                throw new IllegalMoveException(
+                        "Mossa illegale; Pezzo non catturabile con e.p. o cella di destinazione occupata");
+            }
+        } else {
+            throw new IllegalMoveException(
+                    "Mossa illegale; Nessun pedone catturabile e.p. alla posizione indicata.");
+        }
     }
 }

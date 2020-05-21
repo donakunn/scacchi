@@ -90,10 +90,10 @@ public final class AppMain {
                                 menu.play();
                                 break;
                             } else if (answer.toUpperCase().equals("NO")) {
-								break;
-							} else {
-								System.out.println("Risposta non valida; inserire si (yes) o no");
-							}
+                                break;
+                            } else {
+                                System.out.println("Risposta non valida; inserire si (yes) o no");
+                            }
                         }
                     }
                     break;
