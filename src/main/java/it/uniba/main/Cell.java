@@ -10,13 +10,11 @@ package it.uniba.main;
  */
 class Cell {
 
-    Piece piece;
+    private Piece piece;
 
-    Cell(Piece piece) {
+    Cell(final Piece piece) {
         this.piece = piece;
     }
-
-    ;
 
     Piece getPiece() {
         return this.piece;
@@ -26,11 +24,9 @@ class Cell {
         this.piece = null;
     }
 
-    void setPiece(Piece piece) {
+    void setPiece(final Piece piece) {
         this.piece = piece;
     }
-
-    ;
 
     public String toString() {
         if (piece == null) {
