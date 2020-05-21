@@ -140,7 +140,8 @@ public final class AppMain {
                             System.err.println("Mossa non riconosciuta");
                         } catch (IndexOutOfBoundsException e) {
                             System.err.println(
-                                    "Mossa illegale; la mossa specificata non rispetta i limiti della scacchiera (a-g) (1-8)");
+                                    "Mossa illegale; la mossa specificata non rispetta "
+                                            + "i limiti della scacchiera (a-g) (1-8)");
                         } catch (IllegalMoveException e) {
                             System.err.println(e.getMessage());
                         }
