@@ -309,7 +309,11 @@ class King extends Piece {
         //cella di destinazione da ritornare, parti da colonna specificata e tagli fino alla fine della stringa
         printOut[2] = move.substring(y);
         y = (int) move.charAt(y) - 97;
-        x = 8 - Integer.parseInt(move.substring(x, x + 1));
+       x = 8 - (((int) move.charAt(x)) - 48);
+		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
+
 
         if (Game.getCell(x, y).getPiece() != null
                 && Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 1 : 0)) {

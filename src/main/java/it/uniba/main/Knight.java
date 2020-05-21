@@ -8,6 +8,7 @@ package it.uniba.main;
  */
 class Knight extends Piece {
 
+
     Knight(int col) {
 
         this.color = col;
@@ -42,8 +43,11 @@ class Knight extends Piece {
         boolean isCapture = false;
         boolean blackTurn = Game.getBlackTurn();
 
-        int a = 8 - Integer.parseInt(move.substring(move.length() - 1));
-        int b = (int) move.charAt(move.length() - 2) - 97;
+        int a = 8 - (((int) move.charAt(move.length()-1)) - 48);
+		int b = (int) move.charAt(move.length() - 2) - 97;
+		if ((a <0) || (a > 7) || (b <0) || (b > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
 
         if ((move.length() == 4 && move.charAt(1) == 'x') || (move.length() == 5 && move.charAt(2) == 'x')) {
             isCapture = true;
@@ -173,4 +177,5 @@ class Knight extends Piece {
             return pieces;
         }
     }
+
 }

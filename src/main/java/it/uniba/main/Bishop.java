@@ -22,6 +22,7 @@ class Bishop extends Piece {
         }
     }
 
+
     static String[] move(String move) throws IllegalMoveException {
         int x = 2; // ascissa
         int y = 1; // ordinata
@@ -39,8 +40,12 @@ class Bishop extends Piece {
             throw new IllegalMoveException("Mossa non consentita per l'alfiere");
         }
 
+
         y = (int) move.charAt(y) - 97;
-        x = 8 - Integer.parseInt(move.substring(x, x + 1));
+        	x = 8 - (((int) move.charAt(x)) - 48);
+		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
         if (Game.getCell(x, y).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
             if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {

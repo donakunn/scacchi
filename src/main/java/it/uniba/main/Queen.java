@@ -14,6 +14,7 @@ class Queen extends Piece {
         if (col == 0) {
             this.pieceType = "\u265B"; // Regina nera
 
+
         } else if (col == 1) {
             this.pieceType = "\u2655"; // Regina bianca
 
@@ -40,12 +41,16 @@ class Queen extends Piece {
         }
 
         y = (int) move.charAt(y) - 97;
-        x = 8 - Integer.parseInt(move.substring(x, x + 1));
+      x = 8 - (((int) move.charAt(x)) - 48);
+		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
         if (Game.getCell(x, y).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
             if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
             }
+
 
             //o se � una mossa di spostamento con cella di destinazione occupata da avversario
             else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
