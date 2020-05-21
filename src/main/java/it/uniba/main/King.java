@@ -2,15 +2,19 @@ package it.uniba.main;
 
 /**
  * <<entity>><br>
- * King class, implementing the abstract class {@link Piece}<br>
- * Includes a method to verify the checkmate event.
- *
+ * La classe King implementa la classe astratta {@link Piece} ed è la clase che permette di utilizzare il re all'interno del gioco.
+ * 
  * @author Donato Lucente
  * @author Filippo Iacobellis
  */
 class King extends Piece {
 	private static int []coordBlackKing; // coordinate re nero, [0]=x [1]=y
 	private static int [] coordWhiteKing; // coordinate re bianco, [0]=x [1]=y
+	
+	/**
+	 * E' il costruttore della classe King.
+	 * @param col: colore del pezzo.
+	 */
 	King(int col) {
 
 		this.color = col;
@@ -27,14 +31,22 @@ class King extends Piece {
 		} else throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
 	}
 
+	/**
+	 * Il metodo incrementMoves contiene un contatore che viene incrementato nel caso il re faccia una mossa.
+	 */
 	void incrementMoves() {
 		nMoves++;
 	}
 
+	/**
+	 * Il metodo getNumberOfMoves memorizza le mosse effettuate dal re.
+	 * @return il numero delle mosse effettuate dal re.
+	 */
 	int getNumberOfMoves() {
 		return this.nMoves;
 	}
 
+	
 	static boolean isThreatened() {
 		int x,y;
 		if(Game.getBlackTurn()) {
