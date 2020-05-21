@@ -320,4 +320,74 @@ class King extends Piece {
 		}
 		return printOut;
 	}
+	
+	static String[] castling(boolean isLong) throws IllegalMoveException {
+		//isLong = true -> si tratta di longCastling
+		
+		String[] result = new String[1];
+		
+		//coordinate del re da muovere
+		int xK,yK;
+		
+		//ordinata della torre da muovere, l'ascissa e' uguale
+		int yR;
+		
+		//moltiplicatore, serve per raggiungere le celle in mezzo all'arrocco
+		//per arrocco lungo bisogna spostarsi a sinistra e viceversa
+		int indexMultiplier= isLong ? -1 : +1;
+		
+		boolean blackTurn=Game.getBlackTurn();
+		if(blackTurn) {
+			xK=coordBlackKing[0];
+			yK=coordBlackKing[1];
+		}else {
+			xK=coordWhiteKing[0];
+			yK=coordWhiteKing[1];
+		}
+		
+		if(isLong) {
+			//arrocco lungo, torre sempre in posizione yK-4
+			yR=yK-4;
+		}else {
+			//arrocco corto, torre sempre in posizione yK+3
+			yR=yK+3;
+		}
+		
+		if (!(Game.getCell(xK, yK).getPiece() instanceof King) || !(Game.getCell(xK, yR).getPiece() instanceof Rook)) {
+			throw new IllegalMoveException(
+					"Mossa illegale; Impossibile effettuare arrocco lungo, re o torre non sono nella posizione iniziale");
+		}
+		// controllo che re e torre siano nella posizione corretta
+		King k = (King) Game.getCell(xK, yK).getPiece();
+		Rook r = (Rook) Game.getCell(xK, yR).getPiece();
+		// controllo che non siano stati ancora mossi
+		if ((k.getNumberOfMoves() != 0)
+				|| (r.getNumberOfMoves() != 0)) {
+			throw new IllegalMoveException(
+					"Mossa illegale; Il re o la torre sono gia' stati mossi in precedenza");
+		} 
+
+		if ((Game.getCell(xK,yK+(indexMultiplier)).getPiece() != null) 
+				|| (Game.getCell(xK,yK+(indexMultiplier*2)).getPiece() != null) 
+				|| ((Game.getCell(xK,yK-3).getPiece() != null) && isLong)) {
+			throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
+		}
+		if ((King.isThreatened(xK, yK))
+				// controllo che il re non e', e non finisce sotto scacco durante la mossa
+				|| (King.isThreatened(xK, yK+(indexMultiplier)))
+				|| (King.isThreatened(xK, yK+(indexMultiplier*2)))
+						) {
+			throw new IllegalMoveException(
+					"Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
+		}
+		// controllo se il percorso e' libero
+		k.incrementMoves();
+		r.incrementMoves();
+		Game.getCell(xK,yK+(indexMultiplier*2)).setPiece(k);
+		Game.getCell(xK,yK+(indexMultiplier)).setPiece(r);
+		Game.getCell(xK, yK).setEmpty();
+		Game.getCell(xK, yR).setEmpty();
+		result[0] = isLong ? "0-0-0" : "0-0";
+		return result;
+	}
 }
