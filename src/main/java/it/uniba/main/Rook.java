@@ -17,12 +17,12 @@ class Rook extends Piece {
 
         } else if (col == 1) {
 
-			this.pieceType = "\u2656"; // Torre bianca
-			nMoves = 0;
+            this.pieceType = "\u2656"; // Torre bianca
+            nMoves = 0;
 
-		} else {
-			throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
-		}
+        } else {
+            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
+        }
     }
 
     void incrementMoves() {
@@ -37,37 +37,37 @@ class Rook extends Piece {
         int i = a;
         int j = b;
 
-		if (x == a && y == b) {
-			return false;
-		}
+        if (x == a && y == b) {
+            return false;
+        }
 
         if (x == a) { // controllo orizzontale
             int dx = (y < b) ? 1 : -1;
 
-			for (j = y + dx; j != b; j += dx) {
-				if (Game.getCell(x, j).getPiece() != null) {
-					break;
-				}
-			}
+            for (j = y + dx; j != b; j += dx) {
+                if (Game.getCell(x, j).getPiece() != null) {
+                    break;
+                }
+            }
         } else if (y == b) { // in verticale
             int dy = (x < a) ? 1 : -1;
 
-			for (i = x + dy; i != a; i += dy) {
-				if (Game.getCell(i, y).getPiece() != null) {
-					break;
-				}
-			}
+            for (i = x + dy; i != a; i += dy) {
+                if (Game.getCell(i, y).getPiece() != null) {
+                    break;
+                }
+            }
         } else { // Non valido
             return false;
         }
-		if (Game.getCell(i, j).getPiece() == null ||
-				Game.getCell(i, j).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1))
-		// Return true
-		{
-			return true;
-		} else {
-			return false;
-		}
+        if (Game.getCell(i, j).getPiece() == null ||
+                Game.getCell(i, j).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1))
+        // Return true
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     static String[] move(String move) throws IllegalMoveException {
@@ -90,19 +90,19 @@ class Rook extends Piece {
 
         if (Game.getCell(a, b).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-			if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
-				throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-			}
+            if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+                throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
+            }
 
-			//o se � una mossa di spostamento con cella di destinazione occupata da avversario
-			else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
-				throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
-			}
+            //o se � una mossa di spostamento con cella di destinazione occupata da avversario
+            else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+                throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
+            }
 
             //o se � una mossa di cattura con cella di destinazione vuota
         } else if (Game.getCell(a, b).getPiece() == null && isCapture) {
-			throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
-		}
+            throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
+        }
 
         for (int i = 0; i <= 7; i++) {
             for (int j = 0; j <= 7; j++) {

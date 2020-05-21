@@ -15,11 +15,11 @@ class Queen extends Piece {
             this.pieceType = "\u265B"; // Regina nera
 
         } else if (col == 1) {
-			this.pieceType = "\u2655"; // Regina bianca
+            this.pieceType = "\u2655"; // Regina bianca
 
-		} else {
-			throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
-		}
+        } else {
+            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
+        }
     }
 
     static String[] move(String move) throws IllegalMoveException {
@@ -32,30 +32,30 @@ class Queen extends Piece {
         if (move.length() == 3) {
             isCapture = false;
         } else if ((move.length() == 4) && (move.substring(1, 2).equals("x"))) {
-			isCapture = true;
-			x = 3;
-			y = 2;
-		} else {
-			throw new IllegalMoveException("Mossa non consentita per la Donna");
-		}
+            isCapture = true;
+            x = 3;
+            y = 2;
+        } else {
+            throw new IllegalMoveException("Mossa non consentita per la Donna");
+        }
 
         y = (int) move.charAt(y) - 97;
         x = 8 - Integer.parseInt(move.substring(x, x + 1));
         if (Game.getCell(x, y).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-			if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {
-				throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-			}
+            if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+                throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
+            }
 
-			//o se � una mossa di spostamento con cella di destinazione occupata da avversario
-			else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
-				throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
-			}
+            //o se � una mossa di spostamento con cella di destinazione occupata da avversario
+            else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+                throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
+            }
 
             //o se � una mossa di cattura con cella di destinazione vuota
         } else if (Game.getCell(x, y).getPiece() == null && isCapture) {
-			throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
-		}
+            throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
+        }
 
         xCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
         while (xCheck < 8) {

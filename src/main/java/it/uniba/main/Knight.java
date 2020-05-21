@@ -15,11 +15,11 @@ class Knight extends Piece {
             this.pieceType = "\u265E"; // Cavallo nero
 
         } else if (col == 1) {
-			this.pieceType = "\u2658"; // Cavallo bianco
+            this.pieceType = "\u2658"; // Cavallo bianco
 
-		} else {
-			throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
-		}
+        } else {
+            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
+        }
     }
 
     private static boolean isMovable(int x, int y, int a, int b) {
@@ -51,19 +51,19 @@ class Knight extends Piece {
 
         if (Game.getCell(a, b).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-			if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
-				throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-			}
+            if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+                throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
+            }
 
-			//o se � una mossa di spostamento con cella di destinazione occupata da avversario
-			else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
-				throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
-			}
+            //o se � una mossa di spostamento con cella di destinazione occupata da avversario
+            else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+                throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
+            }
 
             //o se � una mossa di cattura con cella di destinazione vuota
         } else if (Game.getCell(a, b).getPiece() == null && isCapture) {
-			throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
-		}
+            throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
+        }
 
         //provo a trovare entrambi i cavalli nella scacchiera
         for (int i = 0; i <= 7; i++) {
