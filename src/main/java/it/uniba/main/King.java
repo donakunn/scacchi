@@ -18,6 +18,7 @@ class King extends Piece {
      *
      * @param col: colore del pezzo.
      */
+
     King(int col) {
 
         this.color = col;
@@ -26,37 +27,41 @@ class King extends Piece {
             coordBlackKing = new int[] {0, 4};
             nMoves = 0;
 
-        } else if (col == 1) {
+        } else {
             this.pieceType = "\u2654"; // Re bianco
             coordWhiteKing = new int[] {7, 4};
             nMoves = 0;
 
-        } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
-        }
+        } 
     }
+
 
     /**
      * Il metodo incrementMoves contiene un contatore che viene incrementato nel caso il re faccia una mossa.
      */
+
     void incrementMoves() {
         nMoves++;
     }
+
 
     /**
      * Il metodo getNumberOfMoves memorizza le mosse effettuate dal re.
      *
      * @return il numero delle mosse effettuate dal re.
      */
+
     int getNumberOfMoves() {
         return this.nMoves;
     }
+
 
     /**
      * Il metodo isThreatened() chiama il metodo isThreatened sulla posizione del re utilizzato dal giocatore che sta giocando in quel turno.
      *
      * @return le coordinate del re in quel determinato turno.
      */
+
     static boolean isThreatened() {
         int x, y;
         if (Game.getBlackTurn()) {
@@ -69,6 +74,7 @@ class King extends Piece {
         return isThreatened(x, y);
     }
 
+
     /**
      * Il metodo isThreatened(int x, int y) verifica che il re, in posizione x-y, non sia sotto scacco.
      *
@@ -76,6 +82,7 @@ class King extends Piece {
      * @param y: ordinata del re.
      * @return true, se il re non è sotto scacco; false, altrimenti.
      */
+
     static boolean isThreatened(int x, int y) {
         int i, j;
         Piece checkPiece;
@@ -328,6 +335,7 @@ class King extends Piece {
      * @return array che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
      * @throws IllegalMoveException
      */
+
     static String[] move(String move) throws IllegalMoveException {
         int x = 2;
         int y = 1;
@@ -342,7 +350,12 @@ class King extends Piece {
         //cella di destinazione da ritornare, parti da colonna specificata e tagli fino alla fine della stringa
         printOut[2] = move.substring(y);
         y = (int) move.charAt(y) - 97;
-        x = 8 - Integer.parseInt(move.substring(x, x + 1));
+
+       x = 8 - (((int) move.charAt(x)) - 48);
+		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
+
 
         if (Game.getCell(x, y).getPiece() != null
                 && Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 1 : 0)) {
@@ -408,6 +421,7 @@ class King extends Piece {
      * @return array contenente la stringa che determina il tipo di arrocco.
      * @throws IllegalMoveException
      */
+
     static String[] castling(boolean isLong) throws IllegalMoveException {
         //isLong = true -> si tratta di longCastling
 
@@ -477,4 +491,6 @@ class King extends Piece {
         result[0] = isLong ? "0-0-0" : "0-0";
         return result;
     }
+
 }
+

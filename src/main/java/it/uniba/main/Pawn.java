@@ -14,6 +14,7 @@ class Pawn extends Piece {
      * E' il costruttore della classe Pawn.
      *
      * @param col: colore del pezzo.
+
      */
     Pawn(int col) { // costruttore classe Pedone
         nMoves = 0;
@@ -31,7 +32,7 @@ class Pawn extends Piece {
     /**
      * Il metodo incrementMoves contiene un contatore che viene incrementato nel caso in cui il pedone faccia una mossa.
      */
-    private void incrementMoves() {
+     private void incrementMoves() {
         this.nMoves++;
     }
 
@@ -66,9 +67,12 @@ class Pawn extends Piece {
         int xCheck; //ordinata su cui fare il check del pezzo
         boolean blackTurn = Game.getBlackTurn();
 
-        y = (int) (move.charAt(0)) - 97; // lettura x e y casella di destinazione
-        x = 8 - Integer.parseInt(move.substring(1, 2));
 
+        y = (int) (move.charAt(0)) - 97; // lettura x e y casella di destinazione
+      x = 8 - (((int) move.charAt(1)) - 48);
+		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
         Pawn p;
         String[] pieceAndCell = new String[3]; //0 pezzo che viene mosso, //2 cella di destinazione
         if (Game.getCell(x, y).getPiece() != null) {
@@ -132,6 +136,7 @@ class Pawn extends Piece {
      * la cella di destinazione.
      * @throws IllegalMoveException
      */
+
     static String[] capture(String move) throws IllegalMoveException {
         int x; // ascissa
         int y; // ordinata
@@ -142,13 +147,14 @@ class Pawn extends Piece {
         Piece p, caught;
         String[] pieces = new String[3]; // 0 pezzo che cattura, 1 pezzo catturato, 2 cella di destinazione
 
+
         y = (int) (move.charAt(2)) - 97;
-        x =
-                8
-                        - Integer.parseInt(
-                        move.substring(
-                                3, 4)); // calcolo x,y di cella di destinazione e z colonna di partenza
+        x = 8 - (((int) move.charAt(3)) - 48);
+		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
         z = (int) (move.charAt(0)) - 97;
+
 
         if (Game.getCell(x, y).getPiece()
                 == null) { // se cella di destinazione e' vuota prova a fare cattura en passant
@@ -226,9 +232,11 @@ class Pawn extends Piece {
         boolean blackTurn = Game.getBlackTurn();
         Piece p;
         String[] pieces = new String[3]; // 0 pezzo catturato, 1 pezzo che cattura //2 cella di destinazione
-
         y = (int) (move.charAt(2)) - 97;
-        x = 8 - Integer.parseInt(move.substring(3, 4));
+       x = 8 - (((int) move.charAt(3)) - 48);
+		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
+			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+		}
         z = (int) (move.charAt(0)) - 97;
         if (Math.abs(z - y) >= 2 || (z - y) == 0) {
             throw new IllegalMoveException(

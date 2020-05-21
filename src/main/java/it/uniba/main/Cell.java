@@ -10,26 +10,29 @@ package it.uniba.main;
  */
 class Cell {
 
-  Piece piece;
+    private Piece piece;
 
-  Cell(Piece piece) {
-    this.piece = piece;
-  };
+    Cell(final Piece piece) {
+        this.piece = piece;
+    }
 
-  Piece getPiece() {
-    return this.piece;
-  }
+    Piece getPiece() {
+        return this.piece;
+    }
 
-  void setEmpty() {
-    this.piece = null;
-  }
+    void setEmpty() {
+        this.piece = null;
+    }
 
-  void setPiece(Piece piece) {
-    this.piece = piece;
-  };
+    void setPiece(final Piece piece) {
+        this.piece = piece;
+    }
 
-  public String toString() {
-    if (piece == null) return "[ ]";
-    else return "[" + piece.toString() + "]";
-  }
+    public String toString() {
+        if (piece == null) {
+            return "[ ]";
+        } else {
+            return "[" + piece.toString() + "]";
+        }
+    }
 }
