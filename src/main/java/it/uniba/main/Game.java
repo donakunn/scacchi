@@ -62,7 +62,7 @@ class Game {
     board[7][7] = new Cell(new Rook(1));
   }
 
-  String[] moveAPawn(String input) throws IllegalMoveException {
+  String[] movePawn(String input) throws IllegalMoveException {
 	  if (input.length() == 2) { 
 		  return Pawn.move(input);
 	  } else if (input.length() == 4) {
@@ -103,182 +103,15 @@ class Game {
   String[] moveRook(String move) throws IllegalMoveException {
 	  return Rook.move(move);
   }
-
-  String[] shortCastling() throws IllegalMoveException {
-    String[] result = new String[2];
-    if (blackTurn == true) {
-      if ((board[7][4].getPiece() instanceof King) && (board[7][7].getPiece() instanceof Rook)) {
-        // controllo che re e torre siano nella posizione corretta
-        King k = (King) board[7][4].getPiece();
-        Rook r = (Rook) board[7][7].getPiece();
-        if ((k.getNumberOfMoves() == 0)
-            && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
-          // ancora mossi
-
-          if ((board[7][5].getPiece() == null)
-              && (board[7][6].getPiece() == null)) { // controllo se il
-            // percorso e' libero
-            if ((King.isThreatened(7, 4))
-                || (King.isThreatened(7, 5))
-                // controllo che il re non e', e non finisce sotto scacco durante la mossa
-                || (King.isThreatened(7, 6))) {
-              throw new IllegalMoveException(
-                  "Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
-            }
-            k.incrementMoves();
-            r.incrementMoves();
-            board[7][6].setPiece(k);
-            board[7][5].setPiece(r);
-            board[7][4].setEmpty();
-            board[7][7].setEmpty();
-            movesDone.add("0-0");
-            setBlackTurn();
-            result[0] = "0-0";
-            return result;
-          } else {
-            throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
-          }
-
-        } else {
-          throw new IllegalMoveException(
-              "Mossa illegale; Il re o la torre sono gia' stati mossi in precedenza");
-        }
-
-      } else {
-        throw new IllegalMoveException(
-            "Mossa illegale; Impossibile effettuare arrocco corto, re e torre non sono nella posizione iniziale");
-      }
-    } else {
-      if ((board[0][4].getPiece() instanceof King) && (board[0][7].getPiece() instanceof Rook)) {
-        // controllo che re e torre siano nella posizione corretta
-        King k = (King) board[0][4].getPiece();
-        Rook r = (Rook) board[0][7].getPiece();
-        if ((k.getNumberOfMoves() == 0)
-            && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
-          // ancora mossi
-
-          if ((board[0][5].getPiece() == null) && (board[0][6].getPiece() == null)) {
-            if ((King.isThreatened(0, 4))
-                || (King.isThreatened(0, 5))
-                || (King.isThreatened(0, 6))) { // controllo che il re non e', e non
-              // finisce sotto scacco durante la
-              // mossa
-              throw new IllegalMoveException(
-                  "Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
-            }
-            // controllo se il percorso e' libero
-            k.incrementMoves();
-            r.incrementMoves();
-            board[0][6].setPiece(k);
-            board[0][5].setPiece(r);
-            board[0][4].setEmpty();
-            board[0][7].setEmpty();
-            movesDone.add("0-0");
-            setNotBlackTurn();
-            result[0] = "0-0";
-            return result;
-          } else {
-            throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
-          }
-
-        } else {
-          throw new IllegalMoveException(
-              "Mossa illegale; Il re o la torre sono gia'  stati mossi in precedenza");
-        }
-
-      } else {
-        throw new IllegalMoveException(
-            "Mossa illegale; Impossibile effettuare arrocco corto, re e torre non sono nella posizione iniziale");
-      }
-    }
-  }
-
-  String[] longCastling() throws IllegalMoveException {
-    String[] result = new String[2];
-    if (blackTurn == true) {
-      if ((board[7][4].getPiece() instanceof King) && (board[7][0].getPiece() instanceof Rook)) {
-        // controllo che re e torre siano nella posizione corretta
-        King k = (King) board[7][4].getPiece();
-        Rook r = (Rook) board[7][0].getPiece();
-        if ((k.getNumberOfMoves() == 0)
-            && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
-          // ancora mossi
-
-          if ((board[7][3].getPiece() == null) && (board[7][2].getPiece() == null)) {
-            if ((King.isThreatened(7, 4))
-                || (King.isThreatened(7, 3))
-                // controllo che il re non e', e non finisce sotto scacco durante la mossa
-                || (King.isThreatened(7, 2))) {
-              throw new IllegalMoveException(
-                  "Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
-            }
-            // controllo se il percorso e' libero
-            k.incrementMoves();
-            r.incrementMoves();
-            board[7][2].setPiece(k);
-            board[7][3].setPiece(r);
-            board[7][4].setEmpty();
-            board[7][0].setEmpty();
-            movesDone.add("0-0-0");
-            result[0] = "0-0-0";
-            setBlackTurn();
-            return result;
-          } else {
-            throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
-          }
-
-        } else {
-          throw new IllegalMoveException(
-              "Mossa illegale; Il re o la torre sono gia' stati mossi in precedenza");
-        }
-
-      } else {
-        throw new IllegalMoveException(
-            "Mossa illegale; Impossibile effettuare arrocco lungo, re e torre non sono nella posizione iniziale");
-      }
-    } else {
-      if ((board[0][4].getPiece() instanceof King) && (board[0][0].getPiece() instanceof Rook)) {
-        // controllo che re e torre siano nella posizione corretta
-        King k = (King) board[0][4].getPiece();
-        Rook r = (Rook) board[0][0].getPiece();
-        if ((k.getNumberOfMoves() == 0)
-            && (r.getNumberOfMoves() == 0)) { // controllo che non siano stati
-          // ancora mossi
-
-          if ((board[0][3].getPiece() == null) && (board[0][2].getPiece() == null)) {
-            if ((King.isThreatened(0, 4))
-                || (King.isThreatened(0, 3))
-                || (King.isThreatened(0, 2))) { // controllo che il re non e', e non
-              // finisce sotto scacco durante la
-              // mossa
-              throw new IllegalMoveException(
-                  "Mossa illegale; Il re e' sotto scacco, o finirebbe sotto scacco effettuando l'arrocco");
-            }
-            // controllo se il percorso e' libero
-            k.incrementMoves();
-            r.incrementMoves();
-            board[0][2].setPiece(k);
-            board[0][3].setPiece(r);
-            board[0][4].setEmpty();
-            board[0][0].setEmpty();
-            movesDone.add("0-0-0");
-            result[0] = "0-0-0";
-            setNotBlackTurn();
-            return result;
-          } else {
-            throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
-          }
-
-        } else {
-          throw new IllegalMoveException(
-              "Mossa illegale; Il re o la torre sono gia'  stati mossi in precedenza");
-        }
-
-      } else {
-        throw new IllegalMoveException(
-            "Mossa illegale; Impossibile effettuare arrocco lungo, re e torre non sono nella posizione iniziale");
-      }
-    }
+  
+  String[] tryCastling(String move) throws IllegalMoveException{
+	  if (move.equals("0-0") || move.equals("O-O")) {
+		  return King.castling(false);
+	  } else if (move.equals("0-0-0") || move.equals("O-O-O")) {
+		  return King.castling(true);
+	  } else
+		  throw new IllegalMoveException(
+				  "Errore di sintassi; Utilizzare 0-0 oppure O-O per arroco corto; 0-0-0 oppure O-O-O per arrocco lungo");
   }
 
   static boolean getBlackTurn() {

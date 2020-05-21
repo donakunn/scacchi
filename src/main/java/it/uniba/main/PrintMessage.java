@@ -60,7 +60,7 @@ public class PrintMessage {
   }
 
   static void printLongCastling() {
-    System.out.println("Arrocco corto eseguito");
+    System.out.println("Arrocco lungo eseguito");
   }
 
   static void printACapture(String[] piecesAndCell) {
