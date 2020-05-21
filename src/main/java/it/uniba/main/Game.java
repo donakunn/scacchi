@@ -1,24 +1,23 @@
 package it.uniba.main;
-import java.nio.*;
 import java.util.ArrayList;
+import static it.uniba.main.FinalPar.ALTEPLENGTH;
+import static it.uniba.main.FinalPar.CAPTEPLENGTH;
+import static it.uniba.main.FinalPar.CAPTURELENGTH;
+import static it.uniba.main.FinalPar.CHARPOS1;
+import static it.uniba.main.FinalPar.CHARPOS2;
+import static it.uniba.main.FinalPar.CHARPOS4;
+import static it.uniba.main.FinalPar.CHARPOS6;
+import static it.uniba.main.FinalPar.CHARPOS8;
+import static it.uniba.main.FinalPar.MOVELENGTH;
+import static it.uniba.main.FinalPar.POS0;
+import static it.uniba.main.FinalPar.POS1;
+import static it.uniba.main.FinalPar.POS2;
+import static it.uniba.main.FinalPar.POS3;
+import static it.uniba.main.FinalPar.POS4;
+import static it.uniba.main.FinalPar.POS5;
+import static it.uniba.main.FinalPar.POS6;
+import static it.uniba.main.FinalPar.POS7;
 
-import static it.uniba.main.FinalPar.ambiguityEpLength;
-import static it.uniba.main.FinalPar.captEpLength;
-import static it.uniba.main.FinalPar.captureLength;
-import static it.uniba.main.FinalPar.charPos1;
-import static it.uniba.main.FinalPar.charPos2;
-import static it.uniba.main.FinalPar.charPos4;
-import static it.uniba.main.FinalPar.charPos6;
-import static it.uniba.main.FinalPar.charPos8;
-import static it.uniba.main.FinalPar.moveLength;
-import static it.uniba.main.FinalPar.pos0;
-import static it.uniba.main.FinalPar.pos1;
-import static it.uniba.main.FinalPar.pos2;
-import static it.uniba.main.FinalPar.pos3;
-import static it.uniba.main.FinalPar.pos4;
-import static it.uniba.main.FinalPar.pos5;
-import static it.uniba.main.FinalPar.pos6;
-import static it.uniba.main.FinalPar.pos7;
 
 /**
  * <<entity>><br>
@@ -42,64 +41,66 @@ class Game {
     private static ArrayList<String> whitesCaptured = new ArrayList<String>();
 
     void newGame() {
+        final int firstEmptyRow = 2;
+        final int lastEmptyRow = 5;
         setBlackTurn();
         movesDone.clear();
         blacksCaptured.clear();
         whitesCaptured.clear();
         for (int j = 0; j < ROWDIM; j++) {
             // initialize pawns a2-h2 (white side)
-            board[pos1][j] = new Cell(new Pawn(0));
+            board[POS1][j] = new Cell(new Pawn(0));
 
             // initialize pawns a7-h7 (black side)
-            board[pos6][j] = new Cell(new Pawn(1));
+            board[POS6][j] = new Cell(new Pawn(1));
         }
 
         // initialize pieces a1-h1 (white side)
-        board[pos0][pos0] = new Cell(new Rook(0));
-        board[pos0][pos1] = new Cell(new Knight(0));
-        board[pos0][pos2] = new Cell(new Bishop(0));
-        board[pos0][pos3] = new Cell(new Queen(0));
-        board[pos0][pos4] = new Cell(new King(0));
-        board[pos0][pos5] = new Cell(new Bishop(0));
-        board[pos0][pos6] = new Cell(new Knight(0));
-        board[pos0][pos7] = new Cell(new Rook(0));
+        board[POS0][POS0] = new Cell(new Rook(0));
+        board[POS0][POS1] = new Cell(new Knight(0));
+        board[POS0][POS2] = new Cell(new Bishop(0));
+        board[POS0][POS3] = new Cell(new Queen(0));
+        board[POS0][POS4] = new Cell(new King(0));
+        board[POS0][POS5] = new Cell(new Bishop(0));
+        board[POS0][POS6] = new Cell(new Knight(0));
+        board[POS0][POS7] = new Cell(new Rook(0));
 
         // initialize empty cells
-        for (int i = 2; i <= 5; i++) {
+        for (int i = firstEmptyRow; i <= lastEmptyRow; i++) {
             for (int j = 0; j < ROWDIM; j++) {
                 board[i][j] = new Cell(null);
             }
         }
 
         // initialize pieces a8-h8 (black side)
-        board[pos7][pos0] = new Cell(new Rook(1));
-        board[pos7][pos1] = new Cell(new Knight(1));
-        board[pos7][pos2] = new Cell(new Bishop(1));
-        board[pos7][pos3] = new Cell(new Queen(1));
-        board[pos7][pos4] = new Cell(new King(1));
-        board[pos7][pos5] = new Cell(new Bishop(1));
-        board[pos7][pos6] = new Cell(new Knight(1));
-        board[pos7][pos7] = new Cell(new Rook(1));
+        board[POS7][POS0] = new Cell(new Rook(1));
+        board[POS7][POS1] = new Cell(new Knight(1));
+        board[POS7][POS2] = new Cell(new Bishop(1));
+        board[POS7][POS3] = new Cell(new Queen(1));
+        board[POS7][POS4] = new Cell(new King(1));
+        board[POS7][POS5] = new Cell(new Bishop(1));
+        board[POS7][POS6] = new Cell(new Knight(1));
+        board[POS7][POS7] = new Cell(new Rook(1));
     }
 
     String[] movePawn(final String input) throws IllegalMoveException {
-        if (input.length() == moveLength) {
+        if (input.length() == MOVELENGTH) {
             return Pawn.move(input);
-        } else if (input.length() == captureLength) {
-            if (input.substring(charPos1, charPos2).equals("x")) {
+        } else if (input.length() == CAPTURELENGTH) {
+            if (input.substring(CHARPOS1, CHARPOS2).equals("x")) {
                 return Pawn.capture(input);
             }
             throw new IllegalMoveException("Mossa non valida");
-        } else if (input.length() == ambiguityEpLength) {
-            if ((input.substring(charPos1, charPos2).toLowerCase().equals("x"))
-                    && (input.substring(charPos4, charPos8).toLowerCase().equals("e.p."))) {
+        } else if (input.length() == ALTEPLENGTH) {
+            if ((input.substring(CHARPOS1, CHARPOS2).toLowerCase().equals("x"))
+                    && (input.substring(CHARPOS4, CHARPOS8).toLowerCase().equals("e.p."))) {
                 return Pawn.captureEnPassant(input);
             } else {
                 throw new IllegalMoveException("Mossa non valida");
             }
-        } else if (input.length() == captEpLength) {
-            if ((input.substring(charPos1, charPos2).toLowerCase().equals("x"))
-                    && (input.substring(charPos4, charPos6).toLowerCase().equals("ep"))) {
+        } else if (input.length() == CAPTEPLENGTH) {
+            if ((input.substring(CHARPOS1, CHARPOS2).toLowerCase().equals("x"))
+                    && (input.substring(CHARPOS4, CHARPOS6).toLowerCase().equals("ep"))) {
                 return Pawn.captureEnPassant(input);
             } else {
                 throw new IllegalMoveException("Mossa non valida");
