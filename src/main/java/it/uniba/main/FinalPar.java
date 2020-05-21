@@ -1,6 +1,18 @@
 package it.uniba.main;
 
+/**
+ * <<entity>><br>
+ * <p>Titolo: FinalPar</p>
+ * <p>Descrizione: La classe FinalPar contiene le variabili che vengono usate all'interno delle altre classi per i vari controlli.
+ * e le varie operazioni.</p>
+ * 
+ * @author Patrick Clark
+ */
 public final class FinalPar {
+	
+	/**
+	 * E' il costruttore della classe FinalPar.
+	 */
     private FinalPar() {
     }
     public static final int MAXROW = 8;
