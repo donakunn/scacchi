@@ -2,8 +2,10 @@ package it.uniba.main;
 
 /**
  * <<entity>><br>
- * Queen class, implementing the abstract class {@link Piece}<br>
- *
+ * <p>Titolo: Queen</p>
+ * <p>Descrizione: La classe Queen implementa la classe astratta {@link Piece} ed è la classe che permette di utilizzare la regina
+ * all'interno del gioco.</p>
+ * 
  * @author Donato Lucente
  */
 class Queen extends Piece {
@@ -23,6 +25,14 @@ class Queen extends Piece {
         }
     }
 
+    /**
+     * Il metodo move permette di muovere la regina all'interno della scacchiera e comprende anche la possibilità di effettuare una
+     * cattura.
+     * 
+     * @param move: mossa specificata dall'utente.
+     * @return la funzione che permette di effettuare la mossa.
+     * @throws IllegalMoveException
+     */
     static String[] move(String move) throws IllegalMoveException {
         int x = 2; // ascissa
         int y = 1; // ordinata
@@ -167,6 +177,16 @@ class Queen extends Piece {
         }
     }
 
+    /**
+     * Il metodo actualMove permette di effettuare la mossa.
+     * @param isCapture: verifica se si tratta di una mossa o di una cattura.
+     * @param x: ascissa della regina.
+     * @param y: ordinata della regina.
+     * @param xCheck: sentinella dell'ascissa.
+     * @param yCheck: sentinella dell'ordinata.
+     * @return array contenente la regina convertita a stringa e la mossa effettuata.
+     * @throws IllegalMoveException
+     */
     private static String[] actualMove(boolean isCapture, int x, int y, int xCheck, int yCheck)
             throws IllegalMoveException {
         //isCapture = true -> mossa di cattura
