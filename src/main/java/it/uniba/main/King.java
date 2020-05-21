@@ -2,7 +2,9 @@ package it.uniba.main;
 
 /**
  * <<entity>><br>
- * La classe King implementa la classe astratta {@link Piece} ed è la clase che permette di utilizzare il re all'interno del gioco.
+ * <p>Titolo: King</p>
+ * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} ed è la clase che permette di utilizzare il re
+ * all'interno del gioco.</p>
  * 
  * @author Donato Lucente
  * @author Filippo Iacobellis
@@ -46,7 +48,10 @@ class King extends Piece {
 		return this.nMoves;
 	}
 
-	
+	/**
+	 * Il metodo isThreatened() chiama il metodo isThreatened sulla posizione del re utilizzato dal giocatore che sta giocando in quel turno.
+	 * @return le coordinate del re in quel determinato turno.
+	 */
 	static boolean isThreatened() {
 		int x,y;
 		if(Game.getBlackTurn()) {
@@ -59,6 +64,12 @@ class King extends Piece {
 		return isThreatened(x,y);
 	}
 
+	/**
+	 * Il metodo isThreatened(int x, int y) verifica che il re, in posizione x-y, non sia sotto scacco. 
+	 * @param x: ascissa del re.
+	 * @param y: ordinata del re.
+	 * @return true, se il re non è sotto scacco; false, altrimenti.
+	 */
 	static boolean isThreatened(int x, int y) {
 		int i, j;
 		Piece checkPiece;
@@ -260,6 +271,12 @@ class King extends Piece {
 		return false;
 	}
 
+	/**
+	 * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche la possibilità di effettuare una cattura.
+	 * @param move: mossa specificata dall'utente.
+	 * @return array di tipo String che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
+	 * @throws IllegalMoveException
+	 */
 	static String[] move(String move) throws IllegalMoveException {
 		int x = 2;
 		int y = 1;
@@ -333,6 +350,12 @@ class King extends Piece {
 		return printOut;
 	}
 	
+	/**
+	 * Il metodo castling determina se è possibile effettuare l'arrocco o meno.
+	 * @param isLong: indica se l'arrocco è lungo o corto.
+	 * @return array di tipo String contenente la stringa che determina il tipo di arrocco.
+	 * @throws IllegalMoveException
+	 */
 	static String[] castling(boolean isLong) throws IllegalMoveException {
 		//isLong = true -> si tratta di longCastling
 		
