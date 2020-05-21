@@ -274,7 +274,7 @@ class King extends Piece {
 	/**
 	 * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche la possibilità di effettuare una cattura.
 	 * @param move: mossa specificata dall'utente.
-	 * @return array di tipo String che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
+	 * @return array che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
 	 * @throws IllegalMoveException
 	 */
 	static String[] move(String move) throws IllegalMoveException {
@@ -353,7 +353,7 @@ class King extends Piece {
 	/**
 	 * Il metodo castling determina se è possibile effettuare l'arrocco o meno.
 	 * @param isLong: indica se l'arrocco è lungo o corto.
-	 * @return array di tipo String contenente la stringa che determina il tipo di arrocco.
+	 * @return array contenente la stringa che determina il tipo di arrocco.
 	 * @throws IllegalMoveException
 	 */
 	static String[] castling(boolean isLong) throws IllegalMoveException {
