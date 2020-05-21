@@ -1,6 +1,24 @@
 package it.uniba.main;
-
+import java.nio.*;
 import java.util.ArrayList;
+
+import static it.uniba.main.FinalPar.ambiguityEpLength;
+import static it.uniba.main.FinalPar.captEpLength;
+import static it.uniba.main.FinalPar.captureLength;
+import static it.uniba.main.FinalPar.charPos1;
+import static it.uniba.main.FinalPar.charPos2;
+import static it.uniba.main.FinalPar.charPos4;
+import static it.uniba.main.FinalPar.charPos6;
+import static it.uniba.main.FinalPar.charPos8;
+import static it.uniba.main.FinalPar.moveLength;
+import static it.uniba.main.FinalPar.pos0;
+import static it.uniba.main.FinalPar.pos1;
+import static it.uniba.main.FinalPar.pos2;
+import static it.uniba.main.FinalPar.pos3;
+import static it.uniba.main.FinalPar.pos4;
+import static it.uniba.main.FinalPar.pos5;
+import static it.uniba.main.FinalPar.pos6;
+import static it.uniba.main.FinalPar.pos7;
 
 /**
  * <<entity>><br>
@@ -24,14 +42,6 @@ class Game {
     private static ArrayList<String> whitesCaptured = new ArrayList<String>();
 
     void newGame() {
-        final int pos0 = 0;
-        final int pos1 = 1;
-        final int pos2 = 2;
-        final int pos3 = 3;
-        final int pos4 = 4;
-        final int pos5 = 5;
-        final int pos6 = 6;
-        final int pos7 = 7;
         setBlackTurn();
         movesDone.clear();
         blacksCaptured.clear();
@@ -73,28 +83,23 @@ class Game {
     }
 
     String[] movePawn(final String input) throws IllegalMoveException {
-        final int moveLength = 2;
-        final int captureLength = 4;
-        final int ambiguityEpLength = 8;
-        final int captEpLength = 6;
-
         if (input.length() == moveLength) {
             return Pawn.move(input);
         } else if (input.length() == captureLength) {
-            if (input.substring(1, 2).equals("x")) {
+            if (input.substring(charPos1, charPos2).equals("x")) {
                 return Pawn.capture(input);
             }
             throw new IllegalMoveException("Mossa non valida");
         } else if (input.length() == ambiguityEpLength) {
-            if ((input.substring(1, 2).toLowerCase().equals("x"))
-                    && (input.substring(4, 8).toLowerCase().equals("e.p."))) {
+            if ((input.substring(charPos1, charPos2).toLowerCase().equals("x"))
+                    && (input.substring(charPos4, charPos8).toLowerCase().equals("e.p."))) {
                 return Pawn.captureEnPassant(input);
             } else {
                 throw new IllegalMoveException("Mossa non valida");
             }
         } else if (input.length() == captEpLength) {
-            if ((input.substring(1, 2).toLowerCase().equals("x"))
-                    && (input.substring(4, 6).toLowerCase().equals("ep"))) {
+            if ((input.substring(charPos1, charPos2).toLowerCase().equals("x"))
+                    && (input.substring(charPos4, charPos6).toLowerCase().equals("ep"))) {
                 return Pawn.captureEnPassant(input);
             } else {
                 throw new IllegalMoveException("Mossa non valida");
