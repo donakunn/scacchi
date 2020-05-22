@@ -85,12 +85,12 @@ class King extends Piece {
 
     static boolean isThreatened(int x, int y) {
         return checkPawnThreat(x,y)
-        		&& checkBishopThreat(x,y)
-        		&& checkRookThreat(x,y)
-        		&& checkKnightThreat(x,y);
+        		|| checkBishopThreat(x,y)
+        		|| checkRookThreat(x,y)
+        		|| checkKnightThreat(x,y);
     }
 
-    static boolean checkPawnThreat(int x, int y) {
+    static private boolean checkPawnThreat(int x, int y) {
     	boolean blackTurn= Game.getBlackTurn();
     	Piece checkPiece;
     	if (blackTurn) {
@@ -128,7 +128,7 @@ class King extends Piece {
         return false;
     }
     
-    static boolean checkBishopThreat(int x, int y) {
+    static private boolean checkBishopThreat(int x, int y) {
     	boolean blackTurn= Game.getBlackTurn();
     	Piece checkPiece;
     	int i,j;
@@ -219,7 +219,7 @@ class King extends Piece {
         return false;
     }
     
-    static boolean checkRookThreat(int x, int y) {
+    static private boolean checkRookThreat(int x, int y) {
     	boolean blackTurn= Game.getBlackTurn();
     	Piece checkPiece;
     	int i,j;
@@ -294,7 +294,7 @@ class King extends Piece {
         return false;
     }
     
-    static boolean checkKnightThreat(int x, int y) {
+    static private boolean checkKnightThreat(int x, int y) {
     	boolean blackTurn= Game.getBlackTurn();
     	// knight
         if (y + 2 <= 7) {
