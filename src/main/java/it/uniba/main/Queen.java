@@ -30,6 +30,8 @@ class Queen extends Piece {
         this.color = col;
         if (col == 0) {
             this.pieceType = "\u265B"; // Regina nera
+
+
         } else {
             this.pieceType = "\u2655"; // Regina bianca
         }
