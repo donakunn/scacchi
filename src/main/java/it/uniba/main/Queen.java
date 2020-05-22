@@ -17,12 +17,10 @@ class Queen extends Piece {
             this.pieceType = "\u265B"; // Regina nera
 
 
-        } else if (col == 1) {
+        } else  {
             this.pieceType = "\u2655"; // Regina bianca
 
-        } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
-        }
+        } 
     }
 
     /**
