@@ -56,7 +56,7 @@ class King extends Piece {
      * Il metodo incrementMoves contiene un contatore che viene incrementato nel caso il re faccia una mossa.
      */
 
-    void incrementMoves() {
+    private void incrementMoves() {
         nMoves++;
     }
 

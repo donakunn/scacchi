@@ -23,8 +23,10 @@ public final class FinalPar {
     public static final int CAPTURELENGTH = 4;
     public static final int ALTEPLENGTH = 8;
     public static final int CAPTEPLENGTH = 6;
+    public static final int CHARPOS0 = 0;
     public static final int CHARPOS1 = 1;
     public static final int CHARPOS2 = 2;
+    public static final int CHARPOS3 = 3;
     public static final int CHARPOS4 = 4;
     public static final int CHARPOS6 = 6;
     public static final int CHARPOS8 = 8;
