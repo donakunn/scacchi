@@ -17,7 +17,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 /**
  * <<entity>><br>
  * <p>Titolo: Pawn</p>
- * <p>Descrizione: La classe Pawn, implementa la classe astratta {@link Piece} e permette di usare il Pedone
+ * <p>Descrizione: La classe Pawn implementa la classe astratta {@link Piece} e permette di usare il Pedone
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente
@@ -26,7 +26,7 @@ class Pawn extends Piece {
 
 
 	/**
-	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa sringa Unicode.
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
 	 * 
 	 * @param col: colore del pezzo.
 	 */
