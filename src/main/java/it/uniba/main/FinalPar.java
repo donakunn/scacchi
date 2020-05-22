@@ -38,4 +38,10 @@ public final class FinalPar {
     public static final int POS7 = 7;
     public static final int AINASCII = 97;
     public static final int DIGIT0INASCII = 48;
+    public static final int STRARRDIM = 3;
+    public static final int CASTLARRDIM = 1;
+    public static final int STARTBKINGX = 0;
+    public static final int STARTBKINGY = 4;
+    public static final int STARTWKINGX = 7;
+    public static final int STARTWKINGY = 4;
 }

@@ -9,6 +9,7 @@ import static it.uniba.main.FinalPar.MAXCOL;
 import static it.uniba.main.FinalPar.MAXROW;
 import static it.uniba.main.FinalPar.OUTOFBOUND;
 import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
+import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
@@ -137,10 +138,9 @@ class Bishop extends Piece {
     private static String[] actualMove(final boolean isCapture, final int x, final int y, final int xCheck,
                                        final int yCheck)
             throws IllegalMoveException {
-        final int strArrDim = 3;
         //isCapture = true -> mossa di cattura
         //isCapture = false -> mossa di spostamento
-        String[] pieces = new String[strArrDim]; //0 Donna, 2 cella di dest
+        String[] pieces = new String[STRARRDIM]; //0 Donna, 2 cella di dest
         Piece target = null;
         if (isCapture) {
             //update: nell'originale viene fatto il cast a piece, qui lo tolgo
