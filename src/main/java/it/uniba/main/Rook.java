@@ -16,15 +16,14 @@ class Rook extends Piece {
             this.pieceType = "\u265C"; // Torre nera
             nMoves = 0;
 
-        } else if (col == 1) {
+        } else {
 
             this.pieceType = "\u2656"; // Torre bianca
             nMoves = 0;
 
-        } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
         }
     }
+
 
     void incrementMoves() {
         nMoves++;
@@ -82,11 +81,11 @@ class Rook extends Piece {
         boolean isCapture = false;
         boolean blackTurn = Game.getBlackTurn();
 
-       int a = 8 - (((int) move.charAt(move.length()-1)) - 48);
-		int b = (int) move.charAt(move.length() - 2) - 97;
-		if ((a <0) || (a > 7) || (b <0) || (b > 7)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
+        int a = 8 - (((int) move.charAt(move.length() - 1)) - 48);
+        int b = (int) move.charAt(move.length() - 2) - 97;
+        if ((a < 0) || (a > 7) || (b < 0) || (b > 7)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
 
         if ((move.length() == 4 && move.charAt(1) == 'x') || (move.length() == 5 && move.charAt(2) == 'x')) {
             isCapture = true;
@@ -199,7 +198,7 @@ class Rook extends Piece {
         if (King.isThreatened()) {
             Game.getCell(x, y).setPiece(target);
             Game.getCell(xC, yC).setPiece(r);
-            throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+            throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
         } else {
             if (isCapture) {
                 if (target.getColor() == 0) {

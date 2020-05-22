@@ -2,6 +2,9 @@ package it.uniba.main;
 
 import java.util.ArrayList;
 
+import static it.uniba.main.FinalPar.MAXCOL;
+import static it.uniba.main.FinalPar.MAXROW;
+
 /**
  * <<control>><br>
  * Menu class, containing all methods of the command list.
@@ -16,20 +19,23 @@ public final class Menu {
     private Game game = new Game();
 
     public String help() {
-        return "Lista di comandi utilizzabili:\n" + "help\n" + "play\n"
-                + "quit\n" +
-                "Lista di comandi utilizzabili solo se in partita:\n" +
-                "board\n"
+        return "Lista di comandi utilizzabili:\n"
+                + "help\n"
+                + "play\n"
+                + "quit\n"
+                + "Lista di comandi utilizzabili solo se in partita:\n"
+                + "board\n"
                 + "captures\n"
                 + "moves\n"
-                +
-                "Per effettuare una mossa e' necessario specificarla in notazione algebrica; \nPer la cattura en passant si puo' specificare 'e.p.' o 'ep' alla fine della mossa in notazione algebrica";
+                + "Per effettuare una mossa e' necessario specificarla in notazione algebrica; \n"
+                + "Per la cattura en passant si puo' specificare 'e.p.' "
+                + "o 'ep' alla fine della mossa in notazione algebrica";
     }
 
     public String[][] board() {
-        String[][] board = new String[8][8];
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        String[][] board = new String[MAXROW][MAXCOL];
+        for (int i = 0; i < MAXROW; i++) {
+            for (int j = 0; j < MAXCOL; j++) {
 
                 board[i][j] = Game.getCell(i, j).toString();
             }
@@ -48,7 +54,7 @@ public final class Menu {
         game.newGame();
     }
 
-    public String[] getMove(String input)
+    public String[] getMove(final String input)
             throws IllegalArgumentException, IndexOutOfBoundsException, IllegalMoveException {
         char chosenPiece = input.charAt(0);
         String[] pieces;

@@ -1,5 +1,19 @@
 package it.uniba.main;
 
+import static it.uniba.main.FinalPar.AINASCII;
+import static it.uniba.main.FinalPar.CHARPOS0;
+import static it.uniba.main.FinalPar.CHARPOS1;
+import static it.uniba.main.FinalPar.CHARPOS2;
+import static it.uniba.main.FinalPar.CHARPOS3;
+import static it.uniba.main.FinalPar.CHARPOS4;
+import static it.uniba.main.FinalPar.DIGIT0INASCII;
+import static it.uniba.main.FinalPar.MAXROW;
+import static it.uniba.main.FinalPar.OUTOFBOUND;
+import static it.uniba.main.FinalPar.POS3;
+import static it.uniba.main.FinalPar.POS4;
+import static it.uniba.main.FinalPar.POS6;
+import static it.uniba.main.FinalPar.STRARRDIM;
+
 /**
  * <<entity>><br>
  * <p>Titolo: Pawn</p>
@@ -10,12 +24,13 @@ package it.uniba.main;
  */
 class Pawn extends Piece {
 
+
 	/**
 	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa sringa Unicode.
 	 * 
 	 * @param col: colore del pezzo.
 	 */
-    Pawn(int col) { // costruttore classe Pedone
+    Pawn(final int col) { // costruttore classe Pedone
         nMoves = 0;
 
         this.color = col;
@@ -31,7 +46,7 @@ class Pawn extends Piece {
     /**
      * Incrementa il contatore delle mosse del Pedone.
      */
-     private void incrementMoves() {
+    private void incrementMoves() {
         this.nMoves++;
     }
 
@@ -39,73 +54,72 @@ class Pawn extends Piece {
      * Controlla che il Pedone sia catturabile en passant.
      *
      * @param x: ascissa del Pedone.
-     * @return true, se il Pedone è catturabile en passant; false, altrimenti.
+     * @return true, se il Pedone Ã¨ catturabile en passant; false, altrimenti.
      */
-    private Boolean enPassantCatturable(
-            int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
+    private Boolean enPassantCatturable(final int x) { // restituisce true se il pedone
+        // ha effettuato una sola mossa con salto di 2,
         // false altrimenti
-        if ((getColor() == 1) && (nMoves == 1) && (x == 4)) {
+        if ((getColor() == 1) && (nMoves == 1) && (x == POS4)) {
             return true;
-        } else if ((getColor() == 0) && (nMoves == 1) && (x == 3)) {
+        } else if ((getColor() == 0) && (nMoves == 1) && (x == POS3)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
      * Permette di muovere un Pedone all'interno della scacchiera.
      *
      * @param move: mossa specificata dall'utente.
-     * @return array che contiene il Pedone che è stato mosso convertito a stringa e la cella di destinazione.
+     * @return array che contiene il Pedone che Ã¨ stato mosso convertito a stringa e la cella di destinazione.
      * @throws IllegalMoveException
      */
-    static String[] move(String move) throws IllegalMoveException {
+    static String[] move(final String move) throws IllegalMoveException {
         int x; // ascissa
         int y; // ordinata
         int xCheck; //ordinata su cui fare il check del pezzo
         boolean blackTurn = Game.getBlackTurn();
 
 
-        y = (int) (move.charAt(0)) - 97; // lettura x e y casella di destinazione
-      x = 8 - (((int) move.charAt(1)) - 48);
-		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
+        y = (int) (move.charAt(CHARPOS0)) - AINASCII; // lettura x e y casella di destinazione
+        x = MAXROW - (((int) move.charAt(CHARPOS1)) - DIGIT0INASCII);
+        if ((x < 0) || (x > OUTOFBOUND) || (y < 0) || (y > OUTOFBOUND)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
         Pawn p;
-        String[] pieceAndCell = new String[3]; //0 pezzo che viene mosso, //2 cella di destinazione
+        String[] pieceAndCell = new String[STRARRDIM]; //0 pezzo che viene mosso, //2 cella di destinazione
         if (Game.getCell(x, y).getPiece() != null) {
             throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota.");
         }
         if ((x > 0)
-                && (x < 8)
+                && (x < MAXROW)
                 && (Game.getCell(x - 1, y).getPiece() instanceof Pawn)
                 && (Game.getCell(x - 1, y).getPiece().getColor() == 0)
                 // check se casella in x-1 c'e' pedone con colore 1
-                && blackTurn != false) {
+                && blackTurn) {
             xCheck = x - 1;
         } else if ((x > 1)
-                && (x < 8)
+                && (x < MAXROW)
                 && (Game.getCell(x - 2, y).getPiece() instanceof Pawn)
                 && (Game.getCell(x - 2, y).getPiece().getColor() == 0)
                 // check se casella in x-2 c'e' pedone con colore 1
-                && (blackTurn != false)
+                && (blackTurn)
                 && (Game.getCell(x - 2, y).getPiece().getMoves() == 0)) { // se le condizioni sono
             // rispettate fa la mossa
             xCheck = x - 2;
         } else if ((x >= 0)
-                && (x < 7)
+                && (x < OUTOFBOUND)
                 && (Game.getCell(x + 1, y).getPiece() instanceof Pawn)
                 && (Game.getCell(x + 1, y).getPiece().getColor() == 1)
                 // check se casella in x+1 c'e' pedone con colore 0
-                && blackTurn != true) { // se le condizioni sono rispettate fa la mossa
+                && !blackTurn) { // se le condizioni sono rispettate fa la mossa
             xCheck = x + 1;
         } else if ((x >= 0)
-                && (x < 6)
+                && (x < POS6)
                 && (Game.getCell(x + 2, y).getPiece() instanceof Pawn)
                 && (Game.getCell(x + 2, y).getPiece().getColor() == 1)
                 // check se casella in x+2 c'e' pedone con colore 1
-                && (blackTurn != true)
+                && (!blackTurn)
                 && (Game.getCell(x + 2, y).getPiece().getMoves() == 0)) { // se le condizioni sono
             // rispettate fa la mossa
             xCheck = x + 2;
@@ -119,7 +133,7 @@ class Pawn extends Piece {
         if (King.isThreatened()) {
             Game.getCell(xCheck, y).setPiece(p);
             Game.getCell(x, y).setEmpty();
-            throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+            throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
         }
         p.incrementMoves();
         pieceAndCell[0] = p.toString();
@@ -136,7 +150,7 @@ class Pawn extends Piece {
      * @throws IllegalMoveException
      */
 
-    static String[] capture(String move) throws IllegalMoveException {
+    static String[] capture(final String move) throws IllegalMoveException {
         int x; // ascissa
         int y; // ordinata
         int z; // colonna del pezzo di provenienza
@@ -144,15 +158,15 @@ class Pawn extends Piece {
         boolean blackTurn = Game.getBlackTurn();
 
         Piece p, caught;
-        String[] pieces = new String[3]; // 0 pezzo che cattura, 1 pezzo catturato, 2 cella di destinazione
+        String[] pieces = new String[STRARRDIM]; // 0 pezzo che cattura, 1 pezzo catturato, 2 cella di destinazione
 
 
-        y = (int) (move.charAt(2)) - 97;
-        x = 8 - (((int) move.charAt(3)) - 48);
-		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
-        z = (int) (move.charAt(0)) - 97;
+        y = (int) (move.charAt(CHARPOS2)) - AINASCII;
+        x = MAXROW - (((int) move.charAt(CHARPOS3)) - DIGIT0INASCII);
+        if ((x < 0) || (x > OUTOFBOUND) || (y < 0) || (y > OUTOFBOUND)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
+        z = (int) (move.charAt(CHARPOS0)) - AINASCII;
 
 
         if (Game.getCell(x, y).getPiece()
@@ -164,9 +178,10 @@ class Pawn extends Piece {
         }
         if (Math.abs(z - y) >= 2 || (z - y) == 0) {
             throw new IllegalMoveException(
-                    "Mossa illegale; Nessuna possibile cattura da parte di un pedone a partire dalla colonna indicata");
+                    "Mossa illegale; Nessuna possibile cattura "
+                            + "da parte di un pedone a partire dalla colonna indicata");
         }
-        if (blackTurn != false) {
+        if (blackTurn) {
             xCheck = x - 1;
             if (z == y - 1) {
                 yCheck = y - 1;
@@ -186,7 +201,8 @@ class Pawn extends Piece {
         }
         if (!(Game.getCell(xCheck, yCheck).getPiece() instanceof Pawn)) {
             throw new IllegalMoveException(
-                    "Mossa illegale; Nessun pedone puo' catturare dalla colonna di partenza indicata.");
+                    "Mossa illegale; Nessun pedone puo' catturare "
+                            + "dalla colonna di partenza indicata.");
         }
         p = (Pawn) Game.getCell(xCheck, yCheck).getPiece();
         if (Game.getCell(x, y).getPiece().getColor() != p.getColor()) {
@@ -196,7 +212,7 @@ class Pawn extends Piece {
             if (King.isThreatened()) {
                 Game.getCell(x, y).setPiece(caught);
                 Game.getCell(xCheck, yCheck).setPiece(p);
-                throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+                throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
             } else {
                 if (caught.getColor() == 0) {
                     Game.addBlackCaptured(caught.toString());
@@ -205,7 +221,7 @@ class Pawn extends Piece {
                 }
                 pieces[0] = p.toString();
                 pieces[1] = caught.toString();
-                pieces[2] = move.substring(2, 4);
+                pieces[2] = move.substring(CHARPOS2, CHARPOS4);
                 return pieces;
             }
         } else {
@@ -215,6 +231,7 @@ class Pawn extends Piece {
     }
 
     /**
+
      * Consente ad un Pedone di catturare solo en passant all'interno della scacchiera.
      *
      * @param move: mossa specificata dall'utente.
@@ -222,7 +239,7 @@ class Pawn extends Piece {
      * la cella di destinazione.
      * @throws IllegalMoveException
      */
-    static String[] captureEnPassant(String move) throws IllegalMoveException {
+    static String[] captureEnPassant(final String move) throws IllegalMoveException {
 
         int x; // ascissa
         int y; // ordinata
@@ -230,18 +247,19 @@ class Pawn extends Piece {
         int xCheck, yCheck; //coordinate target check
         boolean blackTurn = Game.getBlackTurn();
         Piece p;
-        String[] pieces = new String[3]; // 0 pezzo catturato, 1 pezzo che cattura //2 cella di destinazione
-        y = (int) (move.charAt(2)) - 97;
-       x = 8 - (((int) move.charAt(3)) - 48);
-		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
-        z = (int) (move.charAt(0)) - 97;
+        String[] pieces = new String[STRARRDIM]; // 0 pezzo catturato, 1 pezzo che cattura //2 cella di destinazione
+        y = (int) (move.charAt(CHARPOS2)) - AINASCII;
+        x = MAXROW - (((int) move.charAt(CHARPOS3)) - DIGIT0INASCII);
+        if ((x < 0) || (x > OUTOFBOUND) || (y < 0) || (y > OUTOFBOUND)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
+        z = (int) (move.charAt(CHARPOS0)) - AINASCII;
         if (Math.abs(z - y) >= 2 || (z - y) == 0) {
             throw new IllegalMoveException(
-                    "Mossa illegale; Nessuna possibile cattura da parte di un pedone a partire dalla colonna indicata");
+                    "Mossa illegale; Nessuna possibile cattura "
+                            + "da parte di un pedone a partire dalla colonna indicata");
         }
-        if (blackTurn == true) {
+        if (blackTurn) {
             xCheck = x - 1;
             if (z == y - 1) {
                 yCheck = y - 1;
@@ -259,7 +277,8 @@ class Pawn extends Piece {
         if (!(Game.getCell(xCheck, yCheck).getPiece()
                 instanceof Pawn)) {
             throw new IllegalMoveException(
-                    "Mossa illegale; Nessun pedone puo' effettuare cattura e.p. a partire dalla colonna inserita");
+                    "Mossa illegale; Nessun pedone puo' effettuare cattura e.p."
+                            + " a partire dalla colonna inserita");
         }
         if (Game.getCell(xCheck, y).getPiece() instanceof Pawn) {
             p = (Pawn) Game.getCell(xCheck, yCheck).getPiece();
@@ -272,7 +291,7 @@ class Pawn extends Piece {
                     Game.getCell(x, y).setEmpty();
                     Game.getCell(xCheck, yCheck).setPiece(p);
                     Game.getCell(xCheck, y).setPiece(caught);
-                    throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+                    throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
                 } else {
                     if (caught.getColor() == 0) {
                         Game.addBlackCaptured(caught.toString());
@@ -281,7 +300,7 @@ class Pawn extends Piece {
                     }
                     pieces[0] = p.toString();
                     pieces[1] = caught.toString();
-                    pieces[2] = move.substring(2, 4) + " e.p.";
+                    pieces[2] = move.substring(CHARPOS2, CHARPOS4) + " e.p.";
                     return pieces;
                 }
             } else {

@@ -22,11 +22,8 @@ class Queen extends Piece {
             this.pieceType = "\u265B"; // Regina nera
 
 
-        } else if (col == 1) {
+        } else  {
             this.pieceType = "\u2655"; // Regina bianca
-
-        } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
         }
     }
 
@@ -210,7 +207,7 @@ class Queen extends Piece {
         if (King.isThreatened()) {
             Game.getCell(x, y).setPiece(target);
             Game.getCell(xCheck, yCheck).setPiece(q);
-            throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+            throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
         } else {
             if (isCapture) {
                 if (target.getColor() == 0) {
