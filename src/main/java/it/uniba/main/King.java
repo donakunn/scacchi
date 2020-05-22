@@ -30,7 +30,8 @@ class King extends Piece {
     private static int[] coordWhiteKing; // coordinate re bianco, [0]=x [1]=y
 
     /**
-     * E' il costruttore della classe King.
+     * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode. Inoltre, alla creazione 
+     * dell'oggetto, inizializza le coordinate del Re.
      *
      * @param col: colore del pezzo.
      */
@@ -45,14 +46,13 @@ class King extends Piece {
         	this.setPieceType("\u2654"); // Re bianco
             coordWhiteKing = new int[] {STARTWKINGX, STARTWKINGY};
         }
-        this.setnMoves(0);
     }
 
+
     /**
-     * Il metodo isThreatened() chiama il metodo isThreatened sulla posizione del re
-     * utilizzato dal giocatore che sta giocando in quel turno.
+     * Chiama il metodo isThreatened sulla posizione del Re utilizzato dal giocatore che sta giocando in quel turno.
      *
-     * @return le coordinate del re in quel determinato turno.
+     * @return true, se il Re del giocatore che sta giocando in quel turno e' sotto scacco; false, altrimenti.
      */
 
     static boolean isThreatened() {
@@ -69,11 +69,11 @@ class King extends Piece {
 
 
     /**
-     * Il metodo isThreatened(int x, int y) verifica che il re, in posizione x-y, non sia sotto scacco.
+     * Verifica che il Re, in posizione x-y, non sia sotto scacco.
      *
-     * @param x: ascissa del re.
-     * @param y: ordinata del re.
-     * @return true, se il re non è sotto scacco; false, altrimenti.
+     * @param x: ascissa del Re.
+     * @param y: ordinata del Re.
+     * @return true, se il Re del giocatore che sta giocando in quel turno e' sotto scacco; false, altrimenti.
      */
 
     static boolean isThreatened(final int x, final int y) {
@@ -83,11 +83,19 @@ class King extends Piece {
                 || checkKnightThreat(x, y);
     }
 
+    /**
+     * Controlla che il Re non sia minacciato dal Pedone.
+     * 
+     * @param x: ascissa da controllare.
+     * @param y: ordinata da controllare.
+     * @return true, se il Re del giocatore che sta giocando in quel turno e' minacciato; false altrimenti.
+     */
    private static boolean checkPawnThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
         Piece checkPiece;
         if (blackTurn) {
             if (x < OUTOFBOUND) {
+
                 checkPiece = Game.getCell(x + 1, y - 1).getPiece();
                 if (y > 0
                         && checkPiece instanceof Pawn
@@ -121,6 +129,14 @@ class King extends Piece {
         return false;
     }
 
+
+    /**
+     * Controlla che il Re non sia minacciato da un Alfiere e dalla Regina diagonalmente.
+     * 
+     * @param x: ascissa da controllare.
+     * @param y: ordinata da controllare.
+     * @return true, se il Re e' minacciato; false, altrimenti. 
+     */
     private static boolean checkBishopThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
         Piece checkPiece;
@@ -211,6 +227,14 @@ class King extends Piece {
         }
         return false;
     }
+    
+    /**
+     * Controlla che il Re non sia minacciato da una Torre e dalla Regina orizzontalmente e verticalmente.
+     * 
+     * @param x: ascissa da controllare.
+     * @param y: ordinata da controllare.
+     * @return true, se il Re e' minacciato; false, altrimenti.
+     */
 
     private static boolean checkRookThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
@@ -285,7 +309,15 @@ class King extends Piece {
             i++;
         }
         return false;
-    }
+    }  
+  
+    /**
+     * Controlla che il Re non sia minacciato da un Cavallo.
+     * 
+     * @param x: ascissa da controllare.
+     * @param y: ordinata da controllare.
+     * @return true, se il Re e' minacciato; false altrimenti.
+     */
 
     private static boolean checkKnightThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
@@ -342,11 +374,10 @@ class King extends Piece {
     }
 
     /**
-     * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche
-     * la possibilita'� di effettuare una cattura.
+     * Permette di muovere il Re all'interno della scacchiera e comprende anche la possibilita' di effettuare una cattura.
      *
      * @param move: mossa specificata dall'utente.
-     * @return array che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
+     * @return array che contiene il Re che effettua la cattura, il pezzo catturato e la casella di destinazione.
      * @throws IllegalMoveException
      */
 
@@ -430,9 +461,9 @@ class King extends Piece {
     }
 
     /**
-     * Il metodo castling determina se è possibile effettuare l'arrocco o meno.
+     * Determina se e' possibile effettuare l'arrocco o meno.
      *
-     * @param isLong: indica se l'arrocco è lungo o corto.
+     * @param isLong: indica se l'arrocco e' lungo o corto.
      * @return array contenente la stringa che determina il tipo di arrocco.
      * @throws IllegalMoveException
      */
