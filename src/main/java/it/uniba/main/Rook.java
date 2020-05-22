@@ -2,13 +2,19 @@ package it.uniba.main;
 
 /**
  * <<entity>><br>
- * Rook class, implementing the abstract class {@link Piece}<br>
+ * <p>Titolo: Rook</p>
+ * <p>Descrizione: La classe Rook implementa la classe astratta {@link Piece}<br> e permette di utilizzare
+ * la Torre all'interno del gioco.
  *
  * @author Donato Lucente
  */
 class Rook extends Piece {
 
-
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+	 * 
+	 * @param col: colore del pezzo.
+	 */
     Rook(int col) {
 
         this.color = col;
@@ -26,15 +32,30 @@ class Rook extends Piece {
 
     }
 
-
+    /**
+     * Incrementa il contatore delle mosse della Torre.
+     */
     void incrementMoves() {
         nMoves++;
     }
 
+    /**
+     * 
+     * @return il numero delle mosse effettuate dalla Torre.
+     */
     int getNumberOfMoves() {
         return this.nMoves;
     }
 
+    /**
+     * Verifica che la mossa sia una mossa legale.
+     * 
+     * @param x: ascissa della casella di partenza.
+     * @param y: ordinata della casella di partenza.
+     * @param a: ascissa della casella di arrivo.
+     * @param b: ordinata della casella di arrivo.
+     * @return true, se è possibile effettuare la mossa; false, altrimenti.
+     */
     static private boolean isMovable(int x, int y, int a, int b) {
         int i = a;
         int j = b;
@@ -72,6 +93,14 @@ class Rook extends Piece {
         }
     }
 
+    /**
+     * Effettua i controlli che servono per poter effettuare la mossa o la cattura.
+     * 
+     * @param move: mossa specificata dall'utente.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     static String[] move(String move) throws IllegalMoveException {
         int count = 0;
         int xT1 = -1;
@@ -179,6 +208,18 @@ class Rook extends Piece {
         return actualMove(isCapture, xTarget, yTarget, a, b);
     }
 
+    /**
+     * Permette di effettuare la mossa.
+     * 
+     * @param isCapture: verifica se si tratta di una mossa o una cattura.
+     * @param xC: sentinella dell'ascissa.
+     * @param yC: sentinella dell'ordinata.
+     * @param x: ascissa della Torre.
+     * @param y: ordinata della Torre.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
+     * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     static private String[] actualMove(boolean isCapture, int xC, int yC, int x, int y) throws IllegalMoveException {
         String[] pieces = new String[3];
         Piece target = null;
