@@ -1,5 +1,16 @@
 package it.uniba.main;
 
+import static it.uniba.main.FinalPar.AINASCII;
+import static it.uniba.main.FinalPar.AMBCAPTLENGTH;
+import static it.uniba.main.FinalPar.CAPTURELENGTH;
+import static it.uniba.main.FinalPar.CHARPOS1;
+import static it.uniba.main.FinalPar.CHARPOS2;
+import static it.uniba.main.FinalPar.DIGIT0INASCII;
+import static it.uniba.main.FinalPar.MAXROW;
+import static it.uniba.main.FinalPar.OUTOFBOUND;
+import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
+import static it.uniba.main.FinalPar.STRARRDIM;
+
 /**
  * <<entity>><br>
  * <p>Titolo: Rook</p>
@@ -10,12 +21,14 @@ package it.uniba.main;
  */
 class Rook extends Piece {
 
+
 	/**
 	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
 	 * 
 	 * @param col: colore del pezzo.
 	 */
-    Rook(int col) {
+    Rook(final int col) {
+
 
         this.color = col;
         if (col == 0) {
@@ -47,6 +60,7 @@ class Rook extends Piece {
         return this.nMoves;
     }
 
+
     /**
      * Verifica che la mossa sia una mossa legale.
      * 
@@ -56,7 +70,8 @@ class Rook extends Piece {
      * @param b: ordinata della casella di arrivo.
      * @return true, se è possibile effettuare la mossa; false, altrimenti.
      */
-    static private boolean isMovable(int x, int y, int a, int b) {
+    private static boolean isMovable(final int x, final int y, final int a, final int b) {
+
         int i = a;
         int j = b;
 
@@ -83,15 +98,13 @@ class Rook extends Piece {
         } else { // Non valido
             return false;
         }
-        if (Game.getCell(i, j).getPiece() == null ||
-                Game.getCell(i, j).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1))
-        // Return true
-        {
+        if (Game.getCell(i, j).getPiece() == null
+                || Game.getCell(i, j).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1)) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
+
 
     /**
      * Effettua i controlli che servono per poter effettuare la mossa o la cattura.
@@ -101,7 +114,8 @@ class Rook extends Piece {
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException
      */
-    static String[] move(String move) throws IllegalMoveException {
+    static String[] move(final String move) throws IllegalMoveException {
+
         int count = 0;
         int xT1 = -1;
         int yT1 = -1;
@@ -109,16 +123,18 @@ class Rook extends Piece {
         int yT2 = -1;
         int xTarget = -1;
         int yTarget = -1;
+        final int maxCount = 3;
         boolean isCapture = false;
         boolean blackTurn = Game.getBlackTurn();
 
-        int a = 8 - (((int) move.charAt(move.length() - 1)) - 48);
-        int b = (int) move.charAt(move.length() - 2) - 97;
-        if ((a < 0) || (a > 7) || (b < 0) || (b > 7)) {
+        int a = MAXROW - (((int) move.charAt(move.length() - 1)) - DIGIT0INASCII);
+        int b = (int) move.charAt(move.length() - 2) - AINASCII;
+        if ((a < 0) || (a > OUTOFBOUND) || (b < 0) || (b > OUTOFBOUND)) {
             throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
         }
 
-        if ((move.length() == 4 && move.charAt(1) == 'x') || (move.length() == 5 && move.charAt(2) == 'x')) {
+        if ((move.length() == CAPTURELENGTH && move.charAt(CHARPOS1) == 'x')
+                || (move.length() == AMBCAPTLENGTH && move.charAt(CHARPOS2) == 'x')) {
             isCapture = true;
         }
 
@@ -126,10 +142,8 @@ class Rook extends Piece {
             //lancia eccezione se la cella di destinazione ï¿½ occupata da alleato
             if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-            }
-
-            //o se ï¿½ una mossa di spostamento con cella di destinazione occupata da avversario
-            else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+                //o se � una mossa di spostamento con cella di destinazione occupata da avversario
+            } else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
@@ -138,8 +152,8 @@ class Rook extends Piece {
             throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
         }
 
-        for (int i = 0; i <= 7; i++) {
-            for (int j = 0; j <= 7; j++) {
+        for (int i = 0; i <= OUTOFBOUND; i++) {
+            for (int j = 0; j <= OUTOFBOUND; j++) {
                 if (Game.getCell(i, j).getPiece() instanceof Rook
                         && Game.getCell(i, j).getPiece().getColor() == (blackTurn ? 0 : 1)) {
                     if (xT1 == -1) {
@@ -173,32 +187,35 @@ class Rook extends Piece {
         } else if (count == 2) {
             xTarget = xT2;
             yTarget = yT2;
-        } else if (count == 3) {
-            if (move.length() == 3) {
+        } else if (count == maxCount) {
+            if (move.length() == PIECEMOVELENGTH) {
                 throw new IllegalMoveException(
-                        "Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
+                        "Mossa ambigua, devi specificare quale delle due torri "
+                                + "muovere secondo la notazione algebrica.");
             }
-            if (move.charAt(1) >= '1' && move.charAt(1) <= '8') {
+            if (move.charAt(CHARPOS1) >= '1' && move.charAt(CHARPOS1) <= '8') {
                 if (xT1 == xT2) {
                     throw new IllegalMoveException(
-                            "Quando le due torri si trovano sulla stessa riga e' necessario specificare la colonna!");
+                            "Quando le due torri si trovano sulla stessa riga "
+                                    + "e' necessario specificare la colonna!");
                 }
-                if (xT1 == (8 - Integer.parseInt(move.substring(1, 2)))) {
+                if (xT1 == (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
                     xTarget = xT1;
                     yTarget = yT1;
-                } else if (xT2 == (8 - Integer.parseInt(move.substring(1, 2)))) {
+                } else if (xT2 == (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
                     xTarget = xT2;
                     yTarget = yT2;
                 } 
             } else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
                 if (yT1 == yT2) {
                     throw new IllegalMoveException(
-                            "Quando le due torri si trovano sulla stessa colonna e' necessario specificare la riga!");
+                            "Quando le due torri si trovano sulla stessa "
+                                    + "colonna e' necessario specificare la riga!");
                 }
-                if (yT1 == ((int) move.charAt(1) - 97)) {
+                if (yT1 == ((int) move.charAt(CHARPOS1) - AINASCII)) {
                     xTarget = xT1;
                     yTarget = yT1;
-                } else if (yT2 == ((int) move.charAt(1) - 97)) {
+                } else if (yT2 == ((int) move.charAt(1) - AINASCII)) {
                     xTarget = xT2;
                     yTarget = yT2;
                 } 
@@ -207,6 +224,7 @@ class Rook extends Piece {
 
         return actualMove(isCapture, xTarget, yTarget, a, b);
     }
+
 
     /**
      * Permette di effettuare la mossa.
@@ -220,8 +238,10 @@ class Rook extends Piece {
      * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException
      */
-    static private String[] actualMove(boolean isCapture, int xC, int yC, int x, int y) throws IllegalMoveException {
-        String[] pieces = new String[3];
+    private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
+            throws IllegalMoveException {
+        String[] pieces = new String[STRARRDIM];
+
         Piece target = null;
         if (isCapture) {
             target = Game.getCell(x, y).getPiece();
@@ -232,7 +252,8 @@ class Rook extends Piece {
         if (King.isThreatened()) {
             Game.getCell(x, y).setPiece(target);
             Game.getCell(xC, yC).setPiece(r);
-            throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
+            throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco "
+                    + "o ci finirebbe dopo questa mossa");
         } else {
             if (isCapture) {
                 if (target.getColor() == 0) {
@@ -246,7 +267,7 @@ class Rook extends Piece {
             }
             r.incrementMoves();
             pieces[0] = r.toString();
-            pieces[2] = ((char) (y + 97)) + "" + (8 - x);
+            pieces[2] = ((char) (y + AINASCII)) + "" + (MAXROW - x);
             return pieces;
         }
     }

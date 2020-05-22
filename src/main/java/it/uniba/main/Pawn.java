@@ -291,7 +291,8 @@ class Pawn extends Piece {
                     Game.getCell(x, y).setEmpty();
                     Game.getCell(xCheck, yCheck).setPiece(p);
                     Game.getCell(xCheck, y).setPiece(caught);
-                    throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
+                    throw new IllegalMoveException("Mossa illegale; il Re e' sotto scacco "
+                            + "o ci finirebbe dopo questa mossa");
                 } else {
                     if (caught.getColor() == 0) {
                         Game.addBlackCaptured(caught.toString());

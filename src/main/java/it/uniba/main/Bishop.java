@@ -32,7 +32,7 @@ class Bishop extends Piece {
         if (col == 0) {
             this.pieceType = "\u265D"; // Alfiere nero
 
-        } else  {
+        } else {
             this.pieceType = "\u2657"; // Alfiere bianco
 
         }
@@ -74,10 +74,9 @@ class Bishop extends Piece {
             //lancia eccezione se la cella di destinazione � occupata da alleato
             if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-            }
 
-            //o se � una mossa di spostamento con cella di destinazione occupata da avversario
-            else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+                //o se � una mossa di spostamento con cella di destinazione occupata da avversario
+            } else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
