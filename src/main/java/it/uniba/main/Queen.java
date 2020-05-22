@@ -32,7 +32,7 @@ class Queen extends Piece {
 
         	this.setPieceType("\u265B"); // Regina nera
 
-this.setPieceType("\u265B"); // Regina nera
+        	this.setPieceType("\u265B"); // Regina nera
 
         } else {
         	this.setPieceType("\u2655"); // Regina bianca
