@@ -22,7 +22,7 @@ import static it.uniba.main.FinalPar.POS7;
 
 
 /**
- * <<entity>><br>
+ * <<control>><br>
  * Game is the main entity of the application. It contains the chessboard, turn of player currently
  * playing, white and black pieces captured, moves done. It also contains the main methods to
  * activate a move or a capture event for each piece.
@@ -43,7 +43,7 @@ class Game {
     void newGame() {
         final int firstEmptyRow = 2;
         final int lastEmptyRow = 5;
-        setBlackTurn();
+        setWhiteTurn();
         movesDone.clear();
         blacksCaptured.clear();
         whitesCaptured.clear();
@@ -152,7 +152,7 @@ class Game {
         setNotBlackTurn();
     }
 
-    private static void setBlackTurn() {
+    private static void setWhiteTurn() {
         blackTurn = false;
     }
 

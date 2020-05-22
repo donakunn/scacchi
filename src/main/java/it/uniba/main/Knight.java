@@ -15,11 +15,8 @@ class Knight extends Piece {
         if (col == 0) {
             this.pieceType = "\u265E"; // Cavallo nero
 
-        } else if (col == 1) {
-            this.pieceType = "\u2658"; // Cavallo bianco
-
         } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
+            this.pieceType = "\u2658"; // Cavallo bianco
         }
     }
 
@@ -43,11 +40,11 @@ class Knight extends Piece {
         boolean isCapture = false;
         boolean blackTurn = Game.getBlackTurn();
 
-        int a = 8 - (((int) move.charAt(move.length()-1)) - 48);
-		int b = (int) move.charAt(move.length() - 2) - 97;
-		if ((a <0) || (a > 7) || (b <0) || (b > 7)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
+        int a = 8 - (((int) move.charAt(move.length() - 1)) - 48);
+        int b = (int) move.charAt(move.length() - 2) - 97;
+        if ((a < 0) || (a > 7) || (b < 0) || (b > 7)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
 
         if ((move.length() == 4 && move.charAt(1) == 'x') || (move.length() == 5 && move.charAt(2) == 'x')) {
             isCapture = true;
