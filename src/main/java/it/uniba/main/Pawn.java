@@ -54,7 +54,7 @@ class Pawn extends Piece {
      * Controlla che il Pedone sia catturabile en passant.
      *
      * @param x: ascissa del Pedone.
-     * @return true, se il Pedone Ã¨ catturabile en passant; false, altrimenti.
+     * @return true, se il Pedone e' catturabile en passant; false, altrimenti.
      */
     private Boolean enPassantCatturable(final int x) { // restituisce true se il pedone
         // ha effettuato una sola mossa con salto di 2,
@@ -71,7 +71,7 @@ class Pawn extends Piece {
      * Permette di muovere un Pedone all'interno della scacchiera.
      *
      * @param move: mossa specificata dall'utente.
-     * @return array che contiene il Pedone che Ã¨ stato mosso convertito a stringa e la cella di destinazione.
+     * @return array che contiene il Pedone che e' stato mosso convertito a stringa e la cella di destinazione.
      * @throws IllegalMoveException
      */
     static String[] move(final String move) throws IllegalMoveException {
