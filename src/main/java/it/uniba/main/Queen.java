@@ -3,7 +3,7 @@ package it.uniba.main;
 /**
  * <<entity>><br>
  * <p>Titolo: Queen</p>
- * <p>Descrizione: La classe Queen implementa la classe astratta {@link Piece} e permette di utilizzare la regina
+ * <p>Descrizione: La classe Queen implementa la classe astratta {@link Piece} e permette di utilizzare la Regina
  * all'interno del gioco.</p>
  * 
  * @author Donato Lucente
@@ -34,7 +34,7 @@ class Queen extends Piece {
      * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
      * 
      * @param move: mossa specificata dall'utente.
-     * @return array contenente la regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
+     * @return array contenente la Regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa. 
      * @throws IllegalMoveException
      */
@@ -186,11 +186,11 @@ class Queen extends Piece {
      * Il metodo actualMove permette di effettuare la mossa.
      * 
      * @param isCapture: verifica se si tratta di una mossa o di una cattura.
-     * @param x: ascissa della regina.
-     * @param y: ordinata della regina.
+     * @param x: ascissa della Regina.
+     * @param y: ordinata della Regina.
      * @param xCheck: sentinella dell'ascissa.
      * @param yCheck: sentinella dell'ordinata.
-     * @return array contenente la regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
+     * @return array contenente la Regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException
      */

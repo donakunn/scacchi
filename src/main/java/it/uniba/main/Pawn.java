@@ -3,19 +3,18 @@ package it.uniba.main;
 /**
  * <<entity>><br>
  * <p>Titolo: Pawn</p>
- * <p>Descrizione: La classe Pawn, implementa la classe astratta {@link Piece} ed è la classe che permette di usare il pedone
+ * <p>Descrizione: La classe Pawn, implementa la classe astratta {@link Piece} e permette di usare il Pedone
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente
  */
 class Pawn extends Piece {
 
-    /**
-     * E' il costruttore della classe Pawn.
-     *
-     * @param col: colore del pezzo.
-
-     */
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa sringa Unicode.
+	 * 
+	 * @param col: colore del pezzo.
+	 */
     Pawn(int col) { // costruttore classe Pedone
         nMoves = 0;
 
@@ -30,17 +29,17 @@ class Pawn extends Piece {
     }
 
     /**
-     * Il metodo incrementMoves contiene un contatore che viene incrementato nel caso in cui il pedone faccia una mossa.
+     * Incrementa il contatore delle mosse del Pedone.
      */
      private void incrementMoves() {
         this.nMoves++;
     }
 
     /**
-     * Il metodo enPassantCatturable controlla che il pedone sia catturabile en passant.
+     * Controlla che il Pedone sia catturabile en passant.
      *
-     * @param x: ascissa del pedone.
-     * @return true, se il pedone è catturabile en passant; false, altrimenti.
+     * @param x: ascissa del Pedone.
+     * @return true, se il Pedone è catturabile en passant; false, altrimenti.
      */
     private Boolean enPassantCatturable(
             int x) { // restituisce true se il pedone ha effettuato una sola mossa con salto di 2,
@@ -55,10 +54,10 @@ class Pawn extends Piece {
     }
 
     /**
-     * Il metodo move permette di muovere un pedone all'interno della scacchiera.
+     * Permette di muovere un Pedone all'interno della scacchiera.
      *
      * @param move: mossa specificata dall'utente.
-     * @return array che contiene il pedone che è stato mosso convertito a stringa e la cella di destinazione.
+     * @return array che contiene il Pedone che è stato mosso convertito a stringa e la cella di destinazione.
      * @throws IllegalMoveException
      */
     static String[] move(String move) throws IllegalMoveException {
@@ -129,10 +128,10 @@ class Pawn extends Piece {
     }
 
     /**
-     * Il metodo capture consente ad un pedone di catturare,semplicemente o en passant, un pezzo all'interno della scacchiera.
+     * Consente ad un Pedone di catturare, semplicemente o en passant, un pezzo all'interno della scacchiera.
      *
      * @param move: mossa specificta dall'utente.
-     * @return array che contiene il pezzo che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e
+     * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e
      * la cella di destinazione.
      * @throws IllegalMoveException
      */
@@ -216,10 +215,10 @@ class Pawn extends Piece {
     }
 
     /**
-     * Il metodo captureEnPassant consente ad un pedone di catturare solo en passant all'interno della scacchiera.
+     * Consente ad un Pedone di catturare solo en passant all'interno della scacchiera.
      *
      * @param move: mossa specificata dall'utente.
-     * @return array che contiene il pezzo che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e
+     * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e
      * la cella di destinazione.
      * @throws IllegalMoveException
      */
