@@ -18,7 +18,7 @@ import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
  */
 class Bishop extends Piece {
 
-    Bishop(int col) {
+    Bishop(final int col) {
 
         this.color = col;
         if (col == 0) {
