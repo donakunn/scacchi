@@ -25,11 +25,9 @@ class Bishop extends Piece {
         if (col == 0) {
             this.pieceType = "\u265D"; // Alfiere nero
 
-        } else if (col == 1) {
+        } else  {
             this.pieceType = "\u2657"; // Alfiere bianco
 
-        } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
         }
     }
 

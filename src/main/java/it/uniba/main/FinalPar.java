@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
- * <<entity>><br>
+ * <<utility>><br>
  * <p>Titolo: FinalPar</p>
  * <p>Descrizione: La classe FinalPar contiene tutte le costanti che vengono usate all'interno delle altre
  * classi per i vari controlli.
