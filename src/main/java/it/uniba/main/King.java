@@ -30,52 +30,29 @@ class King extends Piece {
     private static int[] coordWhiteKing; // coordinate re bianco, [0]=x [1]=y
 
     /**
-     * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode. Inoltre, alla creazione 
-     * dell'oggetto, inizializza le coordinate del Re.
+     * E' il costruttore della classe King.
      *
      * @param col: colore del pezzo.
      */
 
     King(final int col) {
 
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265A"; // Re nero
+        	this.setPieceType("\u265A"); // Re nero
             coordBlackKing = new int[] {STARTBKINGX, STARTBKINGY};
-            nMoves = 0;
-
         } else {
-            this.pieceType = "\u2654"; // Re bianco
+        	this.setPieceType("\u2654"); // Re bianco
             coordWhiteKing = new int[] {STARTWKINGX, STARTWKINGY};
-            nMoves = 0;
-
         }
+        this.setnMoves(0);
     }
 
-
     /**
-     * Incrementa il contatore delle mosse del Re.
-     */
-
-    private void incrementMoves() {
-        nMoves++;
-    }
-
-
-    /**
-     * 
-     * @return il numero delle mosse effettuate dal Re.
-     */
-
-    int getNumberOfMoves() {
-        return this.nMoves;
-    }
-
-
-    /**
-     * Chiama il metodo isThreatened sulla posizione del Re utilizzato dal giocatore che sta giocando in quel turno.
+     * Il metodo isThreatened() chiama il metodo isThreatened sulla posizione del re
+     * utilizzato dal giocatore che sta giocando in quel turno.
      *
-     * @return true, se il Re del giocatore che sta giocando in quel turno e' sotto scacco; false, altrimenti.
+     * @return le coordinate del re in quel determinato turno.
      */
 
     static boolean isThreatened() {
@@ -92,11 +69,11 @@ class King extends Piece {
 
 
     /**
-     * Verifica che il Re, in posizione x-y, non sia sotto scacco.
+     * Il metodo isThreatened(int x, int y) verifica che il re, in posizione x-y, non sia sotto scacco.
      *
-     * @param x: ascissa del Re.
-     * @param y: ordinata del Re.
-     * @return true, se il Re del giocatore che sta giocando in quel turno e' sotto scacco; false, altrimenti.
+     * @param x: ascissa del re.
+     * @param y: ordinata del re.
+     * @return true, se il re non è sotto scacco; false, altrimenti.
      */
 
     static boolean isThreatened(final int x, final int y) {
@@ -106,19 +83,11 @@ class King extends Piece {
                 || checkKnightThreat(x, y);
     }
 
-    /**
-     * Controlla che il Re non sia minacciato dal Pedone.
-     * 
-     * @param x: ascissa da controllare.
-     * @param y: ordinata da controllare.
-     * @return true, se il Re del giocatore che sta giocando in quel turno e' minacciato; false altrimenti.
-     */
    private static boolean checkPawnThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
         Piece checkPiece;
         if (blackTurn) {
             if (x < OUTOFBOUND) {
-
                 checkPiece = Game.getCell(x + 1, y - 1).getPiece();
                 if (y > 0
                         && checkPiece instanceof Pawn
@@ -152,14 +121,6 @@ class King extends Piece {
         return false;
     }
 
-
-    /**
-     * Controlla che il Re non sia minacciato da un Alfiere e dalla Regina diagonalmente.
-     * 
-     * @param x: ascissa da controllare.
-     * @param y: ordinata da controllare.
-     * @return true, se il Re e' minacciato; false, altrimenti. 
-     */
     private static boolean checkBishopThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
         Piece checkPiece;
@@ -250,14 +211,6 @@ class King extends Piece {
         }
         return false;
     }
-    
-    /**
-     * Controlla che il Re non sia minacciato da una Torre e dalla Regina orizzontalmente e verticalmente.
-     * 
-     * @param x: ascissa da controllare.
-     * @param y: ordinata da controllare.
-     * @return true, se il Re e' minacciato; false, altrimenti.
-     */
 
     private static boolean checkRookThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
@@ -332,15 +285,7 @@ class King extends Piece {
             i++;
         }
         return false;
-    }  
-  
-    /**
-     * Controlla che il Re non sia minacciato da un Cavallo.
-     * 
-     * @param x: ascissa da controllare.
-     * @param y: ordinata da controllare.
-     * @return true, se il Re e' minacciato; false altrimenti.
-     */
+    }
 
     private static boolean checkKnightThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
@@ -397,10 +342,11 @@ class King extends Piece {
     }
 
     /**
-     * Permette di muovere il Re all'interno della scacchiera e comprende anche la possibilita' di effettuare una cattura.
+     * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche
+     * la possibilita'� di effettuare una cattura.
      *
      * @param move: mossa specificata dall'utente.
-     * @return array che contiene il Re che effettua la cattura, il pezzo catturato e la casella di destinazione.
+     * @return array che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
      * @throws IllegalMoveException
      */
 
@@ -484,9 +430,9 @@ class King extends Piece {
     }
 
     /**
-     * Determina se e' possibile effettuare l'arrocco o meno.
+     * Il metodo castling determina se è possibile effettuare l'arrocco o meno.
      *
-     * @param isLong: indica se l'arrocco e' lungo o corto.
+     * @param isLong: indica se l'arrocco è lungo o corto.
      * @return array contenente la stringa che determina il tipo di arrocco.
      * @throws IllegalMoveException
      */
@@ -532,8 +478,8 @@ class King extends Piece {
         King k = (King) Game.getCell(xK, yK).getPiece();
         Rook r = (Rook) Game.getCell(xK, yR).getPiece();
         // controllo che non siano stati ancora mossi
-        if ((k.getNumberOfMoves() != 0)
-                || (r.getNumberOfMoves() != 0)) {
+        if ((k.getnMoves() != 0)
+                || (r.getnMoves() != 0)) {
             throw new IllegalMoveException(
                     "Mossa illegale; Il re o la torre "
                             + "sono gia' stati mossi in precedenza");

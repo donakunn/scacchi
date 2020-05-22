@@ -21,13 +21,11 @@ class Knight extends Piece {
 
 
     Knight(final int col) {
-
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265E"; // Cavallo nero
-
+        	this.setPieceType("\u265E"); // Cavallo nero
         } else {
-            this.pieceType = "\u2658"; // Cavallo bianco
+        	this.setPieceType("\u2658"); // Cavallo bianco
         }
     }
 

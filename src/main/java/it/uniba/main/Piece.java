@@ -9,16 +9,20 @@ package it.uniba.main;
  * @author Donato Lucente
  */
 abstract class Piece {
-    protected int color; // 0 black, 1 white
-    protected String pieceType;
-    protected int nMoves;
-
-    String getType() {
-        return this.pieceType;
-    }
+    private int color; // 0 black, 1 white
+    private String pieceType;
+    private int nMoves;
 
     int getColor() {
         return this.color;
+    }
+    
+    public void setColor(int color) {
+    	this.color=color;
+    }
+    
+    public void setPieceType(String pieceType) {
+    	this.pieceType=pieceType;
     }
 
     /**
@@ -28,7 +32,15 @@ abstract class Piece {
         return pieceType;
     }
 
-    public int getMoves() {
+    public int getnMoves() {
         return this.nMoves;
+    }
+    
+    public void incrementMoves() {
+        nMoves++;
+    }
+    
+    public void setnMoves(int nMoves) {
+    	this.nMoves=nMoves;
     }
 }
