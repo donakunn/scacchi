@@ -1631,46 +1631,46 @@ public class MenuTest {
 	
 	
 	
-					//test cattura illegale 
-					@Test
-					void testCaptureOnIllegalCellFromRook() {
-						String[] mossa1 = { "\u2659", null, "a4" };
-						String[] mossa2 = { "\u265F", null, "h5" };
-						String[] mossa3 = { "\u2656", null, "a3" };
-						String[] mossa4 = { "\u265C", null, "h6" };
-						String[] mossa5 = { "\u2656", null, "b3" };
-						String[] mossa6 = { "\u265C", null, "g6" };
-						assertAll("Test on Illegal Cell", () -> {
-							assertArrayEquals(mossa1, menu.getMove("a4"));
-							assertArrayEquals(mossa2, menu.getMove("h5"));
-							assertArrayEquals(mossa3, menu.getMove("Ta3"));
-							assertArrayEquals(mossa4, menu.getMove("Th6"));
-							assertArrayEquals(mossa5, menu.getMove("Tb3"));
-							assertArrayEquals(mossa6, menu.getMove("Tg6"));
-							//test cattura con notazione errata ma cella corretta
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Tcb7");
-							});
-							//test cattura su cella non consentita
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Txc4");
-							});
-							//test cattura con notazione cella oltre limiti scacchiera
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Txq9");
-							});
-							//test cattura su pezzo di colore diverso, ma coperto da altro pezzo
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Txb8");
-							});
-							//test cattura su se stesso
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Txb3");
-							});
-						});
-	
-	
-					}
+//					//test cattura illegale 
+//					@Test
+//					void testCaptureOnIllegalCellFromRook() {
+//						String[] mossa1 = { "\u2659", null, "a4" };
+//						String[] mossa2 = { "\u265F", null, "h5" };
+//						String[] mossa3 = { "\u2656", null, "a3" };
+//						String[] mossa4 = { "\u265C", null, "h6" };
+//						String[] mossa5 = { "\u2656", null, "b3" };
+//						String[] mossa6 = { "\u265C", null, "g6" };
+//						assertAll("Test on Illegal Cell", () -> {
+//							assertArrayEquals(mossa1, menu.getMove("a4"));
+//							assertArrayEquals(mossa2, menu.getMove("h5"));
+//							assertArrayEquals(mossa3, menu.getMove("Ta3"));
+//							assertArrayEquals(mossa4, menu.getMove("Th6"));
+//							assertArrayEquals(mossa5, menu.getMove("Tb3"));
+//							assertArrayEquals(mossa6, menu.getMove("Tg6"));
+//							//test cattura con notazione errata ma cella corretta
+//							assertThrows(IllegalMoveException.class, () -> {
+//								menu.getMove("Tcb7");
+//							});
+//							//test cattura su cella non consentita
+//							assertThrows(IllegalMoveException.class, () -> {
+//								menu.getMove("Txc4");
+//							});
+//							//test cattura con notazione cella oltre limiti scacchiera
+//							assertThrows(IllegalMoveException.class, () -> {
+//								menu.getMove("Txq9");
+//							});
+//							//test cattura su pezzo di colore diverso, ma coperto da altro pezzo
+//							assertThrows(IllegalMoveException.class, () -> {
+//								menu.getMove("Txb8");
+//							});
+//							//test cattura su se stesso
+//							assertThrows(IllegalMoveException.class, () -> {
+//								menu.getMove("Txb3");
+//							});
+//						});
+//	
+//	
+//					}
 
 
 
