@@ -21,8 +21,11 @@ class Rook extends Piece {
             this.pieceType = "\u2656"; // Torre bianca
             nMoves = 0;
 
+
         } 
+
     }
+
 
     void incrementMoves() {
         nMoves++;
@@ -80,28 +83,28 @@ class Rook extends Piece {
         boolean isCapture = false;
         boolean blackTurn = Game.getBlackTurn();
 
-       int a = 8 - (((int) move.charAt(move.length()-1)) - 48);
-		int b = (int) move.charAt(move.length() - 2) - 97;
-		if ((a <0) || (a > 7) || (b <0) || (b > 7)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
+        int a = 8 - (((int) move.charAt(move.length() - 1)) - 48);
+        int b = (int) move.charAt(move.length() - 2) - 97;
+        if ((a < 0) || (a > 7) || (b < 0) || (b > 7)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
 
         if ((move.length() == 4 && move.charAt(1) == 'x') || (move.length() == 5 && move.charAt(2) == 'x')) {
             isCapture = true;
         }
 
         if (Game.getCell(a, b).getPiece() != null) {
-            //lancia eccezione se la cella di destinazione � occupata da alleato
+            //lancia eccezione se la cella di destinazione ï¿½ occupata da alleato
             if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
             }
 
-            //o se � una mossa di spostamento con cella di destinazione occupata da avversario
+            //o se ï¿½ una mossa di spostamento con cella di destinazione occupata da avversario
             else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
-            //o se � una mossa di cattura con cella di destinazione vuota
+            //o se ï¿½ una mossa di cattura con cella di destinazione vuota
         } else if (Game.getCell(a, b).getPiece() == null && isCapture) {
             throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
         }
@@ -188,7 +191,7 @@ class Rook extends Piece {
         if (King.isThreatened()) {
             Game.getCell(x, y).setPiece(target);
             Game.getCell(xC, yC).setPiece(r);
-            throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+            throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
         } else {
             if (isCapture) {
                 if (target.getColor() == 0) {

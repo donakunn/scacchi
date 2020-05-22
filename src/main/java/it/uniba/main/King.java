@@ -1,5 +1,21 @@
 package it.uniba.main;
 
+import static it.uniba.main.FinalPar.AINASCII;
+import static it.uniba.main.FinalPar.CAPTURELENGTH;
+import static it.uniba.main.FinalPar.CASTLARRDIM;
+import static it.uniba.main.FinalPar.CHARPOS1;
+import static it.uniba.main.FinalPar.DIGIT0INASCII;
+import static it.uniba.main.FinalPar.MAXCOL;
+import static it.uniba.main.FinalPar.MAXROW;
+import static it.uniba.main.FinalPar.OUTOFBOUND;
+import static it.uniba.main.FinalPar.POS3;
+import static it.uniba.main.FinalPar.POS4;
+import static it.uniba.main.FinalPar.STARTBKINGX;
+import static it.uniba.main.FinalPar.STARTBKINGY;
+import static it.uniba.main.FinalPar.STARTWKINGX;
+import static it.uniba.main.FinalPar.STARTWKINGY;
+import static it.uniba.main.FinalPar.STRARRDIM;
+
 /**
  * <<entity>><br>
  * <p>Titolo: King</p>
@@ -19,20 +35,20 @@ class King extends Piece {
      * @param col: colore del pezzo.
      */
 
-    King(int col) {
+    King(final int col) {
 
         this.color = col;
         if (col == 0) {
             this.pieceType = "\u265A"; // Re nero
-            coordBlackKing = new int[] {0, 4};
+            coordBlackKing = new int[] {STARTBKINGX, STARTBKINGY};
             nMoves = 0;
 
         } else {
             this.pieceType = "\u2654"; // Re bianco
-            coordWhiteKing = new int[] {7, 4};
+            coordWhiteKing = new int[] {STARTWKINGX, STARTWKINGY};
             nMoves = 0;
 
-        } 
+        }
     }
 
 
@@ -40,7 +56,7 @@ class King extends Piece {
      * Il metodo incrementMoves contiene un contatore che viene incrementato nel caso il re faccia una mossa.
      */
 
-    void incrementMoves() {
+    private void incrementMoves() {
         nMoves++;
     }
 
@@ -57,7 +73,8 @@ class King extends Piece {
 
 
     /**
-     * Il metodo isThreatened() chiama il metodo isThreatened sulla posizione del re utilizzato dal giocatore che sta giocando in quel turno.
+     * Il metodo isThreatened() chiama il metodo isThreatened sulla posizione del re
+     * utilizzato dal giocatore che sta giocando in quel turno.
      *
      * @return le coordinate del re in quel determinato turno.
      */
@@ -83,18 +100,18 @@ class King extends Piece {
      * @return true, se il re non Ã¨ sotto scacco; false, altrimenti.
      */
 
-    static boolean isThreatened(int x, int y) {
-        return checkPawnThreat(x,y)
-        		|| checkBishopThreat(x,y)
-        		|| checkRookThreat(x,y)
-        		|| checkKnightThreat(x,y);
+    static boolean isThreatened(final int x, final int y) {
+        return checkPawnThreat(x, y)
+                || checkBishopThreat(x, y)
+                || checkRookThreat(x, y)
+                || checkKnightThreat(x, y);
     }
 
-    static private boolean checkPawnThreat(int x, int y) {
-    	boolean blackTurn= Game.getBlackTurn();
-    	Piece checkPiece;
-    	if (blackTurn) {
-            if (x < 7) {
+   private static boolean checkPawnThreat(final int x, final int y) {
+        boolean blackTurn = Game.getBlackTurn();
+        Piece checkPiece;
+        if (blackTurn) {
+            if (x < OUTOFBOUND) {
                 checkPiece = Game.getCell(x + 1, y - 1).getPiece();
                 if (y > 0
                         && checkPiece instanceof Pawn
@@ -102,7 +119,7 @@ class King extends Piece {
                     return true;
                 }
                 checkPiece = Game.getCell(x + 1, y + 1).getPiece();
-                if (y < 7
+                if (y < OUTOFBOUND
                         && checkPiece instanceof Pawn
                         && checkPiece.getColor() == 1) {
                     return true;
@@ -118,7 +135,7 @@ class King extends Piece {
                     return true;
                 }
                 checkPiece = Game.getCell(x - 1, y + 1).getPiece();
-                if (y < 7
+                if (y < OUTOFBOUND
                         && checkPiece instanceof Pawn
                         && checkPiece.getColor() == 0) {
                     return true;
@@ -127,15 +144,15 @@ class King extends Piece {
         }
         return false;
     }
-    
-    static private boolean checkBishopThreat(int x, int y) {
-    	boolean blackTurn= Game.getBlackTurn();
-    	Piece checkPiece;
-    	int i,j;
-    	// up right
+
+    private static boolean checkBishopThreat(final int x, final int y) {
+        boolean blackTurn = Game.getBlackTurn();
+        Piece checkPiece;
+        int i, j;
+        // up right
         i = 1;
         j = 1;
-        while (x - i >= 0 && y + j <= 7) {
+        while (x - i >= 0 && y + j <= OUTOFBOUND) {
             checkPiece = Game.getCell(x - i, y + j).getPiece();
             if (checkPiece == null) {
                 i++;
@@ -156,7 +173,7 @@ class King extends Piece {
         // down right
         i = 1;
         j = 1;
-        while (x + i <= 7 && y + j <= 7) {
+        while (x + i <= OUTOFBOUND && y + j <= OUTOFBOUND) {
             checkPiece = Game.getCell(x + i, y + j).getPiece();
             if (checkPiece == null) {
                 i++;
@@ -177,7 +194,7 @@ class King extends Piece {
         // down left
         i = 1;
         j = 1;
-        while (x + i <= 7 && y - j >= 0) {
+        while (x + i <= OUTOFBOUND && y - j >= 0) {
             checkPiece = Game.getCell(x + i, y - j).getPiece();
             if (checkPiece == null) {
                 i++;
@@ -218,14 +235,14 @@ class King extends Piece {
         }
         return false;
     }
-    
-    static private boolean checkRookThreat(int x, int y) {
-    	boolean blackTurn= Game.getBlackTurn();
-    	Piece checkPiece;
-    	int i,j;
-    	// right
+
+    private static boolean checkRookThreat(final int x, final int y) {
+        boolean blackTurn = Game.getBlackTurn();
+        Piece checkPiece;
+        int i, j;
+        // right
         j = 1;
-        while (y + j <= 7) {
+        while (y + j <= OUTOFBOUND) {
             checkPiece = Game.getCell(x, y + j).getPiece();
             if (checkPiece == null) {
                 j++;
@@ -242,7 +259,7 @@ class King extends Piece {
         }
         // down
         i = 1;
-        while (x + i <= 7) {
+        while (x + i <= OUTOFBOUND) {
             checkPiece = Game.getCell(x + i, y).getPiece();
             if (checkPiece == null) {
                 i++;
@@ -293,29 +310,29 @@ class King extends Piece {
         }
         return false;
     }
-    
-    static private boolean checkKnightThreat(int x, int y) {
-    	boolean blackTurn= Game.getBlackTurn();
-    	// knight
-        if (y + 2 <= 7) {
+
+    private static boolean checkKnightThreat(final int x, final int y) {
+        boolean blackTurn = Game.getBlackTurn();
+        // knight
+        if (y + 2 <= OUTOFBOUND) {
             if (x - 1 >= 0
                     && Game.getCell(x - 1, y + 2).getPiece() instanceof Knight
                     && Game.getCell(x - 1, y + 2).getPiece().getColor() != (blackTurn ? 0 : 1)) {
                 return true;
             }
-            if (x + 1 <= 7
+            if (x + 1 <= OUTOFBOUND
                     && Game.getCell(x + 1, y + 2).getPiece() instanceof Knight
                     && Game.getCell(x + 1, y + 2).getPiece().getColor() != (blackTurn ? 0 : 1)) {
                 return true;
             }
         }
-        if (y + 1 <= 7) {
+        if (y + 1 <= OUTOFBOUND) {
             if (x - 2 >= 0
                     && Game.getCell(x - 2, y + 1).getPiece() instanceof Knight
                     && Game.getCell(x - 2, y + 1).getPiece().getColor() != (blackTurn ? 0 : 1)) {
                 return true;
             }
-            if (x + 2 <= 7
+            if (x + 2 <= OUTOFBOUND
                     && Game.getCell(x + 2, y + 1).getPiece() instanceof Knight
                     && Game.getCell(x + 2, y + 1).getPiece().getColor() != (blackTurn ? 0 : 1)) {
                 return true;
@@ -327,7 +344,7 @@ class King extends Piece {
                     && Game.getCell(x - 2, y - 1).getPiece().getColor() != (blackTurn ? 0 : 1)) {
                 return true;
             }
-            if (x + 2 <= 7
+            if (x + 2 <= OUTOFBOUND
                     && Game.getCell(x + 2, y - 1).getPiece() instanceof Knight
                     && Game.getCell(x + 2, y - 1).getPiece().getColor() != (blackTurn ? 0 : 1)) {
                 return true;
@@ -339,7 +356,7 @@ class King extends Piece {
                     && Game.getCell(x - 1, y - 2).getPiece().getColor() != (blackTurn ? 0 : 1)) {
                 return true;
             }
-            if (x + 1 <= 7
+            if (x + 1 <= OUTOFBOUND
                     && Game.getCell(x + 1, y - 2).getPiece() instanceof Knight
                     && Game.getCell(x + 1, y - 2).getPiece().getColor() != (blackTurn ? 0 : 1)) {
                 return true;
@@ -347,34 +364,36 @@ class King extends Piece {
         }
         return false;
     }
-    
+
     /**
-     * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche la possibilita'  di effettuare una cattura.
+     * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche
+     * la possibilita'ï¿½ di effettuare una cattura.
      *
      * @param move: mossa specificata dall'utente.
      * @return array che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
      * @throws IllegalMoveException
      */
 
-    static String[] move(String move) throws IllegalMoveException {
+    static String[] move(final String move) throws IllegalMoveException {
         int x = 2;
         int y = 1;
+        final int xInCapture = 3;
         boolean blackTurn = Game.getBlackTurn();
         // pezzi da ritornare a fine esecuzione
-        String printOut[] = new String[3];
+        String[] printOut = new String[STRARRDIM];
 
-        if (move.length() == 4) {
-            x = 3;
+        if (move.length() == CAPTURELENGTH) {
+            x = xInCapture;
             y = 2;
         }
         //cella di destinazione da ritornare, parti da colonna specificata e tagli fino alla fine della stringa
         printOut[2] = move.substring(y);
-        y = (int) move.charAt(y) - 97;
+        y = (int) move.charAt(y) - AINASCII;
 
-       x = 8 - (((int) move.charAt(x)) - 48);
-		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
+        x = MAXROW - (((int) move.charAt(x)) - DIGIT0INASCII);
+        if ((x < 0) || (x > OUTOFBOUND) || (y < 0) || (y > OUTOFBOUND)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
 
 
         if (Game.getCell(x, y).getPiece() != null
@@ -384,8 +403,8 @@ class King extends Piece {
         int xK = -1;
         int yK = -1;
 
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < MAXROW; i++) {
+            for (int j = 0; j < MAXCOL; j++) {
                 if (Game.getCell(i, j).getPiece() instanceof King
                         && Game.getCell(i, j).getPiece().getColor() != (blackTurn ? 1 : 0)) {
                     xK = i;
@@ -404,12 +423,12 @@ class King extends Piece {
         // null valore standard perche' non sappiamo se e' una cattura o meno
         printOut[0] = Game.getCell(xK, yK).getPiece().toString();
         if (Game.getCell(x, y).getPiece() == null) {
-            if (move.charAt(1) == 'x') {
+            if (move.charAt(CHARPOS1) == 'x') {
                 throw new IllegalMoveException(
                         "Mossa illegale, non c'e' nessun pezzo da catturare nella cella di arrivo");
             }
         } else {
-            if (move.charAt(1) != 'x') {
+            if (move.charAt(CHARPOS1) != 'x') {
                 throw new IllegalMoveException(
                         "Mossa illegale, devi specificare la cattura come da notazione algebrica");
             }
@@ -442,10 +461,10 @@ class King extends Piece {
      * @throws IllegalMoveException
      */
 
-    static String[] castling(boolean isLong) throws IllegalMoveException {
+    static String[] castling(final boolean isLong) throws IllegalMoveException {
         //isLong = true -> si tratta di longCastling
 
-        String[] result = new String[1];
+        String[] result = new String[CASTLARRDIM];
 
         //coordinate del re da muovere
         int xK, yK;
@@ -468,15 +487,16 @@ class King extends Piece {
 
         if (isLong) {
             //arrocco lungo, torre sempre in posizione yK-4
-            yR = yK - 4;
+            yR = yK - POS4;
         } else {
             //arrocco corto, torre sempre in posizione yK+3
-            yR = yK + 3;
+            yR = yK + POS3;
         }
 
         if (!(Game.getCell(xK, yK).getPiece() instanceof King) || !(Game.getCell(xK, yR).getPiece() instanceof Rook)) {
             throw new IllegalMoveException(
-                    "Mossa illegale; Impossibile effettuare arrocco lungo, re o torre non sono nella posizione iniziale");
+                    "Mossa illegale; Impossibile effettuare arrocco lungo, "
+                            + "re o torre non sono nella posizione iniziale");
         }
         // controllo che re e torre siano nella posizione corretta
         King k = (King) Game.getCell(xK, yK).getPiece();
@@ -485,12 +505,13 @@ class King extends Piece {
         if ((k.getNumberOfMoves() != 0)
                 || (r.getNumberOfMoves() != 0)) {
             throw new IllegalMoveException(
-                    "Mossa illegale; Il re o la torre sono gia' stati mossi in precedenza");
+                    "Mossa illegale; Il re o la torre "
+                            + "sono gia' stati mossi in precedenza");
         }
 
         if ((Game.getCell(xK, yK + (indexMultiplier)).getPiece() != null)
                 || (Game.getCell(xK, yK + (indexMultiplier * 2)).getPiece() != null)
-                || ((Game.getCell(xK, yK - 3).getPiece() != null) && isLong)) {
+                || ((Game.getCell(xK, yK - POS3).getPiece() != null) && isLong)) {
             throw new IllegalMoveException("Mossa illegale; Il percorso non e' libero");
         }
         if ((King.isThreatened(xK, yK))
