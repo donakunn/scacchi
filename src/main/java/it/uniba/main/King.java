@@ -14,7 +14,7 @@ class King extends Piece {
     private static int[] coordWhiteKing; // coordinate re bianco, [0]=x [1]=y
 
     /**
-     * E' il costruttore della classe assegna al pezzo il colore e la relativa stringa Unicode. Inoltre, alla creazione 
+     * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode. Inoltre, alla creazione 
      * dell'oggetto, inizializza le coordinate del Re.
      *
      * @param col: colore del pezzo.
@@ -136,7 +136,7 @@ class King extends Piece {
     }
 
     /**
-     * Controlla che il Re non sia minacciato dall'Alfiera e dalla Regina diagonalmente.
+     * Controlla che il Re non sia minacciato da un Alfiere e dalla Regina diagonalmente.
      * 
      * @param x: ascissa da controllare.
      * @param y: ordinata da controllare.
@@ -234,7 +234,7 @@ class King extends Piece {
     }
     
     /**
-     * Controlla che il Re non sia minacciato dalla Torre e dalla Regina orizzontalmente e verticalmente.
+     * Controlla che il Re non sia minacciato da una Torre e dalla Regina orizzontalmente e verticalmente.
      * 
      * @param x: ascissa da controllare.
      * @param y: ordinata da controllare.
@@ -316,7 +316,7 @@ class King extends Piece {
     }
     
     /**
-     * Controlla che il Re non sia minacciato dal Cavallo.
+     * Controlla che il Re non sia minacciato da un Cavallo.
      * 
      * @param x: ascissa da controllare.
      * @param y: ordinata da controllare.
