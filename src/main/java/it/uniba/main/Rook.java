@@ -64,6 +64,7 @@ class Rook extends Piece {
                     break;
                 }
             }
+            i=x;
         } else if (y == b) { // in verticale
             int dy = (x < a) ? 1 : -1;
 
@@ -72,8 +73,12 @@ class Rook extends Piece {
                     break;
                 }
             }
+            j=y;
         } else { // Non valido
             return false;
+        }
+        if(i!=a||j!=b) {
+        	return false;
         }
         if (Game.getCell(i, j).getPiece() == null
                 || Game.getCell(i, j).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1)) {
