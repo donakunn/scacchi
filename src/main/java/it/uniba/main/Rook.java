@@ -16,14 +16,12 @@ class Rook extends Piece {
             this.pieceType = "\u265C"; // Torre nera
             nMoves = 0;
 
-        } else if (col == 1) {
+        } else {
 
             this.pieceType = "\u2656"; // Torre bianca
             nMoves = 0;
 
-        } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
-        }
+        } 
     }
 
     void incrementMoves() {
@@ -159,10 +157,7 @@ class Rook extends Piece {
                 } else if (xT2 == (8 - Integer.parseInt(move.substring(1, 2)))) {
                     xTarget = xT2;
                     yTarget = yT2;
-                } else {
-                    throw new IllegalMoveException(
-                            "Nessuna torre appartenente alla riga di disambiguazione specificata.");
-                }
+                } 
             } else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
                 if (yT1 == yT2) {
                     throw new IllegalMoveException(
@@ -174,14 +169,8 @@ class Rook extends Piece {
                 } else if (yT2 == ((int) move.charAt(1) - 97)) {
                     xTarget = xT2;
                     yTarget = yT2;
-                } else {
-                    throw new IllegalMoveException(
-                            "Nessuna torre appartenente alla colonna di disambiguazione specificata.");
-                }
-            } else {
-                throw new IllegalMoveException(
-                        "Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
-            }
+                } 
+            } 
         }
 
         return actualMove(isCapture, xTarget, yTarget, a, b);
