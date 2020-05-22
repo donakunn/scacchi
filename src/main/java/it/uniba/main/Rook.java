@@ -187,7 +187,10 @@ class Rook extends Piece {
                 } else if (xT2 == (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
                     xTarget = xT2;
                     yTarget = yT2;
-                } 
+                } else {
+                    throw new IllegalMoveException(
+                            "Nessuna torre appartenente alla riga di disambiguazione specificata.");
+                }
             } else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
                 if (yT1 == yT2) {
                     throw new IllegalMoveException(
@@ -200,8 +203,14 @@ class Rook extends Piece {
                 } else if (yT2 == ((int) move.charAt(1) - AINASCII)) {
                     xTarget = xT2;
                     yTarget = yT2;
-                } 
-            } 
+                } else {
+                    throw new IllegalMoveException(
+                            "Nessuna torre appartenente alla colonna di disambiguazione specificata.");
+                }
+            } else {
+                throw new IllegalMoveException(
+                        "Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
+            }
         }
 
         return actualMove(isCapture, xTarget, yTarget, a, b);
