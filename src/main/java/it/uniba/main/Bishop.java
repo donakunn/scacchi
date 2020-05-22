@@ -1,59 +1,82 @@
 package it.uniba.main;
 
+import static it.uniba.main.FinalPar.AINASCII;
+import static it.uniba.main.FinalPar.CAPTURELENGTH;
+import static it.uniba.main.FinalPar.CHARPOS1;
+import static it.uniba.main.FinalPar.CHARPOS2;
+import static it.uniba.main.FinalPar.DIGIT0INASCII;
+import static it.uniba.main.FinalPar.MAXCOL;
+import static it.uniba.main.FinalPar.MAXROW;
+import static it.uniba.main.FinalPar.OUTOFBOUND;
+import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
+import static it.uniba.main.FinalPar.STRARRDIM;
+
 /**
  * <<entity>><br>
- * Bishop class, implementing the abstract class {@link Piece}
+ * <p>Titolo: Bishop</p>
+ * <p>Descrizione: La classe Bishop implementa la classe astratta {@link Piece} e permette di utilizzare
+ * l'Alfiere all'interno del gioco.
  *
  * @author Donato Lucente
  */
 class Bishop extends Piece {
 
-    Bishop(int col) {
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+	 * 
+	 * @param col: colore del pezzo.
+	 */
+    Bishop(final int col) {
 
         this.color = col;
         if (col == 0) {
             this.pieceType = "\u265D"; // Alfiere nero
 
-        } else if (col == 1) {
+        } else {
             this.pieceType = "\u2657"; // Alfiere bianco
 
-        } else {
-            throw new IllegalArgumentException("Valore non valido, valori accettati: 0,1");
         }
     }
 
-
-    static String[] move(String move) throws IllegalMoveException {
+    /**
+     * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
+     * 
+     * @param move: mossa specificata dall'utente.
+     * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
+    static String[] move(final String move) throws IllegalMoveException {
         int x = 2; // ascissa
         int y = 1; // ordinata
+        final int xValue = 3;
         int xCheck; // sentinella dell'ascissa
         int yCheck; // sentinella dell'ordinata
         boolean blackTurn = Game.getBlackTurn();
         boolean isCapture;
-        if (move.length() == 3) {
+        if (move.length() == PIECEMOVELENGTH) {
             isCapture = false;
-        } else if ((move.length() == 4) && (move.substring(1, 2).equals("x"))) {
+        } else if ((move.length() == CAPTURELENGTH) && (move.substring(CHARPOS1, CHARPOS2).equals("x"))) {
             isCapture = true;
-            x = 3;
+            x = xValue;
             y = 2;
         } else {
             throw new IllegalMoveException("Mossa non consentita per l'alfiere");
         }
 
 
-        y = (int) move.charAt(y) - 97;
-        	x = 8 - (((int) move.charAt(x)) - 48);
-		if ((x <0) || (x > 7) || (y <0) || (y > 7)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
+        y = (int) move.charAt(y) - AINASCII;
+        x = MAXROW - (((int) move.charAt(x)) - DIGIT0INASCII);
+        if ((x < 0) || (x > OUTOFBOUND) || (y < 0) || (y > OUTOFBOUND)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
         if (Game.getCell(x, y).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
             if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-            }
 
-            //o se � una mossa di spostamento con cella di destinazione occupata da avversario
-            else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+                //o se � una mossa di spostamento con cella di destinazione occupata da avversario
+            } else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
@@ -77,7 +100,7 @@ class Bishop extends Piece {
         }
         xCheck = x - 1;
         yCheck = y + 1;
-        while (xCheck >= 0 && yCheck < 8) { // controllo diagonale alta destra
+        while (xCheck >= 0 && yCheck < MAXCOL) { // controllo diagonale alta destra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
                     && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
@@ -90,7 +113,7 @@ class Bishop extends Piece {
         }
         xCheck = x + 1;
         yCheck = y - 1;
-        while (xCheck < 8 && yCheck >= 0) { // controllo diagonale bassa sinistra
+        while (xCheck < MAXROW && yCheck >= 0) { // controllo diagonale bassa sinistra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
                     && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
@@ -104,7 +127,7 @@ class Bishop extends Piece {
 
         xCheck = x + 1;
         yCheck = y + 1;
-        while (xCheck < 8 && yCheck < 8) { // controllo diagonale bassa destra
+        while (xCheck < MAXROW && yCheck < MAXCOL) { // controllo diagonale bassa destra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
                     && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
@@ -123,11 +146,24 @@ class Bishop extends Piece {
         }
     }
 
-    private static String[] actualMove(boolean isCapture, int x, int y, int xCheck, int yCheck)
+    /**
+     * Permette di effettuare la mossa.
+     * 
+     * @param isCapture: verifica se si tratta di una mossa o di una cattura.
+     * @param x: ascissa dell'Alfiere.
+     * @param y: ordinata dell'Alfiere.
+     * @param xCheck: sentinella dell'ascissa.
+     * @param yCheck: sentinella dell'ordinata.
+     * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
+    private static String[] actualMove(final boolean isCapture, final int x, final int y, final int xCheck,
+                                       final int yCheck)
             throws IllegalMoveException {
         //isCapture = true -> mossa di cattura
         //isCapture = false -> mossa di spostamento
-        String[] pieces = new String[3]; //0 Donna, 2 cella di dest
+        String[] pieces = new String[STRARRDIM]; //0 Donna, 2 cella di dest
         Piece target = null;
         if (isCapture) {
             //update: nell'originale viene fatto il cast a piece, qui lo tolgo
@@ -139,7 +175,7 @@ class Bishop extends Piece {
         if (King.isThreatened()) {
             Game.getCell(x, y).setPiece(target);
             Game.getCell(xCheck, yCheck).setPiece(q);
-            throw new IllegalMoveException("Mossa illegale; Metterebbe il re sotto scacco");
+            throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco o ci finirebbe dopo questa mossa");
         } else {
             if (isCapture) {
                 if (target.getColor() == 0) {
@@ -152,7 +188,7 @@ class Bishop extends Piece {
                 pieces[1] = null;
             }
             pieces[0] = q.toString();
-            pieces[2] = ((char) (y + 97)) + "" + (8 - x);
+            pieces[2] = ((char) (y + AINASCII)) + "" + (MAXROW - x);
             return pieces;
         }
     }

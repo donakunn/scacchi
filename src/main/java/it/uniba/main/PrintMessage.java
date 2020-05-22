@@ -1,14 +1,30 @@
 package it.uniba.main;
 
+/**
+ * <<boundary>><br>
+ * <p>Titolo: PrintMessage</p>
+ * <p>Descrizione: La classe PrintMessage contiene tutti i messaggi e la scacchiera che vengono stampati a video durante 
+ * l'esecuzione del programma.</p>
+ * 
+ * @author Donato Lucente 
+ */
+
 import java.util.ArrayList;
 
 import static it.uniba.main.FinalPar.MAXCOL;
 import static it.uniba.main.FinalPar.MAXROW;
 
 public final class PrintMessage {
+	/**
+	 * E' il costruttore della classe.
+	 */
     private PrintMessage() {
     }
-
+    
+    /**
+     * Stampa a video la scacchiera.
+     * @param board: matrice di stringhe.
+     */
     static void printBoard(final String[][] board) {
         System.out.println("    a    b    c    d    e    f    g    h");
         for (int i = 0; i < MAXROW; i++) {
@@ -22,6 +38,10 @@ public final class PrintMessage {
         System.out.println("    a    b    c    d    e    f    g    h");
     }
 
+    /**
+     * Stampa a video le mosse effettuate.
+     * @param moves: arraylist che contiene le mosse effettuate.
+     */
     static void printMoves(final ArrayList<String> moves) {
         if (moves.size() == 0) {
             System.out.println("Non sono ancora state effettuate mosse");
@@ -43,6 +63,11 @@ public final class PrintMessage {
         }
     }
 
+    /**
+     * Stampa a video le catture effettuate.
+     * @param capturedBlacks: pezzi neri catturati.
+     * @param capturedWhites: pezzi bianchi catturati.
+     */
     static void printCaptures(final ArrayList<String> capturedBlacks, final ArrayList<String> capturedWhites) {
         if (capturedBlacks.size() == 0) {
             System.out.println("Nessun pezzo nero catturato");
@@ -56,18 +81,33 @@ public final class PrintMessage {
         }
     }
 
+    /**
+     * Stampa a video la mossa di quel determinato turno.
+     * @param pieceAndCell: array contenente il pezzo che effettua la mossa e la sua casella di destinazione.
+     */
     static void printAMove(final String[] pieceAndCell) {
         System.out.println(pieceAndCell[0] + " spostato su " + pieceAndCell[2]);
     }
 
+    /**
+     * Stampa a video il messaggio dell'arrocco corto.
+     */
     static void printShortCastling() {
         System.out.println("Arrocco corto eseguito");
     }
 
+    /**
+     * Stampa a video il messaggio dell'arrocco lungo.
+     */
     static void printLongCastling() {
         System.out.println("Arrocco lungo eseguito");
     }
 
+    /**
+     * Stampa a video la cattura di quel determinato turno.
+     * @param piecesAndCell: array contenente il pezzo catturato convertito a stringa, il pezzo che effettua la cattura convertito
+     * a stringa e la casella di destinazione.
+     */
     static void printACapture(final String[] piecesAndCell) {
         System.out.println(piecesAndCell[1] + " e' stato catturato da " + piecesAndCell[0] + " su " + piecesAndCell[2]);
     }
