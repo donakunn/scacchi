@@ -22,7 +22,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  */
 class Queen extends Piece {
 	/**
-	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa sringa Unicode.
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
 	 * 
 	 * @param col: colore del pezzo.
 	 */
@@ -191,7 +191,7 @@ class Queen extends Piece {
     }
 
     /**
-     * Il metodo actualMove permette di effettuare la mossa.
+     * Permette di effettuare la mossa.
      * 
      * @param isCapture: verifica se si tratta di una mossa o di una cattura.
      * @param x: ascissa della Regina.

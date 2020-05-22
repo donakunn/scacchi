@@ -13,14 +13,22 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * Rook class, implementing the abstract class {@link Piece}<br>
+ * <p>Titolo: Rook</p>
+ * <p>Descrizione: La classe Rook implementa la classe astratta {@link Piece}<br> e permette di utilizzare
+ * la Torre all'interno del gioco.
  *
  * @author Donato Lucente
  */
 class Rook extends Piece {
 
 
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+	 * 
+	 * @param col: colore del pezzo.
+	 */
     Rook(final int col) {
+
 
         this.color = col;
         if (col == 0) {
@@ -37,16 +45,33 @@ class Rook extends Piece {
 
     }
 
-
+    /**
+     * Incrementa il contatore delle mosse della Torre.
+     */
     void incrementMoves() {
         nMoves++;
     }
 
+    /**
+     * 
+     * @return il numero delle mosse effettuate dalla Torre.
+     */
     int getNumberOfMoves() {
         return this.nMoves;
     }
 
+
+    /**
+     * Verifica che la mossa sia una mossa legale.
+     * 
+     * @param x: ascissa della casella di partenza.
+     * @param y: ordinata della casella di partenza.
+     * @param a: ascissa della casella di arrivo.
+     * @param b: ordinata della casella di arrivo.
+     * @return true, se è possibile effettuare la mossa; false, altrimenti.
+     */
     private static boolean isMovable(final int x, final int y, final int a, final int b) {
+
         int i = a;
         int j = b;
 
@@ -80,7 +105,17 @@ class Rook extends Piece {
         return false;
     }
 
+
+    /**
+     * Effettua i controlli che servono per poter effettuare la mossa o la cattura.
+     * 
+     * @param move: mossa specificata dall'utente.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     static String[] move(final String move) throws IllegalMoveException {
+
         int count = 0;
         int xT1 = -1;
         int yT1 = -1;
@@ -190,9 +225,23 @@ class Rook extends Piece {
         return actualMove(isCapture, xTarget, yTarget, a, b);
     }
 
+
+    /**
+     * Permette di effettuare la mossa.
+     * 
+     * @param isCapture: verifica se si tratta di una mossa o una cattura.
+     * @param xC: sentinella dell'ascissa.
+     * @param yC: sentinella dell'ordinata.
+     * @param x: ascissa della Torre.
+     * @param y: ordinata della Torre.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
+     * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
             throws IllegalMoveException {
         String[] pieces = new String[STRARRDIM];
+
         Piece target = null;
         if (isCapture) {
             target = Game.getCell(x, y).getPiece();
