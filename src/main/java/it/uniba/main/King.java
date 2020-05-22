@@ -3,7 +3,7 @@ package it.uniba.main;
 /**
  * <<entity>><br>
  * <p>Titolo: King</p>
- * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} ed è la classe che permette di utilizzare il re
+ * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} e permette di utilizzare il re
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente
@@ -84,10 +84,16 @@ class King extends Piece {
      */
 
     static boolean isThreatened(int x, int y) {
-        int i, j;
-        Piece checkPiece;
-        boolean blackTurn = Game.getBlackTurn();
-        if (blackTurn) {
+        return checkPawnThreat(x,y)
+        		|| checkBishopThreat(x,y)
+        		|| checkRookThreat(x,y)
+        		|| checkKnightThreat(x,y);
+    }
+
+    static private boolean checkPawnThreat(int x, int y) {
+    	boolean blackTurn= Game.getBlackTurn();
+    	Piece checkPiece;
+    	if (blackTurn) {
             if (x < 7) {
                 checkPiece = Game.getCell(x + 1, y - 1).getPiece();
                 if (y > 0
@@ -119,7 +125,14 @@ class King extends Piece {
                 }
             }
         }
-        // up right
+        return false;
+    }
+    
+    static private boolean checkBishopThreat(int x, int y) {
+    	boolean blackTurn= Game.getBlackTurn();
+    	Piece checkPiece;
+    	int i,j;
+    	// up right
         i = 1;
         j = 1;
         while (x - i >= 0 && y + j <= 7) {
@@ -203,13 +216,18 @@ class King extends Piece {
             i++;
             j++;
         }
-
-        // right
+        return false;
+    }
+    
+    static private boolean checkRookThreat(int x, int y) {
+    	boolean blackTurn= Game.getBlackTurn();
+    	Piece checkPiece;
+    	int i,j;
+    	// right
         j = 1;
         while (y + j <= 7) {
             checkPiece = Game.getCell(x, y + j).getPiece();
             if (checkPiece == null) {
-                i++;
                 j++;
                 continue;
             }
@@ -228,7 +246,6 @@ class King extends Piece {
             checkPiece = Game.getCell(x + i, y).getPiece();
             if (checkPiece == null) {
                 i++;
-                j++;
                 continue;
             }
             if (checkPiece.getColor() != (blackTurn ? 1 : 0)
@@ -245,7 +262,6 @@ class King extends Piece {
         while (y - j >= 0) {
             checkPiece = Game.getCell(x, y - j).getPiece();
             if (checkPiece == null) {
-                i++;
                 j++;
                 continue;
             }
@@ -264,7 +280,6 @@ class King extends Piece {
             checkPiece = Game.getCell(x - i, y).getPiece();
             if (checkPiece == null) {
                 i++;
-                j++;
                 continue;
             }
             if (checkPiece.getColor() != (blackTurn ? 1 : 0)
@@ -276,7 +291,12 @@ class King extends Piece {
             }
             i++;
         }
-        // knight
+        return false;
+    }
+    
+    static private boolean checkKnightThreat(int x, int y) {
+    	boolean blackTurn= Game.getBlackTurn();
+    	// knight
         if (y + 2 <= 7) {
             if (x - 1 >= 0
                     && Game.getCell(x - 1, y + 2).getPiece() instanceof Knight
@@ -327,9 +347,9 @@ class King extends Piece {
         }
         return false;
     }
-
+    
     /**
-     * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche la possibilità di effettuare una cattura.
+     * Il metodo move permette di muovere il re all'interno della scacchiera e comprende anche la possibilita'� di effettuare una cattura.
      *
      * @param move: mossa specificata dall'utente.
      * @return array che contiene il re che effettua la cattura, il pezzo catturato e la casella di destinazione.
