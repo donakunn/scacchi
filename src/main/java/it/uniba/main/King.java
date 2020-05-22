@@ -92,6 +92,7 @@ class King extends Piece {
 
     /**
      * Controlla che il Re non sia minacciato dal Pedone.
+     * 
      * @param x: ascissa da controllare.
      * @param y: ordinata da controllare.
      * @return true, se il Re del giocatore che sta giocando in quel turno e' minacciato; false altrimenti.
@@ -135,7 +136,8 @@ class King extends Piece {
     }
 
     /**
-     * Controlla che il Re non sia minacciato da Alfieri e Regine diagonalmente.
+     * Controlla che il Re non sia minacciato dall'Alfiera e dalla Regina diagonalmente.
+     * 
      * @param x: ascissa da controllare.
      * @param y: ordinata da controllare.
      * @return true, se il Re e' minacciato; false, altrimenti. 
@@ -232,7 +234,8 @@ class King extends Piece {
     }
     
     /**
-     * Controlla che il Re non sia minacciato da Torri e Regine orizzontalmente e verticalmente.
+     * Controlla che il Re non sia minacciato dalla Torre e dalla Regina orizzontalmente e verticalmente.
+     * 
      * @param x: ascissa da controllare.
      * @param y: ordinata da controllare.
      * @return true, se il Re e' minacciato; false, altrimenti.
@@ -314,6 +317,7 @@ class King extends Piece {
     
     /**
      * Controlla che il Re non sia minacciato dal Cavallo.
+     * 
      * @param x: ascissa da controllare.
      * @param y: ordinata da controllare.
      * @return true, se il Re e' minacciato; false altrimenti.
