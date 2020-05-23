@@ -10,6 +10,7 @@ import static it.uniba.main.FinalPar.MAXROW;
 import static it.uniba.main.FinalPar.OUTOFBOUND;
 import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
 import static it.uniba.main.FinalPar.STRARRDIM;
+import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
 
 /**
  * <<entity>><br>
@@ -183,6 +184,19 @@ class Knight extends Piece {
                                 + " muovere secondo la notazione algebrica.");
             }
         }
+        
+        if (count <=2) {
+        	if ((move.length() > PIECEMOVELENGTH) && (move.charAt(CHARPOS1) >= '1' && move.charAt(CHARPOS1) <= '8')) {
+            	if (xC1 != (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
+            		throw new IllegalMoveException("Mossa illegale; Nessun cavallo puo' muoversi a partire dalla riga data");
+            	}
+            }
+            else if ((move.length() > PIECEMOVELENGTH) &&(move.charAt(CHARPOS1) >= 'a' && move.charAt(CHARPOS1) <= 'h')) {
+            	if (yC1 != ((int) move.charAt(CHARPOS1) - AINASCII) ) {
+            		throw new IllegalMoveException("Mossa illegale; Nessun cavallo puo' muoversi a partire dalla colonna data");
+            	}
+            }
+        }
 
         return actualMove(isCapture, xTarget, yTarget, a, b);
     }
@@ -212,7 +226,7 @@ class Knight extends Piece {
         if (King.isThreatened()) {
             Game.getCell(x, y).setPiece(target);
             Game.getCell(xC, yC).setPiece(k);
-            throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco o ci finirebbe dopo questa mossa");
+            throw new IllegalMoveException("Mossa illegale; il Re e' sotto scacco o ci finirebbe dopo questa mossa");
         } else {
             if (isCapture) {
                 if (target.getColor() == 0) {
