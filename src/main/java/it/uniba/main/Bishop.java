@@ -51,6 +51,14 @@ class Bishop extends Piece {
         int yCheck; // sentinella dell'ordinata
         boolean blackTurn = Game.getBlackTurn();
         boolean isCapture;
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
+
         if (move.length() == PIECEMOVELENGTH) {
             isCapture = false;
         } else if ((move.length() == CAPTURELENGTH) && (move.substring(CHARPOS1, CHARPOS2).equals("x"))) {
@@ -69,11 +77,11 @@ class Bishop extends Piece {
         }
         if (Game.getCell(x, y).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-            if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+            if (Game.getCell(x, y).getPiece().getColor() == blackTurnColor) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
 
                 //o se � una mossa di spostamento con cella di destinazione occupata da avversario
-            } else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+            } else if (Game.getCell(x, y).getPiece().getColor() != blackTurnColor && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
@@ -86,7 +94,7 @@ class Bishop extends Piece {
         yCheck = y - 1;
         while (xCheck >= 0 && yCheck >= 0) { // controllo diagonale alta sinistra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -99,7 +107,7 @@ class Bishop extends Piece {
         yCheck = y + 1;
         while (xCheck >= 0 && yCheck < MAXCOL) { // controllo diagonale alta destra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -112,7 +120,7 @@ class Bishop extends Piece {
         yCheck = y - 1;
         while (xCheck < MAXROW && yCheck >= 0) { // controllo diagonale bassa sinistra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -126,7 +134,7 @@ class Bishop extends Piece {
         yCheck = y + 1;
         while (xCheck < MAXROW && yCheck < MAXCOL) { // controllo diagonale bassa destra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;

@@ -26,8 +26,8 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  * @author Filippo Iacobellis
  */
 class King extends Piece {
-    private static int[] coordBlackKing; // coordinate re nero, [0]=x [1]=y
-    private static int[] coordWhiteKing; // coordinate re bianco, [0]=x [1]=y
+    private static int[] coordBlackKing = new int[2]; // coordinate re nero, [0]=x [1]=y
+    private static int[] coordWhiteKing = new int[2]; // coordinate re bianco, [0]=x [1]=y
 
     /**
      * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode. Inoltre, alla creazione 
@@ -46,6 +46,10 @@ class King extends Piece {
         	this.setPieceType("\u2654"); // Re bianco
             coordWhiteKing = new int[] {STARTWKINGX, STARTWKINGY};
         }
+    }
+
+    static void setCoordBlackKing(final int[] newCoord) {
+        coordBlackKing = newCoord;
     }
 
 
@@ -139,8 +143,15 @@ class King extends Piece {
      */
     private static boolean checkBishopThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
         Piece checkPiece;
         int i, j;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
         // up right
         i = 1;
         j = 1;
@@ -151,10 +162,11 @@ class King extends Piece {
                 j++;
                 continue;
             }
-            if (checkPiece.getColor() != (blackTurn ? 1 : 0)
+            if (checkPiece.getColor() == blackTurnColor
                     || checkPiece instanceof Pawn) {
                 break;
             }
+
             if (checkPiece instanceof Bishop
                     || checkPiece instanceof Queen) {
                 return true;
@@ -172,7 +184,7 @@ class King extends Piece {
                 j++;
                 continue;
             }
-            if (checkPiece.getColor() != (blackTurn ? 1 : 0)
+            if (checkPiece.getColor() == blackTurnColor
                     || checkPiece instanceof Pawn) {
                 break;
             }
@@ -193,7 +205,7 @@ class King extends Piece {
                 j++;
                 continue;
             }
-            if (checkPiece.getColor() != (blackTurn ? 1 : 0)
+            if (checkPiece.getColor() == blackTurnColor
                     || checkPiece instanceof Pawn) {
                 break;
             }
@@ -214,7 +226,7 @@ class King extends Piece {
                 j++;
                 continue;
             }
-            if (checkPiece.getColor() != (blackTurn ? 1 : 0)
+            if (checkPiece.getColor() == blackTurnColor
                     || checkPiece instanceof Pawn) {
                 break;
             }
@@ -240,6 +252,13 @@ class King extends Piece {
         boolean blackTurn = Game.getBlackTurn();
         Piece checkPiece;
         int i, j;
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
         // right
         j = 1;
         while (y + j <= OUTOFBOUND) {
@@ -248,7 +267,7 @@ class King extends Piece {
                 j++;
                 continue;
             }
-            if (checkPiece.getColor() != (blackTurn ? 1 : 0)
+            if (checkPiece.getColor() == blackTurnColor
                     || checkPiece instanceof Pawn) {
                 break;
             }
@@ -265,7 +284,7 @@ class King extends Piece {
                 i++;
                 continue;
             }
-            if (checkPiece.getColor() != (blackTurn ? 1 : 0)
+            if (checkPiece.getColor() == blackTurnColor
                     || checkPiece instanceof Pawn) {
                 break;
             }
@@ -282,7 +301,7 @@ class King extends Piece {
                 j++;
                 continue;
             }
-            if (checkPiece.getColor() != (blackTurn ? 1 : 0)
+            if (checkPiece.getColor() == blackTurnColor
                     || checkPiece instanceof Pawn) {
                 break;
             }
@@ -299,7 +318,7 @@ class King extends Piece {
                 i++;
                 continue;
             }
-            if (checkPiece.getColor() != (blackTurn ? 1 : 0)
+            if (checkPiece.getColor() == blackTurnColor
                     || checkPiece instanceof Pawn) {
                 break;
             }
@@ -321,52 +340,59 @@ class King extends Piece {
 
     private static boolean checkKnightThreat(final int x, final int y) {
         boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
         // knight
         if (y + 2 <= OUTOFBOUND) {
             if (x - 1 >= 0
                     && Game.getCell(x - 1, y + 2).getPiece() instanceof Knight
-                    && Game.getCell(x - 1, y + 2).getPiece().getColor() != (blackTurn ? 0 : 1)) {
+                    && Game.getCell(x - 1, y + 2).getPiece().getColor() != blackTurnColor) {
                 return true;
             }
             if (x + 1 <= OUTOFBOUND
                     && Game.getCell(x + 1, y + 2).getPiece() instanceof Knight
-                    && Game.getCell(x + 1, y + 2).getPiece().getColor() != (blackTurn ? 0 : 1)) {
+                    && Game.getCell(x + 1, y + 2).getPiece().getColor() != blackTurnColor) {
                 return true;
             }
         }
         if (y + 1 <= OUTOFBOUND) {
             if (x - 2 >= 0
                     && Game.getCell(x - 2, y + 1).getPiece() instanceof Knight
-                    && Game.getCell(x - 2, y + 1).getPiece().getColor() != (blackTurn ? 0 : 1)) {
+                    && Game.getCell(x - 2, y + 1).getPiece().getColor() != blackTurnColor) {
                 return true;
             }
             if (x + 2 <= OUTOFBOUND
                     && Game.getCell(x + 2, y + 1).getPiece() instanceof Knight
-                    && Game.getCell(x + 2, y + 1).getPiece().getColor() != (blackTurn ? 0 : 1)) {
+                    && Game.getCell(x + 2, y + 1).getPiece().getColor() != blackTurnColor) {
                 return true;
             }
         }
         if (y - 1 >= 0) {
             if (x - 2 >= 0
                     && Game.getCell(x - 2, y - 1).getPiece() instanceof Knight
-                    && Game.getCell(x - 2, y - 1).getPiece().getColor() != (blackTurn ? 0 : 1)) {
+                    && Game.getCell(x - 2, y - 1).getPiece().getColor() != blackTurnColor) {
                 return true;
             }
             if (x + 2 <= OUTOFBOUND
                     && Game.getCell(x + 2, y - 1).getPiece() instanceof Knight
-                    && Game.getCell(x + 2, y - 1).getPiece().getColor() != (blackTurn ? 0 : 1)) {
+                    && Game.getCell(x + 2, y - 1).getPiece().getColor() != blackTurnColor) {
                 return true;
             }
         }
         if (y - 2 >= 0) {
             if (x - 1 >= 0
                     && Game.getCell(x - 1, y - 2).getPiece() instanceof Knight
-                    && Game.getCell(x - 1, y - 2).getPiece().getColor() != (blackTurn ? 0 : 1)) {
+                    && Game.getCell(x - 1, y - 2).getPiece().getColor() != blackTurnColor) {
                 return true;
             }
             if (x + 1 <= OUTOFBOUND
                     && Game.getCell(x + 1, y - 2).getPiece() instanceof Knight
-                    && Game.getCell(x + 1, y - 2).getPiece().getColor() != (blackTurn ? 0 : 1)) {
+                    && Game.getCell(x + 1, y - 2).getPiece().getColor() != blackTurnColor) {
                 return true;
             }
         }
@@ -386,8 +412,15 @@ class King extends Piece {
         int y = 1;
         final int xInCapture = 3;
         boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
         // pezzi da ritornare a fine esecuzione
         String[] printOut = new String[STRARRDIM];
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
 
         if (move.length() == CAPTURELENGTH) {
             x = xInCapture;
@@ -404,7 +437,7 @@ class King extends Piece {
 
 
         if (Game.getCell(x, y).getPiece() != null
-                && Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 1 : 0)) {
+                && Game.getCell(x, y).getPiece().getColor() == blackTurnColor) {
             throw new IllegalMoveException("Non puoi spostarti sulla cella di un alleato.");
         }
         int xK = -1;
@@ -413,7 +446,7 @@ class King extends Piece {
         for (int i = 0; i < MAXROW; i++) {
             for (int j = 0; j < MAXCOL; j++) {
                 if (Game.getCell(i, j).getPiece() instanceof King
-                        && Game.getCell(i, j).getPiece().getColor() != (blackTurn ? 1 : 0)) {
+                        && Game.getCell(i, j).getPiece().getColor() == blackTurnColor) {
                     xK = i;
                     yK = j;
                     break;
@@ -481,7 +514,13 @@ class King extends Piece {
 
         //moltiplicatore, serve per raggiungere le celle in mezzo all'arrocco
         //per arrocco lungo bisogna spostarsi a sinistra e viceversa
-        int indexMultiplier = isLong ? -1 : +1;
+        int indexMultiplier;
+
+        if (isLong) {
+            indexMultiplier = -1;
+        } else {
+            indexMultiplier = +1;
+        }
 
         boolean blackTurn = Game.getBlackTurn();
         if (blackTurn) {
@@ -536,7 +575,11 @@ class King extends Piece {
         Game.getCell(xK, yK + (indexMultiplier)).setPiece(r);
         Game.getCell(xK, yK).setEmpty();
         Game.getCell(xK, yR).setEmpty();
-        result[0] = isLong ? "0-0-0" : "0-0";
+        if (isLong) {
+            result[0] = "0-0-0";
+        } else {
+            result[0] = "0-0";
+        }
         return result;
     }
 

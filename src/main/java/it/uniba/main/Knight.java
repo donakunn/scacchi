@@ -49,6 +49,13 @@ class Knight extends Piece {
         final int maxCount = 3;
         boolean isCapture = false;
         boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
 
         int a = MAXROW - (((int) move.charAt(move.length() - 1)) - DIGIT0INASCII);
         int b = (int) move.charAt(move.length() - 2) - AINASCII;
@@ -63,12 +70,12 @@ class Knight extends Piece {
 
         if (Game.getCell(a, b).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-            if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+            if (Game.getCell(a, b).getPiece().getColor() == blackTurnColor) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
 
 
                 //o se � una mossa di spostamento con cella di destinazione occupata da avversario
-            } else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+            } else if (Game.getCell(a, b).getPiece().getColor() != blackTurnColor && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
@@ -81,7 +88,7 @@ class Knight extends Piece {
         for (int i = 0; i <= OUTOFBOUND; i++) {
             for (int j = 0; j <= OUTOFBOUND; j++) {
                 if (Game.getCell(i, j).getPiece() instanceof Knight
-                        && Game.getCell(i, j).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+                        && Game.getCell(i, j).getPiece().getColor() == blackTurnColor) {
                     if (xC1 == -1) {
                         xC1 = i;
                         yC1 = j;
