@@ -41,16 +41,20 @@ class King extends Piece {
         this.setColor(col);
         if (col == 0) {
         	this.setPieceType("\u265A"); // Re nero
-            coordBlackKing = new int[] {STARTBKINGX, STARTBKINGY};
+        	setCoordBlackKing(new int[] {STARTBKINGX, STARTBKINGY});
         } else {
         	this.setPieceType("\u2654"); // Re bianco
-            coordWhiteKing = new int[] {STARTWKINGX, STARTWKINGY};
+        	setCoordWhiteKing(new int[] {STARTWKINGX, STARTWKINGY});
         }
     }
-
+    
     static void setCoordBlackKing(final int[] newCoord) {
         coordBlackKing = newCoord;
-    }
+      }
+    
+    static void setCoordWhiteKing(final int[] newCoord) {
+        coordWhiteKing = newCoord;
+      }
 
 
     /**
