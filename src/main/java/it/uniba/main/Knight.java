@@ -13,13 +13,18 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * Knight class, implementing the abstract class {@link Piece}<br>
- *
+ * <p>Titolo: Knight</p>
+ * <p>Descrizione: La classe Knight implementa la classe astratta {@link Piece} e permette di utilizzare
+ * il Cavallo all'interno del gioco.
+ * 
  * @author Donato Lucente
  */
 class Knight extends Piece {
 
-
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+	 * @param col: colore del pezzo.
+	 */
     Knight(final int col) {
         this.setColor(col);
         if (col == 0) {
@@ -29,6 +34,15 @@ class Knight extends Piece {
         }
     }
 
+    /**
+     * Verifica se e' possibile effettuare la mossa.
+     * 
+     * @param x: ascissa della casella di partenza.
+     * @param y: ordinata della casella di partenza.
+     * @param a: ascissa della casella di arrivo.
+     * @param b: ordinata della casella di arrivo.
+     * @return true, se e' possibile effettuare la mossa; false, altrimenti.
+     */
     private static boolean isMovable(final int x, final int y, final int a, final int b) {
         if ((Math.abs(x - a) == 1 && Math.abs(y - b) == 2)
                 || (Math.abs(y - b) == 1 && Math.abs(x - a) == 2)) {
@@ -37,6 +51,14 @@ class Knight extends Piece {
         return false;
     }
 
+    /**
+     * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
+     * 
+     * @param move: mossa specificata dell'utente.
+     * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     static String[] move(final String move) throws IllegalMoveException {
         int count = 0;
         int xC1 = -1;
@@ -165,6 +187,18 @@ class Knight extends Piece {
         return actualMove(isCapture, xTarget, yTarget, a, b);
     }
 
+    /**
+     * Permette di effettuare la mossa.
+     * 
+     * @param isCapture: verifica se si tratta di una mossa o una cattura.
+     * @param xC: ascissa di partenza del Cavallo.
+     * @param yC: ordinata di partenza del Cavallo.
+     * @param x: ascissa di arrivo del Cavallo.
+     * @param y: ordinata di arrivo del Cavallo.
+     * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
             throws IllegalMoveException {
         String[] pieces = new String[STRARRDIM];
