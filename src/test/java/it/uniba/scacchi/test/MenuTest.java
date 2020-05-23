@@ -1899,7 +1899,7 @@ public class MenuTest {
 //								}	
 //								
 //								
-								//test mossa torre casella occupata da pezzo nemico
+								//test mossa cavallo casella occupata da pezzo nemico
 								@Test
 								void testOccupiedCellMoveKnight() {
 									String[] mossa1 = { "\u2658", null, "c3" };
