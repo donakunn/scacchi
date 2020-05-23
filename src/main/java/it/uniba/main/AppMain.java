@@ -6,22 +6,23 @@ import java.util.Scanner;
 
 /**
  * <<boundary>><br>
- * The main class for the project. It must be customized to meet the project assignment
- * specifications.
+ * <p>Titolo: AppMain</p>
+ * <p>Descrizione: La classe AppMain e' la classe principale del progetto. Contiene tutti i comandi del gioco e permette
+ * di effetuare diverse operazioni a seconda del comando.</p>
  *
- * <p><b>DO NOT RENAME</b>
  */
 public final class AppMain {
     /**
-     * Private constructor. Change if needed.
+     * E' il costruttore della classe.
      */
     private AppMain() {
     }
 
     /**
-     * This is the main entry of the application. It executes the chess app.
+     * E' il metodo principale dell'applicazione. Permette di avviare il gioco degli scacchi, crea un nuovo menu e
+     * assegna il turno iniziale ai bianchi. 
      *
-     * @param args The command-line arguments.
+     * @param args: argomenti della riga di comando.
      */
     public static void main(final String[] args) {
         Menu menu = new Menu();
