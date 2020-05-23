@@ -84,14 +84,12 @@ class Pawn extends Piece {
             throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota.");
         }
         if ((x > 0)
-                && (x < MAXROW)
                 && (Game.getCell(x - 1, y).getPiece() instanceof Pawn)
                 && (Game.getCell(x - 1, y).getPiece().getColor() == 0)
                 // check se casella in x-1 c'e' pedone con colore 1
                 && blackTurn) {
             xCheck = x - 1;
         } else if ((x > 1)
-                && (x < MAXROW)
                 && (Game.getCell(x - 2, y).getPiece() instanceof Pawn)
                 && (Game.getCell(x - 2, y).getPiece().getColor() == 0)
                 // check se casella in x-2 c'e' pedone con colore 1
