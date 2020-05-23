@@ -7,7 +7,9 @@ import static it.uniba.main.FinalPar.MAXROW;
 
 /**
  * <<control>><br>
- * Menu class, containing all methods of the command list.
+ *<p>Titolo: Menu</p>
+ *<p>Descrizione: La classe Menu crea una nuova partita. Tramite gli appositi comandi, permette di visualizzare le mosse 
+ * effettuate, le catture, la scacchiera e permette ai pezzi di effettuare mosse e catture.</p>
  *
  * @author Megi Gjata
  * @author Mario Giordano
@@ -18,6 +20,11 @@ import static it.uniba.main.FinalPar.MAXROW;
 public final class Menu {
     private Game game = new Game();
 
+    /**
+     * Mostra tutti i comandi disponibili.
+     * 
+     * @return lista di tutti i comandi disponibili
+     */
     public String help() {
         return "Lista di comandi utilizzabili:\n"
                 + "help\n"
@@ -32,6 +39,11 @@ public final class Menu {
                 + "o 'ep' alla fine della mossa in notazione algebrica";
     }
 
+    /**
+     * Mostra la scacchiera stampata a video.
+     * 
+     * @return la scacchiera formata da celle convertite a stringa.
+     */
     public String[][] board() {
         String[][] board = new String[MAXROW][MAXCOL];
         for (int i = 0; i < MAXROW; i++) {
@@ -45,15 +57,34 @@ public final class Menu {
         return board;
     }
 
+    /**
+     * Mostra le mosse effettuate durante il gioco.
+     * 
+     * @return arraylist contenente tutte le mosse effettuate. 
+     */
     public ArrayList<String> moves() {
         return game.getMoves();
 
     }
 
+    /**
+     * Permette di inziare una nuova partita, svuotando gli arraylist e inizializzando la scacchiera.
+     */
     public void play() {
         game.newGame();
     }
 
+    /**
+     * Permette di effettuare le mosse dei vari pezzi, le catture, gli arrocchi e cambia il turno corrente.
+     * 
+     * @param input: mossa specificata dall'utente.
+     * @return array contenente il pezzo che effettua la mossa o la cattura convertito a stringa, la cella di destinazione e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * Se si tratta di arrocco, un array contenente la stringa che determina il tipo di arrocco.
+     * @throws IllegalArgumentException
+     * @throws IndexOutOfBoundsException
+     * @throws IllegalMoveException
+     */
     public String[] getMove(final String input)
             throws IllegalArgumentException, IndexOutOfBoundsException, IllegalMoveException {
         char chosenPiece = input.charAt(0);
@@ -94,15 +125,28 @@ public final class Menu {
         return pieces;
     }
 
+    /**
+     * 
+     * @return true, se e' il turno dei neri; false altrimenti.
+     */
     public Boolean getBlackTurn() {
         return Game.getBlackTurn();
     }
 
-
+    /**
+     * Mostra i pezzi neri catturati.
+     * 
+     * @return arraylist contenente i pezzi neri catturati.
+     */
     public ArrayList<String> blackCaptured() {
         return game.getBlacks();
     }
 
+    /**
+     * Mostra i pezzi bianchi catturati.
+     * 
+     * @return arraylist contenente i pezzi bianchi catturati.
+     */
     public ArrayList<String> whiteCaptured() {
         return game.getWhites();
     }
