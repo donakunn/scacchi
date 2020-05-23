@@ -47,13 +47,27 @@ class Rook extends Piece {
     private static boolean isMovable(final int x, final int y, final int a, final int b) {
         int i = a;
         int j = b;
+        boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
 
         if (x == a && y == b) {
             return false;
         }
 
         if (x == a) { // controllo orizzontale
-            int dx = (y < b) ? 1 : -1;
+            int dx;
+
+            if (y < b) {
+                dx = 1;
+            } else {
+                dx = -1;
+            }
 
             for (j = y + dx; j != b; j += dx) {
                 if (Game.getCell(x, j).getPiece() != null) {
@@ -61,7 +75,13 @@ class Rook extends Piece {
                 }
             }
         } else if (y == b) { // in verticale
-            int dy = (x < a) ? 1 : -1;
+            int dy;
+
+            if (x < a) {
+                dy = 1;
+            } else {
+                dy = -1;
+            }
 
             for (i = x + dy; i != a; i += dy) {
                 if (Game.getCell(i, y).getPiece() != null) {
@@ -72,7 +92,7 @@ class Rook extends Piece {
             return false;
         }
         if (Game.getCell(i, j).getPiece() == null
-                || Game.getCell(i, j).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1)) {
+                || Game.getCell(i, j).getPiece().getColor() != blackTurnColor) {
             return true;
         }
         return false;
@@ -89,6 +109,13 @@ class Rook extends Piece {
         final int maxCount = 3;
         boolean isCapture = false;
         boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
 
         int a = MAXROW - (((int) move.charAt(move.length() - 1)) - DIGIT0INASCII);
         int b = (int) move.charAt(move.length() - 2) - AINASCII;
@@ -103,12 +130,12 @@ class Rook extends Piece {
 
         if (Game.getCell(a, b).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-            if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+            if (Game.getCell(a, b).getPiece().getColor() == blackTurnColor) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
 
 
                 //o se � una mossa di spostamento con cella di destinazione occupata da avversario
-            } else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+            } else if (Game.getCell(a, b).getPiece().getColor() != blackTurnColor && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
@@ -120,7 +147,7 @@ class Rook extends Piece {
         for (int i = 0; i <= OUTOFBOUND; i++) {
             for (int j = 0; j <= OUTOFBOUND; j++) {
                 if (Game.getCell(i, j).getPiece() instanceof Rook
-                        && Game.getCell(i, j).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+                        && Game.getCell(i, j).getPiece().getColor() == blackTurnColor) {
                     if (xT1 == -1) {
                         xT1 = i;
                         yT1 = j;
