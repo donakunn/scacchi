@@ -13,25 +13,36 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * Bishop class, implementing the abstract class {@link Piece}
+ * <p>Titolo: Bishop</p>
+ * <p>Descrizione: La classe Bishop implementa la classe astratta {@link Piece} e permette di utilizzare
+ * l'Alfiere all'interno del gioco.
  *
  * @author Donato Lucente
  */
 class Bishop extends Piece {
 
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+	 * 
+	 * @param col: colore del pezzo.
+	 */
     Bishop(final int col) {
-
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265D"; // Alfiere nero
-
+        	this.setPieceType("\u265D"); // Alfiere nero
         } else {
-            this.pieceType = "\u2657"; // Alfiere bianco
-
+        	this.setPieceType("\u2657"); // Alfiere bianco
         }
     }
 
-
+    /**
+     * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
+     * 
+     * @param move: mossa specificata dall'utente.
+     * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     static String[] move(final String move) throws IllegalMoveException {
         int x = 2; // ascissa
         int y = 1; // ordinata
@@ -140,6 +151,18 @@ class Bishop extends Piece {
         }
     }
 
+    /**
+     * Permette di effettuare la mossa.
+     * 
+     * @param isCapture: verifica se si tratta di una mossa o di una cattura.
+     * @param x: ascissa dell'Alfiere.
+     * @param y: ordinata dell'Alfiere.
+     * @param xCheck: sentinella dell'ascissa.
+     * @param yCheck: sentinella dell'ordinata.
+     * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     private static String[] actualMove(final boolean isCapture, final int x, final int y, final int xCheck,
                                        final int yCheck)
             throws IllegalMoveException {

@@ -13,38 +13,42 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * Rook class, implementing the abstract class {@link Piece}<br>
+ * <p>Titolo: Rook</p>
+ * <p>Descrizione: La classe Rook implementa la classe astratta {@link Piece}<br> e permette di utilizzare
+ * la Torre all'interno del gioco.
  *
  * @author Donato Lucente
  */
 class Rook extends Piece {
 
 
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+	 * 
+	 * @param col: colore del pezzo.
+	 */
     Rook(final int col) {
-
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265C"; // Torre nera
-            nMoves = 0;
-
+        	this.setPieceType("\u265C"); // Torre nera
         } else {
-
-            this.pieceType = "\u2656"; // Torre bianca
-            nMoves = 0;
-
-        }
+            this.setPieceType("\u2656"); // Torre bianca
+        } 
+        this.setnMoves(0);
     }
 
 
-    void incrementMoves() {
-        nMoves++;
-    }
-
-    int getNumberOfMoves() {
-        return this.nMoves;
-    }
-
+    /**
+     * Verifica che la mossa sia una mossa legale.
+     * 
+     * @param x: ascissa della casella di partenza.
+     * @param y: ordinata della casella di partenza.
+     * @param a: ascissa della casella di arrivo.
+     * @param b: ordinata della casella di arrivo.
+     * @return true, se è possibile effettuare la mossa; false, altrimenti.
+     */
     private static boolean isMovable(final int x, final int y, final int a, final int b) {
+
         int i = a;
         int j = b;
         boolean blackTurn = Game.getBlackTurn();
@@ -74,6 +78,7 @@ class Rook extends Piece {
                     break;
                 }
             }
+            i=x;
         } else if (y == b) { // in verticale
             int dy;
 
@@ -88,8 +93,12 @@ class Rook extends Piece {
                     break;
                 }
             }
+            j=y;
         } else { // Non valido
             return false;
+        }
+        if(i!=a||j!=b) {
+        	return false;
         }
         if (Game.getCell(i, j).getPiece() == null
                 || Game.getCell(i, j).getPiece().getColor() != blackTurnColor) {
@@ -98,7 +107,17 @@ class Rook extends Piece {
         return false;
     }
 
+
+    /**
+     * Effettua i controlli che servono per poter effettuare la mossa o la cattura.
+     * 
+     * @param move: mossa specificata dall'utente.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     static String[] move(final String move) throws IllegalMoveException {
+
         int count = 0;
         int xT1 = -1;
         int yT1 = -1;
@@ -129,17 +148,15 @@ class Rook extends Piece {
         }
 
         if (Game.getCell(a, b).getPiece() != null) {
-            //lancia eccezione se la cella di destinazione � occupata da alleato
+            //lancia eccezione se la cella di destinazione e' occupata da alleato
             if (Game.getCell(a, b).getPiece().getColor() == blackTurnColor) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-
-
                 //o se � una mossa di spostamento con cella di destinazione occupata da avversario
             } else if (Game.getCell(a, b).getPiece().getColor() != blackTurnColor && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
-            //o se � una mossa di cattura con cella di destinazione vuota
+            //o se ï¿½ una mossa di cattura con cella di destinazione vuota
         } else if (Game.getCell(a, b).getPiece() == null && isCapture) {
             throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
         }
@@ -197,10 +214,7 @@ class Rook extends Piece {
                 } else if (xT2 == (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
                     xTarget = xT2;
                     yTarget = yT2;
-                } else {
-                    throw new IllegalMoveException(
-                            "Nessuna torre appartenente alla riga di disambiguazione specificata.");
-                }
+                } 
             } else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
                 if (yT1 == yT2) {
                     throw new IllegalMoveException(
@@ -213,24 +227,30 @@ class Rook extends Piece {
                 } else if (yT2 == ((int) move.charAt(1) - AINASCII)) {
                     xTarget = xT2;
                     yTarget = yT2;
-                } else {
-                    throw new IllegalMoveException(
-                            "Nessuna torre appartenente alla colonna"
-                                    + " di disambiguazione specificata.");
-                }
-            } else {
-                throw new IllegalMoveException(
-                        "Mossa ambigua, devi specificare quale delle due torri "
-                                + "muovere secondo la notazione algebrica.");
-            }
+                } 
+            } 
         }
 
         return actualMove(isCapture, xTarget, yTarget, a, b);
     }
 
+
+    /**
+     * Permette di effettuare la mossa.
+     * 
+     * @param isCapture: verifica se si tratta di una mossa o una cattura.
+     * @param xC: sentinella dell'ascissa.
+     * @param yC: sentinella dell'ordinata.
+     * @param x: ascissa della Torre.
+     * @param y: ordinata della Torre.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
+     * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
             throws IllegalMoveException {
         String[] pieces = new String[STRARRDIM];
+
         Piece target = null;
         if (isCapture) {
             target = Game.getCell(x, y).getPiece();

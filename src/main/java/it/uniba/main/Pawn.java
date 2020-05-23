@@ -17,62 +17,53 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 /**
  * <<entity>><br>
  * <p>Titolo: Pawn</p>
- * <p>Descrizione: La classe Pawn, implementa la classe astratta {@link Piece}
- * ed è la classe che permette di usare il pedone
+ * <p>Descrizione: La classe Pawn implementa la classe astratta {@link Piece} e permette di usare il Pedone
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente
  */
 class Pawn extends Piece {
 
-    /**
-     * E' il costruttore della classe Pawn.
-     *
-     * @param col: colore del pezzo.
-     */
-    Pawn(final int col) { // costruttore classe Pedone
-        nMoves = 0;
 
-        this.color = col;
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+	 * 
+	 * @param col: colore del pezzo.
+	 */
+    Pawn(final int col) { // costruttore classe Pedone
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265F"; // pedone nero
+        	this.setPieceType("\u265F"); // pedone nero
 
         } else {
-            this.pieceType = "\u2659"; // pedone bianco
+        	this.setPieceType("\u2659"); // pedone bianco
 
         }
+        this.setnMoves(0);
     }
 
     /**
-     * Il metodo incrementMoves contiene un contatore che viene incrementato nel caso
-     * in cui il pedone faccia una mossa.
-     */
-    private void incrementMoves() {
-        this.nMoves++;
-    }
-
-    /**
-     * Il metodo enPassantCatturable controlla che il pedone sia catturabile en passant.
+     * Controlla che il Pedone sia catturabile en passant.
      *
-     * @param x: ascissa del pedone.
-     * @return true, se il pedone è catturabile en passant; false, altrimenti.
+     * @param x: ascissa del Pedone.
+     * @return true, se il Pedone e' catturabile en passant; false, altrimenti.
      */
     private Boolean enPassantCatturable(final int x) { // restituisce true se il pedone
         // ha effettuato una sola mossa con salto di 2,
         // false altrimenti
-        if ((getColor() == 1) && (nMoves == 1) && (x == POS4)) {
+        if ((getColor() == 1) && (this.getnMoves()== 1) && (x == POS4)) {
             return true;
-        } else if ((getColor() == 0) && (nMoves == 1) && (x == POS3)) {
+        } else if ((getColor() == 0) && (this.getnMoves() == 1) && (x == POS3)) {
             return true;
         }
         return false;
     }
 
     /**
-     * Il metodo move permette di muovere un pedone all'interno della scacchiera.
+     * Permette di muovere un Pedone all'interno della scacchiera.
      *
      * @param move: mossa specificata dall'utente.
-     * @return array che contiene il pedone che è stato mosso convertito a stringa e la cella di destinazione.
+     * @return array che contiene il Pedone che e' stato mosso convertito a stringa e la cella di destinazione.
      * @throws IllegalMoveException
      */
     static String[] move(final String move) throws IllegalMoveException {
@@ -105,7 +96,7 @@ class Pawn extends Piece {
                 && (Game.getCell(x - 2, y).getPiece().getColor() == 0)
                 // check se casella in x-2 c'e' pedone con colore 1
                 && (blackTurn)
-                && (Game.getCell(x - 2, y).getPiece().getMoves() == 0)) { // se le condizioni sono
+                && (Game.getCell(x - 2, y).getPiece().getnMoves() == 0)) { // se le condizioni sono
             // rispettate fa la mossa
             xCheck = x - 2;
         } else if ((x >= 0)
@@ -121,7 +112,7 @@ class Pawn extends Piece {
                 && (Game.getCell(x + 2, y).getPiece().getColor() == 1)
                 // check se casella in x+2 c'e' pedone con colore 1
                 && (!blackTurn)
-                && (Game.getCell(x + 2, y).getPiece().getMoves() == 0)) { // se le condizioni sono
+                && (Game.getCell(x + 2, y).getPiece().getnMoves() == 0)) { // se le condizioni sono
             // rispettate fa la mossa
             xCheck = x + 2;
         } else {
@@ -134,7 +125,7 @@ class Pawn extends Piece {
         if (King.isThreatened()) {
             Game.getCell(xCheck, y).setPiece(p);
             Game.getCell(x, y).setEmpty();
-            throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco o ci finirebbe dopo questa mossa");
+            throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
         }
         p.incrementMoves();
         pieceAndCell[0] = p.toString();
@@ -143,12 +134,10 @@ class Pawn extends Piece {
     }
 
     /**
-     * Il metodo capture consente ad un pedone di catturare,semplicemente o en passant,
-     * un pezzo all'interno della scacchiera.
+     * Consente ad un Pedone di catturare, semplicemente o en passant, un pezzo all'interno della scacchiera.
      *
      * @param move: mossa specificta dall'utente.
-     * @return array che contiene il pezzo che effettua la cattura convertito a stringa,
-     * il pezzo catturato convertito a stringa e
+     * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e
      * la cella di destinazione.
      * @throws IllegalMoveException
      */
@@ -215,7 +204,7 @@ class Pawn extends Piece {
             if (King.isThreatened()) {
                 Game.getCell(x, y).setPiece(caught);
                 Game.getCell(xCheck, yCheck).setPiece(p);
-                throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco o ci finirebbe dopo questa mossa");
+                throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
             } else {
                 if (caught.getColor() == 0) {
                     Game.addBlackCaptured(caught.toString());
@@ -234,12 +223,11 @@ class Pawn extends Piece {
     }
 
     /**
-     * Il metodo captureEnPassant consente ad un pedone di catturare solo en passant
-     * all'interno della scacchiera.
+
+     * Consente ad un Pedone di catturare solo en passant all'interno della scacchiera.
      *
      * @param move: mossa specificata dall'utente.
-     * @return array che contiene il pezzo che effettua la cattura convertito a stringa,
-     * il pezzo catturato convertito a stringa e
+     * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e
      * la cella di destinazione.
      * @throws IllegalMoveException
      */
@@ -295,7 +283,7 @@ class Pawn extends Piece {
                     Game.getCell(x, y).setEmpty();
                     Game.getCell(xCheck, yCheck).setPiece(p);
                     Game.getCell(xCheck, y).setPiece(caught);
-                    throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco "
+                    throw new IllegalMoveException("Mossa illegale; il Re e' sotto scacco "
                             + "o ci finirebbe dopo questa mossa");
                 } else {
                     if (caught.getColor() == 0) {
