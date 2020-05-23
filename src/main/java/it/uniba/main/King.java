@@ -19,7 +19,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 /**
  * <<entity>><br>
  * <p>Titolo: King</p>
- * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} e permette di utilizzare il re
+ * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} e permette di utilizzare il Re
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente

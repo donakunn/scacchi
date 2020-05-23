@@ -150,10 +150,10 @@ class Bishop extends Piece {
      * Permette di effettuare la mossa.
      * 
      * @param isCapture: verifica se si tratta di una mossa o di una cattura.
-     * @param x: ascissa dell'Alfiere.
-     * @param y: ordinata dell'Alfiere.
-     * @param xCheck: sentinella dell'ascissa.
-     * @param yCheck: sentinella dell'ordinata.
+     * @param x: ascissa di arrivo dell'Alfiere.
+     * @param y: ordinata di arrivo dell'Alfiere.
+     * @param xCheck: ascissa di partenza dell'Alfiere.
+     * @param yCheck: ordinata di partenza dell'Alfiere.
      * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException

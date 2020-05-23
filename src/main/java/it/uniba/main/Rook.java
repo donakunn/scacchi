@@ -14,7 +14,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 /**
  * <<entity>><br>
  * <p>Titolo: Rook</p>
- * <p>Descrizione: La classe Rook implementa la classe astratta {@link Piece}<br> e permette di utilizzare
+ * <p>Descrizione: La classe Rook implementa la classe astratta {@link Piece} e permette di utilizzare
  * la Torre all'interno del gioco.
  *
  * @author Donato Lucente
@@ -62,13 +62,13 @@ class Rook extends Piece {
 
 
     /**
-     * Verifica che la mossa sia una mossa legale.
+     * Verifica se e' possibile effettuare la mossa.
      * 
      * @param x: ascissa della casella di partenza.
      * @param y: ordinata della casella di partenza.
      * @param a: ascissa della casella di arrivo.
      * @param b: ordinata della casella di arrivo.
-     * @return true, se è possibile effettuare la mossa; false, altrimenti.
+     * @return true, se e' possibile effettuare la mossa; false, altrimenti.
      */
     private static boolean isMovable(final int x, final int y, final int a, final int b) {
 
@@ -107,7 +107,7 @@ class Rook extends Piece {
 
 
     /**
-     * Effettua i controlli che servono per poter effettuare la mossa o la cattura.
+     * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
      * 
      * @param move: mossa specificata dall'utente.
      * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
@@ -230,10 +230,10 @@ class Rook extends Piece {
      * Permette di effettuare la mossa.
      * 
      * @param isCapture: verifica se si tratta di una mossa o una cattura.
-     * @param xC: sentinella dell'ascissa.
-     * @param yC: sentinella dell'ordinata.
-     * @param x: ascissa della Torre.
-     * @param y: ordinata della Torre.
+     * @param xC: ascissa di partenza della Torre.
+     * @param yC: ordinata di partenza della Torre.
+     * @param x: ascissa di arrivo della Torre.
+     * @param y: ordinata di arrivo della Torre.
      * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException
