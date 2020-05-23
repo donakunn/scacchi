@@ -188,9 +188,6 @@ class Pawn extends Piece {
                 yCheck = y + 1;
             }
         }
-        if (Game.getCell(x, y) == null) {
-            throw new IllegalMoveException("Mossa illegale. La cella e' vuota.");
-        }
         if (!(Game.getCell(xCheck, yCheck).getPiece() instanceof Pawn)) {
             throw new IllegalMoveException(
                     "Mossa illegale; Nessun pedone puo' catturare "
