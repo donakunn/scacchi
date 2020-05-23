@@ -60,11 +60,6 @@ class Rook extends Piece {
         } else {
             blackTurnColor = 1;
         }
-
-        if (x == a && y == b) {
-            return false;
-        }
-
         if (x == a) { // controllo orizzontale
             int dx;
 
@@ -271,7 +266,7 @@ class Rook extends Piece {
         if (King.isThreatened()) {
             Game.getCell(x, y).setPiece(target);
             Game.getCell(xC, yC).setPiece(r);
-            throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco "
+            throw new IllegalMoveException("Mossa illegale; il Re e' sotto scacco "
                     + "o ci finirebbe dopo questa mossa");
         } else {
             if (isCapture) {

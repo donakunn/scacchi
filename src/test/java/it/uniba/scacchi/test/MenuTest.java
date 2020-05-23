@@ -619,32 +619,32 @@ public class MenuTest {
 	}
 
 	//test cattura illegale
-		@Test
-		void testCaptureOnIllegalCellEP() {
-			assertAll("Test on Illegal Cell", () -> {
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("edc4ep");
-				});
-				//test cattura con colonna di partenza lontana da quella di arrivo
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("axf8ep");
-				});
-				//test cattura da pezzo diverso da pedone
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("axb2ep");
-				});
-				//test cattura cella di destinazione fuori dai limiti della scacchiera
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("bxy9ep");
-				});
-				//test cattura colonna di partenzafuori dai limiti della scacchiera
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("zxb3ep");
-				});
+	@Test
+	void testCaptureOnIllegalCellEP() {
+		assertAll("Test on Illegal Cell", () -> {
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("edc4ep");
 			});
+			//test cattura con colonna di partenza lontana da quella di arrivo
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("axf8ep");
+			});
+			//test cattura da pezzo diverso da pedone
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("axb2ep");
+			});
+			//test cattura cella di destinazione fuori dai limiti della scacchiera
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("bxy9ep");
+			});
+			//test cattura colonna di partenzafuori dai limiti della scacchiera
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("zxb3ep");
+			});
+		});
 
 
-		}
+	}
 
 	//test spostamento regina lecito
 	@Test
@@ -1237,16 +1237,16 @@ public class MenuTest {
 	//test mossa torre su casella occupata da alleato
 	@Test
 	void testOccupiedCellFromAlliedRook() {
-			assertAll("Test move on allied piece cell, with and without ambiguous notation", () -> {
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("Tb1");
-				});
-				//notazione disambigua
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("Thg2");
-				});
-
+		assertAll("Test move on allied piece cell, with and without ambiguous notation", () -> {
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Tb1");
 			});
+			//notazione disambigua
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Thg2");
+			});
+
+		});
 	}
 
 	//test mossa ambigua
@@ -1281,160 +1281,172 @@ public class MenuTest {
 		});
 	}	
 	//test mossa ambigua, e disambiguazione con riga o colonna sbagliata
-		@Test
-		void testAmbiguousMoveRookWrongRowAndColumns() {
-			String[] mossa1 = { "\u2659", null, "a3" };
-			String[] mossa2 = { "\u265F", null, "a5" };
-			String[] mossa3 = { "\u2659", null, "b3" };
-			String[] mossa4 = { "\u265F", null, "h5" };
-			String[] mossa5 = { "\u2659", null, "c3" };
-			String[] mossa6 = { "\u265C", null, "a6" };
-			String[] mossa7 = { "\u2659", null, "d3" };
+	@Test
+	void testAmbiguousMoveRookWrongRowAndColumns() {
+		String[] mossa1 = { "\u2659", null, "a3" };
+		String[] mossa2 = { "\u265F", null, "a5" };
+		String[] mossa3 = { "\u2659", null, "b3" };
+		String[] mossa4 = { "\u265F", null, "h5" };
+		String[] mossa5 = { "\u2659", null, "c3" };
+		String[] mossa6 = { "\u265C", null, "a6" };
+		String[] mossa7 = { "\u2659", null, "d3" };
 
-			assertAll("Throwing exception for wrong row or columns for disambiguation", () -> {
-				assertArrayEquals(mossa1, menu.getMove("a3"));
-				assertArrayEquals(mossa2, menu.getMove("a5"));
-				assertArrayEquals(mossa3, menu.getMove("b3"));
-				assertArrayEquals(mossa4, menu.getMove("h5"));
-				assertArrayEquals(mossa5, menu.getMove("c3"));
-				assertArrayEquals(mossa6, menu.getMove("Ta6"));
-				assertArrayEquals(mossa7, menu.getMove("d3"));
-				//solleva eccezione, mossa disambigua con riga sbagliata
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("T3h6");
-				});
-				//solleva eccezione, mossa disambigua con colonna sbagliata
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("T3h6");
-				});
-				//solleva eccezione, mossa disambigua con colonna fuori dai limiti
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("Tyh6");
-				});
+		assertAll("Throwing exception for wrong row or columns for disambiguation", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a3"));
+			assertArrayEquals(mossa2, menu.getMove("a5"));
+			assertArrayEquals(mossa3, menu.getMove("b3"));
+			assertArrayEquals(mossa4, menu.getMove("h5"));
+			assertArrayEquals(mossa5, menu.getMove("c3"));
+			assertArrayEquals(mossa6, menu.getMove("Ta6"));
+			assertArrayEquals(mossa7, menu.getMove("d3"));
+			//solleva eccezione, mossa disambigua con riga sbagliata
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("T3h6");
 			});
-		}
-	
-	
+			//solleva eccezione, mossa disambigua con colonna sbagliata
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("T3h6");
+			});
+			//solleva eccezione, mossa disambigua con colonna fuori dai limiti
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Tyh6");
+			});
+		});
+	}
+
+
 	//test mossa ambigua stessa riga
-		@Test
-		void testAmbiguousOnRowMoveRook() {
-			String[] mossa1 = { "\u2659", null, "a4" };
-			String[] mossa2 = { "\u265F", null, "a5" };
-			String[] mossa3 = { "\u2659", null, "h4" };
-			String[] mossa4 = { "\u265F", null, "h5" };
-			String[] mossa5 = { "\u2656", null, "a3" };
-			String[] mossa6 = { "\u265C", null, "a6" };
-			String[] mossa7 = { "\u2656", null, "h3" };
-			String[] mossa8 = { "\u265C", null, "h6" };
-			String[] mossa9 = { "\u2656", null, "c3" };
+	@Test
+	void testAmbiguousOnRowMoveRook() {
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "a5" };
+		String[] mossa3 = { "\u2659", null, "h4" };
+		String[] mossa4 = { "\u265F", null, "h5" };
+		String[] mossa5 = { "\u2656", null, "a3" };
+		String[] mossa6 = { "\u265C", null, "a6" };
+		String[] mossa7 = { "\u2656", null, "h3" };
+		String[] mossa8 = { "\u265C", null, "h6" };
+		String[] mossa9 = { "\u2656", null, "c3" };
 
-			assertAll("Moving Rook with and without ambiguous notation", () -> {
-				assertArrayEquals(mossa1, menu.getMove("a4"));
-				assertArrayEquals(mossa2, menu.getMove("a5"));
-				assertArrayEquals(mossa3, menu.getMove("h4"));
-				assertArrayEquals(mossa4, menu.getMove("h5"));
-				assertArrayEquals(mossa5, menu.getMove("Ta3"));
-				assertArrayEquals(mossa6, menu.getMove("Ta6"));
-				assertArrayEquals(mossa7, menu.getMove("Thh3"));
-				assertArrayEquals(mossa8, menu.getMove("Thh6"));
-				//solleva eccezione, mossa ambigua
-				assertThrows(IllegalMoveException.class, () -> {
-					menu.getMove("T3c3");
-				});
-				//notazione disambigua
-				assertArrayEquals(mossa9, menu.getMove("Tac3"));
+		assertAll("Moving Rook with and without ambiguous notation", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("a5"));
+			assertArrayEquals(mossa3, menu.getMove("h4"));
+			assertArrayEquals(mossa4, menu.getMove("h5"));
+			assertArrayEquals(mossa5, menu.getMove("Ta3"));
+			assertArrayEquals(mossa6, menu.getMove("Ta6"));
+			assertArrayEquals(mossa7, menu.getMove("Thh3"));
+			assertArrayEquals(mossa8, menu.getMove("Thh6"));
+			//solleva eccezione, mossa ambigua
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("T3c3");
 			});
-		}	
-		//test mossa ambigua stessa colonna muovendo la prima torre
-				@Test
-				void testAmbiguousOnColumnMoveRook() {
-					String[] mossa1 = { "\u2659", null, "a4" };
-					String[] mossa2 = { "\u265F", null, "a5" };
-					String[] mossa3 = { "\u2659", null, "h4" };
-					String[] mossa4 = { "\u265F", null, "h5" };
-					String[] mossa5 = { "\u2656", null, "a3" };
-					String[] mossa6 = { "\u265C", null, "a6" };
-					String[] mossa7 = { "\u2656", null, "h3" };
-					String[] mossa8 = { "\u265F", null, "b6" };
-					String[] mossa9 = { "\u2656", null, "h2" };
+			//notazione disambigua
+			assertArrayEquals(mossa9, menu.getMove("Tac3"));
+		});
+	}	
+	//test mossa ambigua stessa colonna muovendo la prima torre
+	@Test
+	void testAmbiguousOnColumnMoveRook() {
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "a5" };
+		String[] mossa3 = { "\u2659", null, "h4" };
+		String[] mossa4 = { "\u265F", null, "h5" };
+		String[] mossa5 = { "\u2656", null, "a3" };
+		String[] mossa6 = { "\u265C", null, "a6" };
+		String[] mossa7 = { "\u2656", null, "h3" };
+		String[] mossa8 = { "\u265F", null, "b6" };
+		String[] mossa9 = { "\u2656", null, "h2" };
 
-					assertAll("Moving Rook with and without ambiguous notation", () -> {
-						assertArrayEquals(mossa1, menu.getMove("a4"));
-						assertArrayEquals(mossa2, menu.getMove("a5"));
-						assertArrayEquals(mossa3, menu.getMove("h4"));
-						assertArrayEquals(mossa4, menu.getMove("h5"));
-						assertArrayEquals(mossa5, menu.getMove("Ta3"));
-						assertArrayEquals(mossa6, menu.getMove("Ta6"));
-						assertArrayEquals(mossa7, menu.getMove("Tah3"));
-						assertArrayEquals(mossa8, menu.getMove("b6"));
-						//solleva eccezione, mossa ambigua
-						assertThrows(IllegalMoveException.class, () -> {
-							menu.getMove("Thh2");
-						});
-						assertArrayEquals(mossa9, menu.getMove("T3h2"));
-					});
-				}	
-				//test mossa ambigua stessa colonna muovendo la seconda torre 
-				@Test
-				void testAmbiguousOnColumnMoveRook2() {
-					String[] mossa1 = { "\u2659", null, "a4" };
-					String[] mossa2 = { "\u265F", null, "a5" };
-					String[] mossa3 = { "\u2659", null, "h4" };
-					String[] mossa4 = { "\u265F", null, "h5" };
-					String[] mossa5 = { "\u2656", null, "a3" };
-					String[] mossa6 = { "\u265C", null, "a6" };
-					String[] mossa7 = { "\u2656", null, "h3" };
-					String[] mossa8 = { "\u265F", null, "b6" };
-					String[] mossa9 = { "\u2656", null, "h2" };
+		assertAll("Moving Rook with and without ambiguous notation", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("a5"));
+			assertArrayEquals(mossa3, menu.getMove("h4"));
+			assertArrayEquals(mossa4, menu.getMove("h5"));
+			assertArrayEquals(mossa5, menu.getMove("Ta3"));
+			assertArrayEquals(mossa6, menu.getMove("Ta6"));
+			assertArrayEquals(mossa7, menu.getMove("Tah3"));
+			assertArrayEquals(mossa8, menu.getMove("b6"));
+			//solleva eccezione, mossa ambigua
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Thh2");
+			});
+			assertArrayEquals(mossa9, menu.getMove("T3h2"));
+		});
+	}	
+	//test mossa ambigua stessa colonna muovendo la seconda torre 
+	@Test
+	void testAmbiguousOnColumnMoveRook2() {
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "a5" };
+		String[] mossa3 = { "\u2659", null, "h4" };
+		String[] mossa4 = { "\u265F", null, "h5" };
+		String[] mossa5 = { "\u2656", null, "a3" };
+		String[] mossa6 = { "\u265C", null, "a6" };
+		String[] mossa7 = { "\u2656", null, "h3" };
+		String[] mossa8 = { "\u265F", null, "b6" };
+		String[] mossa9 = { "\u2656", null, "h2" };
 
-					assertAll("Moving Rook with and without ambiguous notation", () -> {
-						assertArrayEquals(mossa1, menu.getMove("a4"));
-						assertArrayEquals(mossa2, menu.getMove("a5"));
-						assertArrayEquals(mossa3, menu.getMove("h4"));
-						assertArrayEquals(mossa4, menu.getMove("h5"));
-						assertArrayEquals(mossa5, menu.getMove("Ta3"));
-						assertArrayEquals(mossa6, menu.getMove("Ta6"));
-						assertArrayEquals(mossa7, menu.getMove("Tah3"));
-						assertArrayEquals(mossa8, menu.getMove("b6"));
-						//solleva eccezione, mossa ambigua
-						assertThrows(IllegalMoveException.class, () -> {
-							menu.getMove("Thh2");
-						});
-						assertArrayEquals(mossa9, menu.getMove("T1h2"));
-					});
-				}	
-				
-				
-				//test mossa torre casella occupata da pezzo nemico
-				@Test
-				void testOccupiedCellMoveRook() {
-					String[] mossa1 = { "\u2659", null, "a4" };
-					String[] mossa2 = { "\u265F", null, "a5" };
-					String[] mossa3 = { "\u2656", null, "a3" };
-					String[] mossa4 = { "\u265F", null, "b6" };
-					String[] mossa5 = { "\u2656", null, "b3" };
-					String[] mossa6 = { "\u265F", null, "b5" };
-	
-					assertAll("Moving Rook on lecit cell, but occupied from an enemy piece", () -> {
-						assertArrayEquals(mossa1, menu.getMove("a4"));
-						assertArrayEquals(mossa2, menu.getMove("a5"));
-						assertArrayEquals(mossa3, menu.getMove("Ta3"));
-						assertArrayEquals(mossa4, menu.getMove("b6"));
-						assertArrayEquals(mossa5, menu.getMove("Tb3"));
-						assertArrayEquals(mossa6, menu.getMove("b5"));
-						assertThrows(IllegalMoveException.class, () -> {
-							menu.getMove("Tb5");
-						});
-	
-					});
-				}
-	
+		assertAll("Moving Rook with and without ambiguous notation", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("a5"));
+			assertArrayEquals(mossa3, menu.getMove("h4"));
+			assertArrayEquals(mossa4, menu.getMove("h5"));
+			assertArrayEquals(mossa5, menu.getMove("Ta3"));
+			assertArrayEquals(mossa6, menu.getMove("Ta6"));
+			assertArrayEquals(mossa7, menu.getMove("Tah3"));
+			assertArrayEquals(mossa8, menu.getMove("b6"));
+			//solleva eccezione, mossa ambigua
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Thh2");
+			});
+			assertArrayEquals(mossa9, menu.getMove("T1h2"));
+		});
+	}	
+
+
+	//test mossa torre casella occupata da pezzo nemico
+	@Test
+	void testOccupiedCellMoveRook() {
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "a5" };
+		String[] mossa3 = { "\u2656", null, "a3" };
+		String[] mossa4 = { "\u265F", null, "b6" };
+		String[] mossa5 = { "\u2656", null, "b3" };
+		String[] mossa6 = { "\u265F", null, "b5" };
+
+		assertAll("Moving Rook on lecit cell, but occupied from an enemy piece", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("a5"));
+			assertArrayEquals(mossa3, menu.getMove("Ta3"));
+			assertArrayEquals(mossa4, menu.getMove("b6"));
+			assertArrayEquals(mossa5, menu.getMove("Tb3"));
+			assertArrayEquals(mossa6, menu.getMove("b5"));
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Tb5");
+			});
+
+		});
+	}
+
 	//test mossa torre illegale
 	@Test
 	void testIllegalMoveRook() {
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "a5" };
+		String[] mossa3 = { "\u2656", null, "a3" };
+		String[] mossa4 = { "\u265F", null, "b6" };
+		String[] mossa5 = { "\u2659", null, "c3" };
+		String[] mossa6 = { "\u265F", null, "b5" };
 		assertAll("Testing illegal moves for Rook", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("a5"));
+			assertArrayEquals(mossa3, menu.getMove("Ta3"));
+			assertArrayEquals(mossa4, menu.getMove("b6"));
+			assertArrayEquals(mossa5, menu.getMove("c3"));
+			assertArrayEquals(mossa6, menu.getMove("b5"));
 			assertThrows(IllegalMoveException.class, () -> {
-				menu.getMove("Tc3");
+				menu.getMove("Tc4");
 			});
 			assertThrows(IllegalMoveException.class, () -> {
 				menu.getMove("Tgh");
@@ -1444,7 +1456,7 @@ public class MenuTest {
 			});
 			//con notazione disambigua
 			assertThrows(IllegalMoveException.class, () -> {
-				menu.getMove("Tac3");
+				menu.getMove("Tac4");
 			});
 			//cella di destinazione invalida
 			assertThrows(IllegalMoveException.class, () -> {
@@ -1466,702 +1478,742 @@ public class MenuTest {
 			assertThrows(IllegalMoveException.class, () -> {
 				menu.getMove("T9f5");
 			});
+			//colonna di partenza oltre limiti scacchiera
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Tyf5");
+			});
+			//Test mossa su se stesso
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("T3a3");
+			});
+			//Test mossa percorso ostacolato
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Td3");
+			});
 		});
 	}
-				
-				//test mossa torre che lascerebbe il re sotto scacco
-					@Test
-					void testMoveRookThreatenedKing() {
-						String[] mossa1 = { "\u2659", null, "e4" };
-						String[] mossa2 = { "\u265F", null, "e5" };
-						String[] mossa3 = { "\u2659", null, "d4" };
-						String[] mossa4 = { "\u265F", null, "d5" };
-						String[] mossa5 = { "\u2659", "\u265F", "d5" };
-						String[] mossa6 = { "\u265F", "\u2659", "d4" };
-						String[] mossa7 = { "\u2659", null, "a3" };
-						String[] mossa8 = { "\u265F", null, "h5" };
-						String[] mossa9 = { "\u2659", null, "b3" };
-						String[] mossa10 = { "\u265C", null, "h6" };
-						String[] mossa11 = { "\u2659", null, "b4" };
-						String[] mossa12 = { "\u265C", null, "e6" };
-						String[] mossa13 = { "\u2654", null, "d2" };
-						String[] mossa14 = { "\u265F", null, "a6" };
-						String[] mossa15 = { "\u2655", null, "e1" };
-	
-						assertAll("Moving Rook that will leave King threatened", () -> {
-							assertArrayEquals(mossa1, menu.getMove("e4"));
-							assertArrayEquals(mossa2, menu.getMove("e5"));
-							assertArrayEquals(mossa3, menu.getMove("d4"));
-							assertArrayEquals(mossa4, menu.getMove("d5"));
-							assertArrayEquals(mossa5, menu.getMove("exd5"));
-							assertArrayEquals(mossa6, menu.getMove("exd4"));
-							assertArrayEquals(mossa7, menu.getMove("a3"));
-							assertArrayEquals(mossa8, menu.getMove("h5"));
-							assertArrayEquals(mossa9, menu.getMove("b3"));
-							assertArrayEquals(mossa10, menu.getMove("Th6"));
-							assertArrayEquals(mossa11, menu.getMove("b4"));
-							assertArrayEquals(mossa12, menu.getMove("Te6"));
-							assertArrayEquals(mossa13, menu.getMove("Rd2"));
-							assertArrayEquals(mossa14, menu.getMove("a6"));
-							assertArrayEquals(mossa15, menu.getMove("De1"));
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Tc6");
-							});
-	
-						});
-					}
-					
-					//test cattura semplice Torre
-					
-					@Test
-					void testCapturefromARook() {
-	
-						//avvaloro mosse attese
-	
-						expectedMoves.add("a4");
-						expectedMoves.add("h5");
-						expectedMoves.add("Ta3");
-						expectedMoves.add("Th6");
-						expectedMoves.add("Tb3");
-						expectedMoves.add("Tg6");
-						expectedMoves.add("Txb7");
-						expectedMoves.add("Txg2");
-						
-	
-						//pezzi catturati attesi
-	
-						expectedBlackPieceCaptured.add("\u265F");
-						expectedWhitePieceCaptured.add("\u2659");
-	
-						//array mosse da confrontare con il risultato
-	
-						String[] mossa1 = { "\u2659", null, "a4" };
-						String[] mossa2 = { "\u265F", null, "h5" };
-						String[] mossa3 = { "\u2656", null, "a3" };
-						String[] mossa4 = { "\u265C", null, "h6" };
-						String[] mossa5 = { "\u2656", null, "b3" };
-						String[] mossa6 = { "\u265C", null, "g6" };
-						String[] mossa7 = { "\u2656", "\u265F", "b7" };
-						String[] mossa8 = { "\u265C", "\u2659", "g2" };
-	
-	
-						//test cattura semplice per entrambi i colori
-						assertAll("Capture from Rooks", () -> {
-							assertArrayEquals(mossa1, menu.getMove("a4"));
-							assertArrayEquals(mossa2, menu.getMove("h5"));
-							assertArrayEquals(mossa3, menu.getMove("Ta3"));
-							assertArrayEquals(mossa4, menu.getMove("Th6"));
-							assertArrayEquals(mossa5, menu.getMove("Tb3"));
-							assertArrayEquals(mossa6, menu.getMove("Tg6"));
-							assertArrayEquals(mossa7, menu.getMove("Txb7"));
-							assertArrayEquals(mossa8, menu.getMove("Txg2"));
-							assertEquals(expectedBlackPieceCaptured,menu.blackCaptured());
-							assertEquals(expectedWhitePieceCaptured,menu.whiteCaptured());
-							assertEquals(expectedMoves,menu.moves());
-						});
-					}
-	
-	
-					//test cattura su cella vuota
-					@Test
-					void testCaptureOnEmptyCellFromRook() {
-						String[] mossa1 = { "\u2659", null, "a4" };
-						String[] mossa2 = { "\u265F", null, "h5" };
-						String[] mossa3 = { "\u2656", null, "a3" };
-						String[] mossa4 = { "\u265C", null, "h6" };
-						assertAll("capture fail on empty cell from Rook", () -> {
-							assertArrayEquals(mossa1, menu.getMove("a4"));
-							assertArrayEquals(mossa2, menu.getMove("h5"));
-							assertArrayEquals(mossa3, menu.getMove("Ta3"));
-							assertArrayEquals(mossa4, menu.getMove("Th6"));
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Txd3");
-							});
-	
-						});
-					}
-					//test cattura su pezzo alleato
-					@Test
-					void testCaptureOnAlliedPieceFromRook() {
-						
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Txb1");
-							});
-					}
-	
-					//test cattura che lascerebbe il re sotto scacco
-					@Test
-					void testCaptureThreatenedKingFromRook() {
-						String[] mossa1 = { "\u2659", null, "a4" };
-						String[] mossa2 = { "\u265F", null, "h5" };
-						String[] mossa3 = { "\u2656", null, "a3" };
-						String[] mossa4 = { "\u265C", null, "h6" };
-						String[] mossa5 = { "\u2659", null, "e4" };
-						String[] mossa6 = { "\u265F", null, "e5" };
-						String[] mossa7 = { "\u2659", null, "d4" };
-						String[] mossa8 = { "\u265F", null, "d5" };
-						String[] mossa9 = { "\u2659", "\u265F", "d5" };
-						String[] mossa10 = { "\u265F", "\u2659", "d4" };
-						String[] mossa11 = { "\u2656", null, "e3" };
-						String[] mossa12 = { "\u265C", null, "e6" };
-						String[] mossa13 = { "\u2659", null, "a5" };
-						String[] mossa14 = { "\u265F", null, "d3" };
-	
-						assertAll("Capture from Rook that will leave King threatened", () -> {
-							assertArrayEquals(mossa1, menu.getMove("a4"));
-							assertArrayEquals(mossa2, menu.getMove("h5"));
-							assertArrayEquals(mossa3, menu.getMove("Ta3"));
-							assertArrayEquals(mossa4, menu.getMove("Th6"));
-							assertArrayEquals(mossa5, menu.getMove("e4"));
-							assertArrayEquals(mossa6, menu.getMove("e5"));
-							assertArrayEquals(mossa7, menu.getMove("d4"));
-							assertArrayEquals(mossa8, menu.getMove("d5"));
-							assertArrayEquals(mossa9, menu.getMove("exd5"));
-							assertArrayEquals(mossa10, menu.getMove("exd4"));
-							assertArrayEquals(mossa11, menu.getMove("Te3"));
-							assertArrayEquals(mossa12, menu.getMove("Te6"));
-							assertArrayEquals(mossa13, menu.getMove("a5"));
-							assertArrayEquals(mossa14, menu.getMove("d3"));
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Txd3");
-							});
-	
-						});
-					}
-	
-	
-	
-//					//test cattura illegale 
-//					@Test
-//					void testCaptureOnIllegalCellFromRook() {
-//						String[] mossa1 = { "\u2659", null, "a4" };
-//						String[] mossa2 = { "\u265F", null, "h5" };
-//						String[] mossa3 = { "\u2656", null, "a3" };
-//						String[] mossa4 = { "\u265C", null, "h6" };
-//						String[] mossa5 = { "\u2656", null, "b3" };
-//						String[] mossa6 = { "\u265C", null, "g6" };
-//						assertAll("Test on Illegal Cell", () -> {
-//							assertArrayEquals(mossa1, menu.getMove("a4"));
-//							assertArrayEquals(mossa2, menu.getMove("h5"));
-//							assertArrayEquals(mossa3, menu.getMove("Ta3"));
-//							assertArrayEquals(mossa4, menu.getMove("Th6"));
-//							assertArrayEquals(mossa5, menu.getMove("Tb3"));
-//							assertArrayEquals(mossa6, menu.getMove("Tg6"));
-//							//test cattura con notazione errata ma cella corretta
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Tcb7");
-//							});
-//							//test cattura su cella non consentita
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Txc4");
-//							});
-//							//test cattura con notazione cella oltre limiti scacchiera
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Txq9");
-//							});
-//							//test cattura su pezzo di colore diverso, ma coperto da altro pezzo
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Txb8");
-//							});
-//							//test cattura su se stesso
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Txb3");
-//							});
-//						});
-//	
-//	
-//					}
 
-					//test spostamento Cavallo lecito
-					@Test
-					void testMoveKnight() {
-						String[] mossa1 = { "\u2658", null, "c3" };
-						String[] mossa2 = { "\u265E", null, "a6" };
-						String[] mossa3 = { "\u2658", null, "f3" };
-						String[] mossa4 = { "\u265E", null, "h6" };
-						String[] mossa5 = { "\u2658", null, "e4" };
-						String[] mossa6 = { "\u265E", null, "c5" };
-						String[] mossa7 = { "\u2658", null, "d4" };
-						String[] mossa8 = { "\u265E", null, "f5" };
-						expectedMoves.add("Cc3");
-						expectedMoves.add("Ca6");
-						expectedMoves.add("Cf3");
-						expectedMoves.add("Ch6");
-						expectedMoves.add("Ce4");
-						expectedMoves.add("Cc5");
-						expectedMoves.add("Cd4");
-						expectedMoves.add("Cf5");
+	//test mossa torre che lascerebbe il re sotto scacco
+	@Test
+	void testMoveRookThreatenedKing() {
+		String[] mossa1 = { "\u2659", null, "e4" };
+		String[] mossa2 = { "\u265F", null, "e5" };
+		String[] mossa3 = { "\u2659", null, "d4" };
+		String[] mossa4 = { "\u265F", null, "d5" };
+		String[] mossa5 = { "\u2659", "\u265F", "d5" };
+		String[] mossa6 = { "\u265F", "\u2659", "d4" };
+		String[] mossa7 = { "\u2659", null, "a3" };
+		String[] mossa8 = { "\u265F", null, "h5" };
+		String[] mossa9 = { "\u2659", null, "b3" };
+		String[] mossa10 = { "\u265C", null, "h6" };
+		String[] mossa11 = { "\u2659", null, "b4" };
+		String[] mossa12 = { "\u265C", null, "e6" };
+		String[] mossa13 = { "\u2654", null, "d2" };
+		String[] mossa14 = { "\u265F", null, "a6" };
+		String[] mossa15 = { "\u2655", null, "e1" };
 
-						assertAll("Moving Knight on lecit cells", () -> {
-							assertArrayEquals(mossa1, menu.getMove("Cc3"));
-							assertArrayEquals(mossa2, menu.getMove("Ca6"));
-							assertArrayEquals(mossa3, menu.getMove("Cf3"));
-							assertArrayEquals(mossa4, menu.getMove("Ch6"));
-							assertArrayEquals(mossa5, menu.getMove("Ce4"));
-							assertArrayEquals(mossa6, menu.getMove("Cc5"));
-							assertArrayEquals(mossa7, menu.getMove("Cd4"));
-							assertArrayEquals(mossa8, menu.getMove("Cf5"));
-							assertEquals(expectedMoves,menu.moves());
+		assertAll("Moving Rook that will leave King threatened", () -> {
+			assertArrayEquals(mossa1, menu.getMove("e4"));
+			assertArrayEquals(mossa2, menu.getMove("e5"));
+			assertArrayEquals(mossa3, menu.getMove("d4"));
+			assertArrayEquals(mossa4, menu.getMove("d5"));
+			assertArrayEquals(mossa5, menu.getMove("exd5"));
+			assertArrayEquals(mossa6, menu.getMove("exd4"));
+			assertArrayEquals(mossa7, menu.getMove("a3"));
+			assertArrayEquals(mossa8, menu.getMove("h5"));
+			assertArrayEquals(mossa9, menu.getMove("b3"));
+			assertArrayEquals(mossa10, menu.getMove("Th6"));
+			assertArrayEquals(mossa11, menu.getMove("b4"));
+			assertArrayEquals(mossa12, menu.getMove("Te6"));
+			assertArrayEquals(mossa13, menu.getMove("Rd2"));
+			assertArrayEquals(mossa14, menu.getMove("a6"));
+			assertArrayEquals(mossa15, menu.getMove("De1"));
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Tc6");
+			});
 
-						});
+		});
+	}
 
-					}
+	//test cattura semplice Torre
+
+	@Test
+	void testCapturefromARook() {
+
+		//avvaloro mosse attese
+
+		expectedMoves.add("a4");
+		expectedMoves.add("h5");
+		expectedMoves.add("Ta3");
+		expectedMoves.add("Th6");
+		expectedMoves.add("Tb3");
+		expectedMoves.add("Tg6");
+		expectedMoves.add("Txb7");
+		expectedMoves.add("Txg2");
 
 
-					//test mossa torre su casella occupata da alleato
-					@Test
-					void testOccupiedCellFromAlliedKnight() {
-							assertAll("Test move on allied piece cell", () -> {
-								assertThrows(IllegalMoveException.class, () -> {
-									menu.getMove("Cd2");
-								});
-								assertThrows(IllegalMoveException.class, () -> {
-									menu.getMove("Ce2");
-								});
+		//pezzi catturati attesi
 
-							});
-					}
+		expectedBlackPieceCaptured.add("\u265F");
+		expectedWhitePieceCaptured.add("\u2659");
 
-					//test mossa ambigua stessa riga, muovendo primo cavallo
-					@Test
-					void testAmbiguousRowMoveFirstKnight() {
-						String[] mossa1 = { "\u2658", null, "c3" };
-						String[] mossa2 = { "\u265F", null, "a6" };
-						String[] mossa3 = { "\u2658", null, "f3" };
-						String[] mossa4 = { "\u265F", null, "a5" };
-						String[] mossa5 = { "\u2658", null, "e5" };
-						String[] mossa6 = { "\u265F", null, "a4" };
-						String[] mossa7 = { "\u2658", null, "d5" };
-						String[] mossa8 = { "\u265F", null, "a3" };
-						String[] mossa9 = { "\u2658", null, "e3" };
-						String[] mossa10 = { "\u265F", null, "b6" };
-						String[] mossa11 = { "\u2658", null, "c4" };
-						
+		//array mosse da confrontare con il risultato
 
-						assertAll("Moving Knight with and without ambiguous notation", () -> {
-							assertArrayEquals(mossa1, menu.getMove("Cc3"));
-							assertArrayEquals(mossa2, menu.getMove("a6"));
-							assertArrayEquals(mossa3, menu.getMove("Cf3"));
-							assertArrayEquals(mossa4, menu.getMove("a5"));
-							assertArrayEquals(mossa5, menu.getMove("Ce5"));
-							assertArrayEquals(mossa6, menu.getMove("a4"));
-							assertArrayEquals(mossa7, menu.getMove("Cd5"));
-							assertArrayEquals(mossa8, menu.getMove("a3"));
-							assertArrayEquals(mossa9, menu.getMove("Ce3"));
-							assertArrayEquals(mossa10, menu.getMove("b6"));
-							//solleva eccezione, mossa ambigua
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Cc4");
-							});
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Cg4");
-							});
-							//notazione disambigua
-							assertArrayEquals(mossa11, menu.getMove("C5c4"));
-						});
-					}
-					//test mossa ambigua stessa riga, muovendo secondo cavallo
-					@Test
-					void testAmbiguousRowMoveSecondKnight() {
-						String[] mossa1 = { "\u2658", null, "c3" };
-						String[] mossa2 = { "\u265F", null, "a6" };
-						String[] mossa3 = { "\u2658", null, "f3" };
-						String[] mossa4 = { "\u265F", null, "a5" };
-						String[] mossa5 = { "\u2658", null, "e5" };
-						String[] mossa6 = { "\u265F", null, "a4" };
-						String[] mossa7 = { "\u2658", null, "d5" };
-						String[] mossa8 = { "\u265F", null, "a3" };
-						String[] mossa9 = { "\u2658", null, "e3" };
-						String[] mossa10 = { "\u265F", null, "b6" };
-						String[] mossa11 = { "\u2658", null, "c4" };
-						
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "h5" };
+		String[] mossa3 = { "\u2656", null, "a3" };
+		String[] mossa4 = { "\u265C", null, "h6" };
+		String[] mossa5 = { "\u2656", null, "b3" };
+		String[] mossa6 = { "\u265C", null, "g6" };
+		String[] mossa7 = { "\u2656", "\u265F", "b7" };
+		String[] mossa8 = { "\u265C", "\u2659", "g2" };
 
-						assertAll("Moving Knight with and without ambiguous notation", () -> {
-							assertArrayEquals(mossa1, menu.getMove("Cc3"));
-							assertArrayEquals(mossa2, menu.getMove("a6"));
-							assertArrayEquals(mossa3, menu.getMove("Cf3"));
-							assertArrayEquals(mossa4, menu.getMove("a5"));
-							assertArrayEquals(mossa5, menu.getMove("Ce5"));
-							assertArrayEquals(mossa6, menu.getMove("a4"));
-							assertArrayEquals(mossa7, menu.getMove("Cd5"));
-							assertArrayEquals(mossa8, menu.getMove("a3"));
-							assertArrayEquals(mossa9, menu.getMove("Ce3"));
-							assertArrayEquals(mossa10, menu.getMove("b6"));
-							//solleva eccezione, mossa ambigua
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Cc4");
-							});
-							assertThrows(IllegalMoveException.class, () -> {
-								menu.getMove("Cg4");
-							});
-							//notazione disambigua
-							assertArrayEquals(mossa11, menu.getMove("C3c4"));
-						});
-					}	
-//					//test mossa ambigua, e disambiguazione con riga o colonna sbagliata
-//						@Test
-//						void testAmbiguousMoveKnightWrongRowAndColumns() {
-//							String[] mossa1 = { "\u2658", null, "c3" };
-//							String[] mossa2 = { "\u265F", null, "a6" };
-//							String[] mossa3 = { "\u2658", null, "f3" };
-//							String[] mossa4 = { "\u265F", null, "a5" };
-//							String[] mossa5 = { "\u2658", null, "e5" };
-//							String[] mossa6 = { "\u265F", null, "a4" };
-//							String[] mossa7 = { "\u2658", null, "d5" };
-//							String[] mossa8 = { "\u265F", null, "a3" };
-//							String[] mossa9 = { "\u2658", null, "e3" };
-//							String[] mossa10 = { "\u265F", null, "b6" };
-//							String[] mossa11 = { "\u2658", null, "c4" };
-//							
-//							assertAll("Throwing exception for wrong row or columns for disambiguation", () -> {
-//								assertArrayEquals(mossa1, menu.getMove("Cc3"));
-//								assertArrayEquals(mossa2, menu.getMove("a6"));
-//								assertArrayEquals(mossa3, menu.getMove("Cf3"));
-//								assertArrayEquals(mossa4, menu.getMove("a5"));
-//								assertArrayEquals(mossa5, menu.getMove("Ce5"));
-//								assertArrayEquals(mossa6, menu.getMove("a4"));
-//								assertArrayEquals(mossa7, menu.getMove("Cd5"));
-//				//da fare				assertArrayEquals(mossa8, menu.getMove("a3"));
-//								assertArrayEquals(mossa9, menu.getMove("Ce3"));
-//								assertArrayEquals(mossa10, menu.getMove("b6"));
-//								//solleva eccezione, mossa disambigua con riga sbagliata
-//								assertThrows(IllegalMoveException.class, () -> {
-//									menu.getMove("T3h6");
-//								});
-//								//solleva eccezione, mossa disambigua con colonna sbagliata
-//								assertThrows(IllegalMoveException.class, () -> {
-//									menu.getMove("T3h6");
-//								});
-//								//solleva eccezione, mossa disambigua con colonna fuori dai limiti
-//								assertThrows(IllegalMoveException.class, () -> {
-//									menu.getMove("Tyh6");
-//								});
-//							});
-//						}
 
-//						//test mossa ambigua stessa colonna muovendo la prima torre
-//								@Test
-//								void testAmbiguousOnColumnMoveRook() {
-//									String[] mossa1 = { "\u2659", null, "a4" };
-//									String[] mossa2 = { "\u265F", null, "a5" };
-//									String[] mossa3 = { "\u2659", null, "h4" };
-//									String[] mossa4 = { "\u265F", null, "h5" };
-//									String[] mossa5 = { "\u2656", null, "a3" };
-//									String[] mossa6 = { "\u265C", null, "a6" };
-//									String[] mossa7 = { "\u2656", null, "h3" };
-//									String[] mossa8 = { "\u265F", null, "b6" };
-//									String[] mossa9 = { "\u2656", null, "h2" };
+		//test cattura semplice per entrambi i colori
+		assertAll("Capture from Rooks", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("h5"));
+			assertArrayEquals(mossa3, menu.getMove("Ta3"));
+			assertArrayEquals(mossa4, menu.getMove("Th6"));
+			assertArrayEquals(mossa5, menu.getMove("Tb3"));
+			assertArrayEquals(mossa6, menu.getMove("Tg6"));
+			assertArrayEquals(mossa7, menu.getMove("Txb7"));
+			assertArrayEquals(mossa8, menu.getMove("Txg2"));
+			assertEquals(expectedBlackPieceCaptured,menu.blackCaptured());
+			assertEquals(expectedWhitePieceCaptured,menu.whiteCaptured());
+			assertEquals(expectedMoves,menu.moves());
+		});
+	}
+
+
+	//test cattura su cella vuota
+	@Test
+	void testCaptureOnEmptyCellFromRook() {
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "h5" };
+		String[] mossa3 = { "\u2656", null, "a3" };
+		String[] mossa4 = { "\u265C", null, "h6" };
+		assertAll("capture fail on empty cell from Rook", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("h5"));
+			assertArrayEquals(mossa3, menu.getMove("Ta3"));
+			assertArrayEquals(mossa4, menu.getMove("Th6"));
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Txd3");
+			});
+
+		});
+	}
+	//test cattura su pezzo alleato
+	@Test
+	void testCaptureOnAlliedPieceFromRook() {
+
+		assertThrows(IllegalMoveException.class, () -> {
+			menu.getMove("Txb1");
+		});
+	}
+
+	//test cattura che lascerebbe il re sotto scacco
+	@Test
+	void testCaptureThreatenedKingFromRook() {
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "h5" };
+		String[] mossa3 = { "\u2656", null, "a3" };
+		String[] mossa4 = { "\u265C", null, "h6" };
+		String[] mossa5 = { "\u2659", null, "e4" };
+		String[] mossa6 = { "\u265F", null, "e5" };
+		String[] mossa7 = { "\u2659", null, "d4" };
+		String[] mossa8 = { "\u265F", null, "d5" };
+		String[] mossa9 = { "\u2659", "\u265F", "d5" };
+		String[] mossa10 = { "\u265F", "\u2659", "d4" };
+		String[] mossa11 = { "\u2656", null, "e3" };
+		String[] mossa12 = { "\u265C", null, "e6" };
+		String[] mossa13 = { "\u2659", null, "a5" };
+		String[] mossa14 = { "\u265F", null, "d3" };
+
+		assertAll("Capture from Rook that will leave King threatened", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("h5"));
+			assertArrayEquals(mossa3, menu.getMove("Ta3"));
+			assertArrayEquals(mossa4, menu.getMove("Th6"));
+			assertArrayEquals(mossa5, menu.getMove("e4"));
+			assertArrayEquals(mossa6, menu.getMove("e5"));
+			assertArrayEquals(mossa7, menu.getMove("d4"));
+			assertArrayEquals(mossa8, menu.getMove("d5"));
+			assertArrayEquals(mossa9, menu.getMove("exd5"));
+			assertArrayEquals(mossa10, menu.getMove("exd4"));
+			assertArrayEquals(mossa11, menu.getMove("Te3"));
+			assertArrayEquals(mossa12, menu.getMove("Te6"));
+			assertArrayEquals(mossa13, menu.getMove("a5"));
+			assertArrayEquals(mossa14, menu.getMove("d3"));
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Txd3");
+			});
+
+		});
+	}
+
+
+
+	//test cattura illegale 
+	@Test
+	void testCaptureOnIllegalCellFromRook() {
+		String[] mossa1 = { "\u2659", null, "a4" };
+		String[] mossa2 = { "\u265F", null, "h5" };
+		String[] mossa3 = { "\u2656", null, "a3" };
+		String[] mossa4 = { "\u265C", null, "h6" };
+		String[] mossa5 = { "\u2656", null, "b3" };
+		String[] mossa6 = { "\u265C", null, "g6" };
+		assertAll("Test on Illegal Cell", () -> {
+			assertArrayEquals(mossa1, menu.getMove("a4"));
+			assertArrayEquals(mossa2, menu.getMove("h5"));
+			assertArrayEquals(mossa3, menu.getMove("Ta3"));
+			assertArrayEquals(mossa4, menu.getMove("Th6"));
+			assertArrayEquals(mossa5, menu.getMove("Tb3"));
+			assertArrayEquals(mossa6, menu.getMove("Tg6"));
+			//test cattura con notazione errata ma cella corretta
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Tcb7");
+			});
+			//test cattura su cella non consentita
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Txc4");
+			});
+			//test cattura con notazione cella oltre limiti scacchiera
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Txq9");
+			});
+			//test cattura su pezzo di colore diverso, ma coperto da altro pezzo
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Txb8");
+			});
+			//test cattura su se stesso
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Txb3");
+			});
+		});
+
+
+	}
+
+	//test spostamento Cavallo lecito
+	@Test
+	void testMoveKnight() {
+		String[] mossa1 = { "\u2658", null, "c3" };
+		String[] mossa2 = { "\u265E", null, "a6" };
+		String[] mossa3 = { "\u2658", null, "f3" };
+		String[] mossa4 = { "\u265E", null, "h6" };
+		String[] mossa5 = { "\u2658", null, "e4" };
+		String[] mossa6 = { "\u265E", null, "c5" };
+		String[] mossa7 = { "\u2658", null, "d4" };
+		String[] mossa8 = { "\u265E", null, "f5" };
+		expectedMoves.add("Cc3");
+		expectedMoves.add("Ca6");
+		expectedMoves.add("Cf3");
+		expectedMoves.add("Ch6");
+		expectedMoves.add("Ce4");
+		expectedMoves.add("Cc5");
+		expectedMoves.add("Cd4");
+		expectedMoves.add("Cf5");
+
+		assertAll("Moving Knight on lecit cells", () -> {
+			assertArrayEquals(mossa1, menu.getMove("Cc3"));
+			assertArrayEquals(mossa2, menu.getMove("Ca6"));
+			assertArrayEquals(mossa3, menu.getMove("Cf3"));
+			assertArrayEquals(mossa4, menu.getMove("Ch6"));
+			assertArrayEquals(mossa5, menu.getMove("Ce4"));
+			assertArrayEquals(mossa6, menu.getMove("Cc5"));
+			assertArrayEquals(mossa7, menu.getMove("Cd4"));
+			assertArrayEquals(mossa8, menu.getMove("Cf5"));
+			assertEquals(expectedMoves,menu.moves());
+
+		});
+
+	}
+
+
+	//test mossa torre su casella occupata da alleato
+	@Test
+	void testOccupiedCellFromAlliedKnight() {
+		assertAll("Test move on allied piece cell", () -> {
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cd2");
+			});
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Ce2");
+			});
+
+		});
+	}
+
+	//test mossa ambigua stessa colonna, muovendo primo cavallo
+	@Test
+	void testAmbiguousRowMoveFirstKnight() {
+		String[] mossa1 = { "\u2658", null, "c3" };
+		String[] mossa2 = { "\u265F", null, "a6" };
+		String[] mossa3 = { "\u2658", null, "f3" };
+		String[] mossa4 = { "\u265F", null, "a5" };
+		String[] mossa5 = { "\u2658", null, "e5" };
+		String[] mossa6 = { "\u265F", null, "a4" };
+		String[] mossa7 = { "\u2658", null, "d5" };
+		String[] mossa8 = { "\u265F", null, "a3" };
+		String[] mossa9 = { "\u2658", null, "e3" };
+		String[] mossa10 = { "\u265F", null, "b6" };
+		String[] mossa11 = { "\u2658", null, "c4" };
+
+
+		assertAll("Moving Knight with and without ambiguous notation", () -> {
+			assertArrayEquals(mossa1, menu.getMove("Cc3"));
+			assertArrayEquals(mossa2, menu.getMove("a6"));
+			assertArrayEquals(mossa3, menu.getMove("Cf3"));
+			assertArrayEquals(mossa4, menu.getMove("a5"));
+			assertArrayEquals(mossa5, menu.getMove("Ce5"));
+			assertArrayEquals(mossa6, menu.getMove("a4"));
+			assertArrayEquals(mossa7, menu.getMove("Cd5"));
+			assertArrayEquals(mossa8, menu.getMove("a3"));
+			assertArrayEquals(mossa9, menu.getMove("Ce3"));
+			assertArrayEquals(mossa10, menu.getMove("b6"));
+			//solleva eccezione, mossa ambigua entrambe possibili celle
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cc4");
+			});
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cg4");
+			});
+			//notazione disambigua con riga sbagliata
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C6g4");
+			});
+			//notazione disambigua dando colonna di partenza
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Ceg4");
+			});
+			//notazione disambigua dando riga di partenza fuori dai limiti
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C9g4");
+			});
+			//notazione disambigua
+			assertArrayEquals(mossa11, menu.getMove("C5c4"));
+		});
+	}
+	//test mossa ambigua stessa colonna, muovendo secondo cavallo
+	@Test
+	void testAmbiguousRowMoveSecondKnight() {
+		String[] mossa1 = { "\u2658", null, "c3" };
+		String[] mossa2 = { "\u265F", null, "a6" };
+		String[] mossa3 = { "\u2658", null, "f3" };
+		String[] mossa4 = { "\u265F", null, "a5" };
+		String[] mossa5 = { "\u2658", null, "e5" };
+		String[] mossa6 = { "\u265F", null, "a4" };
+		String[] mossa7 = { "\u2658", null, "d5" };
+		String[] mossa8 = { "\u265F", null, "a3" };
+		String[] mossa9 = { "\u2658", null, "e3" };
+		String[] mossa10 = { "\u265F", null, "b6" };
+		String[] mossa11 = { "\u2658", null, "g4" };
+
+
+		assertAll("Moving Knight with and without ambiguous notation", () -> {
+			assertArrayEquals(mossa1, menu.getMove("Cc3"));
+			assertArrayEquals(mossa2, menu.getMove("a6"));
+			assertArrayEquals(mossa3, menu.getMove("Cf3"));
+			assertArrayEquals(mossa4, menu.getMove("a5"));
+			assertArrayEquals(mossa5, menu.getMove("Ce5"));
+			assertArrayEquals(mossa6, menu.getMove("a4"));
+			assertArrayEquals(mossa7, menu.getMove("Cd5"));
+			assertArrayEquals(mossa8, menu.getMove("a3"));
+			assertArrayEquals(mossa9, menu.getMove("Ce3"));
+			assertArrayEquals(mossa10, menu.getMove("b6"));
+			//solleva eccezione, mossa ambigua entrambe possibili celle
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cc4");
+			});
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cg4");
+			});
+			//notazione disambigua con riga sbagliata
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C4g4");
+			});
+			//notazione disambigua dando colonna di partenza
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Ceg4");
+			});
+			//notazione disambigua dando riga di partenza fuori dai limiti
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C9g4");
+			});
+			//notazione disambigua
+			assertArrayEquals(mossa11, menu.getMove("C3g4"));
+		});
+	}	
+
+	//test mossa ambigua stessa riga, muovendo primo cavallo
+	@Test
+	void testAmbiguousColumnMoveFirstKnight() {
+		String[] mossa1 = { "\u2658", null, "c3" };
+		String[] mossa2 = { "\u265F", null, "a6" };
+		String[] mossa3 = { "\u2658", null, "d5" };
+		String[] mossa4 = { "\u265F", null, "b6" };
+		String[] mossa5 = { "\u2658", null, "f3" };
+		String[] mossa6 = { "\u265F", null, "c6" };
+		String[] mossa7 = { "\u2658", null, "f4" };
+		String[] mossa8 = { "\u265F", null, "d6" };
+		String[] mossa9 = { "\u2658", null, "d3" };
+		String[] mossa10 = { "\u265F", null, "e6" };
+		String[] mossa11 = { "\u2658", null, "e5" };
+
+
+		assertAll("Moving Knight with and without ambiguous notation", () -> {
+			assertArrayEquals(mossa1, menu.getMove("Cc3"));
+			assertArrayEquals(mossa2, menu.getMove("a6"));
+			assertArrayEquals(mossa3, menu.getMove("Cd5"));
+			assertArrayEquals(mossa4, menu.getMove("b6"));
+			assertArrayEquals(mossa5, menu.getMove("Cf3"));
+			assertArrayEquals(mossa6, menu.getMove("c6"));
+			assertArrayEquals(mossa7, menu.getMove("Cf4"));
+			assertArrayEquals(mossa8, menu.getMove("d6"));
+			assertArrayEquals(mossa9, menu.getMove("Cd3"));
+			assertArrayEquals(mossa10, menu.getMove("e6"));
+			//solleva eccezione, mossa ambigua
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Ce5");
+			});
+			//notazione disambigua con colonna sbagliata
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Che5");
+			});
+			//notazione disambigua dando riga di partenza
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C3e5");
+			});
+			//notazione disambigua dando colonna di partenza fuori dai limiti
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cte5");
+			});
+
+			//notazione disambigua
+			assertArrayEquals(mossa11, menu.getMove("Cde5"));
+		});
+	}
+	//test mossa ambigua stessa riga, muovendo secondo cavallo
+	@Test
+	void testAmbiguousColumnMoveSecondKnight() {
+		String[] mossa1 = { "\u2658", null, "c3" };
+		String[] mossa2 = { "\u265F", null, "a6" };
+		String[] mossa3 = { "\u2658", null, "d5" };
+		String[] mossa4 = { "\u265F", null, "b6" };
+		String[] mossa5 = { "\u2658", null, "f3" };
+		String[] mossa6 = { "\u265F", null, "c6" };
+		String[] mossa7 = { "\u2658", null, "f4" };
+		String[] mossa8 = { "\u265F", null, "d6" };
+		String[] mossa9 = { "\u2658", null, "d3" };
+		String[] mossa10 = { "\u265F", null, "e6" };
+		String[] mossa11 = { "\u2658", null, "e5" };
+
+
+		assertAll("Moving Knight with and without ambiguous notation", () -> {
+			assertArrayEquals(mossa1, menu.getMove("Cc3"));
+			assertArrayEquals(mossa2, menu.getMove("a6"));
+			assertArrayEquals(mossa3, menu.getMove("Cd5"));
+			assertArrayEquals(mossa4, menu.getMove("b6"));
+			assertArrayEquals(mossa5, menu.getMove("Cf3"));
+			assertArrayEquals(mossa6, menu.getMove("c6"));
+			assertArrayEquals(mossa7, menu.getMove("Cf4"));
+			assertArrayEquals(mossa8, menu.getMove("d6"));
+			assertArrayEquals(mossa9, menu.getMove("Cd3"));
+			assertArrayEquals(mossa10, menu.getMove("e6"));
+			//solleva eccezione, mossa ambigua
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Ce5");
+			});
+			//notazione disambigua con colonna sbagliata
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cbe5");
+			});
+			//notazione disambigua dando riga di partenza
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C3e5");
+			});
+			//notazione disambigua dando colonna di partenza fuori dai limiti
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cte5");
+			});
+
+			//notazione disambigua corretta
+			assertArrayEquals(mossa11, menu.getMove("Cfe5"));
+		});
+	}
+
+	//test mossa cavallo casella occupata da pezzo nemico
+	@Test
+	void testOccupiedCellMoveKnight() {
+		String[] mossa1 = { "\u2658", null, "c3" };
+		String[] mossa2 = { "\u265E", null, "c6" };
+		String[] mossa3 = { "\u2658", null, "b5" };
+		String[] mossa4 = { "\u265E", null, "b4" };
+
+
+		assertAll("Moving Knight on lecit cell, but occupied from an enemy piece", () -> {
+			assertArrayEquals(mossa1, menu.getMove("Cc3"));
+			assertArrayEquals(mossa2, menu.getMove("Cc6"));
+			assertArrayEquals(mossa3, menu.getMove("Cb5"));
+			assertArrayEquals(mossa4, menu.getMove("Cb4"));
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cc7");
+			});
+
+		});
+	}
+
+	//test mossa cavallo illegale
+	@Test
+	void testIllegalMoveKnight() {
+		assertAll("Testing illegal moves for Knight", () -> {
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cd4");
+			});
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cgh");
+			});
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C88");
+			});
+			//con notazione disambigua colonna sbagliata
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cac3");
+			});
+			//con notazione disambigua riga sbagliata
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C5h3");
+			});
+			//cella di destinazione invalida
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Chgh");
+			});
+			//cella di destinazione oltre i limiti
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Ca88");
+			});
+			//nessun Cavallo può muoversi da riga di partenza
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C5c5");
+			});
+			//nessun Cavallopuò muoversi da colonna di partenza
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cdd4");
+			});
+			//riga di partenza oltre limiti scacchiera
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("C9f5");
+			});
+			//colonna di partenza oltre limiti scacchiera
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cyf5");
+			});
+		});
+	}
+
+	//test mossa Cavallo che lascerebbe il re sotto scacco
+	@Test
+	void testMoveKnightThreatenedKing() {
+		String[] mossa1 = { "\u2658", null, "c3" };
+		String[] mossa2 = { "\u265F", null, "d5" };
+		String[] mossa3 = { "\u2658", null, "e4" };
+		String[] mossa4 = { "\u265F", null, "d4" };
+		String[] mossa5 = { "\u2659", null, "f4" };
+		String[] mossa6 = { "\u265F", null, "d3" };
+		String[] mossa7 = { "\u2659", "\u265F", "d3" };
+		String[] mossa8 = { "\u265F", null, "a6" };
+		String[] mossa9 = { "\u2659", null, "f5" };
+		String[] mossa10 = { "\u265F", null, "b6" };
+		String[] mossa11 = { "\u2659", null, "f6" };
+		String[] mossa12 = { "\u265F", "\u2659", "f6" };
+		String[] mossa13 = { "\u2659", null, "a3" };
+		String[] mossa14 = { "\u265B", null, "e7" };
+
+
+		assertAll("Moving Knight that will leave King threatened", () -> {
+			assertArrayEquals(mossa1, menu.getMove("Cc3"));
+			assertArrayEquals(mossa2, menu.getMove("d5"));
+			assertArrayEquals(mossa3, menu.getMove("Ce4"));
+			assertArrayEquals(mossa4, menu.getMove("d4"));
+			assertArrayEquals(mossa5, menu.getMove("f4"));
+			assertArrayEquals(mossa6, menu.getMove("d3"));
+			assertArrayEquals(mossa7, menu.getMove("exd3"));
+			assertArrayEquals(mossa8, menu.getMove("a6"));
+			assertArrayEquals(mossa9, menu.getMove("f5"));
+			assertArrayEquals(mossa10, menu.getMove("b6"));
+			assertArrayEquals(mossa11, menu.getMove("f6"));
+			assertArrayEquals(mossa12, menu.getMove("exf6"));
+			assertArrayEquals(mossa13, menu.getMove("a3"));
+			assertArrayEquals(mossa14, menu.getMove("De7"));
+			assertThrows(IllegalMoveException.class, () -> {
+				menu.getMove("Cc5");
+			});
+
+		});
+	}
+
+//	//test cattura semplice Cavallo
 //
-//									assertAll("Moving Rook with and without ambiguous notation", () -> {
-//										assertArrayEquals(mossa1, menu.getMove("a4"));
-//										assertArrayEquals(mossa2, menu.getMove("a5"));
-//										assertArrayEquals(mossa3, menu.getMove("h4"));
-//										assertArrayEquals(mossa4, menu.getMove("h5"));
-//										assertArrayEquals(mossa5, menu.getMove("Ta3"));
-//										assertArrayEquals(mossa6, menu.getMove("Ta6"));
-//										assertArrayEquals(mossa7, menu.getMove("Tah3"));
-//										assertArrayEquals(mossa8, menu.getMove("b6"));
-//										//solleva eccezione, mossa ambigua
-//										assertThrows(IllegalMoveException.class, () -> {
-//											menu.getMove("Thh2");
-//										});
-//										assertArrayEquals(mossa9, menu.getMove("T3h2"));
-//									});
-//								}	
-//								//test mossa ambigua stessa colonna muovendo la seconda torre 
-//								@Test
-//								void testAmbiguousOnColumnMoveRook2() {
-//									String[] mossa1 = { "\u2659", null, "a4" };
-//									String[] mossa2 = { "\u265F", null, "a5" };
-//									String[] mossa3 = { "\u2659", null, "h4" };
-//									String[] mossa4 = { "\u265F", null, "h5" };
-//									String[] mossa5 = { "\u2656", null, "a3" };
-//									String[] mossa6 = { "\u265C", null, "a6" };
-//									String[] mossa7 = { "\u2656", null, "h3" };
-//									String[] mossa8 = { "\u265F", null, "b6" };
-//									String[] mossa9 = { "\u2656", null, "h2" };
+//	@Test
+//	void testCapturefromARook() {
 //
-//									assertAll("Moving Rook with and without ambiguous notation", () -> {
-//										assertArrayEquals(mossa1, menu.getMove("a4"));
-//										assertArrayEquals(mossa2, menu.getMove("a5"));
-//										assertArrayEquals(mossa3, menu.getMove("h4"));
-//										assertArrayEquals(mossa4, menu.getMove("h5"));
-//										assertArrayEquals(mossa5, menu.getMove("Ta3"));
-//										assertArrayEquals(mossa6, menu.getMove("Ta6"));
-//										assertArrayEquals(mossa7, menu.getMove("Tah3"));
-//										assertArrayEquals(mossa8, menu.getMove("b6"));
-//										//solleva eccezione, mossa ambigua
-//										assertThrows(IllegalMoveException.class, () -> {
-//											menu.getMove("Thh2");
-//										});
-//										assertArrayEquals(mossa9, menu.getMove("T1h2"));
-//									});
-//								}	
-//								
-//								
-								//test mossa cavallo casella occupata da pezzo nemico
-								@Test
-								void testOccupiedCellMoveKnight() {
-									String[] mossa1 = { "\u2658", null, "c3" };
-									String[] mossa2 = { "\u265E", null, "c6" };
-									String[] mossa3 = { "\u2658", null, "b5" };
-									String[] mossa4 = { "\u265E", null, "b4" };
-									
-					
-									assertAll("Moving Knight on lecit cell, but occupied from an enemy piece", () -> {
-										assertArrayEquals(mossa1, menu.getMove("Cc3"));
-										assertArrayEquals(mossa2, menu.getMove("Cc6"));
-										assertArrayEquals(mossa3, menu.getMove("Cb5"));
-										assertArrayEquals(mossa4, menu.getMove("Cb4"));
-										assertThrows(IllegalMoveException.class, () -> {
-											menu.getMove("Cc7");
-										});
-					
-									});
-								}
-//					
-//					//test mossa torre illegale
-//					@Test
-//					void testIllegalMoveRook() {
-//						assertAll("Testing illegal moves for Rook", () -> {
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Tc3");
-//							});
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Tgh");
-//							});
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("T88");
-//							});
-//							//con notazione disambigua
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Tac3");
-//							});
-//							//cella di destinazione invalida
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Thgh");
-//							});
-//							//cella di destinazione oltre i limiti
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Ta88");
-//							});
-//							//nessuna torre può muoversi da riga di partenza
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("T5c5");
-//							});
-//							//nessuna torre può muoversi da colonna di partenza
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("Tdd4");
-//							});
-//							//riga di partenza oltre limiti scacchiera
-//							assertThrows(IllegalMoveException.class, () -> {
-//								menu.getMove("T9f5");
-//							});
-//						});
-//					}
-//								
-//								//test mossa torre che lascerebbe il re sotto scacco
-//									@Test
-//									void testMoveRookThreatenedKing() {
-//										String[] mossa1 = { "\u2659", null, "e4" };
-//										String[] mossa2 = { "\u265F", null, "e5" };
-//										String[] mossa3 = { "\u2659", null, "d4" };
-//										String[] mossa4 = { "\u265F", null, "d5" };
-//										String[] mossa5 = { "\u2659", "\u265F", "d5" };
-//										String[] mossa6 = { "\u265F", "\u2659", "d4" };
-//										String[] mossa7 = { "\u2659", null, "a3" };
-//										String[] mossa8 = { "\u265F", null, "h5" };
-//										String[] mossa9 = { "\u2659", null, "b3" };
-//										String[] mossa10 = { "\u265C", null, "h6" };
-//										String[] mossa11 = { "\u2659", null, "b4" };
-//										String[] mossa12 = { "\u265C", null, "e6" };
-//										String[] mossa13 = { "\u2654", null, "d2" };
-//										String[] mossa14 = { "\u265F", null, "a6" };
-//										String[] mossa15 = { "\u2655", null, "e1" };
-//					
-//										assertAll("Moving Rook that will leave King threatened", () -> {
-//											assertArrayEquals(mossa1, menu.getMove("e4"));
-//											assertArrayEquals(mossa2, menu.getMove("e5"));
-//											assertArrayEquals(mossa3, menu.getMove("d4"));
-//											assertArrayEquals(mossa4, menu.getMove("d5"));
-//											assertArrayEquals(mossa5, menu.getMove("exd5"));
-//											assertArrayEquals(mossa6, menu.getMove("exd4"));
-//											assertArrayEquals(mossa7, menu.getMove("a3"));
-//											assertArrayEquals(mossa8, menu.getMove("h5"));
-//											assertArrayEquals(mossa9, menu.getMove("b3"));
-//											assertArrayEquals(mossa10, menu.getMove("Th6"));
-//											assertArrayEquals(mossa11, menu.getMove("b4"));
-//											assertArrayEquals(mossa12, menu.getMove("Te6"));
-//											assertArrayEquals(mossa13, menu.getMove("Rd2"));
-//											assertArrayEquals(mossa14, menu.getMove("a6"));
-//											assertArrayEquals(mossa15, menu.getMove("De1"));
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Tc6");
-//											});
-//					
-//										});
-//									}
-//									
-//									//test cattura semplice Torre
-//									
-//									@Test
-//									void testCapturefromARook() {
-//					
-//										//avvaloro mosse attese
-//					
-//										expectedMoves.add("a4");
-//										expectedMoves.add("h5");
-//										expectedMoves.add("Ta3");
-//										expectedMoves.add("Th6");
-//										expectedMoves.add("Tb3");
-//										expectedMoves.add("Tg6");
-//										expectedMoves.add("Txb7");
-//										expectedMoves.add("Txg2");
-//										
-//					
-//										//pezzi catturati attesi
-//					
-//										expectedBlackPieceCaptured.add("\u265F");
-//										expectedWhitePieceCaptured.add("\u2659");
-//					
-//										//array mosse da confrontare con il risultato
-//					
-//										String[] mossa1 = { "\u2659", null, "a4" };
-//										String[] mossa2 = { "\u265F", null, "h5" };
-//										String[] mossa3 = { "\u2656", null, "a3" };
-//										String[] mossa4 = { "\u265C", null, "h6" };
-//										String[] mossa5 = { "\u2656", null, "b3" };
-//										String[] mossa6 = { "\u265C", null, "g6" };
-//										String[] mossa7 = { "\u2656", "\u265F", "b7" };
-//										String[] mossa8 = { "\u265C", "\u2659", "g2" };
-//					
-//					
-//										//test cattura semplice per entrambi i colori
-//										assertAll("Capture from Rooks", () -> {
-//											assertArrayEquals(mossa1, menu.getMove("a4"));
-//											assertArrayEquals(mossa2, menu.getMove("h5"));
-//											assertArrayEquals(mossa3, menu.getMove("Ta3"));
-//											assertArrayEquals(mossa4, menu.getMove("Th6"));
-//											assertArrayEquals(mossa5, menu.getMove("Tb3"));
-//											assertArrayEquals(mossa6, menu.getMove("Tg6"));
-//											assertArrayEquals(mossa7, menu.getMove("Txb7"));
-//											assertArrayEquals(mossa8, menu.getMove("Txg2"));
-//											assertEquals(expectedBlackPieceCaptured,menu.blackCaptured());
-//											assertEquals(expectedWhitePieceCaptured,menu.whiteCaptured());
-//											assertEquals(expectedMoves,menu.moves());
-//										});
-//									}
-//					
-//					
-//									//test cattura su cella vuota
-//									@Test
-//									void testCaptureOnEmptyCellFromRook() {
-//										String[] mossa1 = { "\u2659", null, "a4" };
-//										String[] mossa2 = { "\u265F", null, "h5" };
-//										String[] mossa3 = { "\u2656", null, "a3" };
-//										String[] mossa4 = { "\u265C", null, "h6" };
-//										assertAll("capture fail on empty cell from Rook", () -> {
-//											assertArrayEquals(mossa1, menu.getMove("a4"));
-//											assertArrayEquals(mossa2, menu.getMove("h5"));
-//											assertArrayEquals(mossa3, menu.getMove("Ta3"));
-//											assertArrayEquals(mossa4, menu.getMove("Th6"));
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Txd3");
-//											});
-//					
-//										});
-//									}
-//									//test cattura su pezzo alleato
-//									@Test
-//									void testCaptureOnAlliedPieceFromRook() {
-//										
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Txb1");
-//											});
-//									}
-//					
-//									//test cattura che lascerebbe il re sotto scacco
-//									@Test
-//									void testCaptureThreatenedKingFromRook() {
-//										String[] mossa1 = { "\u2659", null, "a4" };
-//										String[] mossa2 = { "\u265F", null, "h5" };
-//										String[] mossa3 = { "\u2656", null, "a3" };
-//										String[] mossa4 = { "\u265C", null, "h6" };
-//										String[] mossa5 = { "\u2659", null, "e4" };
-//										String[] mossa6 = { "\u265F", null, "e5" };
-//										String[] mossa7 = { "\u2659", null, "d4" };
-//										String[] mossa8 = { "\u265F", null, "d5" };
-//										String[] mossa9 = { "\u2659", "\u265F", "d5" };
-//										String[] mossa10 = { "\u265F", "\u2659", "d4" };
-//										String[] mossa11 = { "\u2656", null, "e3" };
-//										String[] mossa12 = { "\u265C", null, "e6" };
-//										String[] mossa13 = { "\u2659", null, "a5" };
-//										String[] mossa14 = { "\u265F", null, "d3" };
-//					
-//										assertAll("Capture from Rook that will leave King threatened", () -> {
-//											assertArrayEquals(mossa1, menu.getMove("a4"));
-//											assertArrayEquals(mossa2, menu.getMove("h5"));
-//											assertArrayEquals(mossa3, menu.getMove("Ta3"));
-//											assertArrayEquals(mossa4, menu.getMove("Th6"));
-//											assertArrayEquals(mossa5, menu.getMove("e4"));
-//											assertArrayEquals(mossa6, menu.getMove("e5"));
-//											assertArrayEquals(mossa7, menu.getMove("d4"));
-//											assertArrayEquals(mossa8, menu.getMove("d5"));
-//											assertArrayEquals(mossa9, menu.getMove("exd5"));
-//											assertArrayEquals(mossa10, menu.getMove("exd4"));
-//											assertArrayEquals(mossa11, menu.getMove("Te3"));
-//											assertArrayEquals(mossa12, menu.getMove("Te6"));
-//											assertArrayEquals(mossa13, menu.getMove("a5"));
-//											assertArrayEquals(mossa14, menu.getMove("d3"));
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Txd3");
-//											});
-//					
-//										});
-//									}
-//					
-//					
-					
-//									//test cattura illegale 
-//									@Test
-//									void testCaptureOnIllegalCellFromRook() {
-//										String[] mossa1 = { "\u2659", null, "a4" };
-//										String[] mossa2 = { "\u265F", null, "h5" };
-//										String[] mossa3 = { "\u2656", null, "a3" };
-//										String[] mossa4 = { "\u265C", null, "h6" };
-//										String[] mossa5 = { "\u2656", null, "b3" };
-//										String[] mossa6 = { "\u265C", null, "g6" };
-//										assertAll("Test on Illegal Cell", () -> {
-//											assertArrayEquals(mossa1, menu.getMove("a4"));
-//											assertArrayEquals(mossa2, menu.getMove("h5"));
-//											assertArrayEquals(mossa3, menu.getMove("Ta3"));
-//											assertArrayEquals(mossa4, menu.getMove("Th6"));
-//											assertArrayEquals(mossa5, menu.getMove("Tb3"));
-//											assertArrayEquals(mossa6, menu.getMove("Tg6"));
-//											//test cattura con notazione errata ma cella corretta
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Tcb7");
-//											});
-//											//test cattura su cella non consentita
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Txc4");
-//											});
-//											//test cattura con notazione cella oltre limiti scacchiera
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Txq9");
-//											});
-//											//test cattura su pezzo di colore diverso, ma coperto da altro pezzo
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Txb8");
-//											});
-//											//test cattura su se stesso
-//											assertThrows(IllegalMoveException.class, () -> {
-//												menu.getMove("Txb3");
-//											});
-//										});
-				//	
-				//	
-//									}
+//		//avvaloro mosse attese
+//
+//		expectedMoves.add("a4");
+//		expectedMoves.add("h5");
+//		expectedMoves.add("Ta3");
+//		expectedMoves.add("Th6");
+//		expectedMoves.add("Tb3");
+//		expectedMoves.add("Tg6");
+//		expectedMoves.add("Txb7");
+//		expectedMoves.add("Txg2");
+//
+//
+//		//pezzi catturati attesi
+//
+//		expectedBlackPieceCaptured.add("\u265F");
+//		expectedWhitePieceCaptured.add("\u2659");
+//
+//		//array mosse da confrontare con il risultato
+//
+//		String[] mossa1 = { "\u2659", null, "a4" };
+//		String[] mossa2 = { "\u265F", null, "h5" };
+//		String[] mossa3 = { "\u2656", null, "a3" };
+//		String[] mossa4 = { "\u265C", null, "h6" };
+//		String[] mossa5 = { "\u2656", null, "b3" };
+//		String[] mossa6 = { "\u265C", null, "g6" };
+//		String[] mossa7 = { "\u2656", "\u265F", "b7" };
+//		String[] mossa8 = { "\u265C", "\u2659", "g2" };
+//
+//
+//		//test cattura semplice per entrambi i colori
+//		assertAll("Capture from Rooks", () -> {
+//			assertArrayEquals(mossa1, menu.getMove("a4"));
+//			assertArrayEquals(mossa2, menu.getMove("h5"));
+//			assertArrayEquals(mossa3, menu.getMove("Ta3"));
+//			assertArrayEquals(mossa4, menu.getMove("Th6"));
+//			assertArrayEquals(mossa5, menu.getMove("Tb3"));
+//			assertArrayEquals(mossa6, menu.getMove("Tg6"));
+//			assertArrayEquals(mossa7, menu.getMove("Txb7"));
+//			assertArrayEquals(mossa8, menu.getMove("Txg2"));
+//			assertEquals(expectedBlackPieceCaptured,menu.blackCaptured());
+//			assertEquals(expectedWhitePieceCaptured,menu.whiteCaptured());
+//			assertEquals(expectedMoves,menu.moves());
+//		});
+//	}
+//
+	//					
+	//									//test cattura su cella vuota
+	//									@Test
+	//									void testCaptureOnEmptyCellFromRook() {
+	//										String[] mossa1 = { "\u2659", null, "a4" };
+	//										String[] mossa2 = { "\u265F", null, "h5" };
+	//										String[] mossa3 = { "\u2656", null, "a3" };
+	//										String[] mossa4 = { "\u265C", null, "h6" };
+	//										assertAll("capture fail on empty cell from Rook", () -> {
+	//											assertArrayEquals(mossa1, menu.getMove("a4"));
+	//											assertArrayEquals(mossa2, menu.getMove("h5"));
+	//											assertArrayEquals(mossa3, menu.getMove("Ta3"));
+	//											assertArrayEquals(mossa4, menu.getMove("Th6"));
+	//											assertThrows(IllegalMoveException.class, () -> {
+	//												menu.getMove("Txd3");
+	//											});
+	//					
+	//										});
+	//									}
+	//									//test cattura su pezzo alleato
+	//									@Test
+	//									void testCaptureOnAlliedPieceFromRook() {
+	//										
+	//											assertThrows(IllegalMoveException.class, () -> {
+	//												menu.getMove("Txb1");
+	//											});
+	//									}
+	//					
+	//									//test cattura che lascerebbe il re sotto scacco
+	//									@Test
+	//									void testCaptureThreatenedKingFromRook() {
+	//										String[] mossa1 = { "\u2659", null, "a4" };
+	//										String[] mossa2 = { "\u265F", null, "h5" };
+	//										String[] mossa3 = { "\u2656", null, "a3" };
+	//										String[] mossa4 = { "\u265C", null, "h6" };
+	//										String[] mossa5 = { "\u2659", null, "e4" };
+	//										String[] mossa6 = { "\u265F", null, "e5" };
+	//										String[] mossa7 = { "\u2659", null, "d4" };
+	//										String[] mossa8 = { "\u265F", null, "d5" };
+	//										String[] mossa9 = { "\u2659", "\u265F", "d5" };
+	//										String[] mossa10 = { "\u265F", "\u2659", "d4" };
+	//										String[] mossa11 = { "\u2656", null, "e3" };
+	//										String[] mossa12 = { "\u265C", null, "e6" };
+	//										String[] mossa13 = { "\u2659", null, "a5" };
+	//										String[] mossa14 = { "\u265F", null, "d3" };
+	//					
+	//										assertAll("Capture from Rook that will leave King threatened", () -> {
+	//											assertArrayEquals(mossa1, menu.getMove("a4"));
+	//											assertArrayEquals(mossa2, menu.getMove("h5"));
+	//											assertArrayEquals(mossa3, menu.getMove("Ta3"));
+	//											assertArrayEquals(mossa4, menu.getMove("Th6"));
+	//											assertArrayEquals(mossa5, menu.getMove("e4"));
+	//											assertArrayEquals(mossa6, menu.getMove("e5"));
+	//											assertArrayEquals(mossa7, menu.getMove("d4"));
+	//											assertArrayEquals(mossa8, menu.getMove("d5"));
+	//											assertArrayEquals(mossa9, menu.getMove("exd5"));
+	//											assertArrayEquals(mossa10, menu.getMove("exd4"));
+	//											assertArrayEquals(mossa11, menu.getMove("Te3"));
+	//											assertArrayEquals(mossa12, menu.getMove("Te6"));
+	//											assertArrayEquals(mossa13, menu.getMove("a5"));
+	//											assertArrayEquals(mossa14, menu.getMove("d3"));
+	//											assertThrows(IllegalMoveException.class, () -> {
+	//												menu.getMove("Txd3");
+	//											});
+	//					
+	//										});
+	//									}
+	//					
+	//					
+
+	//									//test cattura illegale 
+	//									@Test
+	//									void testCaptureOnIllegalCellFromRook() {
+	//										String[] mossa1 = { "\u2659", null, "a4" };
+	//										String[] mossa2 = { "\u265F", null, "h5" };
+	//										String[] mossa3 = { "\u2656", null, "a3" };
+	//										String[] mossa4 = { "\u265C", null, "h6" };
+	//										String[] mossa5 = { "\u2656", null, "b3" };
+	//										String[] mossa6 = { "\u265C", null, "g6" };
+	//										assertAll("Test on Illegal Cell", () -> {
+	//											assertArrayEquals(mossa1, menu.getMove("a4"));
+	//											assertArrayEquals(mossa2, menu.getMove("h5"));
+	//											assertArrayEquals(mossa3, menu.getMove("Ta3"));
+	//											assertArrayEquals(mossa4, menu.getMove("Th6"));
+	//											assertArrayEquals(mossa5, menu.getMove("Tb3"));
+	//											assertArrayEquals(mossa6, menu.getMove("Tg6"));
+	//											//test cattura con notazione errata ma cella corretta
+	//											assertThrows(IllegalMoveException.class, () -> {
+	//												menu.getMove("Tcb7");
+	//											});
+	//											//test cattura su cella non consentita
+	//											assertThrows(IllegalMoveException.class, () -> {
+	//												menu.getMove("Txc4");
+	//											});
+	//											//test cattura con notazione cella oltre limiti scacchiera
+	//											assertThrows(IllegalMoveException.class, () -> {
+	//												menu.getMove("Txq9");
+	//											});
+	//											//test cattura su pezzo di colore diverso, ma coperto da altro pezzo
+	//											assertThrows(IllegalMoveException.class, () -> {
+	//												menu.getMove("Txb8");
+	//											});
+	//											//test cattura su se stesso
+	//											assertThrows(IllegalMoveException.class, () -> {
+	//												menu.getMove("Txb3");
+	//											});
+	//										});
+	//	
+	//	
+	//									}
 
 
 

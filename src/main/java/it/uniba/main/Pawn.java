@@ -199,7 +199,7 @@ class Pawn extends Piece {
             if (King.isThreatened()) {
                 Game.getCell(x, y).setPiece(caught);
                 Game.getCell(xCheck, yCheck).setPiece(p);
-                throw new IllegalMoveException("Mossa illegale; il Re è sotto scacco o ci finirebbe dopo questa mossa");
+                throw new IllegalMoveException("Mossa illegale; il Re e' sotto scacco o ci finirebbe dopo questa mossa");
             } else {
                 if (caught.getColor() == 0) {
                     Game.addBlackCaptured(caught.toString());
