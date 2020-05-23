@@ -10,7 +10,6 @@ import static it.uniba.main.FinalPar.MAXROW;
 import static it.uniba.main.FinalPar.OUTOFBOUND;
 import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
 import static it.uniba.main.FinalPar.STRARRDIM;
-import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
 
 /**
  * <<entity>><br>
