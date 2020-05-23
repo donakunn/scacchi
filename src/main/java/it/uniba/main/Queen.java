@@ -223,7 +223,7 @@ class Queen extends Piece {
         if (King.isThreatened()) {
             Game.getCell(x, y).setPiece(target);
             Game.getCell(xCheck, yCheck).setPiece(q);
-            throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco o ci finirebbe dopo questa mossa");
+            throw new IllegalMoveException("Mossa illegale; il Re e' sotto scacco o ci finirebbe dopo questa mossa");
         } else {
             if (isCapture) {
                 if (target.getColor() == 0) {
