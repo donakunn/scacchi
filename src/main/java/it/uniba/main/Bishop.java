@@ -27,14 +27,11 @@ class Bishop extends Piece {
 	 * @param col: colore del pezzo.
 	 */
     Bishop(final int col) {
-
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265D"; // Alfiere nero
-
+        	this.setPieceType("\u265D"); // Alfiere nero
         } else {
-            this.pieceType = "\u2657"; // Alfiere bianco
-
+        	this.setPieceType("\u2657"); // Alfiere bianco
         }
     }
 
@@ -54,6 +51,14 @@ class Bishop extends Piece {
         int yCheck; // sentinella dell'ordinata
         boolean blackTurn = Game.getBlackTurn();
         boolean isCapture;
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
+
         if (move.length() == PIECEMOVELENGTH) {
             isCapture = false;
         } else if ((move.length() == CAPTURELENGTH) && (move.substring(CHARPOS1, CHARPOS2).equals("x"))) {
@@ -72,11 +77,11 @@ class Bishop extends Piece {
         }
         if (Game.getCell(x, y).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-            if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+            if (Game.getCell(x, y).getPiece().getColor() == blackTurnColor) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
 
                 //o se � una mossa di spostamento con cella di destinazione occupata da avversario
-            } else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+            } else if (Game.getCell(x, y).getPiece().getColor() != blackTurnColor && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
@@ -89,7 +94,7 @@ class Bishop extends Piece {
         yCheck = y - 1;
         while (xCheck >= 0 && yCheck >= 0) { // controllo diagonale alta sinistra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -102,7 +107,7 @@ class Bishop extends Piece {
         yCheck = y + 1;
         while (xCheck >= 0 && yCheck < MAXCOL) { // controllo diagonale alta destra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -115,7 +120,7 @@ class Bishop extends Piece {
         yCheck = y - 1;
         while (xCheck < MAXROW && yCheck >= 0) { // controllo diagonale bassa sinistra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -129,7 +134,7 @@ class Bishop extends Piece {
         yCheck = y + 1;
         while (xCheck < MAXROW && yCheck < MAXCOL) { // controllo diagonale bassa destra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Bishop)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -150,10 +155,10 @@ class Bishop extends Piece {
      * Permette di effettuare la mossa.
      * 
      * @param isCapture: verifica se si tratta di una mossa o di una cattura.
-     * @param x: ascissa dell'Alfiere.
-     * @param y: ordinata dell'Alfiere.
-     * @param xCheck: sentinella dell'ascissa.
-     * @param yCheck: sentinella dell'ordinata.
+     * @param x: ascissa di arrivo dell'Alfiere.
+     * @param y: ordinata di arrivo dell'Alfiere.
+     * @param xCheck: ascissa di partenza dell'Alfiere.
+     * @param yCheck: ordinata di partenza dell'Alfiere.
      * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException

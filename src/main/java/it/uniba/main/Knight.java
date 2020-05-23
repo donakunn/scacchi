@@ -13,24 +13,36 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * Knight class, implementing the abstract class {@link Piece}<br>
- *
+ * <p>Titolo: Knight</p>
+ * <p>Descrizione: La classe Knight implementa la classe astratta {@link Piece} e permette di utilizzare
+ * il Cavallo all'interno del gioco.
+ * 
  * @author Donato Lucente
  */
 class Knight extends Piece {
 
-
+	/**
+	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+	 * @param col: colore del pezzo.
+	 */
     Knight(final int col) {
-
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265E"; // Cavallo nero
-
+        	this.setPieceType("\u265E"); // Cavallo nero
         } else {
-            this.pieceType = "\u2658"; // Cavallo bianco
+        	this.setPieceType("\u2658"); // Cavallo bianco
         }
     }
 
+    /**
+     * Verifica se e' possibile effettuare la mossa.
+     * 
+     * @param x: ascissa della casella di partenza.
+     * @param y: ordinata della casella di partenza.
+     * @param a: ascissa della casella di arrivo.
+     * @param b: ordinata della casella di arrivo.
+     * @return true, se e' possibile effettuare la mossa; false, altrimenti.
+     */
     private static boolean isMovable(final int x, final int y, final int a, final int b) {
         if ((Math.abs(x - a) == 1 && Math.abs(y - b) == 2)
                 || (Math.abs(y - b) == 1 && Math.abs(x - a) == 2)) {
@@ -39,6 +51,14 @@ class Knight extends Piece {
         return false;
     }
 
+    /**
+     * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
+     * 
+     * @param move: mossa specificata dell'utente.
+     * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     static String[] move(final String move) throws IllegalMoveException {
         int count = 0;
         int xC1 = -1;
@@ -51,6 +71,13 @@ class Knight extends Piece {
         final int maxCount = 3;
         boolean isCapture = false;
         boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
 
         int a = MAXROW - (((int) move.charAt(move.length() - 1)) - DIGIT0INASCII);
         int b = (int) move.charAt(move.length() - 2) - AINASCII;
@@ -65,12 +92,12 @@ class Knight extends Piece {
 
         if (Game.getCell(a, b).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-            if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+            if (Game.getCell(a, b).getPiece().getColor() == blackTurnColor) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
 
 
                 //o se � una mossa di spostamento con cella di destinazione occupata da avversario
-            } else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+            } else if (Game.getCell(a, b).getPiece().getColor() != blackTurnColor && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
@@ -83,7 +110,7 @@ class Knight extends Piece {
         for (int i = 0; i <= OUTOFBOUND; i++) {
             for (int j = 0; j <= OUTOFBOUND; j++) {
                 if (Game.getCell(i, j).getPiece() instanceof Knight
-                        && Game.getCell(i, j).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+                        && Game.getCell(i, j).getPiece().getColor() == blackTurnColor) {
                     if (xC1 == -1) {
                         xC1 = i;
                         yC1 = j;
@@ -160,6 +187,18 @@ class Knight extends Piece {
         return actualMove(isCapture, xTarget, yTarget, a, b);
     }
 
+    /**
+     * Permette di effettuare la mossa.
+     * 
+     * @param isCapture: verifica se si tratta di una mossa o una cattura.
+     * @param xC: ascissa di partenza del Cavallo.
+     * @param yC: ordinata di partenza del Cavallo.
+     * @param x: ascissa di arrivo del Cavallo.
+     * @param y: ordinata di arrivo del Cavallo.
+     * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
             throws IllegalMoveException {
         String[] pieces = new String[STRARRDIM];

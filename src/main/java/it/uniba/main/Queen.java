@@ -14,8 +14,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 /**
  * <<entity>><br>
  * <p>Titolo: Queen</p>
- * <p>Descrizione: La classe Queen implementa la classe astratta {@link Piece} 
- * e permette di utilizzare la Regina
+ * <p>Descrizione: La classe Queen implementa la classe astratta {@link Piece} e permette di utilizzare la Regina
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente
@@ -27,19 +26,16 @@ class Queen extends Piece {
 	 * @param col: colore del pezzo.
 	 */
     Queen(final int col) {
-        this.color = col;
+    	this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265B"; // Regina nera
-
-
+        	this.setPieceType("\u265B"); // Regina nera
         } else {
-            this.pieceType = "\u2655"; // Regina bianca
+        	this.setPieceType("\u2655"); // Regina bianca
         }
     }
 
     /**
-     * Effettua tutti i controlli che servono 
-     * per poter effettuare la mossa o la cattura.
+     * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
      * 
      * @param move: mossa specificata dall'utente.
      * @return array contenente la Regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
@@ -54,6 +50,14 @@ class Queen extends Piece {
         final int xValue = 3;
         boolean blackTurn = Game.getBlackTurn();
         boolean isCapture;
+        int blackTurnColor;
+
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
+
         if (move.length() == PIECEMOVELENGTH) {
             isCapture = false;
         } else if ((move.length() == CAPTURELENGTH) && (move.substring(CHARPOS1, CHARPOS2).equals("x"))) {
@@ -71,11 +75,11 @@ class Queen extends Piece {
         }
         if (Game.getCell(x, y).getPiece() != null) {
             //lancia eccezione se la cella di destinazione � occupata da alleato
-            if (Game.getCell(x, y).getPiece().getColor() == (blackTurn ? 0 : 1)) {
+            if (Game.getCell(x, y).getPiece().getColor() == blackTurnColor) {
                 throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
 
                 //o se � una mossa di spostamento con cella di destinazione occupata da avversario
-            } else if (Game.getCell(x, y).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
+            } else if (Game.getCell(x, y).getPiece().getColor() != (blackTurnColor) && !isCapture) {
                 throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
             }
 
@@ -87,7 +91,7 @@ class Queen extends Piece {
         xCheck = x + 1; // controllo in verticale, verso il basso (della matrice)
         while (xCheck < MAXROW) {
             if ((Game.getCell(xCheck, y).getPiece() instanceof Queen)
-                    && (Game.getCell(xCheck, y).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, y).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, y);
             } else if (Game.getCell(xCheck, y).getPiece() != null) {
                 break;
@@ -98,7 +102,7 @@ class Queen extends Piece {
         xCheck = x - 1;
         while (xCheck >= 0) { // controllo in verticale, verso l'alto (della matrice)
             if ((Game.getCell(xCheck, y).getPiece() instanceof Queen)
-                    && (Game.getCell(xCheck, y).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, y).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, y);
             } else if (Game.getCell(xCheck, y).getPiece() != null) {
                 break;
@@ -109,7 +113,7 @@ class Queen extends Piece {
         yCheck = y + 1; // controllo in orizzontale a destra
         while (yCheck < MAXCOL) {
             if ((Game.getCell(x, yCheck).getPiece() instanceof Queen)
-                    && (Game.getCell(x, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(x, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, x, yCheck);
             } else if (Game.getCell(x, yCheck).getPiece() != null) {
                 break;
@@ -120,7 +124,7 @@ class Queen extends Piece {
         yCheck = y - 1;
         while (yCheck >= 0) { // controllo in orizzontale a sinistra
             if ((Game.getCell(x, yCheck).getPiece() instanceof Queen)
-                    && (Game.getCell(x, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(x, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, x, yCheck);
             } else if (Game.getCell(x, yCheck).getPiece() != null) {
                 break;
@@ -132,7 +136,7 @@ class Queen extends Piece {
         yCheck = y - 1;
         while (xCheck >= 0 && yCheck >= 0) { // controllo diagonale alta sinistra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Queen)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -145,7 +149,7 @@ class Queen extends Piece {
         yCheck = y + 1;
         while (xCheck >= 0 && yCheck < MAXCOL) { // controllo diagonale alta destra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Queen)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -158,7 +162,7 @@ class Queen extends Piece {
         yCheck = y - 1;
         while (xCheck < MAXROW && yCheck >= 0) { // controllo diagonale bassa sinistra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Queen)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -172,7 +176,7 @@ class Queen extends Piece {
         yCheck = y + 1;
         while (xCheck < MAXROW && yCheck < MAXCOL) { // controllo diagonale bassa destra
             if ((Game.getCell(xCheck, yCheck).getPiece() instanceof Queen)
-                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == (blackTurn ? 0 : 1))) {
+                    && (Game.getCell(xCheck, yCheck).getPiece().getColor() == blackTurnColor)) {
                 return actualMove(isCapture, x, y, xCheck, yCheck);
             } else if (Game.getCell(xCheck, yCheck).getPiece() != null) {
                 break;
@@ -183,8 +187,7 @@ class Queen extends Piece {
         }
         if (isCapture) {
             throw new IllegalMoveException(
-                    "Mossa illegale; La donna non puo' effettuare"
-                            + " la cattura nella cella di destinazione data");
+                    "Mossa illegale; La donna non puo' effettuare la cattura nella cella di destinazione");
         } else {
             throw new IllegalMoveException("Mossa illegale; La donna non puo' muoversi qui");
         }
@@ -194,10 +197,10 @@ class Queen extends Piece {
      * Permette di effettuare la mossa.
      * 
      * @param isCapture: verifica se si tratta di una mossa o di una cattura.
-     * @param x: ascissa della Regina.
-     * @param y: ordinata della Regina.
-     * @param xCheck: sentinella dell'ascissa.
-     * @param yCheck: sentinella dell'ordinata.
+     * @param x: ascissa di arrivo della Regina.
+     * @param y: ordinata di arrivo della Regina.
+     * @param xCheck: ascissa di partenza della Regina.
+     * @param yCheck: ordinata di Partenza della regina.
      * @return array contenente la Regina che effettua la mossa 
      * o la cattura convertita a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.

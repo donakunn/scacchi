@@ -31,23 +31,15 @@ class Pawn extends Piece {
 	 * @param col: colore del pezzo.
 	 */
     Pawn(final int col) { // costruttore classe Pedone
-        nMoves = 0;
-
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265F"; // pedone nero
+        	this.setPieceType("\u265F"); // pedone nero
 
         } else {
-            this.pieceType = "\u2659"; // pedone bianco
+        	this.setPieceType("\u2659"); // pedone bianco
 
         }
-    }
-
-    /**
-     * Incrementa il contatore delle mosse del Pedone.
-     */
-    private void incrementMoves() {
-        this.nMoves++;
+        this.setnMoves(0);
     }
 
     /**
@@ -59,9 +51,9 @@ class Pawn extends Piece {
     private Boolean enPassantCatturable(final int x) { // restituisce true se il pedone
         // ha effettuato una sola mossa con salto di 2,
         // false altrimenti
-        if ((getColor() == 1) && (nMoves == 1) && (x == POS4)) {
+        if ((getColor() == 1) && (this.getnMoves()== 1) && (x == POS4)) {
             return true;
-        } else if ((getColor() == 0) && (nMoves == 1) && (x == POS3)) {
+        } else if ((getColor() == 0) && (this.getnMoves() == 1) && (x == POS3)) {
             return true;
         }
         return false;
@@ -104,7 +96,7 @@ class Pawn extends Piece {
                 && (Game.getCell(x - 2, y).getPiece().getColor() == 0)
                 // check se casella in x-2 c'e' pedone con colore 1
                 && (blackTurn)
-                && (Game.getCell(x - 2, y).getPiece().getMoves() == 0)) { // se le condizioni sono
+                && (Game.getCell(x - 2, y).getPiece().getnMoves() == 0)) { // se le condizioni sono
             // rispettate fa la mossa
             xCheck = x - 2;
         } else if ((x >= 0)
@@ -120,7 +112,7 @@ class Pawn extends Piece {
                 && (Game.getCell(x + 2, y).getPiece().getColor() == 1)
                 // check se casella in x+2 c'e' pedone con colore 1
                 && (!blackTurn)
-                && (Game.getCell(x + 2, y).getPiece().getMoves() == 0)) { // se le condizioni sono
+                && (Game.getCell(x + 2, y).getPiece().getnMoves() == 0)) { // se le condizioni sono
             // rispettate fa la mossa
             xCheck = x + 2;
         } else {

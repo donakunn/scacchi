@@ -14,7 +14,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 /**
  * <<entity>><br>
  * <p>Titolo: Rook</p>
- * <p>Descrizione: La classe Rook implementa la classe astratta {@link Piece}<br> e permette di utilizzare
+ * <p>Descrizione: La classe Rook implementa la classe astratta {@link Piece} e permette di utilizzare
  * la Torre all'interno del gioco.
  *
  * @author Donato Lucente
@@ -27,258 +27,267 @@ class Rook extends Piece {
 	 * 
 	 * @param col: colore del pezzo.
 	 */
-	Rook(final int col) {
+
+    Rook(final int col) {
+        this.setColor(col);
+        if (col == 0) {
+        	this.setPieceType("\u265C"); // Torre nera
+        } else {
+            this.setPieceType("\u2656"); // Torre bianca
+        } 
+        this.setnMoves(0);
+    }
 
 
-		this.color = col;
-		if (col == 0) {
-			this.pieceType = "\u265C"; // Torre nera
-			nMoves = 0;
+    /**
+     * Verifica se e' possibile effettuare la mossa.
+     * 
+     * @param x: ascissa della casella di partenza.
+     * @param y: ordinata della casella di partenza.
+     * @param a: ascissa della casella di arrivo.
+     * @param b: ordinata della casella di arrivo.
+     * @return true, se e' possibile effettuare la mossa; false, altrimenti.
+     */
+    private static boolean isMovable(final int x, final int y, final int a, final int b) {
 
-		} else {
+        int i = a;
+        int j = b;
+        boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
 
-			this.pieceType = "\u2656"; // Torre bianca
-			nMoves = 0;
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
 
+        if (x == a && y == b) {
+            return false;
+        }
 
-		} 
+        if (x == a) { // controllo orizzontale
+            int dx;
 
-	}
+            if (y < b) {
+                dx = 1;
+            } else {
+                dx = -1;
+            }
 
-	/**
-	 * Incrementa il contatore delle mosse della Torre.
-	 */
-	void incrementMoves() {
-		nMoves++;
-	}
+            for (j = y + dx; j != b; j += dx) {
+                if (Game.getCell(x, j).getPiece() != null) {
+                    break;
+                }
+            }
+            i=x;
+        } else if (y == b) { // in verticale
+            int dy;
 
-	/**
-	 * 
-	 * @return il numero delle mosse effettuate dalla Torre.
-	 */
-	int getNumberOfMoves() {
-		return this.nMoves;
-	}
+            if (x < a) {
+                dy = 1;
+            } else {
+                dy = -1;
+            }
 
-
-	/**
-	 * Verifica che la mossa sia una mossa legale.
-	 * 
-	 * @param x: ascissa della casella di partenza.
-	 * @param y: ordinata della casella di partenza.
-	 * @param a: ascissa della casella di arrivo.
-	 * @param b: ordinata della casella di arrivo.
-	 * @return true, se è possibile effettuare la mossa; false, altrimenti.
-	 */
-	private static boolean isMovable(final int x, final int y, final int a, final int b) {
-
-		int i = a;
-		int j = b;
-
-		if (x == a && y == b) {
-			return false;
-		}
-
-		if (x == a) { // controllo orizzontale
-			int dx = (y < b) ? 1 : -1;
-
-			for (j = y + dx; j != b; j += dx) {
-				if (Game.getCell(x, j).getPiece() != null) {
-					break;
-				}
-			}
-		} else if (y == b) { // in verticale
-			int dy = (x < a) ? 1 : -1;
-
-			for (i = x + dy; i != a; i += dy) {
-				if (Game.getCell(i, y).getPiece() != null) {
-					break;
-				}
-			}
-		} else { // Non valido
-			return false;
-		}
-		if (Game.getCell(i, j).getPiece() == null
-				|| Game.getCell(i, j).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1)) {
-			return true;
-		}
-		return false;
-	}
+            for (i = x + dy; i != a; i += dy) {
+                if (Game.getCell(i, y).getPiece() != null) {
+                    break;
+                }
+            }
+            j=y;
+        } else { // Non valido
+            return false;
+        }
+        if(i!=a||j!=b) {
+        	return false;
+        }
+        if (Game.getCell(i, j).getPiece() == null
+                || Game.getCell(i, j).getPiece().getColor() != blackTurnColor) {
+            return true;
+        }
+        return false;
+    }
 
 
-	/**
-	 * Effettua i controlli che servono per poter effettuare la mossa o la cattura.
-	 * 
-	 * @param move: mossa specificata dall'utente.
-	 * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
-	 * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-	 * @throws IllegalMoveException
-	 */
-	static String[] move(final String move) throws IllegalMoveException {
+    /**
+     * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
+     * 
+     * @param move: mossa specificata dall'utente.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
+    static String[] move(final String move) throws IllegalMoveException {
 
-		int count = 0;
-		int xT1 = -1;
-		int yT1 = -1;
-		int xT2 = -1;
-		int yT2 = -1;
-		int xTarget = -1;
-		int yTarget = -1;
-		final int maxCount = 3;
-		boolean isCapture = false;
-		boolean blackTurn = Game.getBlackTurn();
+        int count = 0;
+        int xT1 = -1;
+        int yT1 = -1;
+        int xT2 = -1;
+        int yT2 = -1;
+        int xTarget = -1;
+        int yTarget = -1;
+        final int maxCount = 3;
+        boolean isCapture = false;
+        boolean blackTurn = Game.getBlackTurn();
+        int blackTurnColor;
 
-		int a = MAXROW - (((int) move.charAt(move.length() - 1)) - DIGIT0INASCII);
-		int b = (int) move.charAt(move.length() - 2) - AINASCII;
-		if ((a < 0) || (a > OUTOFBOUND) || (b < 0) || (b > OUTOFBOUND)) {
-			throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
-		}
+        if (blackTurn) {
+            blackTurnColor = 0;
+        } else {
+            blackTurnColor = 1;
+        }
 
-		if ((move.length() == CAPTURELENGTH && move.charAt(CHARPOS1) == 'x')
-				|| (move.length() == AMBCAPTLENGTH && move.charAt(CHARPOS2) == 'x')) {
-			isCapture = true;
-		}
+        int a = MAXROW - (((int) move.charAt(move.length() - 1)) - DIGIT0INASCII);
+        int b = (int) move.charAt(move.length() - 2) - AINASCII;
+        if ((a < 0) || (a > OUTOFBOUND) || (b < 0) || (b > OUTOFBOUND)) {
+            throw new IllegalMoveException("Mossa illegale; non rispetta i limiti della scacchiera");
+        }
 
-		if (Game.getCell(a, b).getPiece() != null) {
-			//lancia eccezione se la cella di destinazione ï¿½ occupata da alleato
-			if (Game.getCell(a, b).getPiece().getColor() == (blackTurn ? 0 : 1)) {
-				throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
-				//o se � una mossa di spostamento con cella di destinazione occupata da avversario
-			} else if (Game.getCell(a, b).getPiece().getColor() != (blackTurn ? 0 : 1) && !isCapture) {
-				throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
-			}
+        if ((move.length() == CAPTURELENGTH && move.charAt(CHARPOS1) == 'x')
+                || (move.length() == AMBCAPTLENGTH && move.charAt(CHARPOS2) == 'x')) {
+            isCapture = true;
+        }
 
-			//o se ï¿½ una mossa di cattura con cella di destinazione vuota
-		} else if (Game.getCell(a, b).getPiece() == null && isCapture) {
-			throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
-		}
+        if (Game.getCell(a, b).getPiece() != null) {
+            //lancia eccezione se la cella di destinazione e' occupata da alleato
+            if (Game.getCell(a, b).getPiece().getColor() == blackTurnColor) {
+                throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
+                //o se � una mossa di spostamento con cella di destinazione occupata da avversario
+            } else if (Game.getCell(a, b).getPiece().getColor() != blackTurnColor && !isCapture) {
+                throw new IllegalMoveException("Mossa illegale; La cella di destinazione non e' vuota");
+            }
 
-		for (int i = 0; i <= OUTOFBOUND; i++) {
-			for (int j = 0; j <= OUTOFBOUND; j++) {
-				if (Game.getCell(i, j).getPiece() instanceof Rook
-						&& Game.getCell(i, j).getPiece().getColor() == (blackTurn ? 0 : 1)) {
-					if (xT1 == -1) {
-						xT1 = i;
-						yT1 = j;
-					} else {
-						xT2 = i;
-						yT2 = j;
-					}
-				}
-			}
-		}
-		if (xT1 != -1 && yT1 != -1) {
-			if (isMovable(xT1, yT1, a, b)) {
-				count = count + 1;
-			}
-		}
-		if (xT2 != -1 && yT2 != -1) {
-			if (isMovable(xT2, yT2, a, b)) {
-				count = count + 2;
-			}
-		}
+            //o se ï¿½ una mossa di cattura con cella di destinazione vuota
+        } else if (Game.getCell(a, b).getPiece() == null && isCapture) {
+            throw new IllegalMoveException("Mossa illegale; La cella di destinazione e' vuota");
+        }
 
-		if (count == 0) {
-			throw new IllegalMoveException("Nessuna torre puo' spostarsi in quella cella.");
-		}
+        for (int i = 0; i <= OUTOFBOUND; i++) {
+            for (int j = 0; j <= OUTOFBOUND; j++) {
+                if (Game.getCell(i, j).getPiece() instanceof Rook
+                        && Game.getCell(i, j).getPiece().getColor() == blackTurnColor) {
+                    if (xT1 == -1) {
+                        xT1 = i;
+                        yT1 = j;
+                    } else {
+                        xT2 = i;
+                        yT2 = j;
+                    }
+                }
+            }
+        }
+        if (xT1 != -1 && yT1 != -1) {
+            if (isMovable(xT1, yT1, a, b)) {
+                count = count + 1;
+            }
+        }
+        if (xT2 != -1 && yT2 != -1) {
+            if (isMovable(xT2, yT2, a, b)) {
+                count = count + 2;
+            }
+        }
 
-		if (count == 1) {
-			xTarget = xT1;
-			yTarget = yT1;
-		} else if (count == 2) {
-			xTarget = xT2;
-			yTarget = yT2;
-		} else if (count == maxCount) {
-			if (move.length() == PIECEMOVELENGTH) {
-				throw new IllegalMoveException(
-						"Mossa ambigua, devi specificare quale delle due torri "
-								+ "muovere secondo la notazione algebrica.");
-			}
-			if (move.charAt(CHARPOS1) >= '1' && move.charAt(CHARPOS1) <= '8') {
-				if (xT1 == xT2) {
-					throw new IllegalMoveException(
-							"Quando le due torri si trovano sulla stessa riga "
-									+ "e' necessario specificare la colonna!");
-				}
-				if (xT1 == (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
-					xTarget = xT1;
-					yTarget = yT1;
-				} else if (xT2 == (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
-					xTarget = xT2;
-					yTarget = yT2;
-				} else {
+        if (count == 0) {
+            throw new IllegalMoveException("Nessuna torre puo' spostarsi in quella cella.");
+        }
+
+        if (count == 1) {
+            xTarget = xT1;
+            yTarget = yT1;
+        } else if (count == 2) {
+            xTarget = xT2;
+            yTarget = yT2;
+        } else if (count == maxCount) {
+            if (move.length() == PIECEMOVELENGTH) {
+                throw new IllegalMoveException(
+                        "Mossa ambigua, devi specificare quale delle due torri "
+                                + "muovere secondo la notazione algebrica.");
+            }
+            if (move.charAt(CHARPOS1) >= '1' && move.charAt(CHARPOS1) <= '8') {
+                if (xT1 == xT2) {
+                    throw new IllegalMoveException(
+                            "Quando le due torri si trovano sulla stessa riga "
+                                    + "e' necessario specificare la colonna!");
+                }
+                if (xT1 == (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
+                    xTarget = xT1;
+                    yTarget = yT1;
+                } else if (xT2 == (MAXROW - Integer.parseInt(move.substring(CHARPOS1, CHARPOS2)))) {
+                    xTarget = xT2;
+                    yTarget = yT2;
+                }  else {
 					throw new IllegalMoveException(
 							"Nessuna torre appartenente alla riga di disambiguazione specificata.");
 				}
-			} else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
-				if (yT1 == yT2) {
-					throw new IllegalMoveException(
-							"Quando le due torri si trovano sulla stessa "
-									+ "colonna e' necessario specificare la riga!");
-				}
-				if (yT1 == ((int) move.charAt(CHARPOS1) - AINASCII)) {
-					xTarget = xT1;
-					yTarget = yT1;
-				} else if (yT2 == ((int) move.charAt(1) - AINASCII)) {
-					xTarget = xT2;
-					yTarget = yT2;
-				} else {
+            } else if (move.charAt(1) >= 'a' && move.charAt(1) <= 'h') {
+                if (yT1 == yT2) {
+                    throw new IllegalMoveException(
+                            "Quando le due torri si trovano sulla stessa "
+                                    + "colonna e' necessario specificare la riga!");
+                }
+                if (yT1 == ((int) move.charAt(CHARPOS1) - AINASCII)) {
+                    xTarget = xT1;
+                    yTarget = yT1;
+                } else if (yT2 == ((int) move.charAt(1) - AINASCII)) {
+                    xTarget = xT2;
+                    yTarget = yT2;
+                }else {
 						throw new IllegalMoveException(
 							"Nessuna torre appartenente alla colonna di disambiguazione specificata.");
 				}
-			}else {
+            } else {
 				throw new IllegalMoveException(
 						"Mossa ambigua, devi specificare quale delle due torri muovere secondo la notazione algebrica.");
-			}
+			} 
+        }
 
-		} 
-
-		return actualMove(isCapture, xTarget, yTarget, a, b);
-	}
+        return actualMove(isCapture, xTarget, yTarget, a, b);
+    }
 
 
-	/**
-	 * Permette di effettuare la mossa.
-	 * 
-	 * @param isCapture: verifica se si tratta di una mossa o una cattura.
-	 * @param xC: sentinella dell'ascissa.
-	 * @param yC: sentinella dell'ordinata.
-	 * @param x: ascissa della Torre.
-	 * @param y: ordinata della Torre.
-	 * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
-	 * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
-	 * @throws IllegalMoveException
-	 */
-	private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
-			throws IllegalMoveException {
-		String[] pieces = new String[STRARRDIM];
+    /**
+     * Permette di effettuare la mossa.
+     * 
+     * @param isCapture: verifica se si tratta di una mossa o una cattura.
+     * @param xC: ascissa di partenza della Torre.
+     * @param yC: ordinata di partenza della Torre.
+     * @param x: ascissa di arrivo della Torre.
+     * @param y: ordinata di arrivo della Torre.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
+     * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
+    private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
+            throws IllegalMoveException {
+        String[] pieces = new String[STRARRDIM];
 
-		Piece target = null;
-		if (isCapture) {
-			target = Game.getCell(x, y).getPiece();
-		}
-		Rook r = (Rook) Game.getCell(xC, yC).getPiece();
-		Game.getCell(xC, yC).setEmpty();
-		Game.getCell(x, y).setPiece(r);
-		if (King.isThreatened()) {
-			Game.getCell(x, y).setPiece(target);
-			Game.getCell(xC, yC).setPiece(r);
-			throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco "
-					+ "o ci finirebbe dopo questa mossa");
-		} else {
-			if (isCapture) {
-				if (target.getColor() == 0) {
-					Game.addBlackCaptured(target.toString());
-				} else {
-					Game.addWhiteCaptured(target.toString());
-				}
-				pieces[1] = target.toString();
-			} else {
-				pieces[1] = null;
-			}
-			r.incrementMoves();
-			pieces[0] = r.toString();
-			pieces[2] = ((char) (y + AINASCII)) + "" + (MAXROW - x);
-			return pieces;
-		}
-	}
+        Piece target = null;
+        if (isCapture) {
+            target = Game.getCell(x, y).getPiece();
+        }
+        Rook r = (Rook) Game.getCell(xC, yC).getPiece();
+        Game.getCell(xC, yC).setEmpty();
+        Game.getCell(x, y).setPiece(r);
+        if (King.isThreatened()) {
+            Game.getCell(x, y).setPiece(target);
+            Game.getCell(xC, yC).setPiece(r);
+            throw new IllegalMoveException("Mossa illegale; il Re � sotto scacco "
+                    + "o ci finirebbe dopo questa mossa");
+        } else {
+            if (isCapture) {
+                if (target.getColor() == 0) {
+                    Game.addBlackCaptured(target.toString());
+                } else {
+                    Game.addWhiteCaptured(target.toString());
+                }
+                pieces[1] = target.toString();
+            } else {
+                pieces[1] = null;
+            }
+            r.incrementMoves();
+            pieces[0] = r.toString();
+            pieces[2] = ((char) (y + AINASCII)) + "" + (MAXROW - x);
+            return pieces;
+        }
+    }
 }
