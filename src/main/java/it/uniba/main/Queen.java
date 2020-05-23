@@ -27,13 +27,11 @@ class Queen extends Piece {
 	 * @param col: colore del pezzo.
 	 */
     Queen(final int col) {
-        this.color = col;
+    	this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265B"; // Regina nera
-
-
+        	this.setPieceType("\u265B"); // Regina nera
         } else {
-            this.pieceType = "\u2655"; // Regina bianca
+        	this.setPieceType("\u2655"); // Regina bianca
         }
     }
 

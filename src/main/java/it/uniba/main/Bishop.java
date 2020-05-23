@@ -27,14 +27,11 @@ class Bishop extends Piece {
 	 * @param col: colore del pezzo.
 	 */
     Bishop(final int col) {
-
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265D"; // Alfiere nero
-
+        	this.setPieceType("\u265D"); // Alfiere nero
         } else {
-            this.pieceType = "\u2657"; // Alfiere bianco
-
+        	this.setPieceType("\u2657"); // Alfiere bianco
         }
     }
 

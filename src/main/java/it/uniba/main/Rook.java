@@ -28,36 +28,13 @@ class Rook extends Piece {
 	 * @param col: colore del pezzo.
 	 */
     Rook(final int col) {
-
-
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265C"; // Torre nera
-            nMoves = 0;
-
+        	this.setPieceType("\u265C"); // Torre nera
         } else {
-
-            this.pieceType = "\u2656"; // Torre bianca
-            nMoves = 0;
-
-
+            this.setPieceType("\u2656"); // Torre bianca
         } 
-
-    }
-
-    /**
-     * Incrementa il contatore delle mosse della Torre.
-     */
-    void incrementMoves() {
-        nMoves++;
-    }
-
-    /**
-     * 
-     * @return il numero delle mosse effettuate dalla Torre.
-     */
-    int getNumberOfMoves() {
-        return this.nMoves;
+        this.setnMoves(0);
     }
 
 
@@ -87,6 +64,7 @@ class Rook extends Piece {
                     break;
                 }
             }
+            i=x;
         } else if (y == b) { // in verticale
             int dy = (x < a) ? 1 : -1;
 
@@ -95,8 +73,12 @@ class Rook extends Piece {
                     break;
                 }
             }
+            j=y;
         } else { // Non valido
             return false;
+        }
+        if(i!=a||j!=b) {
+        	return false;
         }
         if (Game.getCell(i, j).getPiece() == null
                 || Game.getCell(i, j).getPiece().getColor() != (Game.getBlackTurn() ? 0 : 1)) {

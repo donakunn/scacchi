@@ -38,37 +38,14 @@ class King extends Piece {
 
     King(final int col) {
 
-        this.color = col;
+        this.setColor(col);
         if (col == 0) {
-            this.pieceType = "\u265A"; // Re nero
+        	this.setPieceType("\u265A"); // Re nero
             coordBlackKing = new int[] {STARTBKINGX, STARTBKINGY};
-            nMoves = 0;
-
         } else {
-            this.pieceType = "\u2654"; // Re bianco
+        	this.setPieceType("\u2654"); // Re bianco
             coordWhiteKing = new int[] {STARTWKINGX, STARTWKINGY};
-            nMoves = 0;
-
         }
-    }
-
-
-    /**
-     * Incrementa il contatore delle mosse del Re.
-     */
-
-    private void incrementMoves() {
-        nMoves++;
-    }
-
-
-    /**
-     * 
-     * @return il numero delle mosse effettuate dal Re.
-     */
-
-    int getNumberOfMoves() {
-        return this.nMoves;
     }
 
 
@@ -532,8 +509,8 @@ class King extends Piece {
         King k = (King) Game.getCell(xK, yK).getPiece();
         Rook r = (Rook) Game.getCell(xK, yR).getPiece();
         // controllo che non siano stati ancora mossi
-        if ((k.getNumberOfMoves() != 0)
-                || (r.getNumberOfMoves() != 0)) {
+        if ((k.getnMoves() != 0)
+                || (r.getnMoves() != 0)) {
             throw new IllegalMoveException(
                     "Mossa illegale; Il re o la torre "
                             + "sono gia' stati mossi in precedenza");
