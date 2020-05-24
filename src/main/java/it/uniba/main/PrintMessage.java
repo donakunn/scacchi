@@ -25,7 +25,7 @@ public final class PrintMessage {
      * Stampa a video la scacchiera.
      * @param board matrice di stringhe.
      */
-    static void printBoard(final String[][] board) {
+    public static void printBoard(final String[][] board) {
         System.out.println("    a    b    c    d    e    f    g    h");
         for (int i = 0; i < MAXROW; i++) {
             System.out.print(MAXROW - i + "  ");
@@ -42,7 +42,7 @@ public final class PrintMessage {
      * Stampa a video un messaggio.
      * @param message messaggio da mostrare.
      */
-    static void printMessage(String message) {
+    public static void printMessage(String message) {
     	System.out.println(message);
     }
     
@@ -50,7 +50,7 @@ public final class PrintMessage {
      * Stampa a video il turno del giocatore.
      * @param turn turno di chi sta giocando.
      */
-    static void printTurn(String turn) {
+    public static void printTurn(String turn) {
     	System.out.println("Inserire comando (turno dei " + turn + ")");
     }
     
@@ -58,7 +58,7 @@ public final class PrintMessage {
      * Stampa a video un messaggio d'errore.
      * @param e messaggio di errore da mostrare.
      */
-    static void printError(String e) {
+    public static void printError(String e) {
     	System.err.println(e);
     }
 
@@ -66,7 +66,7 @@ public final class PrintMessage {
      * Stampa a video le mosse effettuate.
      * @param moves arraylist che contiene le mosse effettuate.
      */
-    static void printMoves(final ArrayList<String> moves) {
+    public static void printMoves(final ArrayList<String> moves) {
         if (moves.size() == 0) {
             System.out.println("Non sono ancora state effettuate mosse");
         } else {
@@ -92,7 +92,7 @@ public final class PrintMessage {
      * @param capturedBlacks pezzi neri catturati.
      * @param capturedWhites pezzi bianchi catturati.
      */
-    static void printCaptures(final ArrayList<String> capturedBlacks, final ArrayList<String> capturedWhites) {
+    public static void printCaptures(final ArrayList<String> capturedBlacks, final ArrayList<String> capturedWhites) {
         if (capturedBlacks.size() == 0) {
             System.out.println("Nessun pezzo nero catturato");
         } else {
@@ -109,21 +109,21 @@ public final class PrintMessage {
      * Stampa a video la mossa di quel determinato turno.
      * @param pieceAndCell array contenente il pezzo che effettua la mossa e la sua casella di destinazione.
      */
-    static void printAMove(final String[] pieceAndCell) {
+    public static void printAMove(final String[] pieceAndCell) {
         System.out.println(pieceAndCell[0] + " spostato su " + pieceAndCell[2]);
     }
 
     /**
      * Stampa a video il messaggio dell'arrocco corto.
      */
-    static void printShortCastling() {
+    public static void printShortCastling() {
         System.out.println("Arrocco corto eseguito");
     }
 
     /**
      * Stampa a video il messaggio dell'arrocco lungo.
      */
-    static void printLongCastling() {
+    public static void printLongCastling() {
         System.out.println("Arrocco lungo eseguito");
     }
 
@@ -132,7 +132,7 @@ public final class PrintMessage {
      * @param piecesAndCell array contenente il pezzo catturato convertito a stringa, il pezzo che effettua la cattura convertito
      * a stringa e la casella di destinazione.
      */
-    static void printACapture(final String[] piecesAndCell) {
+    public static void printACapture(final String[] piecesAndCell) {
         System.out.println(piecesAndCell[1] + " e' stato catturato da " + piecesAndCell[0] + " su " + piecesAndCell[2]);
     }
 }
