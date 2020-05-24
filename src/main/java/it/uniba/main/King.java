@@ -26,7 +26,13 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  * @author Filippo Iacobellis
  */
 class King extends Piece {
-    private static int[] coordBlackKing = new int[2]; // coordinate re nero, [0]=x [1]=y
+	/**
+	 * Contiene le coordinate del Re nero.
+	 */
+    private static int[] coordBlackKing = new int[2];// coordinate re nero, [0]=x [1]=y
+    /**
+     * Contiene le coordinate del Re bianco.
+     */
     private static int[] coordWhiteKing = new int[2]; // coordinate re bianco, [0]=x [1]=y
 
     /**
@@ -48,10 +54,18 @@ class King extends Piece {
         }
     }
     
+    /**
+     * Assegna i valori delle coordinate del Re nero.
+     * @param newCoord array contenente le coordinate.
+     */
     static void setCoordBlackKing(final int[] newCoord) {
         coordBlackKing = newCoord;
       }
     
+    /**
+     * Assegna i valori delle coordinate del re bianco.
+     * @param newCoord array contenente le coordinate.
+     */
     static void setCoordWhiteKing(final int[] newCoord) {
         coordWhiteKing = newCoord;
       }
