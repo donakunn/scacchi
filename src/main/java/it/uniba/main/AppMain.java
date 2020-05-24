@@ -30,8 +30,8 @@ public final class AppMain {
         boolean inGame = false;
         boolean exit = false;
         Scanner in = new Scanner(System.in, "UTF-8");
-        PrintMessage.printMessage("Benvenuto nel gioco degli scacchi!");
-        PrintMessage.printMessage(
+        System.out.println("Benvenuto nel gioco degli scacchi!");
+        System.out.println(
                 "Inserire comando da eseguire oppure inserire help per la lista dei comandi.");
 
         while (!exit) {
@@ -42,9 +42,9 @@ public final class AppMain {
                 turn = "bianchi";
             }
             if (inGame) {
-            	PrintMessage.printTurn(turn);
+                System.out.println("Inserire comando (turno dei " + turn + ")");
             } else {
-            	PrintMessage.printMessage("Inserire comando:");
+                System.out.println("Inserire comando:");
             }
             String input = in.nextLine();
             switch (input) {
@@ -53,7 +53,7 @@ public final class AppMain {
                         PrintMessage.printBoard(menu.board());
                         break;
                     } else {
-                    	PrintMessage.printError("Devi essere in gioco per usare questo comando.");
+                        System.err.println("Devi essere in gioco per usare questo comando.");
                         break;
                     }
                 case "captures":
@@ -62,45 +62,45 @@ public final class AppMain {
 
                         break;
                     } else {
-                        PrintMessage.printError("Devi essere in gioco per usare questo comando.");
+                        System.err.println("Devi essere in gioco per usare questo comando.");
                         break;
                     }
                 case "help":
-                	PrintMessage.printMessage(menu.help());
+                    System.out.println(menu.help());
                     break;
                 case "moves":
                     if (inGame) {
                         PrintMessage.printMoves(menu.moves());
                         break;
                     } else {
-                    	PrintMessage.printError("Devi essere in gioco per usare questo comando.");
+                        System.err.println("Devi essere in gioco per usare questo comando.");
                         break;
                     }
                 case "play":
                     if (!inGame) {
-                    	PrintMessage.printMessage("Creo nuova partita..");
+                        System.out.println("Creo nuova partita..");
                         inGame = true;
                         menu.play();
-                        PrintMessage.printMessage("Partita creata.");
+                        System.out.println("Partita creata.");
                     } else {
-                    	PrintMessage.printMessage("Partita gia' avviata. Vuoi cancellarla ed iniziare una nuova partita?");
+                        System.out.println("Partita gia' avviata. Vuoi cancellarla ed iniziare una nuova partita?");
                         while (true) {
                             String answer = in.nextLine();
                             if (answer.toUpperCase().equals("SI") || answer.toUpperCase().equals("YES")) {
-                            	PrintMessage.printMessage("Cancello la partita in corso e ne avvio una nuova");
+                                System.out.println("Cancello la partita in corso e ne avvio una nuova");
                                 menu.play();
                                 break;
                             } else if (answer.toUpperCase().equals("NO")) {
                                 break;
                             } else {
-                            	PrintMessage.printMessage("Risposta non valida; inserire si (yes) o no");
+                                System.out.println("Risposta non valida; inserire si (yes) o no");
                             }
                         }
                     }
                     break;
                 case "quit":
                     String answer;
-                    PrintMessage.printMessage("Sei sicuro di voler uscire? ");
+                    System.out.println("Sei sicuro di voler uscire? ");
                     answer = in.nextLine();
                     answer = answer.toUpperCase();
 
@@ -112,7 +112,7 @@ public final class AppMain {
                         exit = false;
                         break;
                     } else {
-                    	PrintMessage.printMessage("Risposta non valida, inserisci si (yes) o no");
+                        System.out.println("Risposta non valida, inserisci si (yes) o no");
                     }
 
                 default:
@@ -136,20 +136,20 @@ public final class AppMain {
                             }
 
                         } catch (StringIndexOutOfBoundsException e) {
-                        	PrintMessage.printError("Comando non valido.");
+                            System.err.println("Comando non valido.");
                         } catch (IllegalArgumentException e) {
-                        	PrintMessage.printError("Mossa non riconosciuta");
+                            System.err.println("Mossa non riconosciuta");
                         } catch (IndexOutOfBoundsException e) {
-                        	PrintMessage.printError(
+                            System.err.println(
                                     "Mossa illegale; la mossa specificata non rispetta "
                                             + "i limiti della scacchiera (a-g) (1-8)");
                         } catch (IllegalMoveException e) {
-                        	PrintMessage.printError(e.getMessage());
+                            System.err.println(e.getMessage());
                         }
 
                         break;
                     } else {
-                    	PrintMessage.printError("Comando o mossa non riconosciuti");
+                        System.err.println("Comando o mossa non riconosciuta");
                         break;
                     }
             }
