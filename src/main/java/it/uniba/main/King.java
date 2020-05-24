@@ -407,7 +407,8 @@ class King extends Piece {
      * Permette di muovere il Re all'interno della scacchiera e comprende anche la possibilita' di effettuare una cattura.
      *
      * @param move mossa specificata dall'utente.
-     * @return array che contiene il Re che effettua la cattura, il pezzo catturato e la casella di destinazione.
+     * @return array che contiene il Re effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
+     * se si tratta di una cattura contiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException
      */
 
