@@ -1,5 +1,10 @@
 package it.uniba.main;
 
+import java.util.ArrayList;
+
+import static it.uniba.main.FinalPar.MAXCOL;
+import static it.uniba.main.FinalPar.MAXROW;
+
 /**
  * <<boundary>><br>
  * <p>Titolo: PrintMessage</p>
@@ -8,11 +13,6 @@ package it.uniba.main;
  * 
  * @author Donato Lucente 
  */
-
-import java.util.ArrayList;
-
-import static it.uniba.main.FinalPar.MAXCOL;
-import static it.uniba.main.FinalPar.MAXROW;
 
 public final class PrintMessage {
 	/**

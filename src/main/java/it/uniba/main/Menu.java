@@ -18,6 +18,9 @@ import static it.uniba.main.FinalPar.MAXROW;
  * @author Filippo Iacobellis
  */
 public final class Menu {
+	/**
+	 * Crea un nuovo gioco.
+	 */
     private Game game = new Game();
 
     /**
