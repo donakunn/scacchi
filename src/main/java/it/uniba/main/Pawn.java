@@ -28,7 +28,7 @@ class Pawn extends Piece {
 	/**
 	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
 	 * 
-	 * @param col: colore del pezzo.
+	 * @param col colore del pezzo.
 	 */
     Pawn(final int col) { // costruttore classe Pedone
         this.setColor(col);
@@ -45,7 +45,7 @@ class Pawn extends Piece {
     /**
      * Controlla che il Pedone sia catturabile en passant.
      *
-     * @param x: ascissa del Pedone.
+     * @param x ascissa del Pedone.
      * @return true, se il Pedone e' catturabile en passant; false, altrimenti.
      */
     private Boolean enPassantCatturable(final int x) { // restituisce true se il pedone
@@ -62,7 +62,7 @@ class Pawn extends Piece {
     /**
      * Permette di muovere un Pedone all'interno della scacchiera.
      *
-     * @param move: mossa specificata dall'utente.
+     * @param move mossa specificata dall'utente.
      * @return array che contiene il Pedone che e' stato mosso convertito a stringa e la cella di destinazione.
      * @throws IllegalMoveException
      */
@@ -134,7 +134,7 @@ class Pawn extends Piece {
     /**
      * Consente ad un Pedone di catturare, semplicemente o en passant, un pezzo all'interno della scacchiera.
      *
-     * @param move: mossa specificta dall'utente.
+     * @param move mossa specificta dall'utente.
      * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e
      * la cella di destinazione.
      * @throws IllegalMoveException
@@ -221,7 +221,7 @@ class Pawn extends Piece {
 
      * Consente ad un Pedone di catturare solo en passant all'interno della scacchiera.
      *
-     * @param move: mossa specificata dall'utente.
+     * @param move mossa specificata dall'utente.
      * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e
      * la cella di destinazione.
      * @throws IllegalMoveException

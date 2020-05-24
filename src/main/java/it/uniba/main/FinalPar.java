@@ -48,7 +48,7 @@ public final class FinalPar {
      */
     public static final int ALTEPLENGTH = 8;
     /**
-     * Lunghrzza della cattura en passant se si usa la notazione 'ep'.
+     * Lunghezza della cattura en passant se si usa la notazione 'ep'.
      */
     public static final int CAPTEPLENGTH = 6;
     /**
@@ -132,7 +132,7 @@ public final class FinalPar {
      */
     public static final int STARTBKINGX = 0;
     /**
-     * Ordinata iniziale del Re nero
+     * Ordinata iniziale del Re nero.
      */
     public static final int STARTBKINGY = 4;
     /**
