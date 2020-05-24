@@ -477,9 +477,9 @@ class King extends Piece {
                         "Mossa illegale, devi specificare la cattura come da notazione algebrica");
             }
             if (blackTurn) {
-                Game.addBlackCaptured(Game.getCell(x, y).getPiece().toString());
-            } else {
                 Game.addWhiteCaptured(Game.getCell(x, y).getPiece().toString());
+            } else {
+                Game.addBlackCaptured(Game.getCell(x, y).getPiece().toString());
             }
             printOut[1] = Game.getCell(x, y).getPiece().toString();
         }
