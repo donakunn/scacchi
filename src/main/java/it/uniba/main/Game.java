@@ -23,9 +23,9 @@ import static it.uniba.main.FinalPar.POS7;
 
 /**
  * <<control>><br>
- * Game is the main entity of the application. It contains the chessboard, turn of player currently
- * playing, white and black pieces captured, moves done. It also contains the main methods to
- * activate a move or a capture event for each piece.
+ * <p>Titolo: Game</p>
+ * <p>Descrizione: la classe Game contiene la scacchiera, gestisce i turni dei giocatori, tiene conto
+ * di tutte le mosse effettuate e di tutte le catture effettuate. 
  *
  * @author Megi Gjata
  * @author Mario Giordano
@@ -34,10 +34,25 @@ import static it.uniba.main.FinalPar.POS7;
  * @author Filippo Iacobellis
  */
 class Game {
+	/**
+	 * Imposta il turno nero a false.
+	 */
     private static boolean blackTurn = false;
+    /**
+     * Crea una matrice di celle, ovvero la scacchiera.
+     */
     private static Cell[][] board = new Cell[MAXROW][MAXCOL];
+    /**
+     * Arraylist contenente tutte le mosse effetuate.
+     */
     private static ArrayList<String> movesDone = new ArrayList<String>();
+    /**
+     * Arraylist contenente tutti i pezzi neri catturati.
+     */
     private static ArrayList<String> blacksCaptured = new ArrayList<String>();
+    /**
+     * Arraylist contenente tutti i pezzi bianchi catturati.
+     */
     private static ArrayList<String> whitesCaptured = new ArrayList<String>();
 
     void newGame() {
@@ -83,6 +98,14 @@ class Game {
         board[POS7][POS7] = new Cell(new Rook(1));
     }
 
+    /**
+     * Gestisce mosse, catture semplici, catture en passant ed eccezioni per il Pedone.
+     * @param input mossa specificata dall'utente.
+     * @return array contenente il Pedone che e' stato mosso convertito a stringa e la cella di destinazione se si tratta di una mossa.
+     * Array contenente il Pedone che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e la cella di 
+     * destinazione se si tratta di una cattura.
+     * @throws IllegalMoveException
+     */
     String[] movePawn(final String input) throws IllegalMoveException {
         if (input.length() == MOVELENGTH) {
             return Pawn.move(input);
@@ -112,26 +135,67 @@ class Game {
         }
     }
 
+    /**
+     * Gestisce mosse, catture semplici, catture en passant ed eccezioni per il Re.
+     * @param move mossa specificata dall'utente.
+     * @return array contenente il Re che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     String[] moveKing(final String move) throws IllegalMoveException {
         return King.move(move);
     }
 
+    /**
+     * Gestisce mosse, catture semplici, catture en passant ed eccezioni per la Regina.
+     * @param move mossa specificata dall'utente.
+     * @return array contenente la Regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     String[] moveQueen(final String move) throws IllegalMoveException {
         return Queen.move(move);
     }
 
+    /**
+     * Gestisce mosse, catture semplici, catture en passant ed eccezioni per l'Alfiere.
+     * @param move mossa specificata dall'utente.
+     * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     String[] moveBishop(final String move) throws IllegalMoveException {
         return Bishop.move(move);
     }
 
+    /**
+     * Gestisce mosse, catture sepmlici, catture en passant ed eccezioni per il Cavallo.
+     * @param move mossa specificata dall'utente.
+     * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     String[] moveKnight(final String move) throws IllegalMoveException {
         return Knight.move(move);
     }
 
+    /**
+     * Gestisce mosse, catture semplici, catture en passant ed eccezioni per la Torre.
+     * @param move mossa specificata dall'utente.
+     * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
+     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
+     * @throws IllegalMoveException
+     */
     String[] moveRook(final String move) throws IllegalMoveException {
         return Rook.move(move);
     }
 
+    /**
+     * Verifica se puo' essere effettuato l'arrocco tramite la stringa inserita dall'utente.
+     * @param move mossa specificata dall'utente.
+     * @return  array contenente la stringa che determina il tipo di arrocco.
+     * @throws IllegalMoveException
+     */
     String[] tryCastling(final String move) throws IllegalMoveException {
         if (move.equals("0-0") || move.equals("O-O")) {
             return King.castling(false);
@@ -144,46 +208,89 @@ class Game {
         }
     }
 
+    /**
+     * 
+     * @return true se e' il turno dei neri; false, altrimenti.
+     */
     static boolean getBlackTurn() {
         return blackTurn;
     }
 
+    /**
+     * Cambia il turno all'interno della partita.
+     */
     void changeTurn() {
         setNotBlackTurn();
     }
 
+    /**
+     * Imposta il turno del bianco, assegnando false al turno dei neri.
+     */
     private static void setWhiteTurn() {
         blackTurn = false;
     }
 
+    /**
+     * Cambia il turno del nero.
+     */
     private static void setNotBlackTurn() {
         blackTurn = !blackTurn;
     }
 
+    /**
+     * 
+     * @param x ascissa.
+     * @param y ordinata.
+     * @return cella con ascissa x e ordinata y.
+     */
     static Cell getCell(final int x, final int y) {
         return board[x][y];
     }
 
+    /**
+     * Aggiunge le mosse effettuate all'arraylist contenente tutte le mosse effettuate nella partita.
+     * @param move mossa specificata dall'utente.
+     */
     void addMove(final String move) {
         movesDone.add(move);
     }
 
+    /**
+     * 
+     * @return mosse effettuate durante la partita.
+     */
     ArrayList<String> getMoves() {
         return movesDone;
     }
 
+    /**
+     * 
+     * @return pezzi neri catturati durante la partita.
+     */
     ArrayList<String> getBlacks() {
         return blacksCaptured;
     }
 
+    /**
+     * 
+     * @return pezzi bianchi catturati durante la partita.
+     */
     ArrayList<String> getWhites() {
         return whitesCaptured;
     }
 
+    /**
+     * Aggiunge il pezzo bianco catturato all'arraylist contenente tutti i pezzi bianchi catturati.
+     * @param captured pezzo catturato.
+     */
     static void addWhiteCaptured(final String captured) {
         whitesCaptured.add(captured.toString());
     }
 
+    /**
+     * Aggiunge il pezzo nero catturato all'arraylist contenente tutti i pezzi neri catturati.
+     * @param captured pezzo catturato.
+     */
     static void addBlackCaptured(final String captured) {
         blacksCaptured.add(captured.toString());
     }

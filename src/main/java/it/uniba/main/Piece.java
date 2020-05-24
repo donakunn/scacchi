@@ -9,8 +9,17 @@ package it.uniba.main;
  * @author Donato Lucente
  */
 abstract class Piece {
+	/**
+	 * Colore del pezzo.
+	 */
     private int color; // 0 black, 1 white
+    /**
+     * Tipo di pezzo.
+     */
     private String pieceType;
+    /**
+     * Numero di mosse effettuate.
+     */
     private int nMoves;
 
     /**

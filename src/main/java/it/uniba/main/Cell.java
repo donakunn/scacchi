@@ -11,6 +11,9 @@ package it.uniba.main;
  */
 class Cell {
 
+	/**
+	 * Si riferisce al pezzo da inserire o eliminare nella cella.
+	 */
     private Piece piece;
 
     /**
