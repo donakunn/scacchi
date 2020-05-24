@@ -10,6 +10,9 @@ package it.uniba.main;
  */
 public class IllegalMoveException extends Exception {
 
+	/**
+	 * E' usato per la serializzazione degli oggetti e rappresenta la versione della classe serializzabile.
+	 */
     private static final long serialVersionUID = 1L;
 
     /**
