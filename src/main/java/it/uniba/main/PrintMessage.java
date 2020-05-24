@@ -37,6 +37,30 @@ public final class PrintMessage {
         }
         System.out.println("    a    b    c    d    e    f    g    h");
     }
+    
+    /**
+     * Stampa a video un messaggio.
+     * @param message messaggio da mostrare.
+     */
+    static void printMessage(String message) {
+    	System.out.println(message);
+    }
+    
+    /**
+     * Stampa a video il turno del giocatore.
+     * @param turn turno di chi sta giocando.
+     */
+    static void printTurn(String turn) {
+    	System.out.println("Inserire comando (turno dei " + turn + ")");
+    }
+    
+    /**
+     * Stampa a video un messaggio d'errore.
+     * @param e messaggio di errore da mostrare.
+     */
+    static void printError(String e) {
+    	System.err.println(e);
+    }
 
     /**
      * Stampa a video le mosse effettuate.
