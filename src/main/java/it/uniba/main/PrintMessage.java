@@ -23,7 +23,7 @@ public final class PrintMessage {
     
     /**
      * Stampa a video la scacchiera.
-     * @param board: matrice di stringhe.
+     * @param board matrice di stringhe.
      */
     static void printBoard(final String[][] board) {
         System.out.println("    a    b    c    d    e    f    g    h");
@@ -40,7 +40,7 @@ public final class PrintMessage {
 
     /**
      * Stampa a video le mosse effettuate.
-     * @param moves: arraylist che contiene le mosse effettuate.
+     * @param moves arraylist che contiene le mosse effettuate.
      */
     static void printMoves(final ArrayList<String> moves) {
         if (moves.size() == 0) {
@@ -65,8 +65,8 @@ public final class PrintMessage {
 
     /**
      * Stampa a video le catture effettuate.
-     * @param capturedBlacks: pezzi neri catturati.
-     * @param capturedWhites: pezzi bianchi catturati.
+     * @param capturedBlacks pezzi neri catturati.
+     * @param capturedWhites pezzi bianchi catturati.
      */
     static void printCaptures(final ArrayList<String> capturedBlacks, final ArrayList<String> capturedWhites) {
         if (capturedBlacks.size() == 0) {
@@ -83,7 +83,7 @@ public final class PrintMessage {
 
     /**
      * Stampa a video la mossa di quel determinato turno.
-     * @param pieceAndCell: array contenente il pezzo che effettua la mossa e la sua casella di destinazione.
+     * @param pieceAndCell array contenente il pezzo che effettua la mossa e la sua casella di destinazione.
      */
     static void printAMove(final String[] pieceAndCell) {
         System.out.println(pieceAndCell[0] + " spostato su " + pieceAndCell[2]);
@@ -105,7 +105,7 @@ public final class PrintMessage {
 
     /**
      * Stampa a video la cattura di quel determinato turno.
-     * @param piecesAndCell: array contenente il pezzo catturato convertito a stringa, il pezzo che effettua la cattura convertito
+     * @param piecesAndCell array contenente il pezzo catturato convertito a stringa, il pezzo che effettua la cattura convertito
      * a stringa e la casella di destinazione.
      */
     static void printACapture(final String[] piecesAndCell) {

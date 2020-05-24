@@ -22,7 +22,7 @@ public final class AppMain {
      * E' il metodo principale dell'applicazione. Permette di avviare il gioco degli scacchi, crea un nuovo menu e
      * assegna il turno iniziale ai bianchi. 
      *
-     * @param args: argomenti della riga di comando.
+     * @param args argomenti della riga di comando.
      */
     public static void main(final String[] args) {
         Menu menu = new Menu();

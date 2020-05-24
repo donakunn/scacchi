@@ -24,7 +24,7 @@ class Bishop extends Piece {
 	/**
 	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
 	 * 
-	 * @param col: colore del pezzo.
+	 * @param col colore del pezzo.
 	 */
     Bishop(final int col) {
         this.setColor(col);
@@ -38,7 +38,7 @@ class Bishop extends Piece {
     /**
      * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
      * 
-     * @param move: mossa specificata dall'utente.
+     * @param move mossa specificata dall'utente.
      * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException
@@ -154,11 +154,11 @@ class Bishop extends Piece {
     /**
      * Permette di effettuare la mossa.
      * 
-     * @param isCapture: verifica se si tratta di una mossa o di una cattura.
-     * @param x: ascissa di arrivo dell'Alfiere.
-     * @param y: ordinata di arrivo dell'Alfiere.
-     * @param xCheck: ascissa di partenza dell'Alfiere.
-     * @param yCheck: ordinata di partenza dell'Alfiere.
+     * @param isCapture verifica se si tratta di una mossa o di una cattura.
+     * @param x ascissa di arrivo dell'Alfiere.
+     * @param y ordinata di arrivo dell'Alfiere.
+     * @param xCheck ascissa di partenza dell'Alfiere.
+     * @param yCheck ordinata di partenza dell'Alfiere.
      * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException

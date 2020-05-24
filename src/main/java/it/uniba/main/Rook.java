@@ -25,7 +25,7 @@ class Rook extends Piece {
 	/**
 	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
 	 * 
-	 * @param col: colore del pezzo.
+	 * @param col colore del pezzo.
 	 */
 
     Rook(final int col) {
@@ -42,10 +42,10 @@ class Rook extends Piece {
     /**
      * Verifica se e' possibile effettuare la mossa.
      * 
-     * @param x: ascissa della casella di partenza.
-     * @param y: ordinata della casella di partenza.
-     * @param a: ascissa della casella di arrivo.
-     * @param b: ordinata della casella di arrivo.
+     * @param x ascissa della casella di partenza.
+     * @param y ordinata della casella di partenza.
+     * @param a ascissa della casella di arrivo.
+     * @param b ordinata della casella di arrivo.
      * @return true, se e' possibile effettuare la mossa; false, altrimenti.
      */
     private static boolean isMovable(final int x, final int y, final int a, final int b) {
@@ -107,7 +107,7 @@ class Rook extends Piece {
     /**
      * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
      * 
-     * @param move: mossa specificata dall'utente.
+     * @param move mossa specificata dall'utente.
      * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException
@@ -243,11 +243,11 @@ class Rook extends Piece {
     /**
      * Permette di effettuare la mossa.
      * 
-     * @param isCapture: verifica se si tratta di una mossa o una cattura.
-     * @param xC: ascissa di partenza della Torre.
-     * @param yC: ordinata di partenza della Torre.
-     * @param x: ascissa di arrivo della Torre.
-     * @param y: ordinata di arrivo della Torre.
+     * @param isCapture verifica se si tratta di una mossa o una cattura.
+     * @param xC ascissa di partenza della Torre.
+     * @param yC ordinata di partenza della Torre.
+     * @param x ascissa di arrivo della Torre.
+     * @param y ordinata di arrivo della Torre.
      * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
      * @throws IllegalMoveException

@@ -33,7 +33,7 @@ class King extends Piece {
      * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode. Inoltre, alla creazione 
      * dell'oggetto, inizializza le coordinate del Re.
      *
-     * @param col: colore del pezzo.
+     * @param col colore del pezzo.
      */
 
     King(final int col) {
@@ -79,8 +79,8 @@ class King extends Piece {
     /**
      * Verifica che il Re, in posizione x-y, non sia sotto scacco.
      *
-     * @param x: ascissa del Re.
-     * @param y: ordinata del Re.
+     * @param x ascissa del Re.
+     * @param y ordinata del Re.
      * @return true, se il Re del giocatore che sta giocando in quel turno e' sotto scacco; false, altrimenti.
      */
 
@@ -94,8 +94,8 @@ class King extends Piece {
     /**
      * Controlla che il Re non sia minacciato dal Pedone.
      * 
-     * @param x: ascissa da controllare.
-     * @param y: ordinata da controllare.
+     * @param x ascissa da controllare.
+     * @param y ordinata da controllare.
      * @return true, se il Re del giocatore che sta giocando in quel turno e' minacciato; false altrimenti.
      */
    private static boolean checkPawnThreat(final int x, final int y) {
@@ -141,8 +141,8 @@ class King extends Piece {
     /**
      * Controlla che il Re non sia minacciato da un Alfiere e dalla Regina diagonalmente.
      * 
-     * @param x: ascissa da controllare.
-     * @param y: ordinata da controllare.
+     * @param x ascissa da controllare.
+     * @param y ordinata da controllare.
      * @return true, se il Re e' minacciato; false, altrimenti. 
      */
     private static boolean checkBishopThreat(final int x, final int y) {
@@ -247,8 +247,8 @@ class King extends Piece {
     /**
      * Controlla che il Re non sia minacciato da una Torre e dalla Regina orizzontalmente e verticalmente.
      * 
-     * @param x: ascissa da controllare.
-     * @param y: ordinata da controllare.
+     * @param x ascissa da controllare.
+     * @param y ordinata da controllare.
      * @return true, se il Re e' minacciato; false, altrimenti.
      */
 
@@ -337,8 +337,8 @@ class King extends Piece {
     /**
      * Controlla che il Re non sia minacciato da un Cavallo.
      * 
-     * @param x: ascissa da controllare.
-     * @param y: ordinata da controllare.
+     * @param x ascissa da controllare.
+     * @param y ordinata da controllare.
      * @return true, se il Re e' minacciato; false altrimenti.
      */
 
@@ -406,7 +406,7 @@ class King extends Piece {
     /**
      * Permette di muovere il Re all'interno della scacchiera e comprende anche la possibilita' di effettuare una cattura.
      *
-     * @param move: mossa specificata dall'utente.
+     * @param move mossa specificata dall'utente.
      * @return array che contiene il Re che effettua la cattura, il pezzo catturato e la casella di destinazione.
      * @throws IllegalMoveException
      */
@@ -500,7 +500,7 @@ class King extends Piece {
     /**
      * Determina se e' possibile effettuare l'arrocco o meno.
      *
-     * @param isLong: indica se l'arrocco e' lungo o corto.
+     * @param isLong indica se l'arrocco e' lungo o corto.
      * @return array contenente la stringa che determina il tipo di arrocco.
      * @throws IllegalMoveException
      */

@@ -23,7 +23,7 @@ class Queen extends Piece {
 	/**
 	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
 	 * 
-	 * @param col: colore del pezzo.
+	 * @param col colore del pezzo.
 	 */
     Queen(final int col) {
     	this.setColor(col);
@@ -37,7 +37,7 @@ class Queen extends Piece {
     /**
      * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
      * 
-     * @param move: mossa specificata dall'utente.
+     * @param move mossa specificata dall'utente.
      * @return array contenente la Regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa. 
      * @throws IllegalMoveException
@@ -196,11 +196,11 @@ class Queen extends Piece {
     /**
      * Permette di effettuare la mossa.
      * 
-     * @param isCapture: verifica se si tratta di una mossa o di una cattura.
-     * @param x: ascissa di arrivo della Regina.
-     * @param y: ordinata di arrivo della Regina.
-     * @param xCheck: ascissa di partenza della Regina.
-     * @param yCheck: ordinata di Partenza della regina.
+     * @param isCapture verifica se si tratta di una mossa o di una cattura.
+     * @param x ascissa di arrivo della Regina.
+     * @param y ordinata di arrivo della Regina.
+     * @param xCheck ascissa di partenza della Regina.
+     * @param yCheck ordinata di Partenza della regina.
      * @return array contenente la Regina che effettua la mossa 
      * o la cattura convertita a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.

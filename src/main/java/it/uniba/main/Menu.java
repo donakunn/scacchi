@@ -77,7 +77,7 @@ public final class Menu {
     /**
      * Permette di effettuare le mosse dei vari pezzi, le catture, gli arrocchi e cambia il turno corrente.
      * 
-     * @param input: mossa specificata dall'utente.
+     * @param input mossa specificata dall'utente.
      * @return array contenente il pezzo che effettua la mossa o la cattura convertito a stringa, la cella di destinazione e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * Se si tratta di arrocco, un array contenente la stringa che determina il tipo di arrocco.
