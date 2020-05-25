@@ -93,9 +93,6 @@ class Rook extends Piece {
     } else { // Non valido
       return false;
     }
-    if (i != a || j != b) {
-      return false;
-    }
     if((i==a)&&(j==b)) {
         	if (Game.getCell(i, j).getPiece() == null
                     || Game.getCell(i, j).getPiece().getColor() != blackTurnColor) {
