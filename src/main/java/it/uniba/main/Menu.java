@@ -6,9 +6,9 @@ import static it.uniba.main.FinalPar.MAXCOL;
 import static it.uniba.main.FinalPar.MAXROW;
 
 /**
- * <<control>><br>
- *<p>Titolo: Menu</p>
- *<p>Descrizione: La classe Menu crea una nuova partita. Tramite gli appositi comandi, permette di visualizzare le mosse 
+ * {@literal <<control>>}<br>
+ *<p><I>Titolo</I>: Menu</p>
+ *<p><I>Descrizione</I>: La classe Menu crea una nuova partita. Tramite gli appositi comandi, permette di visualizzare le mosse 
  * effettuate, le catture, la scacchiera e permette ai pezzi di effettuare mosse e catture.</p>
  *
  * @author Megi Gjata
@@ -19,7 +19,7 @@ import static it.uniba.main.FinalPar.MAXROW;
  */
 public final class Menu {
 	/**
-	 * Crea un nuovo gioco.
+	 * Crea una nuova partita.
 	 */
     private Game game = new Game();
 
@@ -84,9 +84,9 @@ public final class Menu {
      * @return array contenente il pezzo che effettua la mossa o la cattura convertito a stringa, la cella di destinazione e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
      * Se si tratta di arrocco, un array contenente la stringa che determina il tipo di arrocco.
-     * @throws IllegalArgumentException
-     * @throws IndexOutOfBoundsException
-     * @throws IllegalMoveException
+     * @throws IllegalArgumentException messaggio di eccezione.
+     * @throws IndexOutOfBoundsException messaggio di eccezione.
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     public String[] getMove(final String input)
             throws IllegalArgumentException, IndexOutOfBoundsException, IllegalMoveException {
