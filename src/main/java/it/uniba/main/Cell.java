@@ -19,10 +19,10 @@ class Cell {
     /**
      * E' il costruttore della classe.
      * 
-     * @param piece pezzo contenuto nella cella.
+     * @param p pezzo contenuto nella cella.
      */
-    Cell(final Piece piece) {
-        this.piece = piece;
+    Cell(final Piece p) {
+        this.piece = p;
     }
 
     /**
@@ -43,10 +43,10 @@ class Cell {
     /**
      * Crea il pezzo all'interno della cella.
      * 
-     * @param piece pezzo contenuto nella cella.
+     * @param p pezzo contenuto nella cella.
      */
-    void setPiece(final Piece piece) {
-        this.piece = piece;
+    void setPiece(final Piece p) {
+        this.piece = p;
     }
 
     /**
