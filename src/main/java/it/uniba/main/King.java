@@ -18,8 +18,8 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * <p>Titolo: King</p>
- * <p>Descrizione: La classe King implementa la classe astratta {@link Piece} e permette di utilizzare il Re
+ * <p><I>Titolo</I>: King</p>
+ * <p><I>Descrizione</I>: La classe King implementa la classe astratta {@link Piece} e permette di utilizzare il Re
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente
@@ -403,7 +403,7 @@ class King extends Piece {
      * @param move mossa specificata dall'utente.
      * @return array contenente il Re effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
 
 	static String[] move(final String move) throws IllegalMoveException {
@@ -497,7 +497,7 @@ class King extends Piece {
 	 *
 	 * @param isLong indica se l'arrocco e' lungo o corto.
 	 * @return array contenente la stringa che determina il tipo di arrocco.
-	 * @throws IllegalMoveException
+	 * @throws IllegalMoveException messaggio di eccezione.
 	 */
 
 	static String[] castling(final boolean isLong) throws IllegalMoveException {

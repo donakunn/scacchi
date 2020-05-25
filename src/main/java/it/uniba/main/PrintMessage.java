@@ -7,8 +7,8 @@ import static it.uniba.main.FinalPar.MAXROW;
 
 /**
  * <<boundary>><br>
- * <p>Titolo: PrintMessage</p>
- * <p>Descrizione: La classe PrintMessage contiene tutti i messaggi e la scacchiera che vengono stampati a video durante 
+ * <p><I>Titolo</I>: PrintMessage</p>
+ * <p><I>Descrizione</I>: La classe PrintMessage contiene tutti i messaggi e la scacchiera che vengono stampati a video durante 
  * l'esecuzione del programma.</p>
  * 
  * @author Donato Lucente 

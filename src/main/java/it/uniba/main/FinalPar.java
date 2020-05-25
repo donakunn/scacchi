@@ -2,8 +2,8 @@ package it.uniba.main;
 
 /**
  * <<utility>><br>
- * <p>Titolo: FinalPar</p>
- * <p>Descrizione: La classe FinalPar contiene tutte le costanti che vengono usate all'interno delle altre
+ * <p><I>Titolo</I>: FinalPar</p>
+ * <p><I>Descrizione</I>: La classe FinalPar contiene tutte le costanti che vengono usate all'interno delle altre
  * classi per i vari controlli.
  * e le varie operazioni.</p>
  * 

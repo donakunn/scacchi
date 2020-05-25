@@ -13,8 +13,8 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * <p>Titolo: Queen</p>
- * <p>Descrizione: La classe Queen implementa la classe astratta {@link Piece} e permette di utilizzare la Regina
+ * <p><I>Titolo</I>: Queen</p>
+ * <p><I>Descrizione</I>: La classe Queen implementa la classe astratta {@link Piece} e permette di utilizzare la Regina
  * all'interno del gioco.</p>
  *
  * @author Donato Lucente
@@ -40,7 +40,7 @@ class Queen extends Piece {
      * @param move mossa specificata dall'utente.
      * @return array contenente la Regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa. 
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     static String[] move(final String move) throws IllegalMoveException {
         int x = 2; // ascissa
@@ -204,7 +204,7 @@ class Queen extends Piece {
      * @return array contenente la Regina che effettua la mossa 
      * o la cattura convertita a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     private static String[] actualMove(final boolean isCapture, final int x, final int y, final int xCheck,
                                        final int yCheck)

@@ -13,8 +13,8 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * <p>Titolo: Rook</p>
- * <p>Descrizione: La classe Rook implementa la classe astratta {@link Piece} e permette di utilizzare
+ * <p><I>Titolo</I>: Rook</p>
+ * <p><I>Descrizione</I>: La classe Rook implementa la classe astratta {@link Piece} e permette di utilizzare
  * la Torre all'interno del gioco.
  *
  * @author Donato Lucente
@@ -110,7 +110,7 @@ class Rook extends Piece {
      * @param move mossa specificata dall'utente.
      * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     static String[] move(final String move) throws IllegalMoveException {
 
@@ -250,7 +250,7 @@ class Rook extends Piece {
      * @param y ordinata di arrivo della Torre.
      * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, conteiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
             throws IllegalMoveException {

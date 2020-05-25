@@ -13,8 +13,8 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
  * <<entity>><br>
- * <p>Titolo: Bishop</p>
- * <p>Descrizione: La classe Bishop implementa la classe astratta {@link Piece} e permette di utilizzare
+ * <p><I>Titolo</I>: Bishop</p>
+ * <p><I>Descrizione</I>: La classe Bishop implementa la classe astratta {@link Piece} e permette di utilizzare
  * l'Alfiere all'interno del gioco.
  *
  * @author Donato Lucente
@@ -41,7 +41,7 @@ class Bishop extends Piece {
      * @param move mossa specificata dall'utente.
      * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     static String[] move(final String move) throws IllegalMoveException {
         int x = 2; // ascissa
@@ -161,7 +161,7 @@ class Bishop extends Piece {
      * @param yCheck ordinata di partenza dell'Alfiere.
      * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     private static String[] actualMove(final boolean isCapture, final int x, final int y, final int xCheck,
                                        final int yCheck)
