@@ -17,7 +17,7 @@ import static it.uniba.main.FinalPar.MAXROW;
  */
 public final class PrintMessage {
   /** E' il costruttore della classe. */
-  private PrintMessage() {}
+  private PrintMessage() { }
 
   /**
    * Stampa a video la scacchiera.
@@ -42,7 +42,7 @@ public final class PrintMessage {
    *
    * @param message messaggio da mostrare.
    */
-  public static void printMessage(String message) {
+  public static void printMessage(final String message) {
     System.out.println(message);
   }
 
@@ -51,7 +51,7 @@ public final class PrintMessage {
    *
    * @param turn turno di chi sta giocando.
    */
-  public static void printTurn(String turn) {
+  public static void printTurn(final String turn) {
     System.out.println("Inserire comando (turno dei " + turn + ")");
   }
 
@@ -60,7 +60,7 @@ public final class PrintMessage {
    *
    * @param e messaggio di errore da mostrare.
    */
-  public static void printError(String e) {
+  public static void printError(final String e) {
     System.err.println(e);
   }
 
