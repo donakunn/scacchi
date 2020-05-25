@@ -23,14 +23,14 @@ abstract class Piece {
     return this.color;
   }
 
-  /** @param color colore del pezzo: 0 se e' nero, 1 se e' bianco. */
-  public void setColor(int color) {
-    this.color = color;
+  /** @param col colore del pezzo: 0 se e' nero, 1 se e' bianco. */
+  public void setColor(final int col) {
+    this.color = col;
   }
 
-  /** @param pieceType tipo di pezzo. */
-  public void setPieceType(String pieceType) {
-    this.pieceType = pieceType;
+  /** @param pType tipo di pezzo. */
+  public void setPieceType(final String pType) {
+    this.pieceType = pType;
   }
 
   /** @return pezzo convertito a stringa. */
@@ -48,8 +48,8 @@ abstract class Piece {
     nMoves++;
   }
 
-  /** @param nMoves numero di mosse effettuate. */
-  public void setnMoves(int nMoves) {
-    this.nMoves = nMoves;
+  /** @param nMov numero di mosse effettuate. */
+  public void setnMoves(final int nMov) {
+    this.nMoves = nMov;
   }
 }
