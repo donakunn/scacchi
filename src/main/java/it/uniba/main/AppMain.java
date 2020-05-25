@@ -42,7 +42,7 @@ public final class AppMain {
                 turn = "bianchi";
             }
             if (inGame) {
-            	PrintMessage.printTurn(turn);
+            	PrintMessage.printMessage("Inserire comando (turno dei " + turn + ")");
             } else {
             	PrintMessage.printMessage("Inserire comando:");
             }

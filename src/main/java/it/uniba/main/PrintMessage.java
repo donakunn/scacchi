@@ -47,15 +47,6 @@ public final class PrintMessage {
   }
 
   /**
-   * Stampa a video il turno del giocatore.
-   *
-   * @param turn turno di chi sta giocando.
-   */
-  public static void printTurn(final String turn) {
-    System.out.println("Inserire comando (turno dei " + turn + ")");
-  }
-
-  /**
    * Stampa a video un messaggio d'errore.
    *
    * @param e messaggio di errore da mostrare.
