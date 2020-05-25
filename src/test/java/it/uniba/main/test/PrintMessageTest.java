@@ -55,13 +55,6 @@ public class PrintMessageTest {
 	    		+ "5  4  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  4  3  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  3  2  "
 	    		+ "[\u2659]  [\u2659]  [\u2659]  [\u2659]  [\u2659]  [\u2659]  [\u2659]  [\u2659]  2  1  [\u2656]  [\u2658]  [\u2657]  [\u2655]  [\u2654]  [\u2657]  [\u2658]  [\u2656]  1      a    b    c    d    e    f    g    h", PrintedBoard);
 	 }
-	@Test
-	void printTurnTest() {
-		PrintMessage.printTurn("bianchi");
-	    String testString = outContent.toString();
-	    testString = testString.replace("\n", "").replace("\r", "");
-	    assertEquals("Inserire comando (turno dei bianchi)",testString);
-	}
 	
 	@Test
 	void printErrMessageTest() {
