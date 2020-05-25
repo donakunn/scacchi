@@ -22,9 +22,9 @@ import static it.uniba.main.FinalPar.POS7;
 
 
 /**
- * <<control>><br>
- * <p>Titolo: Game</p>
- * <p>Descrizione: la classe Game contiene la scacchiera, gestisce i turni dei giocatori, tiene conto
+ * {@literal <<control>>}<br>
+ * <p><I>Titolo</I>: Game</p>
+ * <p><I>Descrizione</I>: la classe Game contiene la scacchiera, gestisce i turni dei giocatori, tiene conto
  * di tutte le mosse effettuate e di tutte le catture effettuate. 
  *
  * @author Megi Gjata
@@ -55,6 +55,10 @@ class Game {
      */
     private static ArrayList<String> whitesCaptured = new ArrayList<String>();
 
+    /**
+     * Inizia una nuova partita assegnando il turno al giocatore bianco, svuota gli arraylist contenenti mosse e catture e 
+     * inizializza la scacchiera.
+     */
     void newGame() {
         final int firstEmptyRow = 2;
         final int lastEmptyRow = 5;
@@ -104,7 +108,7 @@ class Game {
      * @return array contenente il Pedone che e' stato mosso convertito a stringa e la cella di destinazione se si tratta di una mossa.
      * Array contenente il Pedone che effettua la cattura convertito a stringa, il pezzo catturato convertito a stringa e la cella di 
      * destinazione se si tratta di una cattura.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     String[] movePawn(final String input) throws IllegalMoveException {
         if (input.length() == MOVELENGTH) {
@@ -140,7 +144,7 @@ class Game {
      * @param move mossa specificata dall'utente.
      * @return array contenente il Re che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e, 
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     String[] moveKing(final String move) throws IllegalMoveException {
         return King.move(move);
@@ -151,7 +155,7 @@ class Game {
      * @param move mossa specificata dall'utente.
      * @return array contenente la Regina che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     String[] moveQueen(final String move) throws IllegalMoveException {
         return Queen.move(move);
@@ -162,7 +166,7 @@ class Game {
      * @param move mossa specificata dall'utente.
      * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     String[] moveBishop(final String move) throws IllegalMoveException {
         return Bishop.move(move);
@@ -173,7 +177,7 @@ class Game {
      * @param move mossa specificata dall'utente.
      * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     String[] moveKnight(final String move) throws IllegalMoveException {
         return Knight.move(move);
@@ -184,7 +188,7 @@ class Game {
      * @param move mossa specificata dall'utente.
      * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     String[] moveRook(final String move) throws IllegalMoveException {
         return Rook.move(move);
@@ -194,7 +198,7 @@ class Game {
      * Verifica se puo' essere effettuato l'arrocco tramite la stringa inserita dall'utente.
      * @param move mossa specificata dall'utente.
      * @return  array contenente la stringa che determina il tipo di arrocco.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     String[] tryCastling(final String move) throws IllegalMoveException {
         if (move.equals("0-0") || move.equals("O-O")) {

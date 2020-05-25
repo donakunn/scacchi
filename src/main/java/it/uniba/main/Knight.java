@@ -12,9 +12,9 @@ import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
 import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
- * <<entity>><br>
- * <p>Titolo: Knight</p>
- * <p>Descrizione: La classe Knight implementa la classe astratta {@link Piece} e permette di utilizzare
+ * {@literal <<entity>>}<br>
+ * <p><I>Titolo</I>: Knight</p>
+ * <p><I>Descrizione</I>: La classe Knight implementa la classe astratta {@link Piece} e permette di utilizzare
  * il Cavallo all'interno del gioco.
  * 
  * @author Donato Lucente
@@ -57,7 +57,7 @@ class Knight extends Piece {
      * @param move mossa specificata dell'utente.
      * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     static String[] move(final String move) throws IllegalMoveException {
         int count = 0;
@@ -210,7 +210,7 @@ class Knight extends Piece {
      * @param y ordinata di arrivo del Cavallo.
      * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la mossa effettuata e,
      * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException
+     * @throws IllegalMoveException messaggio di eccezione.
      */
     private static String[] actualMove(final boolean isCapture, final int xC, final int yC, final int x, final int y)
             throws IllegalMoveException {
