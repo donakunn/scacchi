@@ -3,7 +3,34 @@
 
 # *Gruppo Newell*
 
-## 1. Introduzione ##
+
+
+## Indice
+
+1. [Introduzione](#introduzione)
+
+2. [Modello di dominio](#modello_dominio)
+
+3. [Introduzione](#introduzione)
+
+4. [Introduzione](#introduzione)
+
+5. [Introduzione](#introduzione)
+
+6. [Introduzione](#introduzione)
+
+7. [Introduzione](#introduzione)
+
+8. [Introduzione](#introduzione)
+
+9. [Introduzione](#introduzione)
+
+   
+
+
+
+## 1. Introduzione <a name="introduzione" /> ##
+
 Gli **scacchi** sono un gioco di strategia che si svolge su una tavola quadrata detta scacchiera, formata da 64 caselle (o "case") di due colori (alternativamente di colore chiaro e scuro), sulla quale ogni giocatore dispone di 16 pezzi (bianchi o neri; per traslato, "il Bianco" e "il Nero" designano i due sfidanti): un re, una donna (o "regina"), due alfieri, due cavalli, due torri e otto pedoni.
 
 ![scacchiera_setup](../res/img/report/scacchiera_setup.jpg)
@@ -23,7 +50,7 @@ Il gioco degli scacchi è alquanto complesso, infatti si stima che il numero di 
 
 L'applicazione sviluppata permette di giocare una partita di scacchi sullo stesso terminale a linea di comando, facendo uso della suddetta notazione algebrica ridotta. È richiesto che i giocatori si alternino fisicamente nel digitare i comandi al fine di garantire il cambio di turno (mostrato a video).
 
-## 2. Modello di dominio ##
+## 2. Modello di dominio <a name="modello_dominio" /> ##
 
 ![modello_di_dominio](../doc/drawings/modello_di_dominio.png)
 
