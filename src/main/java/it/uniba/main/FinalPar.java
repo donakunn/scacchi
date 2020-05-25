@@ -120,7 +120,7 @@ public final class FinalPar {
      */
     public static final int DIGIT0INASCII = 48;
     /**
-     * Dimensione dell'array di stringhe usati per mosse e catture. 
+     *Dimensione dell'array di stringhe usati per mosse e catture.
      */
     public static final int STRARRDIM = 3;
     /**
