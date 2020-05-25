@@ -85,9 +85,9 @@ public final class Menu {
    *     cella di destinazione e, se si tratta di una cattura, contiene anche il pezzo catturato
    *     convertito a stringa. Se si tratta di arrocco, un array contenente la stringa che determina
    *     il tipo di arrocco.
-   * @throws IllegalArgumentException messaggio di eccezione.
-   * @throws IndexOutOfBoundsException messaggio di eccezione.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @throws IllegalArgumentException eccezione che viene sollevata da una mossa illegale.
+   * @throws IndexOutOfBoundsException eccezione che viene sollevata da una mossa illegale.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   public String[] getMove(final String input)
       throws IllegalArgumentException, IndexOutOfBoundsException, IllegalMoveException {

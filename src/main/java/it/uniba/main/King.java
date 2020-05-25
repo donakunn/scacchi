@@ -23,7 +23,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  *
  * <p><I>Titolo</I>: King
  *
- * <p><I>Descrizione</I>: La classe King implementa la classe astratta {@link Piece} e permette di
+ * <p><I>Descrizione</I>: La classe King estende la classe astratta {@link Piece} e permette di
  * utilizzare il Re all'interno del gioco.
  *
  * @author Donato Lucente
@@ -381,10 +381,11 @@ class King extends Piece {
    * effettuare una cattura.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente il Re effettua la mossa o la cattura convertito a stringa, la mossa
-   *     effettuata e, se si tratta di una cattura, contiene anche il pezzo catturato convertito a
-   *     stringa.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @return array contenente il Re che e' stato mosso convertito a stringa e la cella di
+   *     destinazione se si tratta di una mossa. Array contenente il Re che effettua la cattura
+   *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+   *     si tratta di una cattura.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   static String[] move(final String move) throws IllegalMoveException {
     int x = 2;
@@ -473,11 +474,11 @@ class King extends Piece {
   }
 
   /**
-   * Determina se e' possibile effettuare l'arrocco o meno.
+   * Effettua l'arrocco se le condizioni sono verificate.
    *
    * @param isLong indica se l'arrocco e' lungo o corto.
    * @return array contenente la stringa che determina il tipo di arrocco.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   static String[] castling(final boolean isLong) throws IllegalMoveException {
     // isLong = true -> si tratta di longCastling

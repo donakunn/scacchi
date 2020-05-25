@@ -6,7 +6,7 @@ package it.uniba.main;
  * <p><I>Titolo</I>: Piece
  *
  * <p><I>Descrizione</I>: La classe Piece e' la classe astratta per tutti i pezzi. Imposta i colori
- * dei pezzi, tiene conto delle mosse e converte i pezzi a stringa per poterli stampare a video.
+ * dei pezzi, tiene conto delle mosse effettuate, imposta e restituisce la stringa corrispondente al pezzo.
  *
  * @author Donato Lucente
  */
@@ -38,17 +38,17 @@ abstract class Piece {
     return pieceType;
   }
 
-  /** @return numero di mosse effettuate. */
+  /** @return numero di mosse effettuate dal pezzo. */
   public int getnMoves() {
     return this.nMoves;
   }
 
-  /** Incrementa il contatore dell mosse effettuate. */
+  /** Incrementa il contatore dell mosse effettuate dal pezzo. */
   public void incrementMoves() {
     nMoves++;
   }
 
-  /** @param nMov numero di mosse effettuate. */
+  /** @param nMov numero di mosse effettuate dal pezzo. */
   public void setnMoves(final int nMov) {
     this.nMoves = nMov;
   }

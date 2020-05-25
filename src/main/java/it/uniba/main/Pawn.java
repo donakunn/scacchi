@@ -19,7 +19,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  *
  * <p><I>Titolo</I>: Pawn
  *
- * <p><I>Descrizione</I>: La classe Pawn implementa la classe astratta {@link Piece} e permette di
+ * <p><I>Descrizione</I>: La classe Pawn estende la classe astratta {@link Piece} e permette di
  * usare il Pedone all'interno del gioco.
  *
  * @author Donato Lucente
@@ -65,7 +65,7 @@ class Pawn extends Piece {
    * @param move mossa specificata dall'utente.
    * @return array che contiene il Pedone che e' stato mosso convertito a stringa e la cella di
    *     destinazione.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   static String[] move(final String move) throws IllegalMoveException {
     int x; // ascissa
@@ -140,7 +140,7 @@ class Pawn extends Piece {
    * @param move mossa specificta dall'utente.
    * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo
    *     catturato convertito a stringa e la cella di destinazione.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   static String[] capture(final String move) throws IllegalMoveException {
     int x; // ascissa
@@ -223,7 +223,7 @@ class Pawn extends Piece {
    * @param move mossa specificata dall'utente.
    * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo
    *     catturato convertito a stringa e la cella di destinazione.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   static String[] captureEnPassant(final String move) throws IllegalMoveException {
 
