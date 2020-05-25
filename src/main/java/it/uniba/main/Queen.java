@@ -80,8 +80,7 @@ class Queen extends Piece {
     if (Game.getCell(x, y).getPiece() != null) {
       // lancia eccezione se la cella di destinazione � occupata da alleato
       if (Game.getCell(x, y).getPiece().getColor() == blackTurnColor) {
-        throw new IllegalMoveException(
-            "Mossa illegale; Non puoi spostarti sulla cella di un alleato");
+        throw new IllegalMoveException("Mossa illegale; Non puoi spostarti sulla cella di un alleato");
 
         // o se � una mossa di spostamento con cella di destinazione occupata da avversario
       } else if (Game.getCell(x, y).getPiece().getColor() != (blackTurnColor) && !isCapture) {
@@ -191,8 +190,7 @@ class Queen extends Piece {
       }
     }
     if (isCapture) {
-      throw new IllegalMoveException(
-          "Mossa illegale; La donna non puo' effettuare la cattura nella cella di destinazione");
+      throw new IllegalMoveException("Mossa illegale; La donna non puo' catturare nella cella di destinazione");
     } else {
       throw new IllegalMoveException("Mossa illegale; La donna non puo' muoversi qui");
     }
