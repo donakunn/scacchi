@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
- * <<entity>><br>
+ * {@literal <<entity>}><br>
  * <p><I>Titolo</I>: Cell</p>
  * <p><I>Descrizione</I>: La classe Cell viene utilizzata per gestire le celle della scacchiera all'interno del gioco. Ogni cella contiene un 
  * pezzo e puo' essere svuotata o riempita a seconda delle necessita'. Contiene inoltre un metodo che permette di convertire

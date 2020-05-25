@@ -12,7 +12,7 @@ import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
 import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
- * <<entity>><br>
+ * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: Bishop</p>
  * <p><I>Descrizione</I>: La classe Bishop implementa la classe astratta {@link Piece} e permette di utilizzare
  * l'Alfiere all'interno del gioco.

@@ -6,7 +6,7 @@ import static it.uniba.main.FinalPar.MAXCOL;
 import static it.uniba.main.FinalPar.MAXROW;
 
 /**
- * <<control>><br>
+ * {@literal <<control>>}<br>
  *<p><I>Titolo</I>: Menu</p>
  *<p><I>Descrizione</I>: La classe Menu crea una nuova partita. Tramite gli appositi comandi, permette di visualizzare le mosse 
  * effettuate, le catture, la scacchiera e permette ai pezzi di effettuare mosse e catture.</p>

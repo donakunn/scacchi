@@ -17,7 +17,7 @@ import static it.uniba.main.FinalPar.STARTWKINGY;
 import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
- * <<entity>><br>
+ * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: King</p>
  * <p><I>Descrizione</I>: La classe King implementa la classe astratta {@link Piece} e permette di utilizzare il Re
  * all'interno del gioco.</p>

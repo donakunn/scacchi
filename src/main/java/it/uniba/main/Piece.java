@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
- * <<entity>><br>
+ * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: Piece</p>
  * <p><I>Descrizione</I>: La classe Piece e' la classe astratta per tutti i pezzi. Imposta i colori dei pezzi, tiene conto delle mosse
  * e converte i pezzi a stringa per poterli stampare a video.

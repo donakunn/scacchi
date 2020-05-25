@@ -12,7 +12,7 @@ import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
 import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
- * <<entity>><br>
+ * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: Queen</p>
  * <p><I>Descrizione</I>: La classe Queen implementa la classe astratta {@link Piece} e permette di utilizzare la Regina
  * all'interno del gioco.</p>

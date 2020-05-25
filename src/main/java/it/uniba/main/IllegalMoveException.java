@@ -1,7 +1,7 @@
 package it.uniba.main;
 
 /**
- * <<no-ECB>><br>
+ * {@literal <<no-ECB>>}<br>
  * <p><I>Titolo</I>: IllegalMoveException</p>
  * <p><I>Descrizione</I>: La classe IllegalMoveException e' utilizzata per sollevare eccezioni nel caso in cui la mossa specificata 
  * dall'utente sia una mossa illegale.</p>

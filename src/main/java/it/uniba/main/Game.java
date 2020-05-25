@@ -22,7 +22,7 @@ import static it.uniba.main.FinalPar.POS7;
 
 
 /**
- * <<control>><br>
+ * {@literal <<control>>}<br>
  * <p><I>Titolo</I>: Game</p>
  * <p><I>Descrizione</I>: la classe Game contiene la scacchiera, gestisce i turni dei giocatori, tiene conto
  * di tutte le mosse effettuate e di tutte le catture effettuate. 

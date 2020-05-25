@@ -15,7 +15,7 @@ import static it.uniba.main.FinalPar.POS6;
 import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
- * <<entity>><br>
+ * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: Pawn</p>
  * <p><I>Descrizione</I>: La classe Pawn implementa la classe astratta {@link Piece} e permette di usare il Pedone
  * all'interno del gioco.</p>

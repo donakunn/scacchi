@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 
 /**
- * <<boundary>><br>
+ * {@literal <<boundary>>}<br>
  * <p><I>Titolo</I>: AppMain</p>
  * <p><I>Descrizione</I>: La classe AppMain e' la classe principale del progetto. Contiene tutti i comandi del gioco e permette
  * di effetuare diverse operazioni a seconda del comando.</p>

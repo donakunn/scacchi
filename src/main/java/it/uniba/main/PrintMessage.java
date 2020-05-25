@@ -6,7 +6,7 @@ import static it.uniba.main.FinalPar.MAXCOL;
 import static it.uniba.main.FinalPar.MAXROW;
 
 /**
- * <<boundary>><br>
+ * {@literal <<boundary>>}<br>
  * <p><I>Titolo</I>: PrintMessage</p>
  * <p><I>Descrizione</I>: La classe PrintMessage contiene tutti i messaggi e la scacchiera che vengono stampati a video durante 
  * l'esecuzione del programma.</p>

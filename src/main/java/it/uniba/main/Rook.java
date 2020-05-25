@@ -12,7 +12,7 @@ import static it.uniba.main.FinalPar.PIECEMOVELENGTH;
 import static it.uniba.main.FinalPar.STRARRDIM;
 
 /**
- * <<entity>><br>
+ * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: Rook</p>
  * <p><I>Descrizione</I>: La classe Rook implementa la classe astratta {@link Piece} e permette di utilizzare
  * la Torre all'interno del gioco.
