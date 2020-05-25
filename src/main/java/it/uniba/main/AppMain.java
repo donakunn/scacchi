@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 
 /**
- * <<boundary>><br>
- * <p>Titolo: AppMain</p>
- * <p>Descrizione: La classe AppMain e' la classe principale del progetto. Contiene tutti i comandi del gioco e permette
+ * {@literal <<boundary>>}<br>
+ * <p><I>Titolo</I>: AppMain</p>
+ * <p><I>Descrizione</I>: La classe AppMain e' la classe principale del progetto.
+ * Contiene tutti i comandi del gioco e permette
  * di effetuare diverse operazioni a seconda del comando.</p>
- *
  */
 public final class AppMain {
     /**
@@ -19,9 +19,9 @@ public final class AppMain {
     }
 
     /**
-     * E' il metodo principale dell'applicazione. Permette di avviare il gioco degli scacchi, crea un nuovo menu e
-     * assegna il turno iniziale ai bianchi. 
-     *
+     * E' il metodo principale dell'applicazione.
+     * Permette di avviare il gioco degli scacchi, crea un nuovo menu e
+     * assegna il turno iniziale ai bianchi.
      * @param args argomenti della riga di comando.
      */
     public static void main(final String[] args) {
@@ -83,7 +83,8 @@ public final class AppMain {
                         menu.play();
                         PrintMessage.printMessage("Partita creata.");
                     } else {
-                    	PrintMessage.printMessage("Partita gia' avviata. Vuoi cancellarla ed iniziare una nuova partita?");
+                    	PrintMessage.printMessage("Partita gia' avviata. Vuoi cancellarla ed "
+                                + "iniziare una nuova partita?");
                         while (true) {
                             String answer = in.nextLine();
                             if (answer.toUpperCase().equals("SI") || answer.toUpperCase().equals("YES")) {
