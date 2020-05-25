@@ -11,19 +11,27 @@
 
 2. [Modello di dominio](#modello_dominio)
 
-3. [Introduzione](#introduzione)
+3. [Requisiti specifici](#requisiti_specifici)
 
-4. [Introduzione](#introduzione)
+   - [Requisiti funzionali](#rf)
+   - [Requisiti non funzionali](#rnf)
 
-5. [Introduzione](#introduzione)
+4. [System Design](#system_design)
 
-6. [Introduzione](#introduzione)
+5. [OO Design](#oo_design)
 
-7. [Introduzione](#introduzione)
+   - [User story: play](#play)
+   - [User story: arrocco lungo](#arr_lun)
+   - [Analisi](#oo_analisi)
+   - [Design pattern](#design_pattern)
 
-8. [Introduzione](#introduzione)
+6. [Riepilogo dei test](#test)
 
-9. [Introduzione](#introduzione)
+7. [Manuale utente](#manuale_utente)
+
+8. [Processo di sviluppo e organizzazione del lavoro](#sviluppo_lavoro)
+
+9. [Analisi retrospettiva](#analisi_retrospettiva)
 
    
 
@@ -58,9 +66,9 @@ L'applicazione sviluppata permette di giocare una partita di scacchi sullo stess
 
 
 
-## 3. Requisiti specifici
+## 3. Requisiti specifici <a name="requisiti_specifici" />
 
-##### REQUISITI FUNZIONALI
+##### REQUISITI FUNZIONALI <a name="rf" />
 
 In qualità di utilizzatore dell’applicazione voglio...
 
@@ -111,7 +119,7 @@ In qualità di giocatore, dopo aver scelto il mio colore, voglio...
 
 …in modo tale da giocare una partita contro un altro giocatore.
 
-##### REQUISITI NON FUNZIONALI
+##### REQUISITI NON FUNZIONALI <a name="rnf" />
 
 - il sistema non deve permettere l’esecuzione di comandi di gioco mentre non si è in partita (quali mosse, catture, arrocco, ecc…)
 
@@ -139,7 +147,7 @@ In qualità di giocatore, dopo aver scelto il mio colore, voglio...
 
 
 
-## 4. System Design
+## 4. System Design <a name="system_design" />
 
 Lo stile architetturale scelto è il Layered con stratificazione lasca. Attraverso una breve riunione di gruppo, i componenti si sono trovati d’accordo sull’adottare questo stile data la bassa complessità del sistema (assenza di interazione client-server tra i componenti, unicità della rappresentazione visuale dei dati, ridotta quantità di classi e package). 
 
@@ -192,7 +200,7 @@ Di seguito è riportato il diagramma dei componenti dell'unico package del siste
 
 
 
-## 5. OO Design
+## 5. OO Design <a name="oo_design" />
 
 Si riportano di seguito i diagrammi delle classi e di sequenza per la creazione di una nuova partita e per l'esecuzione dell'arrocco lungo.
 
@@ -200,7 +208,7 @@ Si riportano di seguito i diagrammi delle classi e di sequenza per la creazione 
 
 
 
-**Play** 
+**Play** <a name="play" />
 
 Diagramma delle classi:
 
@@ -212,7 +220,7 @@ Diagramma di sequenza:
 
 
 
-**Arrocco Lungo** 
+**Arrocco Lungo** <a name="arr_lun" />
 
 Diagramma delle classi:
 
@@ -224,7 +232,7 @@ Diagramma di sequenza:
 
 
 
-**Analisi**
+**Analisi** <a name="oo_analisi" />
 
 Il progetto rispetta tutti i principi cardine dell'Object Oriented Design, in particolare:
 
@@ -242,7 +250,7 @@ Il progetto rispetta tutti i principi cardine dell'Object Oriented Design, in pa
 - tutti i principi SOLID sono stati verificati, il gruppo si è focalizzato maggiormente sui due principi di Sostituzione di Liskov e di Inversione delle Dipendenze in quanto l'applicazione di entrambi i principi ha permesso di ridistribuire tutti i metodi che prima erano situati nella classe Game (metodi per cattura/spostamento) nelle varie classi dei singoli pezzi, verificando perciò anche il principio di alta coesione per tale classe
 - si è optato per l’affidamento della gestione delle eccezioni alla classe AppMain che, con l'ausilio di PrintMessage, è in grado di comunicare all'utente l'esito della sua richiesta, che sia avvenuta con successo o meno
 
-**Design pattern applicati**
+**Design pattern applicati** <a name="design_pattern" />
 
 Builder: la rappresentazione della scacchiera (attributo board  in classe Game) è stata delegata al metodo printBoard appartenente alla classe PrintMessage al fine di separare l'implementazione di questo oggetto complesso dalla sua proiezione.
 
@@ -254,15 +262,15 @@ Abstract Factory: la classe Piece è stata resa astratta in modo da poterne impl
 
 Singleton: data l'unicità dell'entità "partita" nel programma si è deciso di rendere gli attributi di Game statici e di fornirne l'accesso attraverso metodi pubblici statici
 
-## 6. Riepilogo dei test
+## 6. Riepilogo dei test <a name="test" />
 
 
 
-## 7. Manuale utente
+## 7. Manuale utente <a name="manuale_utente" />
 
 ![manuale_utente](../res/img/report/manuale_utente.png)
 
-## 8. Processo di sviluppo e organizzazione del lavoro
+## 8. Processo di sviluppo e organizzazione del lavoro <a name="sviluppo_lavoro" />
 
 Al fine di sviluppare il programma nel miglior modo possibile i componenti del gruppo hanno previsto:
 
@@ -276,4 +284,4 @@ Dopo aver impostato l'automazione dello sviluppo e del rilascio tramite Gradle e
 
 Importante anche la presenza delle Sprint Board create su GitHub che hanno più volte agevolato il gruppo nello stabilire i tempi necessari a completare con successo uno sprint.
 
-## 9. Analisi retrospettiva
+## 9. Analisi retrospettiva <a name="analisi_retrospettiva" />
