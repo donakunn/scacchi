@@ -50,7 +50,10 @@ public class PrintMessageTest {
 	    PrintMessage.printBoard(boardToPrint);
 	    String PrintedBoard = outContent.toString();
 	    PrintedBoard = PrintedBoard.replace("\n", "").replace("\r", "");
-	    assertEquals("    a    b    c    d    e    f    g    h8  [♜]  [♞]  [♝]  [♛]  [♚]  [♝]  [♞]  [♜]  8  7  [♟]  [♟]  [♟]  [♟]  [♟]  [♟]  [♟]  [♟]  7  6  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  6  5  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  5  4  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  4  3  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  3  2  [♙]  [♙]  [♙]  [♙]  [♙]  [♙]  [♙]  [♙]  2  1  [♖]  [♘]  [♗]  [♕]  [♔]  [♗]  [♘]  [♖]  1      a    b    c    d    e    f    g    h", PrintedBoard);
+	    assertEquals("    a    b    c    d    e    f    g    h8  [\u265C]  [\u265E]  [\u265D]  [\u265B]  [\u265A]  [\u265D]  [\u265E]  "
+	    		+ "[\u265C]  8  7  [\u265F]  [\u265F]  [\u265F]  [\u265F]  [\u265F]  [\u265F]  [\u265F]  [\u265F]  7  6  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  6  5  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  "
+	    		+ "5  4  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  4  3  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  [ ]  3  2  "
+	    		+ "[\u2659]  [\u2659]  [\u2659]  [\u2659]  [\u2659]  [\u2659]  [\u2659]  [\u2659]  2  1  [\u2656]  [\u2658]  [\u2657]  [\u2655]  [\u2654]  [\u2657]  [\u2658]  [\u2656]  1      a    b    c    d    e    f    g    h", PrintedBoard);
 	 }
 	@Test
 	void printTurnTest() {
@@ -59,6 +62,7 @@ public class PrintMessageTest {
 	    testString = testString.replace("\n", "").replace("\r", "");
 	    assertEquals("Inserire comando (turno dei bianchi)",testString);
 	}
+	
 	@Test
 	void printErrMessageTest() {
 		PrintMessage.printError("test mossa illegale");
@@ -96,7 +100,7 @@ public class PrintMessageTest {
 		PrintMessage.printCaptures(blackCaptured,whitesCaptured);
 	    String testString = outContent.toString();
 	    testString = testString.replace("\n", "").replace("\r", "");
-	    assertEquals("Pezzi neri catturati: [♜, ♝, ♟]Pezzi bianchi catturati: [♗, ♙, ♖, ♙]",testString);
+	    assertEquals("Pezzi neri catturati: [\u265C, \u265D, \u265F]Pezzi bianchi catturati: [\u2657, \u2659, \u2656, \u2659]",testString);
 	 }
 	@Test
 	void printAMoveTest() {
@@ -104,7 +108,7 @@ public class PrintMessageTest {
 		PrintMessage.printAMove(move);
 	    String testString = outContent.toString();
 	    testString = testString.replace("\n", "").replace("\r", "");
-	    assertEquals("♘ spostato su e4",testString);
+	    assertEquals("\u2658 spostato su e4",testString);
 	 }
 	@Test
 	void printShortCastlingTest() {
@@ -126,7 +130,7 @@ public class PrintMessageTest {
 		PrintMessage.printACapture(move);
 	    String testString = outContent.toString();
 	    testString = testString.replace("\n", "").replace("\r", "");
-	    assertEquals("♙ e' stato catturato da ♛ su d6",testString);
+	    assertEquals("\u2659 e' stato catturato da \u265B su d6",testString);
 	 }
 	@AfterAll
 	static void tearDownAll() {
