@@ -83,6 +83,7 @@ class Rook extends Piece {
         dy = -1;
       }
 
+
       for (i = x + dy; i != a; i += dy) {
         if (Game.getCell(i, y).getPiece() != null) {
           break;
@@ -95,11 +96,13 @@ class Rook extends Piece {
     if (i != a || j != b) {
       return false;
     }
-    if (Game.getCell(i, j).getPiece() == null
-        || Game.getCell(i, j).getPiece().getColor() != blackTurnColor) {
-      return true;
-    }
-    return false;
+    if((i==a)&&(j==b)) {
+        	if (Game.getCell(i, j).getPiece() == null
+                    || Game.getCell(i, j).getPiece().getColor() != blackTurnColor) {
+                return true;
+            }
+        }
+        return false;
   }
 
   /**
