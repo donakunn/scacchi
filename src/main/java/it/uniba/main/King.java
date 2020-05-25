@@ -10,6 +10,8 @@ import static it.uniba.main.FinalPar.MAXROW;
 import static it.uniba.main.FinalPar.OUTOFBOUND;
 import static it.uniba.main.FinalPar.POS3;
 import static it.uniba.main.FinalPar.POS4;
+import static it.uniba.main.FinalPar.POS0;
+import static it.uniba.main.FinalPar.POS7;
 import static it.uniba.main.FinalPar.STARTBKINGX;
 import static it.uniba.main.FinalPar.STARTBKINGY;
 import static it.uniba.main.FinalPar.STARTWKINGX;
@@ -522,7 +524,11 @@ class King extends Piece {
 			//arrocco corto, torre sempre in posizione yK+3
 			yR = yK + POS3;
 		}
-
+		if ((yR < POS0 ) || (yR > POS7)) {
+			throw new IllegalMoveException(
+					"Mossa illegale; Impossibile effettuare arrocco lungo, "
+							+ "re o torre non sono nella posizione iniziale");
+		}
 		if (!(Game.getCell(xK, yK).getPiece() instanceof King) || !(Game.getCell(xK, yR).getPiece() instanceof Rook)) {
 			throw new IllegalMoveException(
 					"Mossa illegale; Impossibile effettuare arrocco lungo, "
