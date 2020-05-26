@@ -266,7 +266,7 @@ Singleton: data l'unicità dell'entità "partita" nel programma si è deciso di 
 
 Numero dei casi di test:
 
-![tests_number](../res/img/report/tests_number.png)
+![tests_number](../res/img/report/tests_number.PNG)
 
 
 
