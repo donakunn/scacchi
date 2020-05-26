@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="8.8">
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\AppMain.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/AppMain.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Bishop.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Bishop.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Cell.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Cell.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\FinalPar.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/FinalPar.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Game.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Game.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\IllegalMoveException.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/IllegalMoveException.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\King.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/King.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Knight.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Knight.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Menu.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Menu.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Pawn.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Pawn.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Piece.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Piece.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\PrintMessage.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/PrintMessage.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Queen.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Queen.java">
 </file>
-<file name="C:\Users\patri\progetto1920-newell\src\main\java\it\uniba\main\Rook.java">
+<file name="/Users/patrickclark/progetto1920-newell/src/main/java/it/uniba/main/Rook.java">
 </file>
 </checkstyle>
