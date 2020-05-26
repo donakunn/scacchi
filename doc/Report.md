@@ -72,8 +72,8 @@ L'applicazione sviluppata permette di giocare una partita di scacchi sullo stess
 
 In qualità di utilizzatore dell’applicazione voglio...
 
-- visualizzare l’elenco dei comandi- iniziare una nuova partita
-
+- visualizzare l’elenco dei comandi
+- iniziare una nuova partita
 - chiudere l’applicazione
 
 In qualità di giocatore qualsiasi voglio...
@@ -135,7 +135,7 @@ In qualità di giocatore, dopo aver scelto il mio colore, voglio...
 
 - il sistema deve essere containerizzabile
 
-- l’applicazione deve essere eseguibile da terminale di Linux, Mac OS, Git (Git Bash) e Windows (powershell)
+- l’applicazione deve essere eseguibile da terminale di Linux, Mac OS, Git (Git Bash) e Windows (powershell e windows terminal)
 
 - il sistema deve evitare l’interruzione casuale dell’esecuzione a causa di errori
 
@@ -149,7 +149,7 @@ In qualità di giocatore, dopo aver scelto il mio colore, voglio...
 
 ## 4. System Design <a name="system_design" />
 
-Lo stile architetturale scelto è il Layered con stratificazione lasca. Attraverso una breve riunione di gruppo, i componenti si sono trovati d’accordo sull’adottare questo stile data la bassa complessità del sistema (assenza di interazione client-server tra i componenti, unicità della rappresentazione visuale dei dati, ridotta quantità di classi e package). 
+Lo stile architetturale scelto è il Layered con stratificazione stretta. Attraverso una breve riunione di gruppo, i componenti si sono trovati d’accordo sull’adottare questo stile data la bassa complessità del sistema (assenza di interazione client-server tra i componenti, unicità della rappresentazione visuale dei dati, ridotta quantità di classi e package). 
 
 Il progetto è stato riadattato a posteriori per renderlo conforme a tale stile e risulta così impostato:
 
@@ -190,7 +190,7 @@ Il processo di interazione generale tra i vari componenti è il seguente:
 
 **la classe Game a inizio progetto era stata pensata per contenere molteplici funzioni tra cui crea nuova partita, importa partita, salva partita ecc. La funzione realizzata è stata solo quella di creazione di una nuova partita ma si è deciso di lasciare invariato il componente Game e le sue responsabilità al fine di evitare cambiamenti drastici a termine del ciclo di sviluppo del software.*
 
-Il progetto finale ottenuto rispetta pertanto tutti i principi cardine della progettazione architetturale del Software assicurando una netta separazione di interessi tra i vari componenti (garantito dall'adozione dell'architettura Layered), alta coesione nei vari componenti che hanno proprie responsabilità distinte, basso accoppiamento tra i vari componenti (in quanto ognuno di essi fa affidamento sul messaggio ricevuto dallo strato superiore per elaborare i propri dati) e information hiding (ogni livello lavora senza conoscere la struttura degli altri livelli, infatti le interazioni tra i vari strati sono basati sulla comunicazione dell'input dell'utente [richieste] o del risultato dell'operazione [risposte]).
+Il progetto finale ottenuto rispetta pertanto tutti i principi cardine della progettazione architetturale del Software assicurando una netta separazione di interessi tra i vari livelli (garantito dall'adozione dell'architettura Layered), alta coesione nei vari livelli che hanno proprie responsabilità distinte, basso accoppiamento tra gli stessi (in quanto ognuno di essi fa affidamento sul messaggio ricevuto dallo strato superiore per elaborare i propri dati) e information hiding (ogni livello lavora senza conoscere l'implementazione degli altri livelli, infatti le interazioni tra i vari strati sono basati sulla comunicazione dell'input dell'utente [richieste] o del risultato dell'operazione [risposte]).
 
 Di seguito è riportato il diagramma dei componenti dell'unico package del sistema:
 
@@ -208,7 +208,7 @@ Si riportano di seguito i diagrammi delle classi e di sequenza per la creazione 
 
 
 
-**Play** <a name="play" />
+**User story: play** <a name="play" />
 
 Diagramma delle classi:
 
@@ -220,7 +220,7 @@ Diagramma di sequenza:
 
 
 
-**Arrocco Lungo** <a name="arr_lun" />
+**User story: arrocco Lungo** <a name="arr_lun" />
 
 Diagramma delle classi:
 
@@ -257,10 +257,6 @@ Builder: la rappresentazione della scacchiera (attributo board  in classe Game) 
 
 
 Abstract Factory: la classe Piece è stata resa astratta in modo da poterne implementare tutte le differenti sottoclassi che rappresentano i pezzi nella scacchiera (King, Pawn, Knight, Queen, Rook, Bishop).
-
-
-
-Singleton: data l'unicità dell'entità "partita" nel programma si è deciso di rendere gli attributi di Game statici e di fornirne l'accesso attraverso metodi pubblici statici
 
 ## 6. Riepilogo dei test <a name="test" />
 
