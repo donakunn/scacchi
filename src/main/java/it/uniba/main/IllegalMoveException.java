@@ -21,7 +21,7 @@ public class IllegalMoveException extends Exception {
   /**
    * E' il costruttore della classe.
    *
-   * @param s stringa corrispondente all'eccezione.
+   * @param s stringa contenente messaggio di errore.
    */
   public IllegalMoveException(final String s) {
     super(s);

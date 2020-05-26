@@ -5,9 +5,7 @@ package it.uniba.main;
  * <p><I>Titolo</I>: Cell</p>
  * <p><I>Descrizione</I>: La classe Cell viene utilizzata
  * per gestire le celle della scacchiera all'interno del gioco.
- * Ogni cella contiene un pezzo e puo' essere svuotata o riempita a seconda delle necessita'.
- * Contiene inoltre un metodo che permette di convertire
- * il pezzo in stringa per poterlo stampare.
+ * Ogni cella puo' essere vuota o contenere un pezzo e puo' essere svuotata o riempita a seconda delle necessita'.
  * @author Filippo Iacobellis
  */
 class Cell {
@@ -18,7 +16,7 @@ class Cell {
     private Piece piece;
 
     /**
-     * E' il costruttore della classe.
+     * E' il costruttore della classe. Crea la cella con l'eventuale pezzo contenuto.
      * 
      * @param p pezzo contenuto nella cella.
      */
@@ -28,7 +26,7 @@ class Cell {
 
     /**
      * 
-     * @return pezzo contenuto nella cella.
+     * @return stringa dell'eventuale pezzo contenuto nella cella.
      */
     Piece getPiece() {
         return this.piece;

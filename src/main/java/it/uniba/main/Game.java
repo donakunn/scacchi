@@ -26,7 +26,7 @@ import static it.uniba.main.FinalPar.POS7;
  *
  * <p><I>Titolo</I>: Game
  *
- * <p><I>Descrizione</I>: la classe Game contiene la scacchiera, gestisce i turni dei giocatori,
+ * <p><I>Descrizione</I>: la classe Game inizializza la scacchiera, gestisce i turni dei giocatori,
  * tiene conto di tutte le mosse effettuate e di tutte le catture effettuate.
  *
  * @author Megi Gjata
@@ -48,8 +48,7 @@ class Game {
   private static ArrayList<String> whitesCaptured = new ArrayList<String>();
 
   /**
-   * Inizia una nuova partita assegnando il turno al giocatore bianco, svuota gli arraylist
-   * contenenti mosse e catture e inizializza la scacchiera.
+   * Inizializza una nuova partita.
    */
   void newGame() {
     final int firstEmptyRow = 2;
@@ -100,9 +99,9 @@ class Game {
    * @param input mossa specificata dall'utente.
    * @return array contenente il Pedone che e' stato mosso convertito a stringa e la cella di
    *     destinazione se si tratta di una mossa. Array contenente il Pedone che effettua la cattura
-   *     convertito a stringa, il pezzo catturato convertito a stringa e la cella di destinazione se
+   *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
    *     si tratta di una cattura.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   String[] movePawn(final String input) throws IllegalMoveException {
     if (input.length() == MOVELENGTH) {
@@ -134,76 +133,81 @@ class Game {
   }
 
   /**
-   * Gestisce mosse, catture semplici, catture en passant ed eccezioni per il Re.
+   * Gestisce mosse, catture semplici ed eccezioni per il Re chiamando il metodo move contenuto nella propria classe.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente il Re che effettua la mossa o la cattura convertito a stringa, la
-   *     mossa effettuata e, se si tratta di una cattura, contiene anche il pezzo catturato
-   *     convertito a stringa.
-   * @throws IllegalMoveException messaggio di eccezione.
+    * @return array contenente il Re che e' stato mosso convertito a stringa e la cella di
+   *     destinazione se si tratta di una mossa. Array contenente il Re che effettua la cattura
+   *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+   *     si tratta di una cattura.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   String[] moveKing(final String move) throws IllegalMoveException {
     return King.move(move);
   }
 
   /**
-   * Gestisce mosse, catture semplici, catture en passant ed eccezioni per la Regina.
+   * Gestisce mosse, catture semplici ed eccezioni per la Regina chiamando il metodo move contenuto nella propria classe.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente la Regina che effettua la mossa o la cattura convertita a stringa, la
-   *     mossa effettuata e, se si tratta di una cattura, contiene anche il pezzo catturato
-   *     convertito a stringa.
-   * @throws IllegalMoveException messaggio di eccezione.
+    * @return array contenente la Regina che e' stata mossa convertita a stringa e la cella di
+   *     destinazione se si tratta di una mossa. Array contenente la Regina che effettua la cattura
+   *     convertita a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+   *     si tratta di una cattura.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   String[] moveQueen(final String move) throws IllegalMoveException {
     return Queen.move(move);
   }
 
   /**
-   * Gestisce mosse, catture semplici, catture en passant ed eccezioni per l'Alfiere.
+   * Gestisce mosse, catture semplici ed eccezioni per l'Alfiere chiamando il metodo move contenuto nella propria classe.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente l'Alfiere che effettua la mossa o la cattura convertito a stringa, la
-   *     mossa effettuata e, se si tratta di una cattura, contiene anche il pezzo catturato
-   *     convertito a stringa.
-   * @throws IllegalMoveException messaggio di eccezione.
+    * @return array contenente l'Alfiere che e' stato mosso convertito a stringa e la cella di
+   *     destinazione se si tratta di una mossa. Array contenente l'Alfiere che effettua la cattura
+   *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+   *     si tratta di una cattura.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   String[] moveBishop(final String move) throws IllegalMoveException {
     return Bishop.move(move);
   }
 
   /**
-   * Gestisce mosse, catture sepmlici, catture en passant ed eccezioni per il Cavallo.
+   * Gestisce mosse, catture semplici ed eccezioni per il Cavallo chiamando il metodo move contenuto nella propria classe.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la
-   *     mossa effettuata e, se si tratta di una cattura, contiene anche il pezzo catturato
-   *     convertito a stringa.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @return array contenente il Cavallo che e' stato mosso convertito a stringa e la cella di
+   *     destinazione se si tratta di una mossa. Array contenente il Cavallo che effettua la cattura
+   *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+   *     si tratta di una cattura.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   String[] moveKnight(final String move) throws IllegalMoveException {
     return Knight.move(move);
   }
 
   /**
-   * Gestisce mosse, catture semplici, catture en passant ed eccezioni per la Torre.
+   * Gestisce mosse, catture semplici ed eccezioni per la Torre chiamando il metodo move contenuto nella propria classe.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente la Torre che effettua la mossa o la cattura convertita a stringa, la
-   *     mossa effettuata e, se si tratta di una cattura, contiene anche il pezzo catturato
-   *     convertito a stringa.
-   * @throws IllegalMoveException messaggio di eccezione.
+    * @return array contenente la Torre che e' stata mossa convertita a stringa e la cella di
+   *     destinazione se si tratta di una mossa. Array contenente la Torre che effettua la cattura
+   *     convertita a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+   *     si tratta di una cattura.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   String[] moveRook(final String move) throws IllegalMoveException {
     return Rook.move(move);
   }
 
   /**
-   * Verifica se puo' essere effettuato l'arrocco tramite la stringa inserita dall'utente.
+   * Prova ad effettuare l'arrocco.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente la stringa che determina il tipo di arrocco.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @return array contenente la stringa che determina il tipo di arrocco, se l'arrocco e' andato a buon fine.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   String[] tryCastling(final String move) throws IllegalMoveException {
     if (move.equals("0-0") || move.equals("O-O")) {

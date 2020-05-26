@@ -16,7 +16,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  *
  * <p><I>Titolo</I>: Knight
  *
- * <p><I>Descrizione</I>: La classe Knight implementa la classe astratta {@link Piece} e permette di
+ * <p><I>Descrizione</I>: La classe Knight estende la classe astratta {@link Piece} e permette di
  * utilizzare il Cavallo all'interno del gioco.
  *
  * @author Donato Lucente
@@ -58,10 +58,11 @@ class Knight extends Piece {
    * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
    *
    * @param move mossa specificata dell'utente.
-   * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la
-   *     mossa effettuata e, se si tratta di una cattura, contiene anche il pezzo catturato
-   *     convertito a stringa.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @return array contenente il Cavallo che e' stato mosso convertito a stringa e la cella di
+   *     destinazione se si tratta di una mossa. Array contenente il Cavallo che effettua la cattura
+   *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+   *     si tratta di una cattura.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   static String[] move(final String move) throws IllegalMoveException {
     int count = 0;
@@ -215,10 +216,11 @@ class Knight extends Piece {
    * @param yC ordinata di partenza del Cavallo.
    * @param x ascissa di arrivo del Cavallo.
    * @param y ordinata di arrivo del Cavallo.
-   * @return array contenente il Cavallo che effettua la mossa o la cattura convertito a stringa, la
-   *     mossa effettuata e, se si tratta di una cattura, contiene anche il pezzo catturato
-   *     convertito a stringa.
-   * @throws IllegalMoveException messaggio di eccezione.
+   * @return array contenente il Cavallo che e' stato mosso convertito a stringa e la cella di
+   *     destinazione se si tratta di una mossa. Array contenente il Cavallo che effettua la cattura
+   *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+   *     si tratta di una cattura.
+   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
    */
   private static String[] actualMove(
       final boolean isCapture, final int xC, final int yC, final int x, final int y)

@@ -14,7 +14,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 /**
  * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: Bishop</p>
- * <p><I>Descrizione</I>: La classe Bishop implementa la classe astratta {@link Piece} e permette di utilizzare
+ * <p><I>Descrizione</I>: La classe Bishop estende la classe astratta {@link Piece} e permette di utilizzare
  * l'Alfiere all'interno del gioco.
  *
  * @author Donato Lucente
@@ -38,10 +38,11 @@ class Bishop extends Piece {
     /**
      * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
      * @param move mossa specificata dall'utente.
-     * @return array contenente l'Alfiere che effettua la mossa
-     * o la cattura convertito a stringa,la mossa effettuata e,
-     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException messaggio di eccezione.
+     * @return array contenente l'Alfiere che e' stato mosso convertito a stringa e la cella di
+     *     destinazione se si tratta di una mossa. Array contenente l'Alfiere che effettua la cattura
+     *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+     *     si tratta di una cattura.
+     * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
      */
     static String[] move(final String move) throws IllegalMoveException {
         int x = 2; // ascissa
@@ -158,10 +159,11 @@ class Bishop extends Piece {
      * @param y ordinata di arrivo dell'Alfiere.
      * @param xCheck ascissa di partenza dell'Alfiere.
      * @param yCheck ordinata di partenza dell'Alfiere.
-     * @return array contenente l'Alfiere che effettua la mossa
-     * o la cattura convertito a stringa, la mossa effettuata e,
-     * se si tratta di una cattura, contiene anche il pezzo catturato convertito a stringa.
-     * @throws IllegalMoveException messaggio di eccezione.
+     * @return array contenente l'Alfiere che e' stato mosso convertito a stringa e la cella di
+     *     destinazione se si tratta di una mossa. Array contenente l'Alfiere che effettua la cattura
+     *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
+     *     si tratta di una cattura.
+     * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
      */
     private static String[] actualMove(final boolean isCapture, final int x, final int y, final int xCheck,
                                        final int yCheck)
