@@ -264,7 +264,15 @@ Singleton: data l'unicità dell'entità "partita" nel programma si è deciso di 
 
 ## 6. Riepilogo dei test <a name="test" />
 
+Numero dei casi di test:
 
+![tests_number](../res/img/report/tests_number.png)
+
+
+
+Copertura dei casi di test:
+
+![coverage](../res/img/report/coverage.png)
 
 ## 7. Manuale utente <a name="manuale_utente" />
 
