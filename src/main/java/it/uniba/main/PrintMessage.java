@@ -10,8 +10,7 @@ import static it.uniba.main.FinalPar.MAXROW;
  *
  * <p><I>Titolo</I>: PrintMessage
  *
- * <p><I>Descrizione</I>: La classe PrintMessage contiene tutti i messaggi e la scacchiera che
- * vengono stampati a video durante l'esecuzione del programma.
+ * <p><I>Descrizione</I>: Mostra a video i messaggi e la scacchiera durante l'esecuzione del programma.
  *
  * @author Donato Lucente
  */
@@ -102,7 +101,7 @@ public final class PrintMessage {
   }
 
   /**
-   * Stampa a video la mossa di quel determinato turno.
+   * Stampa a video la mossa effettuata.
    *
    * @param pieceAndCell array contenente il pezzo che effettua la mossa e la sua casella di
    *     destinazione.
@@ -111,18 +110,18 @@ public final class PrintMessage {
     System.out.println(pieceAndCell[0] + " spostato su " + pieceAndCell[2]);
   }
 
-  /** Stampa a video il messaggio dell'arrocco corto. */
+  /** Stampa a video il messaggio dell'arrocco corto effettuato. */
   public static void printShortCastling() {
     System.out.println("Arrocco corto eseguito");
   }
 
-  /** Stampa a video il messaggio dell'arrocco lungo. */
+  /** Stampa a video il messaggio dell'arrocco lungo effettuato. */
   public static void printLongCastling() {
     System.out.println("Arrocco lungo eseguito");
   }
 
   /**
-   * Stampa a video la cattura di quel determinato turno.
+   * Stampa a video la cattura effettuata.
    *
    * @param piecesAndCell array contenente il pezzo catturato convertito a stringa, il pezzo che
    *     effettua la cattura convertito a stringa e la casella di destinazione.

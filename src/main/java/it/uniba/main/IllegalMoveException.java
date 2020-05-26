@@ -5,7 +5,7 @@ package it.uniba.main;
  *
  * <p><I>Titolo</I>: IllegalMoveException
  *
- * <p><I>Descrizione</I>: La classe IllegalMoveException e' utilizzata per sollevare eccezioni nel
+ * <p><I>Descrizione</I>: Gestisce le eccezioni nel
  * caso in cui la mossa specificata dall'utente sia una mossa illegale.
  *
  * @author Donato Lucente

@@ -16,10 +16,11 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  *
  * <p><I>Titolo</I>: Queen
  *
- * <p><I>Descrizione</I>: La classe Queen estende la classe astratta {@link Piece} e permette di
- * utilizzare la Regina all'interno del gioco.
+ * <p><I>Descrizione</I>: Estende la classe astratta {@link Piece} e descrive 
+ * caratteristiche e comportamento della Regina all'interno del gioco
  *
  * @author Donato Lucente
+ * @author Filippo Iacobellis
  */
 class Queen extends Piece {
   /**
@@ -40,11 +41,9 @@ class Queen extends Piece {
    * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente la Regina che e' stata mossa convertita a stringa e la cella di
-   *     destinazione se si tratta di una mossa. Array contenente la Regina che effettua la cattura
-   *     convertita a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
-   *     si tratta di una cattura.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+    * @return array contenente la Regina che e' stata mossa convertita a stringa, l'eventuale pezzo
+   * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   static String[] move(final String move) throws IllegalMoveException {
     int x = 2; // ascissa
@@ -205,11 +204,9 @@ class Queen extends Piece {
    * @param y ordinata di arrivo della Regina.
    * @param xCheck ascissa di partenza della Regina.
    * @param yCheck ordinata di Partenza della regina.
-   * @return array contenente la Regina che e' stata mossa convertita a stringa e la cella di
-   *     destinazione se si tratta di una mossa. Array contenente la Regina che effettua la cattura
-   *     convertita a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
-   *     si tratta di una cattura.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+   * @return array contenente la Regina che e' stata mossa convertito a stringa, l'eventuale pezzo
+   * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   private static String[] actualMove(
       final boolean isCapture, final int x, final int y, final int xCheck, final int yCheck)
