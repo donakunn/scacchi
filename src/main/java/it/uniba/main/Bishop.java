@@ -14,7 +14,7 @@ import static it.uniba.main.FinalPar.STRARRDIM;
 /**
  * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: Bishop</p>
- * <p><I>Descrizione</I>: Estende la classe astratta {@link Piece} e descrive 
+ * <p><I>Descrizione</I>: Estende la classe astratta {@link Piece} e descrive
  * caratteristiche e comportamento dell'Alfiere all'interno del gioco.
  *
  * @author Filippo Iacobellis
@@ -22,25 +22,26 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  */
 class Bishop extends Piece {
 
-	/**
-	 * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
-	 * 
-	 * @param col colore del pezzo.
-	 */
+    /**
+     * E' il costruttore della classe, assegna al pezzo il colore e la relativa stringa Unicode.
+     *
+     * @param col colore del pezzo.
+     */
     Bishop(final int col) {
         this.setColor(col);
         if (col == 0) {
-        	this.setPieceType("\u265D"); // Alfiere nero
+            this.setPieceType("\u265D"); // Alfiere nero
         } else {
-        	this.setPieceType("\u2657"); // Alfiere bianco
+            this.setPieceType("\u2657"); // Alfiere bianco
         }
     }
 
     /**
      * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
+     *
      * @param move mossa specificata dall'utente.
-    * @return array contenente l'Alfiere che e' stato mosso convertito a stringa, l'eventuale pezzo
-   * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
+     * @return array contenente l'Alfiere che e' stato mosso convertito a stringa, l'eventuale pezzo
+     * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
      * @throws IllegalMoveException eccezione per mossa illegale.
      */
     static String[] move(final String move) throws IllegalMoveException {
@@ -153,13 +154,14 @@ class Bishop extends Piece {
 
     /**
      * Permette di effettuare la mossa.
+     *
      * @param isCapture verifica se si tratta di una mossa o di una cattura.
-     * @param x ascissa di arrivo dell'Alfiere.
-     * @param y ordinata di arrivo dell'Alfiere.
-     * @param xCheck ascissa di partenza dell'Alfiere.
-     * @param yCheck ordinata di partenza dell'Alfiere.
-    * @return array contenente l'Alfiere che e' stato mosso convertito a stringa, l'eventuale pezzo
-   * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
+     * @param x         ascissa di arrivo dell'Alfiere.
+     * @param y         ordinata di arrivo dell'Alfiere.
+     * @param xCheck    ascissa di partenza dell'Alfiere.
+     * @param yCheck    ordinata di partenza dell'Alfiere.
+     * @return array contenente l'Alfiere che e' stato mosso convertito a stringa, l'eventuale pezzo
+     * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
      * @throws IllegalMoveException eccezione per mossa illegale.
      */
     private static String[] actualMove(final boolean isCapture, final int x, final int y, final int xCheck,

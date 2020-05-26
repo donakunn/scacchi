@@ -23,12 +23,9 @@ import static it.uniba.main.FinalPar.POS7;
 
 /**
  * {@literal <<control>>}<br>
- *
  * <p><I>Titolo</I>: Game
- *
  * <p><I>Descrizione</I>: Inizializza la scacchiera, gestisce i turni dei giocatori e permette
- * di effettuare le mosse e le catture; gestisce le liste di mosse effettuate e pezzi catturati. 
- *
+ * di effettuare le mosse e le catture; gestisce le liste di mosse effettuate e pezzi catturati.
  * @author Megi Gjata
  * @author Mario Giordano
  * @author Donato Lucente
