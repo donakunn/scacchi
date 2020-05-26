@@ -5,7 +5,7 @@ package it.uniba.main;
  *
  * <p><I>Titolo</I>: Piece
  *
- * <p><I>Descrizione</I>: La classe Piece e' la classe astratta per tutti i pezzi. Imposta i colori
+ * <p><I>Descrizione</I>: E' la classe astratta per tutti i pezzi. Imposta i colori
  * dei pezzi, tiene conto delle mosse effettuate, imposta e restituisce la stringa corrispondente al pezzo.
  *
  * @author Donato Lucente
@@ -33,7 +33,7 @@ abstract class Piece {
     this.pieceType = pType;
   }
 
-  /** @return pezzo convertito a stringa. */
+  /** @return Stringa relativa al tipo di pezzo. */
   public String toString() {
     return pieceType;
   }

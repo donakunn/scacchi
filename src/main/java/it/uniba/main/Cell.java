@@ -3,15 +3,15 @@ package it.uniba.main;
 /**
  * {@literal <<entity>>}<br>
  * <p><I>Titolo</I>: Cell</p>
- * <p><I>Descrizione</I>: La classe Cell viene utilizzata
+ * <p><I>Descrizione</I>: Viene utilizzata
  * per gestire le celle della scacchiera all'interno del gioco.
  * Ogni cella puo' essere vuota o contenere un pezzo e puo' essere svuotata o riempita a seconda delle necessita'.
- * @author Filippo Iacobellis
+ * @author Donato Lucente
  */
 class Cell {
 
 	/**
-	 * Si riferisce al pezzo da inserire o eliminare nella cella.
+	 * Eventuale pezzo contenuto all'interno della cella.
 	 */
     private Piece piece;
 
@@ -40,7 +40,7 @@ class Cell {
     }
 
     /**
-     * Crea il pezzo all'interno della cella.
+     * Imposta il pezzo all'interno della cella.
      * 
      * @param p pezzo contenuto nella cella.
      */
@@ -49,7 +49,7 @@ class Cell {
     }
 
     /**
-     * Converte il pezzo a stringa.
+     * Restituisce la stringa relativa alla cella.
      */
     public String toString() {
         if (piece == null) {

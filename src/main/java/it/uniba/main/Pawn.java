@@ -19,10 +19,11 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  *
  * <p><I>Titolo</I>: Pawn
  *
- * <p><I>Descrizione</I>: La classe Pawn estende la classe astratta {@link Piece} e permette di
- * usare il Pedone all'interno del gioco.
+ * <p><I>Descrizione</I>: Estende la classe astratta {@link Piece} e descrive
+ * caratteristiche e comportamento del Pedone all'interno del gioco.
  *
  * @author Donato Lucente
+ * @author Filippo Iacobellis
  */
 class Pawn extends Piece {
 
@@ -63,9 +64,9 @@ class Pawn extends Piece {
    * Permette di muovere un Pedone all'interno della scacchiera.
    *
    * @param move mossa specificata dall'utente.
-   * @return array che contiene il Pedone che e' stato mosso convertito a stringa e la cella di
+   * @return array contenente il Pedone che e' stato mosso convertito a stringa, null e la cella di
    *     destinazione.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   static String[] move(final String move) throws IllegalMoveException {
     int x; // ascissa
@@ -138,9 +139,9 @@ class Pawn extends Piece {
    * scacchiera.
    *
    * @param move mossa specificta dall'utente.
-   * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo
+   * @return array contenente il Pedone che effettua la cattura convertito a stringa, il pezzo
    *     catturato convertito a stringa e la cella di destinazione.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   static String[] capture(final String move) throws IllegalMoveException {
     int x; // ascissa
@@ -221,9 +222,9 @@ class Pawn extends Piece {
    * Consente ad un Pedone di catturare solo en passant all'interno della scacchiera.
    *
    * @param move mossa specificata dall'utente.
-   * @return array che contiene il Pedone che effettua la cattura convertito a stringa, il pezzo
+   * @return array contenente il Pedone che effettua la cattura convertito a stringa, il pezzo
    *     catturato convertito a stringa e la cella di destinazione.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   static String[] captureEnPassant(final String move) throws IllegalMoveException {
 

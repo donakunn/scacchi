@@ -16,10 +16,10 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  *
  * <p><I>Titolo</I>: Rook
  *
- * <p><I>Descrizione</I>: La classe Rook estende la classe astratta {@link Piece} e permette di
- * utilizzare la Torre all'interno del gioco.
- *
- * @author Donato Lucente
+ * <p><I>Descrizione</I>: Estende la classe astratta {@link Piece} e descrive
+ *  caratteristiche e comportamento della Torre all'interno del gioco.
+ * @author Filippo Iacobellis
+ * @author Megi Gjata
  */
 class Rook extends Piece {
 
@@ -106,11 +106,9 @@ class Rook extends Piece {
    * Effettua tutti i controlli che servono per poter effettuare la mossa o la cattura.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente la Torre che e' stata mossa convertita a stringa e la cella di
-   *     destinazione se si tratta di una mossa. Array contenente la Torre che effettua la cattura
-   *     convertita a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
-   *     si tratta di una cattura.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+   * @return array contenente la Torre che e' stata mossa convertita a stringa, l'eventuale pezzo
+   * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   static String[] move(final String move) throws IllegalMoveException {
 
@@ -248,11 +246,9 @@ class Rook extends Piece {
    * @param yC ordinata di partenza della Torre.
    * @param x ascissa di arrivo della Torre.
    * @param y ordinata di arrivo della Torre.
-   * @return array contenente la Torre che e' stata mossa convertita a stringa e la cella di
-   *     destinazione se si tratta di una mossa. Array contenente la Torre che effettua la cattura
-   *     convertita a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
-   *     si tratta di una cattura.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+    * @return array contenente la Torre che e' stata mossa convertita a stringa, l'eventuale pezzo
+   * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   private static String[] actualMove(
       final boolean isCapture, final int xC, final int yC, final int x, final int y)

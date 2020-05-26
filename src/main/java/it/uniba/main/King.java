@@ -23,8 +23,8 @@ import static it.uniba.main.FinalPar.STRARRDIM;
  *
  * <p><I>Titolo</I>: King
  *
- * <p><I>Descrizione</I>: La classe King estende la classe astratta {@link Piece} e permette di
- * utilizzare il Re all'interno del gioco.
+ * <p><I>Descrizione</I>: Estende la classe astratta {@link Piece} e descrive 
+ * caratteristiche e comportamento del Re all'interno del gioco.
  *
  * @author Donato Lucente
  * @author Filippo Iacobellis
@@ -56,7 +56,7 @@ class King extends Piece {
   /**
    * Assegna i valori delle coordinate del Re nero.
    *
-   * @param newCoord array contenente le coordinate.
+   * @param newCoord array contenente le coordinate iniziali del Re nero.
    */
   static void setCoordBlackKing(final int[] newCoord) {
     coordBlackKing = newCoord;
@@ -65,7 +65,7 @@ class King extends Piece {
   /**
    * Assegna i valori delle coordinate del Re bianco.
    *
-   * @param newCoord array contenente le coordinate.
+   * @param newCoord array contenente le coordinate iniziali del Re bianco.
    */
   static void setCoordWhiteKing(final int[] newCoord) {
     coordWhiteKing = newCoord;
@@ -381,11 +381,9 @@ class King extends Piece {
    * effettuare una cattura.
    *
    * @param move mossa specificata dall'utente.
-   * @return array contenente il Re che e' stato mosso convertito a stringa e la cella di
-   *     destinazione se si tratta di una mossa. Array contenente il Re che effettua la cattura
-   *     convertito a stringa, l'eventuale pezzo catturato convertito a stringa e la cella di destinazione se
-   *     si tratta di una cattura.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+   * @return array contenente il Re che e' stato mosso convertito a stringa, l'eventuale pezzo
+   * catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   static String[] move(final String move) throws IllegalMoveException {
     int x = 2;
@@ -474,11 +472,11 @@ class King extends Piece {
   }
 
   /**
-   * Effettua l'arrocco se le condizioni sono verificate.
+   * Effettua l'arrocco (corto o lungo) se le pre-condizioni sono verificate.
    *
    * @param isLong indica se l'arrocco e' lungo o corto.
    * @return array contenente la stringa che determina il tipo di arrocco.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   static String[] castling(final boolean isLong) throws IllegalMoveException {
     // isLong = true -> si tratta di longCastling

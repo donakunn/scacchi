@@ -10,7 +10,7 @@ import static it.uniba.main.FinalPar.MAXROW;
  *
  * <p><I>Titolo</I>: Menu
  *
- * <p><I>Descrizione</I>: La classe Menu crea una nuova partita. Tramite gli appositi comandi,
+ * <p><I>Descrizione</I>: Crea una nuova partita. Tramite gli appositi comandi,
  * permette di visualizzare le mosse effettuate, le catture, la scacchiera e permette ai pezzi di
  * effettuare mosse e catture.
  *
@@ -25,9 +25,9 @@ public final class Menu {
   private Game game = new Game();
 
   /**
-   * Mostra tutti i comandi disponibili.
+   * Restituisce tutti i comandi disponibili.
    *
-   * @return lista di tutti i comandi disponibili
+   * @return lista di tutti i comandi disponibili.
    */
   public String help() {
     return "Lista di comandi utilizzabili:\n"
@@ -44,9 +44,9 @@ public final class Menu {
   }
 
   /**
-   * Mostra la scacchiera stampata a video.
+   * Restituisce la scacchiera stampata a video.
    *
-   * @return la scacchiera formata da celle convertite a stringa.
+   * @return la scacchiera convertita a stringa.
    */
   public String[][] board() {
     String[][] board = new String[MAXROW][MAXCOL];
@@ -61,7 +61,7 @@ public final class Menu {
   }
 
   /**
-   * Mostra le mosse effettuate durante il gioco.
+   * Restituisce le mosse effettuate durante il gioco.
    *
    * @return arraylist contenente tutte le mosse effettuate.
    */
@@ -70,35 +70,36 @@ public final class Menu {
   }
 
   /**
-   * Permette di inziare una nuova partita, svuotando gli arraylist e inizializzando la scacchiera.
+   * Inizia una nuova partita o la reinizializza in caso di partita gia' in corso, svuotando gli arraylist
+   * e inizializzando la scacchiera.
    */
   public void play() {
     game.newGame();
   }
 
   /**
-   * Permette di effettuare le mosse dei vari pezzi, le catture, gli arrocchi e cambia il turno
-   * corrente.
+   * Permette di effettuare le mosse dei vari pezzi, le catture, gli arrocchi, cambia il turno
+   * corrente e aggiunge la mossa alla lista delle mosse effettuate.
    *
    * @param input mossa specificata dall'utente.
-   * @return array contenente il pezzo che effettua la mossa o la cattura convertito a stringa, la
-   *     cella di destinazione e, se si tratta di una cattura, contiene anche il pezzo catturato
-   *     convertito a stringa. Se si tratta di arrocco, un array contenente la stringa che determina
+   * @return array contenente il pezzo che effettua la mossa o la cattura convertito a stringa, l'eventuale
+   *     pezzo catturato convertito a stringa (null in caso di mossa semplice) e la cella di destinazione.
+   *     Se si tratta di arrocco, un array contenente la stringa che determina
    *     il tipo di arrocco.
-   * @throws IllegalArgumentException eccezione che viene sollevata da una mossa illegale.
-   * @throws IndexOutOfBoundsException eccezione che viene sollevata da una mossa illegale.
-   * @throws IllegalMoveException eccezione che viene sollevata da una mossa illegale.
+   * @throws IllegalArgumentException eccezione per argomento illegale.
+   * @throws IndexOutOfBoundsException eccezione per indice fuori dai limiti consentiti.
+   * @throws IllegalMoveException eccezione per mossa illegale.
    */
   public String[] getMove(final String input)
       throws IllegalArgumentException, IndexOutOfBoundsException, IllegalMoveException {
     char chosenPiece = input.charAt(0);
     String[] pieces;
     switch (chosenPiece) {
-      case 'T': // da sistemare
+      case 'T': 
         pieces = game.moveRook(input);
         break;
 
-      case 'C': // da sistemare
+      case 'C': 
         pieces = game.moveKnight(input);
         break;
 
